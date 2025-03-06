@@ -7,6 +7,15 @@ body {
   font-family: "Lato", sans-serif;
 }
 
+input{
+    width: 400px
+    box-sizing: border-box;
+    border: 2px solid black;
+}
+.conteudo{
+    margin-left: 160px;
+}
+
 .sidenav {
   height: 100%;
   width: 160px;
@@ -16,24 +25,42 @@ body {
   left: 0;
   background-color: #0003c8;
   overflow-x: hidden;
-  padding-top: 20px;
+  padding-top: 8px;
 }
 
 .sidenav a {
-  padding: 6px 8px 6px 16px;
+  padding: 8px;
+  text-align: center;
   text-decoration: none;
   font-size: 25px;
   color: #ffffff;
   display: block;
+  border-bottom: 2px solid #ffffff;
 }
 
 .sidenav a:hover {
-  color: #f1f1f1;
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.bloco_titulo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 55px;
+    background-color: #0003c8;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.titulo{
+    color: #ffffff;
+    margin: 0;
 }
 
 .main {
-  margin-left: 160px; /* Same as the width of the sidenav */
-  font-size: 28px; /* Increased text to enable scrolling */
+  font-size: 28px; 
   padding: 0px 10px;
 }
 
@@ -52,12 +79,18 @@ body {
   <a href="#contact">Contact</a>
 </div>
 
-<div class="main">
-  <h2>Sidebar</h2>
-  <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-  <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-  <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
-  <p>Some text to enable scrolling.. Lorem ipsum dolor sit amet, illum definitiones no quo, maluisset concludaturque et eum, altera fabulas ut quo. Atqui causae gloriatur ius te, id agam omnis evertitur eum. Affert laboramus repudiandae nec et. Inciderint efficiantur his ad. Eum no molestiae voluptatibus.</p>
+<div class="conteudo">
+    <div class="bloco_titulo">
+        <h1 class="titulo">Cadastrar Usuário</h1>
+    </div>
+
+    <div class="main">
+    <h2>Sidebar</h2>
+    <form>
+        <label for="fname">First name:</label><br>
+        <input type="text" id="fname" name="fname">
+      </form>
+    </div>
 </div>
    
 </body>
