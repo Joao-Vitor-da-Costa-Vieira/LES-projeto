@@ -24,45 +24,91 @@
         </div>
 
         <div class="main">
-
-            <!--Input de Nome-->
-            <div class="form_nome">
-                <form>
-                    <label for="nome">Nome</label><br>
-                    <input type="text" id="nome" name="nome">
-                </form>
-            </div>
-
-            <!--Input de Email-->
-            <div class="form_email">
-                <form>
-                    <label for="E-mail">E-mail</label><br>
-                    <input type="text" id="E-mail" name="E-mail">
-                </form>
-            </div>
             
-            <!--Input de CPF-->
-            <div class="form_cpf">
-                <form>
-                    <label for="CPF">CPF</label><br>
-                    <input type="number" id="CPF" name="CPF">
-                </form>
-            </div>
-
-            <!--Bloc de Texto Informando como deve ser a senha-->
-            <div class="bloco_texto">
-                <p>Sua escolha de senha de conter ao menos:</p>
-                <p>- 8 caracteres.</p>
-                <p>- Uma letra Maiúscula, Minuscula, número e símbolo</p>
-            </div>
-
-            <!--Entrada de Botão-->
             <form>
-                <input type="button" id="button" name="button" value="Button">
+                <!--Input de Nome-->
+                <div class="nome">
+                        <label for="nome">Nome</label>
+                        <input type="text" id="nome" name="nome">
+                </div>
+
+                <!--Input de Email-->
+                <div class="email">
+                        <label for="E-mail">E-mail</label>
+                        <input type="text" id="E-mail" name="E-mail">
+                </div>
+                
+                <!--Input de CPF-->
+                <div class="cpf">
+                        <label for="CPF">CPF</label>
+                        <input type="number" id="CPF" name="CPF">
+                </div>
+
+                <!--Bloco de Texto Informando como deve ser a senha-->
+                <div class="bloco_texto">
+                    <p>Sua escolha de senha deve conter ao menos:</p>
+                    <p>- 8 caracteres.</p>
+                    <p>- Uma letra Maiúscula, minuscula, número e símbolo.</p>
+                </div>
+
+                <!--Input de senha-->
+                <div class="senha">
+                        <label for="senha">Senha</label>
+                        <input type="password" id="senha" name="senha">
+                </div>
+                
+                <div class="conf_senha">
+                        <label for="conf_senha">Confirmar Senha</label>
+                        <input type="password" id="conf_senha" name="conf_senha">
+                </div>
+
+                <!--Input de data e Telefone-->
+                <div class="form_data_telefone">
+
+                    <div class="data">
+                        <label for="data">Data</label>
+                        <input type="date" id="data" name="data">
+                    </div>
+
+                    <div class="telefone">
+                        <label for="telefone1">Telefone 1</label>
+                        <input type="number" id="telefone1" name="telefone1">
+                    </div>
+                
+                    <div class="telefone">
+                        <label for="telefone2">Telefone 2</label>
+                        <input type="number" id="telefone2" name="telefone2">
+                    </div>
+                </div>
+
+                <div class="genero">
+                    
+                    <p>Genero</p>
+
+                        <input type="radio" id="Masculino" name="genero" value="Masculino">
+                        <label for="Masculino">Masculino</label>
+                        <input type="radio" id="Feminino" name="genero" value="Feminino">
+                        <label for="Feminino">Feminino</label>
+                        <input type="radio" id="Nao_Binario" name="genero" value="Nao_Binario">
+                        <label for="Nao_Binario">Não Binario</label>
+                </div>
+
+                <!--Input de Botões-->
+                <div class="botoes">
+                        <button type="button" id="Cancelar">Cancelar</button>
+                        <input type="submit" id="submit" name="submit" value="Confirmar">
+                </div>
             </form>
         </div>
 
     </div>
+
+    <script>
+        // Script do botão cancelar
+        document.getElementById("Cancelar").addEventListener("click", function() {
+            window.location.href = "index.html";
+        });
+    </script>
 
     
 </body>
