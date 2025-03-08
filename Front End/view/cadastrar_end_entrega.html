@@ -22,10 +22,98 @@
     <!--Div usada para centralizar o conteudo para da página além da barra lateral-->
     <div class="conteudo">
         <div class="bloco_titulo">
-            <h1 class="titulo">Cadastrar Endereço</h1>
+            <h1 class="titulo">Cadastrar End. Entrega</h1>
         </div>
 
         <div class="main">
+            <br>
+
+            <form id="formEndEntrega">
+                <!--Primeira Linha-->
+                <div class="linha_centralizada">
+
+                    <div class="cidade">
+                        <label for="cidade_e">Cidade</label>
+                        <input class="cidade_input" type="text" id="cidade_e" name="cidade_e">
+                    </div>
+
+                    <div class="bairro">
+                        <label for="Bairro_e">Bairro</label>
+                        <input class="cidade_input" type="text" id="Bairro_e" name="Bairro_e">
+                    </div>
+
+                    <div class="estado">
+                        <label>Estado</label>
+                            <select class="selecao" id="estado_e" name="estado_e">
+                                <option value="AC">AC</option>
+                                <option value="AL">AL</option>
+                                <option value="AP">AP</option>
+                                <option value="AM">AM</option>
+                                <option value="BA">BA</option>
+                                <option value="CE">CE</option>
+                                <option value="DF">DF</option>
+                                <option value="ES">ES</option>
+                                <option value="GO">GO</option>
+                                <option value="MA">MA</option>
+                                <option value="MT">MT</option>
+                                <option value="MS">MS</option>
+                                <option value="MG">MG</option>
+                                <option value="PA">PA</option>
+                                <option value="PB">PB</option>
+                                <option value="PR">PR</option>
+                                <option value="PE">PE</option>
+                                <option value="PI">PI</option>
+                                <option value="RJ">RJ</option>
+                                <option value="RN">RN</option>
+                                <option value="RS">RS</option>
+                                <option value="RO">RO</option>
+                                <option value="RR">RR</option>
+                                <option value="SC">SC</option>
+                                <option value="SP">SP</option>
+                                <option value="SE">SE</option>
+                                <option value="TO">TO</option>
+                            </select>
+                    </div>
+                </div>
+
+                <!--Segunda Linha-->
+                <div class="linha_centralizada">
+                    
+                    <div class="endereco">
+                        <label for="endereco_e">Endereço</label>
+                        <input class="endereco_input" type="text" id="endereco_e" name="endereco_e">
+                    </div>
+
+                    <div class="numero">
+                        <label for="numero_e">Nº.</label>
+                        <input class="numero_input" type="number" id="numero_e" name="numero_e">
+                    </div>
+                </div>
+
+                <!--Terceira Linha-->
+                <div class="linha_centralizada">
+
+                    <div class="cidade">
+                        <label for="complemento_e">Complemento</label>
+                        <input class="cidade_input" type="text" id="complemento_e" name="complemento_e">
+                    </div>
+
+                    <div class="bairro">
+                        <label for="cep_e">CEP</label>
+                        <input class="cidade_input" type="text" id="cep_e" name="cep_e">
+                    </div>
+                </div>
+                <br>
+
+                <!--Linha dos Botões-->
+                <div class="botoes">
+                    <button type="button" id="Cancelar">Cancelar</button>
+                    <input type="submit" id="submit" name="submit" value="Confirmar">
+                </div>
+            </form>
+
+            
+            
         </div>
 
     </div>

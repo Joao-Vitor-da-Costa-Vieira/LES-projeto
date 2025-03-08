@@ -16,7 +16,7 @@ document.getElementById('formCadastro').addEventListener('submit', function (eve
   
      localStorage.setItem('dadosUsuario', JSON.stringify(dadosUsuario));
 
-  // Redireciona para a próxima página
-  window.location.href = 'cadastrar_endereco.html';
+
+  window.location.href = '../view/cadastrar_end_cobranca.html';
   
   });
