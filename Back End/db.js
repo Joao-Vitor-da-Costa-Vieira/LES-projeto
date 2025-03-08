@@ -1,18 +1,13 @@
-const mysql = require('mysql2');
+const mysql = require('mysql2/promise');
 
-const connection = mysql.createConnection({
+const pool = mysql.createPool({
   host: 'localhost',
   user: 'root',
   password: '',
-  database: 'ecomercelivros' 
+  database: 'ecomercelivros',
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0 
 });
 
-connection.connect((err) => {
-  if (err) {
-    console.error('Erro ao conectar ao banco de dados:', err.stack);
-    return;
-  }
-  console.log('Conectado ao banco de dados com o ID:', connection.threadId);
-});
-
-module.exports = connection;
+module.exports = pool;

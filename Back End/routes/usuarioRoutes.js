@@ -1,9 +1,8 @@
 const express = require('express');
+const usuarioController = require('../controllers/usuarioController');
+
 const router = express.Router();
 
-// Rota GET /usuario
-router.get('/usuario', (req, res) => {
-  res.send('Rota /usuario funcionando!');
-});
+router.post('/cadastrar', usuarioController.cadastrarUsuario);
 
 module.exports = router;
