@@ -46,13 +46,13 @@ input[type=submit]{
   
 /*Separar o Conteudo Principal da Barra Lateral*/
 .conteudo{
-    margin-left: 160px;
+    margin-left: 200px;
 }
   
 /*Estlização e Fixação da Barra Lateral*/
 .sidenav {
     height: 100%;
-    width: 160px;
+    width: 200px;
     position: fixed;
     z-index: 1;
     top: 0;
@@ -82,7 +82,7 @@ input[type=submit]{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 300px;
+    width: 350px;
     height: 55px;
     background-color: #0003c8;
     margin: 0 auto;
@@ -185,6 +185,17 @@ p{
     flex-direction: row;
     gap: 40px;
     margin-bottom: 10px;
+}
+
+/*Centralização e Estilização da Tabela*/
+.table_div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+table,th,td{
+    border: 2px solid black;
 }
   
 .main {

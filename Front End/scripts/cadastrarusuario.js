@@ -3,7 +3,7 @@ document.getElementById('formCadastro').addEventListener('submit', function (eve
     console.log('Formulário enviado via JavaScript'); // Verifique se essa mensagem aparece no console
   
     // Captura os dados do formulário
-    const formData = {
+    const dadosUsuario =  {
       nome: document.getElementById('nome').value,
       email: document.getElementById('E-mail').value,
       cpf: document.getElementById('CPF').value,
@@ -14,27 +14,9 @@ document.getElementById('formCadastro').addEventListener('submit', function (eve
       genero: document.querySelector('input[name="genero"]:checked').value
     };
   
-    console.log('Dados do formulário:', formData); // Verifique se os dados estão corretos
+     localStorage.setItem('dadosUsuario', JSON.stringify(dadosUsuario));
+
+  // Redireciona para a próxima página
+  window.location.href = 'cadastrar_endereco.html';
   
-    // Envia os dados para o backend
-    fetch('http://localhost:3000/usuario/cadastrar', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(formData)
-    })
-      .then(response => response.json())
-      .then(data => {
-        if (data.message) {
-          alert(data.message); // Exibe mensagem de sucesso
-          window.location.href = 'index.html'; // Redireciona para a página inicial
-        } else {
-          alert('Erro ao cadastrar usuário: ' + data.error);
-        }
-      })
-      .catch(error => {
-        console.error('Erro:', error);
-        alert('Erro ao cadastrar usuário');
-      });
   });
