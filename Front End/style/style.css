@@ -1,6 +1,9 @@
 
 body {
     font-family: "Lato", sans-serif;
+    align-items: center;
+    display: flex;
+    justify-content: center;
 }
   
 /*Estilização do Label */
@@ -11,8 +14,7 @@ label{
 /*Estilização do Input*/
 
 .nome_input{
-    width: 700px;
-    box-sizing: border-box;
+    width: 695px;
     font-size: 20px;
     border: 2px solid black;
 }
@@ -31,7 +33,7 @@ label{
     border: 2px solid black;
 }
 
-input[type=password]{
+.senha_input{
     width: 700px;
     box-sizing: border-box;
     font-size: 20px;
@@ -39,7 +41,7 @@ input[type=password]{
 }
 
 .cpf_input{
-    width: 180px;
+    width: 700px;
     box-sizing: border-box;
     font-size: 20px;
     border: 2px solid black;
@@ -60,6 +62,20 @@ input[type=password]{
 }
 
 .cidade_input{
+    width: 300px;
+    box-sizing: border-box;
+    font-size: 20px;
+    border: 2px solid black;
+}
+
+.cod_sec_input{
+    width: 300px;
+    box-sizing: border-box;
+    font-size: 20px;
+    border: 2px solid black;
+}
+
+.num_cartao_input{
     width: 300px;
     box-sizing: border-box;
     font-size: 20px;
@@ -160,10 +176,9 @@ p{
 /*Centralização e Estilização dos formulários*/
 
 .nome{
-    justify-content: center;
-    align-items: center;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     margin-bottom: 10px;
 }
 
@@ -174,32 +189,21 @@ p{
 }
 
 .email{
-    justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
 }
 
 .cpf{
-    justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
 }
 
 .senha{
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
-}
-
-.conf_senha{
-    justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
@@ -226,6 +230,16 @@ p{
     font-size: 20px;
 }
 
+.cod_sec{
+    width: 320px;
+    font-size: 20px;
+}
+
+.num_cartao{
+    width: 320px;
+    font-size: 20px;
+}
+
 .genero{
     justify-content: center;
     align-items: center;
@@ -234,7 +248,7 @@ p{
     margin-bottom: 10px;
 }
 
-.estado{
+.select{
     justify-content: center;
     align-items: center;
     display: flex;
