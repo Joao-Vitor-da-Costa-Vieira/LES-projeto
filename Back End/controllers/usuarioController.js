@@ -1,13 +1,25 @@
-const Usuario = require('../models/usuarioModel');
+const cryptoUtils = require('../utils/cryptoUtils');
 
-exports.cadastrarUsuario = async (req, res) => {
+function cadastrarUsuario(req, res) {
   const { nome, email, cpf, senha, data_nascimento, telefone1, telefone2, genero } = req.body;
 
-  try {
-    await Usuario.cadastrar(nome, email, cpf, senha, data_nascimento, telefone1, telefone2, genero);
-    res.status(201).json({ message: 'Usuário cadastrado com sucesso!' });
-  } catch (error) {
-    console.error('Erro ao cadastrar usuário:', error);
-    res.status(500).json({ error: 'Erro ao cadastrar usuário' });
-  }
+  const senhaHash = cryptoUtils.hashSenha(senha);
+
+  req.session.usuario = {
+    nome,
+    email,
+    cpf,
+    senha: senhaHash, // Armazenar o hash da senha
+    data_de_nascimento: data_nascimento,
+    telefone_1: telefone1,
+    telefone_2: telefone2,
+    genero
+  };
+
+
+  res.redirect('/proxima-etapa'); // Ou res.json({ mensagem: 'Usuário cadastrado com sucesso!' }); se for uma API
+}
+
+module.exports = {
+  cadastrarUsuario
 };

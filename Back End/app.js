@@ -1,8 +1,9 @@
-require('dotenv').config();
-
 const express = require('express');
 const session = require('express-session');
 const routes = require('./routes');
+const path = require('path');
+
+require('dotenv').config();
 
 const app = express();
 
@@ -12,6 +13,11 @@ app.use(session({
   saveUninitialized: true,
   cookie: { secure: false }
 }));
+
+app.set('view engine', 'ejs');
+app.set('views', __dirname + '/views');
+
+app.use(express.urlencoded({ extended: true }));
 
 app.use(express.json());
 app.use(routes);

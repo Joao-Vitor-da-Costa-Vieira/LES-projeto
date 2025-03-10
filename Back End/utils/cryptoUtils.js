@@ -1,8 +1,11 @@
 const crypto = require('crypto');
-const SALT = process.env.SALT;
 
-function hashSenhaComSalt(senha) {
-  return crypto.createHash('sha256').update(senha + SALT).digest('hex').slice(0, 20);
+function hashSenha(senha) {
+  const hash = crypto.createHash('sha256');
+  hash.update(senha);
+  return hash.digest('hex');
 }
 
-module.exports = { hashSenhaComSalt };
+module.exports = {
+  hashSenha
+};
