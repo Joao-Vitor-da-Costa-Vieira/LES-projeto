@@ -15,7 +15,7 @@ document.getElementById('formUsuario').addEventListener('submit', async function
 
 
   try {
-    const response = await fetch('http://localhost:3000/usuario/cadastrar', {
+    const response = await fetch('http://localhost:3000/api/cadastrar', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -25,11 +25,12 @@ document.getElementById('formUsuario').addEventListener('submit', async function
 
     const data = await response.json();
 
-    if (data.message) {
+    if (response.ok) {
       alert('Usuário cadastrado com sucesso!');
-      window.location.href = 'cadastrar_end_cobranca.html';
+      window.location.href = '/cadastrar_end_cobranca';
     } else {
-      alert('Erro ao cadastrar usuário: ' + data.error);
+      const errorData = await response.json();
+      alert('Erro ao cadastrar usuário: ' + (errorData.error || 'Erro desconhecido'));
     }
   } catch (error) {
     console.error('Erro:', error);

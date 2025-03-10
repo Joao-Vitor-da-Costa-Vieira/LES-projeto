@@ -9,7 +9,7 @@ function cadastrarUsuario(req, res) {
     nome,
     email,
     cpf,
-    senha: senhaHash, // Armazenar o hash da senha
+    senha: senhaHash,
     data_de_nascimento: data_nascimento,
     telefone_1: telefone1,
     telefone_2: telefone2,
@@ -17,7 +17,7 @@ function cadastrarUsuario(req, res) {
   };
 
 
-  res.redirect('/proxima-etapa'); // Ou res.json({ mensagem: 'Usuário cadastrado com sucesso!' }); se for uma API
+  res.redirect('/cadastrar_end_cobranca'); 
 }
 
 module.exports = {
