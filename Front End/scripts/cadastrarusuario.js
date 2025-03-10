@@ -12,7 +12,7 @@ document.getElementById('formUsuario').addEventListener('submit', function (e) {
       genero: document.querySelector('input[name="genero"]:checked').value
   };
 
-  fetch('http://localhost:3000/usuarios', {
+  fetch('http://localhost:3000/api/usuarios', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
