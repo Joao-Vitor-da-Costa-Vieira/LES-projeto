@@ -1,4 +1,4 @@
-const pool = require('../db');
+const pool = require('../config/db');
 
 class Usuario {
   static async cadastrar(nome, email, cpf, senha, data_nascimento, telefone1, telefone2, genero) {

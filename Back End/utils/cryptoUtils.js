@@ -1,5 +1,5 @@
 const crypto = require('crypto');
-const SALT = 'meuSaltSecreto'; // Mantenha isso em segredo
+const SALT = process.env.SALT;
 
 // Função para gerar hash da senha com salt
 function hashSenhaComSalt(senha) {
