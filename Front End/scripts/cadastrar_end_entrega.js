@@ -22,7 +22,7 @@ document.getElementById('formEndEntrega').addEventListener('submit', async funct
   
         if (response.ok) {
             alert('Endereço de entrega cadastrado com sucesso!');
-            window.location.href = '/confirmar_cadastro';
+            window.location.href = '/index';
         } else {
             const errorData = await response.json();
             alert('Erro ao cadastrar endereço de entrega: ' + (errorData.error || 'Erro desconhecido'));

@@ -1,6 +1,6 @@
-// controllers/end_entregaController.js
-const EnderecoEntrega = require('../models/enderecoEntregaModel'); // Importe o modelo do endereço de entrega
-const Usuario = require('../models/usuarioModel'); // Importe o modelo de usuario
+const EnderecoEntrega = require('../models/end_entregaModel');
+const EnderecoEntrega = require('../models/end_cobrancaModel');
+const Usuario = require('../models/usuarioModel');
 
 async function cadastrarEnderecoEntrega(req, res) {
     try {
