@@ -12,7 +12,7 @@ document.getElementById('formEndCobranca').addEventListener('submit', async func
   };
 
   try {
-      const response = await fetch('/api/cadastrar_end_cobranca', {
+      const response = await fetch('http://localhost:3000/api/cadastrar_end_cobranca', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json'

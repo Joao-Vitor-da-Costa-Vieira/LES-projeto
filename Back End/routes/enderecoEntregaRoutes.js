@@ -1,5 +1,5 @@
 const express = require('express');
-const enderecoCobrancaController = require('../controllers/enderecoEntregaController');
+const enderecoEntregaController = require('../controllers/end_entregaController');
 
 const router = express.Router();
 

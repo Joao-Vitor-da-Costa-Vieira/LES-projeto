@@ -1,25 +1,35 @@
-const cryptoUtils = require('../utils/cryptoUtils');
+const Usuario = require('../models/usuarioModel');
 
-function cadastrarUsuario(req, res) {
-  const { nome, email, cpf, senha, data_nascimento, telefone1, telefone2, genero } = req.body;
+exports.cadastrarUsuario = (req, res) => {
+    const usuario = req.body;
+    Usuario.criar(usuario, (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        res.status(201).json({ message: 'Usuário cadastrado com sucesso!', id: results.insertId });
+    });
+};
 
-  const senhaHash = cryptoUtils.hashSenha(senha);
+exports.recuperarUsuario = (req, res) => {
+    const id = req.params.id;
+    Usuario.recuperarPorId(id, (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        if (results.length === 0) {
+            return res.status(404).json({ message: 'Usuário não encontrado' });
+        }
+        res.status(200).json(results[0]);
+    });
+};
 
-  req.session.usuario = {
-    nome,
-    email,
-    cpf,
-    senha: senhaHash,
-    data_de_nascimento: data_nascimento,
-    telefone_1: telefone1,
-    telefone_2: telefone2,
-    genero
-  };
-
-
-  res.redirect('/cadastrar_end_cobranca'); 
-}
-
-module.exports = {
-  cadastrarUsuario
+exports.atualizarUsuario = (req, res) => {
+    const id = req.params.id;
+    const usuario = req.body;
+    Usuario.atualizar(id, usuario, (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        res.status(200).json({ message: 'Usuário atualizado com sucesso!' });
+    });
 };

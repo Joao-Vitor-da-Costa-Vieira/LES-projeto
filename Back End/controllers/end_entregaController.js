@@ -1,5 +1,5 @@
 const EnderecoEntrega = require('../models/end_entregaModel');
-const EnderecoEntrega = require('../models/end_cobrancaModel');
+const EnderecoCobranca = require('../models/end_cobrancaModel');
 const Usuario = require('../models/usuarioModel');
 
 async function cadastrarEnderecoEntrega(req, res) {

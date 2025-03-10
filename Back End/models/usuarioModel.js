@@ -1,18 +1,48 @@
-const pool = require('../config/db');
+const db = require('../config/db');
 
-async function cadastrar(nome, email, cpf, senha, data_nascimento, telefone1, telefone2, genero) {
-  try {
-    const [result] = await pool.query(
-      'INSERT INTO usuario (usr_nome, usr_email, usr_cpf, usr_senha, usr_data_de_nascimento, usr_telefone_1, usr_telefone_2, usr_genero) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-      [nome, email, cpf, senha, data_nascimento, telefone1, telefone2, genero]
-    );
-    return { usr_id: result.insertId, nome, email, cpf, senha, data_nascimento, telefone1, telefone2, genero };
-  } catch (error) {
-    console.error('Erro ao cadastrar usuário:', error);
-    throw error;
-  }
+class Usuario {
+    static criar(usuario, callback) {
+        const query = `
+            INSERT INTO usuarios (nome, email, cpf, senha, data_nascimento, telefone1, telefone2, genero)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        `;
+        const values = [
+            usuario.nome,
+            usuario.email,
+            usuario.cpf,
+            usuario.senha,
+            usuario.data_nascimento,
+            usuario.telefone1,
+            usuario.telefone2,
+            usuario.genero
+        ];
+        db.query(query, values, callback);
+    }
+
+    static recuperarPorId(id, callback) {
+        const query = 'SELECT * FROM usuarios WHERE id = ?';
+        db.query(query, [id], callback);
+    }
+
+    static atualizar(id, usuario, callback) {
+        const query = `
+            UPDATE usuarios
+            SET nome = ?, email = ?, cpf = ?, senha = ?, data_nascimento = ?, telefone1 = ?, telefone2 = ?, genero = ?
+            WHERE id = ?
+        `;
+        const values = [
+            usuario.nome,
+            usuario.email,
+            usuario.cpf,
+            usuario.senha,
+            usuario.data_nascimento,
+            usuario.telefone1,
+            usuario.telefone2,
+            usuario.genero,
+            id
+        ];
+        db.query(query, values, callback);
+    }
 }
 
-module.exports = {
-  cadastrar,
-};
+module.exports = Usuario;
