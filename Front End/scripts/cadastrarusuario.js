@@ -1,7 +1,7 @@
 document.getElementById('formUsuario').addEventListener('submit', async function (event) {
-  event.preventDefault(); // Impede o envio padrão do formulário
+  event.preventDefault();
 
-  // Captura os dados do formulário
+
   const dadosUsuario = {
     nome: document.getElementById('nome').value,
     email: document.getElementById('email').value,
@@ -13,7 +13,7 @@ document.getElementById('formUsuario').addEventListener('submit', async function
     genero: document.querySelector('input[name="genero"]:checked').value
   };
 
-  // Envia os dados para o backend
+
   try {
     const response = await fetch('http://localhost:3000/usuario/cadastrar', {
       method: 'POST',
@@ -27,7 +27,7 @@ document.getElementById('formUsuario').addEventListener('submit', async function
 
     if (data.message) {
       alert('Usuário cadastrado com sucesso!');
-      window.location.href = 'cadastrar_end_cobranca.html'; // Redireciona para a próxima página
+      window.location.href = 'cadastrar_end_cobranca.html';
     } else {
       alert('Erro ao cadastrar usuário: ' + data.error);
     }
