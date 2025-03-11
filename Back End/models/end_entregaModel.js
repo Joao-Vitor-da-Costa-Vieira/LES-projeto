@@ -33,6 +33,8 @@ class EnderecoEntrega {
         db.query(query, [id], callback);
     }
 
+
+
     static recuperarPorUsuarioId(usuarioId, callback) {
       const query = `
           SELECT 
@@ -49,7 +51,7 @@ class EnderecoEntrega {
       `;
       db.query(query, [usuarioId], callback);
   }
-  
+
     static atualizar(id, enderecoEntrega, callback) {
         const query = `
             UPDATE endereco_entrega

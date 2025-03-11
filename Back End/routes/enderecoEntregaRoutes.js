@@ -11,4 +11,6 @@ router.get('/enderecos-entrega/:id', enderecoEntregaController.recuperarEndereco
 // Atualizar endereço de entrega
 router.put('/enderecos-entrega/:id', enderecoEntregaController.atualizarEnderecoEntrega);
 
+router.get('/enderecos-entrega/:usuarioId', enderecoEntregaController.recuperarEnderecosEntregaPorUsuario);
+
 module.exports = router;

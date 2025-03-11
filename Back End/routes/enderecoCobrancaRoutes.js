@@ -11,4 +11,6 @@ router.get('/enderecos-cobranca/:id', enderecoCobrancaController.recuperarEndere
 // Atualizar endereço de cobrança
 router.put('/enderecos-cobranca/:id', enderecoCobrancaController.atualizarEnderecoCobranca);
 
+router.get('/enderecos-cobranca/:usuarioId', enderecoCobrancaController.recuperarEnderecosCobrancaPorUsuario);
+
 module.exports = router;

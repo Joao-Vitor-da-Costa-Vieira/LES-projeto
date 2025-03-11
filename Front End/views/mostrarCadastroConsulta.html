@@ -21,15 +21,22 @@
     <!-- Div usada para centralizar o conteúdo da página além da barra lateral -->
     <div class="conteudo">
         <div class="bloco_titulo">
-            <h1 class="titulo">Mostrar Cadastro</h1>
+            <h1 class="titulo">Detalhes do Cadastro</h1>
         </div>
 
         <div class="main">
             <!-- Mensagem de erro -->
             <div id="mensagemErro" style="color: red; display: none;"></div>
 
-            <!-- Lista de endereços -->
-            <div id="enderecos"></div>
+            <!-- Lista de endereços de cobrança -->
+            <div id="enderecosCobranca">
+                <h2>Endereços de Cobrança</h2>
+            </div>
+
+            <!-- Lista de endereços de entrega -->
+            <div id="enderecosEntrega">
+                <h2>Endereços de Entrega</h2>
+            </div>
         </div>
     </div>
 
@@ -39,35 +46,66 @@
         const urlParams = new URLSearchParams(window.location.search);
         const usuarioId = urlParams.get('usuarioId');
 
-        // Função para carregar os endereços do usuário
-        function carregarEnderecos(usuarioId) {
-            fetch(`http://localhost:3000/api/usuarios/${usuarioId}/enderecos`)
+        // Função para carregar endereços de cobrança
+        function carregarEnderecosCobranca() {
+            fetch(`http://localhost:3000/api/enderecos-cobranca/${usuarioId}`)
                 .then(response => response.json())
                 .then(data => {
-                    const divEnderecos = document.getElementById('enderecos');
-                    divEnderecos.innerHTML = '';
+                    const divEnderecosCobranca = document.getElementById('enderecosCobranca');
+                    divEnderecosCobranca.innerHTML = '<h2>Endereços de Cobrança</h2>';
 
-                    data.enderecos.forEach(endereco => {
+                    data.forEach(endereco => {
                         const divEndereco = document.createElement('div');
                         divEndereco.innerHTML = `
-                            <p><strong>Tipo:</strong> ${endereco.tipo}</p>
                             <p><strong>Endereço:</strong> ${endereco.end_endereco}</p>
                             <p><strong>CEP:</strong> ${endereco.end_cep}</p>
                             <p><strong>Cidade:</strong> ${endereco.end_cidade}</p>
                             <p><strong>Estado:</strong> ${endereco.end_estado}</p>
-                            <button onclick="window.location.href='atualizar_end.html?enderecoId=${endereco.end_id}'">Atualizar</button>
+                            <button onclick="redirecionarParaAtualizarEndereco(${endereco.end_id}, 'cobranca')">Atualizar</button>
                             <hr>
                         `;
-                        divEnderecos.appendChild(divEndereco);
+                        divEnderecosCobranca.appendChild(divEndereco);
                     });
                 })
                 .catch(error => {
-                    console.error('Erro ao carregar endereços:', error);
+                    console.error('Erro ao carregar endereços de cobrança:', error);
                 });
         }
 
+        // Função para carregar endereços de entrega
+        function carregarEnderecosEntrega() {
+            fetch(`http://localhost:3000/api/enderecos-entrega/${usuarioId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const divEnderecosEntrega = document.getElementById('enderecosEntrega');
+                    divEnderecosEntrega.innerHTML = '<h2>Endereços de Entrega</h2>';
+
+                    data.forEach(endereco => {
+                        const divEndereco = document.createElement('div');
+                        divEndereco.innerHTML = `
+                            <p><strong>Endereço:</strong> ${endereco.end_endereco}</p>
+                            <p><strong>CEP:</strong> ${endereco.end_cep}</p>
+                            <p><strong>Cidade:</strong> ${endereco.end_cidade}</p>
+                            <p><strong>Estado:</strong> ${endereco.end_estado}</p>
+                            <button onclick="redirecionarParaAtualizarEndereco(${endereco.end_id}, 'entrega')">Atualizar</button>
+                            <hr>
+                        `;
+                        divEnderecosEntrega.appendChild(divEndereco);
+                    });
+                })
+                .catch(error => {
+                    console.error('Erro ao carregar endereços de entrega:', error);
+                });
+        }
+
+        // Função para redirecionar para a página de atualização de endereço
+        function redirecionarParaAtualizarEndereco(enderecoId, tipo) {
+            window.location.href = `atualizar_end.html?enderecoId=${enderecoId}&tipo=${tipo}`;
+        }
+
         // Carrega os endereços ao carregar a página
-        carregarEnderecos(usuarioId);
+        carregarEnderecosCobranca();
+        carregarEnderecosEntrega();
     </script>
 </body>
 </html>

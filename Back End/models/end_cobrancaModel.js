@@ -34,6 +34,7 @@ class EnderecoCobranca {
         db.query(query, [id], callback);
     }
 
+
     static recuperarPorUsuarioId(usuarioId, callback) {
       const query = `
           SELECT 

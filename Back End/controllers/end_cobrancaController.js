@@ -53,3 +53,13 @@ exports.atualizarEnderecoCobranca = (req, res) => {
         res.status(200).json({ message: 'Endereço de cobrança atualizado com sucesso!' });
     });
 };
+
+exports.recuperarEnderecosCobrancaPorUsuario = (req, res) => {
+    const usuarioId = req.params.usuarioId;
+    EnderecoCobranca.recuperarPorUsuarioId(usuarioId, (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        res.status(200).json(results);
+    });
+};
