@@ -10,11 +10,13 @@ const usuarioRoutes = require('./Back End/routes/usuarioRoutes');
 const enderecoCobrancaRoutes = require('./Back End/routes/enderecoCobrancaRoutes');
 const enderecoEntregaRoutes = require('./Back End/routes/enderecoEntregaRoutes');
 const cartaoRoutes = require('./Back End/routes/cartaoRoutes');
+const dadosRoutes = require('./Back End/routes/dadosRoutes');
 
 app.use('/api', usuarioRoutes);
 app.use('/api', enderecoCobrancaRoutes);
 app.use('/api', enderecoEntregaRoutes);
 app.use('/api', cartaoRoutes);
+app.use('/api', dadosRoutes);
 
 const PORT = 3000;
 app.listen(PORT, () => {

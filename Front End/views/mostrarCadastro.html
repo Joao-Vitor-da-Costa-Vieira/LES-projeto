@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dados Cadastrados</title>
+    <link rel="stylesheet" href="../style/style.css">
+</head>
+<body>
+    <div class="sidenav">
+        <a href="index.html">Menu</a>
+        <a href="cadastrarusuario.html">Cadastrar</a>
+        <a href="cadastrar_end_cobranca.html">Cadastrar End. Cobrança</a>
+        <a href="cadastrar_end_entrega.html">Cadastrar End. Entrega</a>
+        <a href="cadastrar_cartao.html">Cadastrar Cartão</a>
+        <a href="consultarusuario.html">Consultar</a>
+        <a href="atualizarusuario.html">Atualizar</a>
+    </div>
+
+    <div class="conteudo">
+        <div class="bloco_titulo">
+            <h1 class="titulo">Dados Cadastrados</h1>
+        </div>
+
+        <div class="main">
+            <div id="dadosUsuario">
+                <!-- Dados do usuário serão exibidos aqui -->
+            </div>
+
+            <div id="dadosEnderecosCobranca">
+                <!-- Endereços de cobrança serão exibidos aqui -->
+            </div>
+
+            <div id="dadosEnderecosEntrega">
+                <!-- Endereços de entrega serão exibidos aqui -->
+            </div>
+
+            <div id="dadosCartoes">
+                <!-- Cartões serão exibidos aqui -->
+            </div>
+
+            <br>
+
+            <div class="botoes">
+                <button class="botao_menu" type="button" id="Menu">Encerrar</button>
+                <button class="botao_atualizar" type="button" id="atualizar_usuario">Atualizar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        // Função para buscar e exibir os dados
+        function carregarDados() {
+            fetch('http://localhost:3000/api/usuario/dados')
+                .then(response => response.json())
+                .then(data => {
+                    const usuario = data.usuario;
+                    const enderecosCobranca = data.enderecosCobranca;
+                    const enderecosEntrega = data.enderecosEntrega;
+                    const cartoes = data.cartoes;
+
+                    // Exibe os dados do usuário
+                    document.getElementById('dadosUsuario').innerHTML = `
+                        <h2>Usuário</h2>
+                        <p><strong>Nome:</strong> ${usuario.usr_nome}</p>
+                        <p><strong>Email:</strong> ${usuario.usr_email}</p>
+                        <p><strong>CPF:</strong> ${usuario.usr_cpf}</p>
+                        <p><strong>Data de Nascimento:</strong> ${usuario.usr_data_de_nascimento}</p>
+                        <p><strong>Telefone 1:</strong> ${usuario.usr_telefone_1}</p>
+                        <p><strong>Telefone 2:</strong> ${usuario.usr_telefone_2 || 'N/A'}</p>
+                        <p><strong>Gênero:</strong> ${usuario.usr_genero}</p>
+                    `;
+
+                    // Exibe os endereços de cobrança
+                    document.getElementById('dadosEnderecosCobranca').innerHTML = `
+                        <h2>Endereços de Cobrança</h2>
+                        ${enderecosCobranca.map(endereco => `
+                            <div>
+                                <p><strong>Endereço:</strong> ${endereco.end_endereco}, ${endereco.end_numero}</p>
+                                <p><strong>Bairro:</strong> ${endereco.end_bairro}</p>
+                                <p><strong>Cidade:</strong> ${endereco.end_cidade}</p>
+                                <p><strong>Estado:</strong> ${endereco.end_estado}</p>
+                                <p><strong>CEP:</strong> ${endereco.end_cep}</p>
+                                <p><strong>Complemento:</strong> ${endereco.end_complemento || 'N/A'}</p>
+                            </div>
+                        `).join('')}
+                    `;
+
+                    // Exibe os endereços de entrega
+                    document.getElementById('dadosEnderecosEntrega').innerHTML = `
+                        <h2>Endereços de Entrega</h2>
+                        ${enderecosEntrega.map(endereco => `
+                            <div>
+                                <p><strong>Endereço:</strong> ${endereco.end_endereco}, ${endereco.end_numero}</p>
+                                <p><strong>Bairro:</strong> ${endereco.end_bairro}</p>
+                                <p><strong>Cidade:</strong> ${endereco.end_cidade}</p>
+                                <p><strong>Estado:</strong> ${endereco.end_estado}</p>
+                                <p><strong>CEP:</strong> ${endereco.end_cep}</p>
+                                <p><strong>Complemento:</strong> ${endereco.end_complemento || 'N/A'}</p>
+                            </div>
+                        `).join('')}
+                    `;
+
+                    // Exibe os cartões
+                    document.getElementById('dadosCartoes').innerHTML = `
+                        <h2>Cartões</h2>
+                        ${cartoes.map(cartao => `
+                            <div>
+                                <p><strong>Número:</strong> ${cartao.crt_numero}</p>
+                                <p><strong>Bandeira:</strong> ${cartao.crt_bandeira}</p>
+                                <p><strong>Nome:</strong> ${cartao.crt_nome}</p>
+                            </div>
+                        `).join('')}
+                    `;
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    document.getElementById('dadosUsuario').innerHTML = `<p>Erro ao carregar os dados. Tente novamente mais tarde.</p>`;
+                });
+        }
+
+        // Executa a função quando a página carregar
+        document.addEventListener('DOMContentLoaded', carregarDados);
+
+        document.getElementById("Menu").addEventListener("click", function() {
+            window.location.href = "index.html";
+        });
+
+        document.getElementById("atualiza_usuario").addEventListener("click", function() {
+            window.location.href = "atualizarusuario.html";
+        });
+
+    </script>
+</body>
+</html>

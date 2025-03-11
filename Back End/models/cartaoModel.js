@@ -28,6 +28,32 @@ class Cartao {
         db.query(query, [id], callback);
     }
 
+    static recuperarPorUsuarioId(usuarioId, callback) {
+        const query = `
+            SELECT 
+                crt_id, 
+                crt_numero, 
+                crt_bandeira, 
+                crt_nome
+            FROM cartao
+            WHERE usuario_usr_id = ?
+        `;
+        db.query(query, [usuarioId], callback);
+    }
+    
+    static recuperarPorUsuarioId(usuarioId, callback) {
+        const query = `
+            SELECT 
+                crt_id, 
+                crt_numero, 
+                crt_bandeira, 
+                crt_nome
+            FROM cartao
+            WHERE usuario_usr_id = ?
+        `;
+        db.query(query, [usuarioId], callback);
+    }
+
     static atualizar(id, cartao, callback) {
         const query = `
             UPDATE cartao

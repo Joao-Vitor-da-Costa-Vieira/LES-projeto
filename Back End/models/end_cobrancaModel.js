@@ -34,6 +34,23 @@ class EnderecoCobranca {
         db.query(query, [id], callback);
     }
 
+    static recuperarPorUsuarioId(usuarioId, callback) {
+      const query = `
+          SELECT 
+              end_id, 
+              end_estado, 
+              end_cidade, 
+              end_bairro, 
+              end_numero, 
+              end_complemento, 
+              end_cep, 
+              end_endereco
+          FROM endereco_cobranca
+          WHERE usuario_usr_id = ?
+      `;
+      db.query(query, [usuarioId], callback);
+  }
+
     static atualizar(id, enderecoCobranca, callback) {
         const query = `
             UPDATE endereco_cobranca
