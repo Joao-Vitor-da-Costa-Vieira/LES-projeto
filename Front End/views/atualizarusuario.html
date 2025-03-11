@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html>
 <head>
-  
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="../style/style.css">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/style.css">
 
 </head>
 
 <body>
-
-    <!--Barra lateral de Navegação-->
     <div class="sidenav">
         <a href="index.html">Menu</a>
         <a href="cadastrarusuario.html">Cadastrar</a>
@@ -20,28 +18,151 @@
         <a href="atualizarusuario.html">Atualizar</a>
     </div>
 
-    <!--Div usada para centralizar o conteudo para da página além da barra lateral-->
     <div class="conteudo">
         <div class="bloco_titulo">
             <h1 class="titulo">Atualizar Usuário</h1>
         </div>
 
         <div class="main">
-            <!--Entrada de Texto-->
-            <form>
-                <label for="fname">First name:</label><br>
-                <input type="text" id="fname" name="fname">
-            </form>
+            <!-- Exibe os dados do usuário -->
+            <div id="dadosUsuario">
+                <h2>Dados Atuais</h2>
+                <p><strong>Nome:</strong> <span id="usr_nome"></span></p>
+                <p><strong>Email:</strong> <span id="usr_email"></span></p>
+                <p><strong>CPF:</strong> <span id="usr_cpf"></span></p>
+                <p><strong>Data de Nascimento:</strong> <span id="usr_data_nascimento"></span></p>
+                <p><strong>Telefone 1:</strong> <span id="usr_telefone_1"></span></p>
+                <p><strong>Telefone 2:</strong> <span id="usr_telefone_2"></span></p>
+                <p><strong>Gênero:</strong> <span id="usr_genero"></span></p>
+            </div>
 
-            <!--Entrada de Botão-->
-            <form>
-                <input type="button" id="button" name="button" value="Button">
+            <!-- Formulário para atualizar os dados -->
+            <form id="formAtualizarUsuario">
+                <input type="hidden" id="usr_id" name="usr_id">
+                <input type="hidden" id="usr_senha_atual" name="usr_senha_atual">
+                <h2>Atualizar Dados</h2>
+
+                <div>
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" name="nome">
+                </div>
+                
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email">
+                </div>
+                
+                <div>
+                    <label for="cpf">CPF:</label>
+                    <input type="text" id="cpf" name="cpf">
+                </div>
+                
+                <div>
+                    <label for="data_nascimento">Data de Nascimento:</label>
+                    <input type="date" id="data_nascimento" name="data_nascimento">
+                </div>
+                
+                <div>
+                    <label for="telefone1">Telefone 1:</label>
+                    <input type="text" id="telefone1" name="telefone1">
+                </div>
+                
+                <div>
+                    <label for="telefone2">Telefone 2:</label>
+                    <input type="text" id="telefone2" name="telefone2">
+                </div>
+                
+                <div>
+                    <label>Gênero:</label>
+                    <input type="radio" id="Masculino" name="genero" value="Masculino">
+                    <label for="Masculino">Masculino</label>
+                    <input type="radio" id="Feminino" name="genero" value="Feminino">
+                    <label for="Feminino">Feminino</label>
+                    <input type="radio" id="Nao_Binario" name="genero" value="Nao_Binario">
+                    <label for="Nao_Binario">Não Binário</label>
+                </div>
+
+                <br>
+
+                <div class="botoes">
+                    <button class="cancelar" type="button" id="Cancelar">Cancelar</button>
+                    <input type="submit" id="submit" name="submit" value="Confirmar">
+                </div>
             </form>
         </div>
-
     </div>
 
-    
-</body>
+    <script>
+        function carregarDadosUsuario() {
+            fetch('http://localhost:3000/api/usuario/dados')
+                .then(response => response.json())
+                .then(data => {
 
-</html> 
+                    const usuario = data.usuario;
+                    const dataNascimento = new Date(usuario.usr_data_de_nascimento).toISOString().split('T')[0];
+                   
+
+                    document.getElementById('usr_id').value = usuario.usr_id;
+                    document.getElementById('usr_senha_atual').value = usuario.usr_senha;
+                    document.getElementById('usr_nome').textContent = usuario.usr_nome;
+                    document.getElementById('usr_email').textContent = usuario.usr_email;
+                    document.getElementById('usr_cpf').textContent = usuario.usr_cpf;
+                    document.getElementById('usr_data_nascimento').textContent = dataNascimento;
+                    document.getElementById('usr_telefone_1').textContent = usuario.usr_telefone_1;
+                    document.getElementById('usr_telefone_2').textContent = usuario.usr_telefone_2 || 'N/A';
+                    document.getElementById('usr_genero').textContent = usuario.usr_genero;
+
+                    document.getElementById('nome').value = usuario.usr_nome;
+                    document.getElementById('email').value = usuario.usr_email;
+                    document.getElementById('cpf').value = usuario.usr_cpf;
+                    document.getElementById('data_nascimento').value = dataNascimento;
+                    document.getElementById('telefone1').value = usuario.usr_telefone_1;
+                    document.getElementById('telefone2').value = usuario.usr_telefone_2 || '';
+                    document.querySelector(`input[name="genero"][value="${usuario.usr_genero}"]`).checked = true;
+                })
+                .catch(error => {
+                    console.error('Erro ao carregar os dados:', error);
+                    alert('Erro ao carregar os dados. Tente novamente mais tarde.');
+                });
+        }
+
+        // Função para atualizar os dados do usuário
+        function atualizarDadosUsuario(event) {
+            event.preventDefault();
+
+            const usuarioId = document.getElementById('usr_id').value; // Obtém o ID do usuário do campo oculto
+            const dadosAtualizados = {
+                usr_nome: document.getElementById('nome').value || document.getElementById('usr_nome').textContent,
+                usr_senha: document.getElementById('usr_senha_atual').value,
+                usr_email: document.getElementById('email').value || document.getElementById('usr_email').textContent,
+                usr_cpf: document.getElementById('cpf').value || document.getElementById('usr_cpf').textContent,
+                usr_data_de_nascimento: document.getElementById('data_nascimento').value || document.getElementById('usr_data_nascimento').textContent,
+                usr_telefone_1: document.getElementById('telefone1').value || document.getElementById('usr_telefone_1').textContent,
+                usr_telefone_2: document.getElementById('telefone2').value || document.getElementById('usr_telefone_2').textContent,
+                usr_genero: document.querySelector('input[name="genero"]:checked').value || document.getElementById('usr_genero').textContent
+            };
+
+            fetch(`http://localhost:3000/api/usuarios/${usuarioId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dadosAtualizados)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                window.location.href = 'index.html'; // Redireciona para a página inicial
+            })
+            .catch(error => {
+                console.error('Erro ao atualizar os dados:', error);
+                alert('Erro ao atualizar os dados. Tente novamente mais tarde.');
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', carregarDadosUsuario);
+
+        document.getElementById('formAtualizarUsuario').addEventListener('submit', atualizarDadosUsuario);
+    </script>
+</body>
+</html>
