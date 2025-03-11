@@ -1,67 +1,56 @@
 const EnderecoEntrega = require('../models/end_entregaModel');
-const EnderecoCobranca = require('../models/end_cobrancaModel');
 const Usuario = require('../models/usuarioModel');
 
-async function cadastrarEnderecoEntrega(req, res) {
-    try {
-        // Recuperar dados da sessão
-        const usuarioSession = req.session.usuario;
-        const enderecoCobrancaSession = req.session.enderecoCobranca;
+exports.cadastrarEnderecoEntrega = (req, res) => {
+    console.log('Dados recebidos no controller:', req.body); // Verifique os dados recebidos
+    const enderecoEntrega = req.body;
 
-        if (!usuarioSession) {
-            return res.status(400).json({ error: 'Dados do usuário não encontrados na sessão.' });
+    // Recupera o ID do último usuário registrado
+    Usuario.recuperarUltimoId((err, results) => {
+        if (err) {
+            console.error('Erro ao recuperar o último ID do usuário:', err);
+            return res.status(500).json({ error: err.message });
         }
 
-        // Recuperar dados do formulário
-        const { cidade_e, bairro_e, estado_e, endereco_e, numero_e, complemento_e, cep_e } = req.body;
+        const usuario_usr_id = results[0].ultimo_id; // ID do último usuário
 
-        // Inserir usuário no banco de dados
-        const usuarioInserido = await Usuario.cadastrar(
-            usuarioSession.nome,
-            usuarioSession.email,
-            usuarioSession.cpf,
-            usuarioSession.senha,
-            usuarioSession.data_de_nascimento,
-            usuarioSession.telefone_1,
-            usuarioSession.telefone_2,
-            usuarioSession.genero
-        );
+        // Adiciona o ID do usuário ao objeto enderecoEntrega
+        enderecoEntrega.usuario_usr_id = usuario_usr_id;
 
-        // Inserir endereço de cobrança no banco de dados
-        await EnderecoCobranca.cadastrar(
-            usuarioInserido.usr_id,
-            enderecoCobrancaSession.cidade_c,
-            enderecoCobrancaSession.bairro_c,
-            enderecoCobrancaSession.estado_c,
-            enderecoCobrancaSession.endereco_c,
-            enderecoCobrancaSession.numero_c,
-            enderecoCobrancaSession.complemento_c,
-            enderecoCobrancaSession.cep_c
-        );
+        console.log('Dados a serem enviados para o model:', enderecoEntrega); // Verifique os dados antes de chamar o model
 
-        // Inserir endereço de entrega no banco de dados
-        await EnderecoEntrega.cadastrar(
-            usuarioInserido.usr_id,
-            cidade_e,
-            bairro_e,
-            estado_e,
-            endereco_e,
-            numero_e,
-            complemento_e,
-            cep_e
-        );
+        // Cadastra o endereço de entrega
+        EnderecoEntrega.criar(enderecoEntrega, (err, results) => {
+            if (err) {
+                console.error('Erro no model:', err); // Log de erro
+                return res.status(500).json({ error: err.message });
+            }
+            console.log('Resultados da inserção:', results); // Verifique os resultados da inserção
+            res.status(201).json({ message: 'Endereço de entrega cadastrado com sucesso!', id: results.insertId });
+        });
+    });
+};
 
-        // Limpar dados da sessão
-        delete req.session.usuario;
-        delete req.session.enderecoCobranca;
+exports.recuperarEnderecoEntrega = (req, res) => {
+    const id = req.params.id;
+    EnderecoEntrega.recuperarPorId(id, (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        if (results.length === 0) {
+            return res.status(404).json({ message: 'Endereço de entrega não encontrado' });
+        }
+        res.status(200).json(results[0]);
+    });
+};
 
-        res.status(201).json({ message: 'Cadastro completo realizado com sucesso!' });
-    } catch (error) {
-        console.error('Erro ao cadastrar endereço de entrega:', error);
-        res.status(500).json({ error: 'Erro ao cadastrar endereço de entrega' });
-    }
-}
-
-module.exports = {
-    cadastrarEnderecoEntrega
+exports.atualizarEnderecoEntrega = (req, res) => {
+    const id = req.params.id;
+    const enderecoEntrega = req.body;
+    EnderecoEntrega.atualizar(id, enderecoEntrega, (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        res.status(200).json({ message: 'Endereço de entrega atualizado com sucesso!' });
+    });
 };

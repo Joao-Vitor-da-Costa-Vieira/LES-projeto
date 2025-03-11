@@ -1,34 +1,28 @@
-document.getElementById('formEndEntrega').addEventListener('submit', async function (event) {
-    event.preventDefault();
-  
-    const dadosEnderecoEntrega = {
-        cidade_e: document.getElementById('cidade_e').value,
-        bairro_e: document.getElementById('bairro_e').value,
-        estado_e: document.getElementById('estado_e').value,
-        endereco_e: document.getElementById('endereco_e').value,
-        numero_e: document.getElementById('numero_e').value,
-        complemento_e: document.getElementById('complemento_e').value,
-        cep_e: document.getElementById('cep_e').value
+document.getElementById('formEndEntrega').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const enderecoEntrega = {
+        end_estado: document.getElementById('estado_e').value,
+        end_cidade: document.getElementById('cidade_e').value,
+        end_bairro: document.getElementById('Bairro_e').value,
+        end_endereco: document.getElementById('endereco_e').value,
+        end_numero: document.getElementById('numero_e').value,
+        end_complemento: document.getElementById('complemento_e').value,
+        end_cep: document.getElementById('cep_e').value,
+        usuario_usr_id: 1 // Substitua pelo ID do usuário logado ou obtenha dinamicamente
     };
-  
-    try {
-        const response = await fetch('http://localhost:3000/api/cadastrar_end_entrega', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(dadosEnderecoEntrega)
-        });
-  
-        if (response.ok) {
-            alert('Endereço de entrega cadastrado com sucesso!');
-            window.location.href = '/index';
-        } else {
-            const errorData = await response.json();
-            alert('Erro ao cadastrar endereço de entrega: ' + (errorData.error || 'Erro desconhecido'));
-        }
-    } catch (error) {
-        console.error('Erro:', error);
-        alert('Erro ao cadastrar endereço de entrega');
-    }
-  });
+
+    fetch('http://localhost:3000/api/enderecos-entrega', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(enderecoEntrega)
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+        window.location.href = 'index.html'; // Redireciona após o cadastro
+    })
+    .catch(error => console.error('Erro:', error));
+});

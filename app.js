@@ -8,9 +8,11 @@ app.use(express.json());
 
 const usuarioRoutes = require('./Back End/routes/usuarioRoutes');
 const enderecoCobrancaRoutes = require('./Back End/routes/enderecoCobrancaRoutes');
+const enderecoEntregaRoutes = require('./Back End/routes/enderecoEntregaRoutes');
 
 app.use('/api', usuarioRoutes);
 app.use('/api', enderecoCobrancaRoutes);
+app.use('/api', enderecoEntregaRoutes);
 
 const PORT = 3000;
 app.listen(PORT, () => {
