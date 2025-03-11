@@ -1,17 +1,67 @@
-const pool = require('../config/db');
+const db = require('../config/db');
+const Usuario = require('../models/usuarioModel');
 
-async function cadastrar(usr_id, cidade, bairro, estado, endereco, numero, complemento, cep) {
-  try {
-    await pool.query(
-      'INSERT INTO endereco_cobranca (end_c_usr_id, end_c_cidade, end_c_bairro, end_c_estado, end_c_endereco, end_c_numero, end_c_complemento, end_c_cep) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-      [usr_id, cidade, bairro, estado, endereco, numero, complemento, cep]
-    );
-  } catch (error) {
-    console.error('Erro ao cadastrar endereço de cobrança:', error);
-    throw error;
-  }
+class EnderecoCobranca {
+    static criar(enderecoCobranca, callback) {
+        const query = `
+            INSERT INTO endereco_cobranca (
+                end_estado, 
+                end_cidade, 
+                end_bairro,
+                end_endereco,  
+                end_numero, 
+                end_complemento, 
+                end_cep, 
+                usuario_usr_id
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        `;
+        const values = [
+            enderecoCobranca.end_estado,
+            enderecoCobranca.end_cidade,
+            enderecoCobranca.end_bairro,
+            enderecoCobranca.end_endereco,
+            enderecoCobranca.end_numero,
+            enderecoCobranca.end_complemento,
+            enderecoCobranca.end_cep,
+            enderecoCobranca.usuario_usr_id
+        ];
+
+        db.query(query, values, callback);
+    }
+
+    static recuperarPorId(id, callback) {
+        const query = 'SELECT * FROM endereco_cobranca WHERE end_id = ?';
+        db.query(query, [id], callback);
+    }
+
+    static atualizar(id, enderecoCobranca, callback) {
+        const query = `
+            UPDATE endereco_cobranca
+            SET 
+                end_estado = ?, 
+                end_cidade = ?, 
+                end_bairro = ?, 
+                end_numero = ?, 
+                end_complemento = ?, 
+                end_cep = ?, 
+                end_endereco = ?, 
+                usuario_usr_id = ?
+            WHERE end_id = ?
+        `;
+        const values = [
+            enderecoCobranca.end_estado,
+            enderecoCobranca.end_cidade,
+            enderecoCobranca.end_bairro,
+            enderecoCobranca.end_numero,
+            enderecoCobranca.end_complemento,
+            enderecoCobranca.end_cep,
+            enderecoCobranca.end_endereco,
+            enderecoCobranca.usuario_usr_id,
+            id
+        ];
+
+        db.query(query, values, callback);
+    }
 }
 
-module.exports = {
-  cadastrar,
-};
+module.exports = EnderecoCobranca;

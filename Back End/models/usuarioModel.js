@@ -31,6 +31,11 @@ class Usuario {
         db.query(query, values, callback);
     }
 
+    static recuperarUltimoId(callback) {
+        const query = 'SELECT MAX(usr_id) AS ultimo_id FROM usuario';
+        db.query(query, callback);
+    }
+
     static recuperarPorId(usr_id, callback) {
         const query = 'SELECT * FROM usuario WHERE usr_id = ?';
         db.query(query, [usr_id], callback);

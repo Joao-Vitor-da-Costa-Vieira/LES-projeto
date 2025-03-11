@@ -1,34 +1,28 @@
-document.getElementById('formEndCobranca').addEventListener('submit', async function (event) {
-  event.preventDefault();
+document.getElementById('formEndCobranca').addEventListener('submit', function (e) {
+    e.preventDefault();
 
-  const dadosEnderecoCobranca = {
-      cidade_c: document.getElementById('cidade_c').value,
-      bairro_c: document.getElementById('bairro_c').value,
-      estado_c: document.getElementById('estado_c').value,
-      endereco_c: document.getElementById('endereco_c').value,
-      numero_c: document.getElementById('numero_c').value,
-      complemento_c: document.getElementById('complemento_c').value,
-      cep_c: document.getElementById('cep_c').value
-  };
+    const enderecoCobranca = {
+        end_estado: document.getElementById('estado_c').value,
+        end_cidade: document.getElementById('cidade_c').value,
+        end_bairro: document.getElementById('bairro_c').value,
+        end_endereco: document.getElementById('endereco_c').value,
+        end_numero: document.getElementById('numero_c').value,
+        end_complemento: document.getElementById('complemento_c').value,
+        end_cep: document.getElementById('cep_c').value,
+        usuario_usr_id: 1 
+    };
 
-  try {
-      const response = await fetch('http://localhost:3000/api/cadastrar_end_cobranca', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(dadosEnderecoCobranca)
-      });
-
-      if (response.ok) {
-          alert('Endereço de cobrança cadastrado com sucesso!');
-          window.location.href = '/cadastrar_end_entrega';
-      } else {
-          const errorData = await response.json();
-          alert('Erro ao cadastrar endereço de cobrança: ' + (errorData.error || 'Erro desconhecido'));
-      }
-  } catch (error) {
-      console.error('Erro:', error);
-      alert('Erro ao cadastrar endereço de cobrança');
-  }
+    fetch('http://localhost:3000/api/enderecos-cobranca', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(enderecoCobranca)
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+        window.location.href = 'cadastrar_end_entrega.html';
+    })
+    .catch(error => console.error('Erro:', error));
 });
