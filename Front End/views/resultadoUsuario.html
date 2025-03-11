@@ -111,7 +111,8 @@
 
         // Botão "Mais"
         document.getElementById('maisDetalhes').addEventListener('click', function () {
-            window.location.href = 'mostrarCadastro.html'; // Redireciona para a página de detalhes
+            const usuarioId = dados[0].usr_id; // Pega o ID do primeiro usuário na lista
+            window.location.href = `mostrarCadastroConsulta.html?usuarioId=${usuarioId}`; 
         });
     </script>
 </body>

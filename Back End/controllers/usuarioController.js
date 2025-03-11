@@ -91,3 +91,96 @@ exports.atualizarUsuarioParcial = (req, res) => {
         });
     });
 };
+
+// Função para consultar usuários
+exports.consultarUsuarios = (req, res) => {
+    const { coluna, valor } = req.body;
+
+    // Verifica se a coluna e o valor foram fornecidos
+    if (!coluna || !valor) {
+        return res.status(400).json({ success: false, message: "Coluna e valor são obrigatórios." });
+    }
+
+    // Consulta os usuários no banco de dados
+    Usuario.consultar(coluna, valor, (err, resultados) => {
+        if (err) {
+            return res.status(500).json({ success: false, message: "Erro ao consultar usuários." });
+        }
+
+        if (resultados.length === 0) {
+            return res.status(404).json({ success: false, message: "Nenhum usuário encontrado." });
+        }
+
+        // Retorna os resultados
+        res.status(200).json({ success: true, resultados });
+    });
+};
+
+// Função para verificar endereços de cobrança e entrega
+exports.verificarEnderecos = (req, res) => {
+    const usuarioId = req.params.id;
+
+    Usuario.verificarEnderecos(usuarioId, (err, resultados) => {
+        if (err) {
+            return res.status(500).json({ success: false, message: "Erro ao verificar endereços." });
+        }
+
+        const possuiEnderecos = resultados[0].endereco_cobranca > 0 && resultados[0].endereco_entrega > 0;
+        res.status(200).json({ success: true, possuiEnderecos });
+    });
+};
+
+// Função para atualizar o status de atividade do usuário
+exports.atualizarStatus = (req, res) => {
+    const usuarioId = req.params.id;
+    const novoStatus = req.body.novoStatus;
+
+    // Verifica se o novo status é 1 (Ativo)
+    if (novoStatus === 1) {
+        // Verifica se o usuário possui endereços de cobrança e entrega
+        Usuario.verificarEnderecos(usuarioId, (err, resultados) => {
+            if (err) {
+                return res.status(500).json({ success: false, message: "Erro ao verificar endereços." });
+            }
+
+            const possuiEnderecos = resultados[0].endereco_cobranca > 0 && resultados[0].endereco_entrega > 0;
+
+            if (!possuiEnderecos) {
+                return res.status(400).json({ success: false, message: "O usuário precisa ter pelo menos um endereço de cobrança e um de entrega para ativar o status." });
+            }
+
+            // Atualiza o status
+            Usuario.atualizarStatus(usuarioId, novoStatus, (err, results) => {
+                if (err) {
+                    return res.status(500).json({ success: false, message: "Erro ao atualizar status." });
+                }
+                res.status(200).json({ success: true, message: "Status atualizado com sucesso." });
+            });
+        });
+    } else {
+        // Se o novo status for 0 (Inativo), atualiza diretamente
+        Usuario.atualizarStatus(usuarioId, novoStatus, (err, results) => {
+            if (err) {
+                return res.status(500).json({ success: false, message: "Erro ao atualizar status." });
+            }
+            res.status(200).json({ success: true, message: "Status atualizado com sucesso." });
+        });
+    }
+};
+
+exports.recuperarEnderecos = (req, res) => {
+    const usuarioId = req.params.id;
+
+    // Consulta os endereços de cobrança e entrega
+    const query = `
+        SELECT 'Cobrança' AS tipo, end_endereco, end_cep, end_cidade, end_estado FROM endereco_cobranca WHERE usuario_usr_id = ?
+        UNION ALL
+        SELECT 'Entrega' AS tipo, end_endereco, end_cep, end_cidade, end_estado FROM endereco_entrega WHERE usuario_usr_id = ?
+    `;
+    db.query(query, [usuarioId, usuarioId], (err, resultados) => {
+        if (err) {
+            return res.status(500).json({ success: false, message: "Erro ao recuperar endereços." });
+        }
+        res.status(200).json({ success: true, enderecos: resultados });
+    });
+};

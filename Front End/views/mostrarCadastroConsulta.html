@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../style/style.css">
+    <title>Mostrar Cadastro</title>
+</head>
+<body>
+    <!-- Barra lateral de Navegação -->
+    <div class="sidenav">
+        <a href="index.html">Menu</a>
+        <a href="cadastrarusuario.html">Cadastrar</a>
+        <a href="cadastrar_end_cobranca.html">Cadastrar End. Cobrança</a>
+        <a href="cadastrar_end_entrega.html">Cadastrar End. Entrega</a>
+        <a href="cadastrar_cartao.html">Cadastrar Cartão</a>
+        <a href="consultausuario.html">Consultar</a>
+        <a href="atualizarusuario.html">Atualizar</a>
+    </div>
+
+    <!-- Div usada para centralizar o conteúdo da página além da barra lateral -->
+    <div class="conteudo">
+        <div class="bloco_titulo">
+            <h1 class="titulo">Mostrar Cadastro</h1>
+        </div>
+
+        <div class="main">
+            <!-- Mensagem de erro -->
+            <div id="mensagemErro" style="color: red; display: none;"></div>
+
+            <!-- Lista de endereços -->
+            <div id="enderecos"></div>
+        </div>
+    </div>
+
+    <!-- Script para carregar os endereços -->
+    <script>
+        // Captura o ID do usuário da URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const usuarioId = urlParams.get('usuarioId');
+
+        // Função para carregar os endereços do usuário
+        function carregarEnderecos(usuarioId) {
+            fetch(`http://localhost:3000/api/usuarios/${usuarioId}/enderecos`)
+                .then(response => response.json())
+                .then(data => {
+                    const divEnderecos = document.getElementById('enderecos');
+                    divEnderecos.innerHTML = '';
+
+                    data.enderecos.forEach(endereco => {
+                        const divEndereco = document.createElement('div');
+                        divEndereco.innerHTML = `
+                            <p><strong>Tipo:</strong> ${endereco.tipo}</p>
+                            <p><strong>Endereço:</strong> ${endereco.end_endereco}</p>
+                            <p><strong>CEP:</strong> ${endereco.end_cep}</p>
+                            <p><strong>Cidade:</strong> ${endereco.end_cidade}</p>
+                            <p><strong>Estado:</strong> ${endereco.end_estado}</p>
+                            <button onclick="window.location.href='atualizar_end.html?enderecoId=${endereco.end_id}'">Atualizar</button>
+                            <hr>
+                        `;
+                        divEnderecos.appendChild(divEndereco);
+                    });
+                })
+                .catch(error => {
+                    console.error('Erro ao carregar endereços:', error);
+                });
+        }
+
+        // Carrega os endereços ao carregar a página
+        carregarEnderecos(usuarioId);
+    </script>
+</body>
+</html>

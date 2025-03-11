@@ -37,6 +37,11 @@ class Usuario {
         db.query(query, [usr_id], callback);
     }
 
+    static consultar(coluna, valor, callback) {
+        const query = `SELECT * FROM usuario WHERE ${coluna} = ?`;
+        db.query(query, [valor], callback);
+    }
+    
     static recuperarUltimoUsuario(callback) {
         const query = `
             SELECT 
@@ -98,6 +103,21 @@ class Usuario {
         const query = 'UPDATE usuario SET usr_status_de_atividade = 1 WHERE usr_id = ?';
         db.query(query, [usr_id], callback);
     }
+
+    static verificarEnderecos(usuarioId, callback) {
+        const query = `
+            SELECT 
+                (SELECT COUNT(*) FROM endereco_cobranca WHERE usuario_usr_id = ?) AS endereco_cobranca,
+                (SELECT COUNT(*) FROM endereco_entrega WHERE usuario_usr_id = ?) AS endereco_entrega
+        `;
+        db.query(query, [usuarioId, usuarioId], callback);
+    }
+    
+    static atualizarStatus(usuarioId, novoStatus, callback) {
+        const query = 'UPDATE usuario SET usr_status_de_atividade = ? WHERE usr_id = ?';
+        db.query(query, [novoStatus, usuarioId], callback);
+    }
+    
 }
 
 module.exports = Usuario;

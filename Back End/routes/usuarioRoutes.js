@@ -14,4 +14,13 @@ router.put('/usuarios/:id', UsuarioController.atualizarUsuario);
 // Atualizar usuário parcialmente
 router.patch('/usuarios/:id', UsuarioController.atualizarUsuarioParcial);
 
+//Consulta Usuario
+router.post('/usuarios/consultar', UsuarioController.consultarUsuarios);
+
+// Rota para verificar endereços
+router.get('/usuarios/:id/verificar-enderecos', UsuarioController.verificarEnderecos);
+
+// Rota para atualizar status
+router.put('/usuarios/:id/atualizar-status', UsuarioController.atualizarStatus);
+
 module.exports = router;
