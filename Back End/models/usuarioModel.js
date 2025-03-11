@@ -3,45 +3,71 @@ const db = require('../config/db');
 class Usuario {
     static criar(usuario, callback) {
         const query = `
-            INSERT INTO usuario (nome, email, cpf, senha, data_nascimento, telefone1, telefone2, genero)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO usuario (
+                usr_nome, 
+                usr_email, 
+                usr_cpf, 
+                usr_senha, 
+                usr_data_de_nascimento, 
+                usr_telefone_1, 
+                usr_telefone_2, 
+                usr_genero
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         `;
         const values = [
-            usuario.nome,
-            usuario.email,
-            usuario.cpf,
-            usuario.senha,
-            usuario.data_nascimento,
-            usuario.telefone1,
-            usuario.telefone2,
-            usuario.genero
+            usuario.usr_nome,
+            usuario.usr_email,
+            usuario.usr_cpf,
+            usuario.usr_senha,
+            usuario.usr_data_de_nascimento,
+            usuario.usr_telefone_1,
+            usuario.usr_telefone_2,
+            usuario.usr_genero
         ];
         db.query(query, values, callback);
     }
 
-    static recuperarPorId(id, callback) {
-        const query = 'SELECT * FROM usuarios WHERE id = ?';
-        db.query(query, [id], callback);
+    static recuperarPorId(usr_id, callback) {
+        const query = 'SELECT * FROM usuario WHERE usr_id = ?';
+        db.query(query, [usr_id], callback);
     }
 
-    static atualizar(id, usuario, callback) {
+    static atualizar(usr_id, usuario, callback) {
         const query = `
-            UPDATE usuarios
-            SET nome = ?, email = ?, cpf = ?, senha = ?, data_nascimento = ?, telefone1 = ?, telefone2 = ?, genero = ?
-            WHERE id = ?
+            UPDATE usuario
+            SET 
+                usr_nome = ?, 
+                usr_email = ?, 
+                usr_cpf = ?, 
+                usr_senha = ?, 
+                usr_data_de_nascimento = ?, 
+                usr_telefone_1 = ?, 
+                usr_telefone_2 = ?, 
+                usr_genero = ?
+            WHERE usr_id = ?
         `;
         const values = [
-            usuario.nome,
-            usuario.email,
-            usuario.cpf,
-            usuario.senha,
-            usuario.data_nascimento,
-            usuario.telefone1,
-            usuario.telefone2,
-            usuario.genero,
-            id
+            usuario.usr_nome,
+            usuario.usr_email,
+            usuario.usr_cpf,
+            usuario.usr_senha,
+            usuario.usr_data_de_nascimento,
+            usuario.usr_telefone_1,
+            usuario.usr_telefone_2,
+            usuario.usr_genero,
+            usr_id
         ];
         db.query(query, values, callback);
+    }
+
+    static desativar(usr_id, callback) {
+        const query = 'UPDATE usuario SET usr_status_de_atividade = 0 WHERE usr_id = ?';
+        db.query(query, [usr_id], callback);
+    }
+
+    static ativar(usr_id, callback) {
+        const query = 'UPDATE usuario SET usr_status_de_atividade = 1 WHERE usr_id = ?';
+        db.query(query, [usr_id], callback);
     }
 }
 

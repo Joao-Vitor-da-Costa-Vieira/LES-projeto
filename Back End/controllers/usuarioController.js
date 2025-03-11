@@ -1,6 +1,7 @@
 const Usuario = require('../models/usuarioModel');
 
 exports.cadastrarUsuario = (req, res) => {
+    console.log('Dados recebidos no controller:', req.body);
     const usuario = req.body;
     Usuario.criar(usuario, (err, results) => {
         if (err) {
@@ -9,6 +10,7 @@ exports.cadastrarUsuario = (req, res) => {
         res.status(201).json({ message: 'Usuário cadastrado com sucesso!', id: results.insertId });
     });
 };
+
 
 exports.recuperarUsuario = (req, res) => {
     const id = req.params.id;

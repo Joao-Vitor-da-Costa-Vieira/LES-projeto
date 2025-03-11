@@ -22,7 +22,7 @@ document.getElementById('formUsuario').addEventListener('submit', function (e) {
   .then(response => response.json())
   .then(data => {
       alert(data.message);
-      window.location.href = 'index.html'; // Redireciona após o cadastro
+      window.location.href = 'index.html'; 
   })
   .catch(error => console.error('Erro:', error));
 });
