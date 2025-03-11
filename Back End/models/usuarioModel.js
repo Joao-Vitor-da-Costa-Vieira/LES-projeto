@@ -24,6 +24,10 @@ class Usuario {
             usuario.usr_telefone_2,
             usuario.usr_genero
         ];
+
+        console.log('Query:', query); 
+        console.log('Values:', values);
+
         db.query(query, values, callback);
     }
 
