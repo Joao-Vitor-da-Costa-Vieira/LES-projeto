@@ -3,7 +3,7 @@ const db = require('../config/db');
 class Usuario {
     static criar(usuario, callback) {
         const query = `
-            INSERT INTO usuarios (nome, email, cpf, senha, data_nascimento, telefone1, telefone2, genero)
+            INSERT INTO usuario (nome, email, cpf, senha, data_nascimento, telefone1, telefone2, genero)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         `;
         const values = [
