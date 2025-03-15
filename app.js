@@ -1,22 +1,18 @@
 const express = require('express');
-const app = express();
-const cors = require('cors'); 
+const path = require('path');
+const routes = require('./Back End/routes');
 
-app.use(cors());
+const app = express();
+
+app.use(express.static('./Front End/public'));
 
 app.use(express.json()); 
 
-const usuarioRoutes = require('./Back End/routes/usuarioRoutes');
-const enderecoCobrancaRoutes = require('./Back End/routes/enderecoCobrancaRoutes');
-const enderecoEntregaRoutes = require('./Back End/routes/enderecoEntregaRoutes');
-const cartaoRoutes = require('./Back End/routes/cartaoRoutes');
-const dadosRoutes = require('./Back End/routes/dadosRoutes');
+app.set('view engine', 'ejs');
 
-app.use('/api', usuarioRoutes);
-app.use('/api', enderecoCobrancaRoutes);
-app.use('/api', enderecoEntregaRoutes);
-app.use('/api', cartaoRoutes);
-app.use('/api', dadosRoutes);
+app.set('views', path.join(__dirname + '/Front End/views'));
+
+app.use(routes);
 
 const PORT = 3000;
 app.listen(PORT, () => {
