@@ -30,28 +30,19 @@
                 <!--Input de Nome-->
                 <div class="nome">
                     <label class="label" for="nome">Nome</label>
-                    <div class="erro_div">
-                        <input class="nome_input" type="text" id="nome" name="nome">
-                        <span id="erroNome" class="erro" style="color: red; display: none;">*</span>
-                    </div>
+                    <input class="nome_input" type="text" id="nome" name="nome" required>
                 </div>
 
                 <!--Input de Email-->
                 <div class="email">
                     <label class="label" for="E-mail">E-mail</label>
-                    <div class="erro_div">
-                        <input class="email_input" type="text" id="E-mail" name="E-mail">
-                        <span id="erroEmail" class="erro" style="color: red; display: none;">*</span>
-                    </div>
+                    <input class="email_input" type="text" id="E-mail" name="E-mail" required>
                 </div>
                 
                 <!--Input de CPF-->
                 <div class="cpf">
                     <label class="label" for="cpf">CPF</label>
-                    <div class="erro_div">
-                        <input class="cpf_input" type="number" id="cpf" name="cpf">
-                        <span id="erroCpf" class="erro" style="color: red; display: none;">*</span>
-                    </div>
+                    <input class="cpf_input" type="number" id="cpf" name="cpf" required>
                 </div>
 
                 <!--Bloco de Texto Informando como deve ser a senha-->
@@ -65,7 +56,7 @@
                 <div class="senha">
                     <label class="label" for="senha">Senha</label>
                     <div class="erro_div">
-                        <input class="senha_input" type="password" id="senha" name="senha">
+                        <input class="senha_input" type="password" id="senha" name="senha" required>
                         <span id="erroSenha" class="erro" style="color: red; display: none;">*</span>
                     </div>
                 </div>
@@ -74,7 +65,7 @@
                 <div class="senha">
                     <label class="label" for="conf_senha">Confirmar Senha</label>
                     <div class="erro_div">
-                        <input class="senha_input" type="password" id="conf_senha" name="conf_senha">
+                        <input class="senha_input" type="password" id="conf_senha" name="conf_senha" required>
                         <span id="erroConfSenha" class="erro" style="color: red; display: none;">*</span>
                     </div>
                 </div>
@@ -83,18 +74,12 @@
                 <div class="linha_centralizada">
                     <div class="data_div">
                         <label class="label_pequena" for="data_nascimento">Data</label>
-                        <div class="erro_div">
-                            <input type="date" id="data_nascimento" name="data_nascimento">
-                            <span id="erroData" class="erro" style="color: red; display: none;">*</span>
-                        </div>
+                        <input type="date" id="data_nascimento" name="data_nascimento" required>
                     </div>
 
                     <div class="telefone">
                         <label class="label_pequena" for="telefone1">Telefone 1</label>
-                        <div class="erro_div">
-                            <input class="telefone_input" type="text" id="telefone1" name="telefone1">
-                            <span id="erroTelefone1" class="erro" style="color: red; display: none;">*</span>
-                        </div>
+                        <input class="telefone_input" type="text" id="telefone1" name="telefone1" required>
                     </div>
                 
                     <div class="telefone">
@@ -105,13 +90,13 @@
 
                 <!--Input de Gênero-->
                 <div class="genero">
-                    <label class="label_genero">Gênero <span id="erroGenero" class="erro" style="color: red; display: none;">*</span></label>
-                        <select class="selecao" id="genero" name="genero">
-                            <option value="">Selecione</option>
-                            <option value="Masculino">Masculino</option>
-                            <option value="Feminino">Feminino</option>
-                            <option value="Nao_Binario">Não Binário</option>
-                        </select>
+                    <label class="label_genero">Gênero</label>
+                    <select class="selecao" id="genero" name="genero" required>
+                        <option value="">Selecione</option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Feminino">Feminino</option>
+                        <option value="Nao_Binario">Não Binário</option>
+                    </select>
                 </div>
 
                 <br>
@@ -127,23 +112,17 @@
                 <div class="linha_centralizada">
                     <div class="cidade">
                         <label class="label_pequena" for="cidade_e">Cidade</label>
-                        <div class="erro_div">
-                            <input class="cidade_input" type="text" id="cidade_e" name="cidade_e">
-                            <span id="erroCidadeE" class="erro" style="color: red; display: none;">*</span>
-                        </div>
+                        <input class="cidade_input" type="text" id="cidade_e" name="cidade_e" required>
                     </div>
 
                     <div class="bairro">
                         <label class="label_pequena" for="Bairro_e">Bairro</label>
-                        <div class="erro_div">
-                            <input class="cidade_input" type="text" id="Bairro_e" name="Bairro_e">
-                            <span id="erroBairroE" class="erro" style="color: red; display: none;">*</span>
-                        </div>
+                        <input class="cidade_input" type="text" id="Bairro_e" name="Bairro_e" required>
                     </div>
 
                     <div class="estado">
-                        <label class="label_genero">Estado <span id="erroEstadoE" class="erro" style="color: red; display: none;">*</span></label>
-                        <select class="selecao" id="estado_e" name="estado_e">
+                        <label class="label_genero">Estado</label>
+                        <select class="selecao" id="estado_e" name="estado_e" required>
                             <option value="">Selecione</option>
                             <option value="AC">AC</option>
                             <option value="AL">AL</option>
@@ -180,18 +159,12 @@
                 <div class="linha_centralizada">
                     <div class="endereco">
                         <label class="label_pequena" for="endereco_e">Endereço</label>
-                        <div class="erro_div">
-                            <input class="endereco_input" type="text" id="endereco_e" name="endereco_e">
-                            <span id="erroEnderecoE" class="erro" style="color: red; display: none;">*</span>
-                        </div>
+                        <input class="endereco_input" type="text" id="endereco_e" name="endereco_e" required>
                     </div>
 
                     <div class="numero">
                         <label class="label_pequena" for="numero_e">Nº.</label>
-                        <div class="erro_div">
-                            <input class="numero_input" type="number" id="numero_e" name="numero_e">
-                            <span id="erroNumeroE" class="erro" style="color: red; display: none;">*</span>
-                        </div>
+                        <input class="numero_input" type="number" id="numero_e" name="numero_e" required>
                     </div>
                 </div>
 
@@ -199,18 +172,12 @@
                 <div class="linha_centralizada">
                     <div class="cidade">
                         <label class="label_pequena" for="complemento_e">Complemento</label>
-                        <div class="erro_div">
-                            <input class="cidade_input" type="text" id="complemento_e" name="complemento_e">
-                            <span id="erroCidadeE" class="erro" style="color: red; display: none;">*</span>
-                        </div>
+                        <input class="cidade_input" type="text" id="complemento_e" name="complemento_e">
                     </div>
 
                     <div class="bairro">
                         <label class="label_pequena" for="cep_e">CEP</label>
-                        <div class="erro_div">
-                            <input class="cidade_input" type="text" id="cep_e" name="cep_e">
-                            <span id="erroCepE" class="erro" style="color: red; display: none;">*</span>
-                        </div>
+                        <input class="cidade_input" type="text" id="cep_e" name="cep_e" required>
                     </div>
                 </div>
                 
@@ -227,23 +194,17 @@
                 <div class="linha_centralizada">
                     <div class="cidade">
                         <label for="cidade_c">Cidade</label>
-                        <div class="erro_div">
-                            <input class="cidade_input" type="text" id="cidade_c" name="cidade_c">
-                            <span id="erroCidadeC" class="erro" style="color: red; display: none;">*</span>
-                        </div>
+                        <input class="cidade_input" type="text" id="cidade_c" name="cidade_c" required>
                     </div>
     
                     <div class="bairro">
                         <label for="bairro_c">Bairro</label>
-                        <div class="erro_div">
-                            <input class="cidade_input" type="text" id="bairro_c" name="bairro_c">
-                            <span id="erroBairroC" class="erro" style="color: red; display: none;">*</span>
-                        </div>
+                        <input class="cidade_input" type="text" id="bairro_c" name="bairro_c" required>
                     </div>
     
                     <div class="select">
-                        <label class="label_genero">Estado <span id="erroEstadoC" class="erro" style="color: red; display: none;">*</span></label>
-                        <select class="selecao" id="estado_c" name="estado_c">
+                        <label class="label_genero">Estado</label>
+                        <select class="selecao" id="estado_c" name="estado_c" required>
                             <option value="">Selecione</option>
                             <option value="AC">AC</option>
                             <option value="AL">AL</option>
@@ -280,18 +241,12 @@
                 <div class="linha_centralizada">
                     <div class="endereco">
                         <label class="label_pequena" for="endereco_c">Endereço</label>
-                        <div class="erro_div">
-                            <input class="endereco_input" type="text" id="endereco_c" name="endereco_c">
-                            <span id="erroEnderecoC" class="erro" style="color: red; display: none;">*</span>
-                        </div>
+                        <input class="endereco_input" type="text" id="endereco_c" name="endereco_c" required>
                     </div>
     
                     <div class="numero">
                         <label for="numero_c">Nº.</label>
-                        <div class="erro_div">
-                            <input class="numero_input" type="number" id="numero_c" name="numero_c">
-                            <span id="erroNumeroC" class="erro" style="color: red; display: none;">*</span>
-                        </div>
+                        <input class="numero_input" type="number" id="numero_c" name="numero_c" required>
                     </div>
                 </div>
     
@@ -304,10 +259,7 @@
     
                     <div class="bairro">
                         <label class="label_pequena" for="cep_c">CEP</label>
-                        <div class="erro_div">
-                            <input class="cidade_input" type="text" id="cep_c" name="cep_c">
-                            <span id="erroCepC" class="erro" style="color: red; display: none;">*</span>
-                        </div>
+                        <input class="cidade_input" type="text" id="cep_c" name="cep_c" required>
                     </div>
                 </div>
                 
@@ -323,23 +275,17 @@
                 <div class="linha_centralizada">
                     <div class="num_cartao">
                         <label for="num_cartao">Número</label>
-                        <div class="erro_div">
-                            <input class="num_cartao_input" type="number" id="num_cartao" name="num_cartao">
-                            <span id="erroNumCartao" class="erro" style="color: red; display: none;">*</span>
-                        </div>
+                        <input class="num_cartao_input" type="number" id="num_cartao" name="num_cartao" required>
                     </div>
 
                     <div class="cod_sec">
                         <label for="cod_sec">Código de Segurança</label>
-                        <div class="erro_div">
-                            <input class="cod_sec_input" type="password" id="cod_sec" name="cod_sec">
-                            <span id="erroCodSec" class="erro" style="color: red; display: none;">*</span>
-                        </div>
+                        <input class="cod_sec_input" type="password" id="cod_sec" name="cod_sec" required>
                     </div>
 
                     <div class="select">
-                        <label class="label_genero">Bandeira <span id="erroBandeira" class="erro" style="color: red; display: none;">*</span></label>
-                        <select class="selecao" id="bandeira" name="bandeira">
+                        <label class="label_genero">Bandeira</label>
+                        <select class="selecao" id="bandeira" name="bandeira" required>
                             <option value="">Selecione</option>
                             <option value="Visa">Visa</option>
                             <option value="Mastercard">Mastercard</option>
@@ -355,10 +301,7 @@
                 <!--Segunda Linha-->
                 <div class="nome">
                     <label class="label" for="nome_c">Nome</label>
-                    <div class="erro_div">
-                        <input class="nome_input" type="text" id="nome_c" name="nome_c">
-                        <span id="erroNomeC" class="erro" style="color: red; display: none;">*</span>
-                    </div>
+                    <input class="nome_input" type="text" id="nome_c" name="nome_c" required>
                 </div>
 
                 <br>
