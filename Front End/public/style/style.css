@@ -7,8 +7,27 @@ body {
 }
   
 /*Estilização do Label */
-label{
-      font-size: 22px;
+
+.label{
+    font-size: 22px;
+    padding-left: 35px;
+    display: flex;
+    align-items: flex-start;
+    align-self: flex-start;
+}
+
+.label_pequena{
+    font-size: 22px;
+    display: flex;
+    align-items: flex-start;
+    align-self: flex-start;
+}
+
+.label_genero{
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    align-self: center;
 }
   
 /*Estilização do Input*/
@@ -81,7 +100,14 @@ label{
     font-size: 20px;
     border: 2px solid black;
 }
-  
+
+/*Estilização e posicionamento do erro*/
+.erro_div{
+    display: flex;
+    flex-direction: row;
+}
+
+
 /*Estilização do Input do Botão Cancelar */
 .cancelar{
     background-color: red;
@@ -170,6 +196,8 @@ input[type=submit]{
   
 .titulo{
       color: #ffffff;
+      font-size: 25px;
+      font-weight: bold;
       margin: 0;
 }
   
@@ -198,32 +226,32 @@ p{
 .nome{
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     margin-bottom: 10px;
 }
 
 .endereco{
-    align-items: flex-start;
+    align-items: center;
     display: flex;
     flex-direction: column;
 }
 
 .email{
-    align-items: flex-start;
+    align-items: center;
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
 }
 
 .cpf{
-    align-items: flex-start;
+    align-items: center;
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
 }
 
 .senha{
-    align-items: flex-start;
+    align-items: center;
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;

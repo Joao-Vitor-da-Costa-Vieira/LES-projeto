@@ -1,15 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="../style/style.css">
-
+    <link rel="stylesheet" href="style/style.css">
 </head>
-
 <body>
-
     <!--Barra lateral de Navegação-->
     <div class="sidenav">
         <a href="index.html">Menu</a>
@@ -27,25 +23,35 @@
             <h1 class="titulo">Cadastrar Usuário</h1>
         </div>
 
+        <br>
+
         <div class="main">
-            
-            <form id="formUsuario">
+            <form id="formCadastro" method="POST">
                 <!--Input de Nome-->
                 <div class="nome">
-                        <label for="nome">Nome</label>
+                    <label class="label" for="nome">Nome</label>
+                    <div class="erro_div">
                         <input class="nome_input" type="text" id="nome" name="nome">
+                        <span id="erroNome" class="erro" style="color: red; display: none;">*</span>
+                    </div>
                 </div>
 
                 <!--Input de Email-->
                 <div class="email">
-                        <label for="E-mail">E-mail</label>
+                    <label class="label" for="E-mail">E-mail</label>
+                    <div class="erro_div">
                         <input class="email_input" type="text" id="E-mail" name="E-mail">
+                        <span id="erroEmail" class="erro" style="color: red; display: none;">*</span>
+                    </div>
                 </div>
                 
                 <!--Input de CPF-->
                 <div class="cpf">
-                        <label for="cpf">CPF</label>
+                    <label class="label" for="cpf">CPF</label>
+                    <div class="erro_div">
                         <input class="cpf_input" type="number" id="cpf" name="cpf">
+                        <span id="erroCpf" class="erro" style="color: red; display: none;">*</span>
+                    </div>
                 </div>
 
                 <!--Bloco de Texto Informando como deve ser a senha-->
@@ -57,54 +63,313 @@
 
                 <!--Input de senha-->
                 <div class="senha">
-                        <label for="senha">Senha</label>
+                    <label class="label" for="senha">Senha</label>
+                    <div class="erro_div">
                         <input class="senha_input" type="password" id="senha" name="senha">
+                        <span id="erroSenha" class="erro" style="color: red; display: none;">*</span>
+                    </div>
                 </div>
                 
+                <!--Input de confirmação de senha-->
                 <div class="senha">
-                        <label for="conf_senha">Confirmar Senha</label>
+                    <label class="label" for="conf_senha">Confirmar Senha</label>
+                    <div class="erro_div">
                         <input class="senha_input" type="password" id="conf_senha" name="conf_senha">
+                        <span id="erroConfSenha" class="erro" style="color: red; display: none;">*</span>
+                    </div>
                 </div>
 
                 <!--Input de data e Telefone-->
                 <div class="linha_centralizada">
-
-                    <div class="data">
-                        <label for="data_nascimento">Data</label>
-                        <input type="date" id="data_nascimento" name="data_nascimento">
+                    <div class="data_div">
+                        <label class="label_pequena" for="data_nascimento">Data</label>
+                        <div class="erro_div">
+                            <input type="date" id="data_nascimento" name="data_nascimento">
+                            <span id="erroData" class="erro" style="color: red; display: none;">*</span>
+                        </div>
                     </div>
 
                     <div class="telefone">
-                        <label for="telefone1">Telefone 1</label>
-                        <input class="telefone_input" type="text" id="telefone1" name="telefone1">
+                        <label class="label_pequena" for="telefone1">Telefone 1</label>
+                        <div class="erro_div">
+                            <input class="telefone_input" type="text" id="telefone1" name="telefone1">
+                            <span id="erroTelefone1" class="erro" style="color: red; display: none;">*</span>
+                        </div>
                     </div>
                 
                     <div class="telefone">
-                        <label for="telefone2">Telefone 2</label>
+                        <label class="label_pequena" for="telefone2">Telefone 2</label>
                         <input class="telefone_input" type="text" id="telefone2" name="telefone2">
                     </div>
                 </div>
 
+                <!--Input de Gênero-->
                 <div class="genero">
-                    
-                    <p>Genero</p>
-
-                        <input type="radio" id="Masculino" name="genero" value="Masculino">
-                        <label for="Masculino">Masculino</label>
-                        <input type="radio" id="Feminino" name="genero" value="Feminino">
-                        <label for="Feminino">Feminino</label>
-                        <input type="radio" id="Nao_Binario" name="genero" value="Nao_Binario">
-                        <label for="Nao_Binario">Não Binario</label>
+                    <label class="label_genero">Gênero <span id="erroGenero" class="erro" style="color: red; display: none;">*</span></label>
+                        <select class="selecao" id="genero" name="genero">
+                            <option value="">Selecione</option>
+                            <option value="Masculino">Masculino</option>
+                            <option value="Feminino">Feminino</option>
+                            <option value="Nao_Binario">Não Binário</option>
+                        </select>
                 </div>
+
+                <br>
+
+                <!--Cadastrar End. Entrega-->
+                <div class="bloco_titulo">
+                    <h1 class="titulo">Cadastrar End. Entrega</h1>
+                </div>
+                
+                <br>
+                
+                <!--Primeira Linha-->
+                <div class="linha_centralizada">
+                    <div class="cidade">
+                        <label class="label_pequena" for="cidade_e">Cidade</label>
+                        <div class="erro_div">
+                            <input class="cidade_input" type="text" id="cidade_e" name="cidade_e">
+                            <span id="erroCidadeE" class="erro" style="color: red; display: none;">*</span>
+                        </div>
+                    </div>
+
+                    <div class="bairro">
+                        <label class="label_pequena" for="Bairro_e">Bairro</label>
+                        <div class="erro_div">
+                            <input class="cidade_input" type="text" id="Bairro_e" name="Bairro_e">
+                            <span id="erroBairroE" class="erro" style="color: red; display: none;">*</span>
+                        </div>
+                    </div>
+
+                    <div class="estado">
+                        <label class="label_genero">Estado <span id="erroEstadoE" class="erro" style="color: red; display: none;">*</span></label>
+                        <select class="selecao" id="estado_e" name="estado_e">
+                            <option value="">Selecione</option>
+                            <option value="AC">AC</option>
+                            <option value="AL">AL</option>
+                            <option value="AP">AP</option>
+                            <option value="AM">AM</option>
+                            <option value="BA">BA</option>
+                            <option value="CE">CE</option>
+                            <option value="DF">DF</option>
+                            <option value="ES">ES</option>
+                            <option value="GO">GO</option>
+                            <option value="MA">MA</option>
+                            <option value="MT">MT</option>
+                            <option value="MS">MS</option>
+                            <option value="MG">MG</option>
+                            <option value="PA">PA</option>
+                            <option value="PB">PB</option>
+                            <option value="PR">PR</option>
+                            <option value="PE">PE</option>
+                            <option value="PI">PI</option>
+                            <option value="RJ">RJ</option>
+                            <option value="RN">RN</option>
+                            <option value="RS">RS</option>
+                            <option value="RO">RO</option>
+                            <option value="RR">RR</option>
+                            <option value="SC">SC</option>
+                            <option value="SP">SP</option>
+                            <option value="SE">SE</option>
+                            <option value="TO">TO</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!--Segunda Linha-->
+                <div class="linha_centralizada">
+                    <div class="endereco">
+                        <label class="label_pequena" for="endereco_e">Endereço</label>
+                        <div class="erro_div">
+                            <input class="endereco_input" type="text" id="endereco_e" name="endereco_e">
+                            <span id="erroEnderecoE" class="erro" style="color: red; display: none;">*</span>
+                        </div>
+                    </div>
+
+                    <div class="numero">
+                        <label class="label_pequena" for="numero_e">Nº.</label>
+                        <div class="erro_div">
+                            <input class="numero_input" type="number" id="numero_e" name="numero_e">
+                            <span id="erroNumeroE" class="erro" style="color: red; display: none;">*</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Terceira Linha-->
+                <div class="linha_centralizada">
+                    <div class="cidade">
+                        <label class="label_pequena" for="complemento_e">Complemento</label>
+                        <div class="erro_div">
+                            <input class="cidade_input" type="text" id="complemento_e" name="complemento_e">
+                            <span id="erroCidadeE" class="erro" style="color: red; display: none;">*</span>
+                        </div>
+                    </div>
+
+                    <div class="bairro">
+                        <label class="label_pequena" for="cep_e">CEP</label>
+                        <div class="erro_div">
+                            <input class="cidade_input" type="text" id="cep_e" name="cep_e">
+                            <span id="erroCepE" class="erro" style="color: red; display: none;">*</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <br>
+
+                <!--Cadastrar End. Cobrança-->
+                <div class="bloco_titulo">
+                    <h1 class="titulo">Cadastrar End. Cobrança</h1>
+                </div>
+
+                <br>
+    
+                <!--Primeira Linha-->
+                <div class="linha_centralizada">
+                    <div class="cidade">
+                        <label for="cidade_c">Cidade</label>
+                        <div class="erro_div">
+                            <input class="cidade_input" type="text" id="cidade_c" name="cidade_c">
+                            <span id="erroCidadeC" class="erro" style="color: red; display: none;">*</span>
+                        </div>
+                    </div>
+    
+                    <div class="bairro">
+                        <label for="bairro_c">Bairro</label>
+                        <div class="erro_div">
+                            <input class="cidade_input" type="text" id="bairro_c" name="bairro_c">
+                            <span id="erroBairroC" class="erro" style="color: red; display: none;">*</span>
+                        </div>
+                    </div>
+    
+                    <div class="select">
+                        <label class="label_genero">Estado <span id="erroEstadoC" class="erro" style="color: red; display: none;">*</span></label>
+                        <select class="selecao" id="estado_c" name="estado_c">
+                            <option value="">Selecione</option>
+                            <option value="AC">AC</option>
+                            <option value="AL">AL</option>
+                            <option value="AP">AP</option>
+                            <option value="AM">AM</option>
+                            <option value="BA">BA</option>
+                            <option value="CE">CE</option>
+                            <option value="DF">DF</option>
+                            <option value="ES">ES</option>
+                            <option value="GO">GO</option>
+                            <option value="MA">MA</option>
+                            <option value="MT">MT</option>
+                            <option value="MS">MS</option>
+                            <option value="MG">MG</option>
+                            <option value="PA">PA</option>
+                            <option value="PB">PB</option>
+                            <option value="PR">PR</option>
+                            <option value="PE">PE</option>
+                            <option value="PI">PI</option>
+                            <option value="RJ">RJ</option>
+                            <option value="RN">RN</option>
+                            <option value="RS">RS</option>
+                            <option value="RO">RO</option>
+                            <option value="RR">RR</option>
+                            <option value="SC">SC</option>
+                            <option value="SP">SP</option>
+                            <option value="SE">SE</option>
+                            <option value="TO">TO</option>
+                        </select>
+                    </div>
+                </div>
+    
+                <!--Segunda Linha-->
+                <div class="linha_centralizada">
+                    <div class="endereco">
+                        <label class="label_pequena" for="endereco_c">Endereço</label>
+                        <div class="erro_div">
+                            <input class="endereco_input" type="text" id="endereco_c" name="endereco_c">
+                            <span id="erroEnderecoC" class="erro" style="color: red; display: none;">*</span>
+                        </div>
+                    </div>
+    
+                    <div class="numero">
+                        <label for="numero_c">Nº.</label>
+                        <div class="erro_div">
+                            <input class="numero_input" type="number" id="numero_c" name="numero_c">
+                            <span id="erroNumeroC" class="erro" style="color: red; display: none;">*</span>
+                        </div>
+                    </div>
+                </div>
+    
+                <!--Terceira Linha-->
+                <div class="linha_centralizada">
+                    <div class="cidade">
+                        <label class="label_pequena" for="complemento_c">Complemento</label>
+                        <input class="cidade_input" type="text" id="complemento_c" name="complemento_c">
+                    </div>
+    
+                    <div class="bairro">
+                        <label class="label_pequena" for="cep_c">CEP</label>
+                        <div class="erro_div">
+                            <input class="cidade_input" type="text" id="cep_c" name="cep_c">
+                            <span id="erroCepC" class="erro" style="color: red; display: none;">*</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <br>
+
+                <div class="bloco_titulo">
+                    <h1 class="titulo">Cadastrar Cartão</h1>
+                </div>
+
+                <br>
+
+                <!--Primeira Linha-->
+                <div class="linha_centralizada">
+                    <div class="num_cartao">
+                        <label for="num_cartao">Número</label>
+                        <div class="erro_div">
+                            <input class="num_cartao_input" type="number" id="num_cartao" name="num_cartao">
+                            <span id="erroNumCartao" class="erro" style="color: red; display: none;">*</span>
+                        </div>
+                    </div>
+
+                    <div class="cod_sec">
+                        <label for="cod_sec">Código de Segurança</label>
+                        <div class="erro_div">
+                            <input class="cod_sec_input" type="password" id="cod_sec" name="cod_sec">
+                            <span id="erroCodSec" class="erro" style="color: red; display: none;">*</span>
+                        </div>
+                    </div>
+
+                    <div class="select">
+                        <label class="label_genero">Bandeira <span id="erroBandeira" class="erro" style="color: red; display: none;">*</span></label>
+                        <select class="selecao" id="bandeira" name="bandeira">
+                            <option value="">Selecione</option>
+                            <option value="Visa">Visa</option>
+                            <option value="Mastercard">Mastercard</option>
+                            <option value="Hipercard">Hipercard</option>
+                            <option value="American Express">American Express</option>
+                            <option value="Elo">Elo</option>
+                            <option value="Diners Club">Diners Club</option>
+                            <option value="Discover">Discover</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!--Segunda Linha-->
+                <div class="nome">
+                    <label class="label" for="nome_c">Nome</label>
+                    <div class="erro_div">
+                        <input class="nome_input" type="text" id="nome_c" name="nome_c">
+                        <span id="erroNomeC" class="erro" style="color: red; display: none;">*</span>
+                    </div>
+                </div>
+
+                <br>
 
                 <!--Input de Botões-->
                 <div class="botoes">
-                        <button class="cancelar" type="button" id="Cancelar">Cancelar</button>
-                        <input type="submit" id="submit" name="submit" value="Confirmar">
+                    <button class="cancelar" type="button" id="Cancelar">Cancelar</button>
+                    <input type="submit" id="submit" name="submit" value="Confirmar">
                 </div>
             </form>
         </div>
-
     </div>
 
     <script>
@@ -115,8 +380,6 @@
     </script>
 
     <!--Script do Submit-->
-    <script src="../scripts/cadastrarusuario.js"></script>
-    
+    <script type="module" src="scripts/cadastrarusuario.js"></script>
 </body>
-
-</html> 
+</html>
