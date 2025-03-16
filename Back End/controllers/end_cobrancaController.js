@@ -1,65 +1,44 @@
-const EnderecoCobranca = require('../models/end_cobrancaModel');
-const Usuario = require('../models/usuarioModel'); // Importa o model Usuario
+const {
+    atualizarEnderecoCobranca,
+    buscarEnderecoCobrancaId,
+    buscarEnderecosCobrancaUsuarioId,
+    cadastrarEnderecoCobranca
+} = require("../models/endCobrancaModel");
 
-exports.cadastrarEnderecoCobranca = (req, res) => {
-    console.log('Dados recebidos no controller:', req.body);
-    const enderecoCobranca = req.body;
+// Views
+module.exports.getEnderecoCobranca = async (req, res) => {
+    const enderecos = await buscarEnderecosCobrancaUsuarioId(req.params.usr_id);
+    res.render('endereco-cobranca/endereco-cobranca', { enderecos: enderecos });
+};
 
-    Usuario.recuperarUltimoId((err, results) => {
-        if (err) {
-            console.error('Erro ao recuperar o último ID do usuário:', err);
-            return res.status(500).json({ error: err.message });
-        }
+module.exports.getEnderecoCobrancaAdicionar = async (req, res) => {
+    const enderecos = await buscarEnderecosCobrancaUsuarioId(req.params.usr_id);
+    res.render('endereco-cobranca/endereco-cobranca-adicionar', { enderecos: enderecos });
+};
 
-        const usuario_usr_id = results[0].ultimo_id; // ID do último usuário
+module.exports.getEnderecoCobrancaAtualizar = async (req, res) => {
+    const enderecos = await buscarEnderecoCobrancaId(req.params.end_id);
+    res.render('endereco-cobranca/endereco-cobranca-atualizar', { enderecos: enderecos });
+};
 
-        // Adiciona o ID do usuário ao objeto enderecoCobranca
-        enderecoCobranca.usuario_usr_id = usuario_usr_id;
-    
-    // Validação dos campos obrigatórios
-    if (!enderecoCobranca.end_estado || !enderecoCobranca.end_cidade || !enderecoCobranca.end_bairro || !enderecoCobranca.end_numero || !enderecoCobranca.end_cep || !enderecoCobranca.end_endereco || !enderecoCobranca.usuario_usr_id) {
-        return res.status(400).json({ error: 'Todos os campos obrigatórios devem ser preenchidos.' });
+// Inserção de dados
+module.exports.postEnderecoCobrancaAdicionar = async (req, res) => {
+    try {
+        await cadastrarEnderecoCobranca(req.body);
+        res.sendStatus(200);
+    } catch (err) {
+        console.error(`Erro no postEnderecoCobrancaAdicionar - controllerEnderecoCobranca: ${err}`);
+        res.sendStatus(500);
     }
-
-    EnderecoCobranca.criar(enderecoCobranca, (err, results) => {
-        if (err) {
-            return res.status(500).json({ error: err.message });
-        }
-        res.status(201).json({ message: 'Endereço de cobrança cadastrado com sucesso!', id: results.insertId });
-    });
-});
 };
 
-exports.recuperarEnderecoCobranca = (req, res) => {
-    const id = req.params.id;
-    EnderecoCobranca.recuperarPorId(id, (err, results) => {
-        if (err) {
-            return res.status(500).json({ error: err.message });
-        }
-        if (results.length === 0) {
-            return res.status(404).json({ message: 'Endereço de cobrança não encontrado' });
-        }
-        res.status(200).json(results[0]);
-    });
-};
-
-exports.atualizarEnderecoCobranca = (req, res) => {
-    const id = req.params.id;
-    const enderecoCobranca = req.body;
-    EnderecoCobranca.atualizar(id, enderecoCobranca, (err, results) => {
-        if (err) {
-            return res.status(500).json({ error: err.message });
-        }
-        res.status(200).json({ message: 'Endereço de cobrança atualizado com sucesso!' });
-    });
-};
-
-exports.recuperarEnderecosCobrancaPorUsuario = (req, res) => {
-    const usuarioId = req.params.usuarioId;
-    EnderecoCobranca.recuperarPorUsuarioId(usuarioId, (err, results) => {
-        if (err) {
-            return res.status(500).json({ error: err.message });
-        }
-        res.status(200).json(results);
-    });
+// Atualizando os dados dos endereços de cobrança
+module.exports.putEnderecoCobrancaAtuallizar = async (req, res) => {
+    try {
+        const endereco = await atualizarEnderecoCobranca(req.body, req.params.end_id);
+        res.json(endereco);
+    } catch (err) {
+        console.error(`Erro no putEnderecoCobrancaAtualizar - controllerEnderecoCobranca: ${err}`);
+        res.sendStatus(500);
+    }
 };

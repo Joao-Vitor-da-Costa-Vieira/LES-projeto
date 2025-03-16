@@ -1,54 +1,44 @@
-const Cartao = require('../models/cartaoModel');
-const Usuario = require('../models/usuarioModel'); 
+const {
+    atualizarCartao,
+    buscarCartaoId,
+    buscarCartoesUsuarioId,
+    cadastrarCartao
+} = require("../models/cartaoModel");
 
-exports.cadastrarCartao = (req, res) => {
-    console.log('Dados recebidos no controller:', req.body);
-    const cartao = req.body;
+// Views
+module.exports.getCartao = async (req, res) => {
+    const cartoes = await buscarCartoesUsuarioId(req.params.usr_id);
+    res.render('cartao/cartao', { cartoes: cartoes });
+};
 
-    Usuario.recuperarUltimoId((err, results) => {
-        if (err) {
-            console.error('Erro ao recuperar o último ID do usuário:', err);
-            return res.status(500).json({ error: err.message });
-        }
+module.exports.getCartaoAdicionar = async (req, res) => {
+    const cartoes = await buscarCartoesUsuarioId(req.params.usr_id);
+    res.render('cartao/cartao-adicionar', { cartoes: cartoes });
+};
 
-        const usuario_usr_id = results[0].ultimo_id; // ID do último usuário
+module.exports.getCartaoAtualizar = async (req, res) => {
+    const cartoes = await buscarCartaoId(req.params.crt_id);
+    res.render('cartao/cartao-atualizar', { cartoes: cartoes });
+};
 
-        cartao.usuario_usr_id = usuario_usr_id;
-    
-    // Validação dos campos obrigatórios
-    if (!cartao.crt_numero || !cartao.crt_codigo_seguranca || !cartao.crt_bandeira || !cartao.crt_nome || !cartao.usuario_usr_id) {
-        return res.status(400).json({ error: 'Todos os campos obrigatórios devem ser preenchidos.' });
+// Inserção de dados
+module.exports.postCartaoAdicionar = async (req, res) => {
+    try {
+        await cadastrarCartao(req.body);
+        res.sendStatus(200);
+    } catch (err) {
+        console.error(`Erro no postCartaoAdicionar - controllerCartao: ${err}`);
+        res.sendStatus(500);
     }
-
-    Cartao.criar(cartao, (err, results) => {
-        if (err) {
-            return res.status(500).json({ error: err.message });
-        }
-        res.status(201).json({ message: 'Cartao cadastrado com sucesso!', id: results.insertId });
-    });
-});
 };
 
-exports.recuperarCartao = (req, res) => {
-    const id = req.params.id;
-    Cartao.recuperarPorId(id, (err, results) => {
-        if (err) {
-            return res.status(500).json({ error: err.message });
-        }
-        if (results.length === 0) {
-            return res.status(404).json({ message: ' Cartao não encontrado' });
-        }
-        res.status(200).json(results[0]);
-    });
-};
-
-exports.atualizarCartao = (req, res) => {
-    const id = req.params.id;
-    const cartao = req.body;
-    Cartao.atualizar(id, cartao, (err, results) => {
-        if (err) {
-            return res.status(500).json({ error: err.message });
-        }
-        res.status(200).json({ message: 'Cartao atualizado com sucesso!' });
-    });
+// Atualizando os dados dos cartões
+module.exports.putCartaoAtualizar = async (req, res) => {
+    try {
+        const cartao = await atualizarCartao(req.body, req.params.crt_id);
+        res.json(cartao);
+    } catch (err) {
+        console.error(`Erro no putCartaoAtualizar - controllerCartao: ${err}`);
+        res.sendStatus(500);
+    }
 };

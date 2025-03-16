@@ -2,25 +2,12 @@ const express = require('express');
 const router = express.Router();
 const UsuarioController = require('../controllers/usuarioController');
 
-// Cadastrar usuário
-router.post('/usuario', UsuarioController.cadastrarUsuario);
+router.get('/cadastro', UsuarioController.getCadastro)
+router.get('/cadastro/:usr_id', UsuarioController.getCadastroAtualizar);
 
-// Recuperar usuário por ID
-router.get('/usuarios/:id', UsuarioController.recuperarUsuario);
+router.post('/cadastro', UsuarioController.postCadastro);
 
-// Atualizar usuário
-router.put('/usuario/:usr_id', UsuarioController.atualizarUsuario);
+router.put('/cadastro/:usr_id', UsuarioController.putCadastroAtualizar);
 
-// Atualizar usuário parcialmente
-router.patch('/usuarios/:id', UsuarioController.atualizarUsuarioParcial);
-
-//Consulta Usuario
-router.post('/usuarios/consultar', UsuarioController.consultarUsuarios);
-
-// Rota para verificar endereços
-router.get('/usuarios/:id/verificar-enderecos', UsuarioController.verificarEnderecos);
-
-// Rota para atualizar status
-router.put('/usuarios/:id/atualizar-status', UsuarioController.atualizarStatus);
 
 module.exports = router;

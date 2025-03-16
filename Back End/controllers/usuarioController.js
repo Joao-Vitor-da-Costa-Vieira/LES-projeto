@@ -1,196 +1,137 @@
-const { cadastrarUsuario, buscarUsuarioId, atualizarUsuario } = require('../models/usuarioModel');
+const { cadastrarEnderecoEntrega, 
+        buscarEnderecosEntregaUsuarioId, 
+        atualizarEnderecoEntrega 
+} = require("../models/endEntregaModel");
 
+const { cadastrarEnderecoCobranca, 
+        buscarEnderecosCobrancaUsuarioId, 
+        atualizarEnderecoCobranca 
+} = require("../models/endCobrancaModel");
+
+const { cadastrarCartao, 
+        buscarCartoesUsuarioId, 
+        atualizarCartao 
+}= require("../models/cartaoModel");
+
+const { cadastrarUsuario, 
+        buscarUsuarioId, 
+        atualizarUsuario, 
+        alterarSenhaUsuario, 
+        buscarUsuariosAtivos, 
+        buscarUsuariosInativos, 
+        inativarUsuario,
+        ativarUsuario 
+} = require("../models/usuarioModel");
+
+//Views
+module.exports.getCadastro = (req, res) => {
+    res.render('cadastro/cadastrarusuario');
+};
+
+module.exports.getCadastroAtualizar = async (req, res) => {
+    const usuario = await buscarUsuarioId(req.params.usr_id);
+    const enderecos_c = await buscarEnderecosCobrancaUsuarioId(req.params.usr_id);
+    const enderecos_e = await buscarEnderecosEntregaUsuarioId(req.params.usr_id);
+    const cartoes = await buscarCartoesUsuarioId(req.params.usr_id);
+
+    res.render('cadastro/atualizarusuario', {
+        usuario: usuario,
+        enderecos: enderecos_c,
+        enderecos: enderecos_e,
+        cartoes: cartoes
+    });
+};
+
+module.exports.getSenha = (req, res) => {
+    res.render('senha');
+};
+
+module.exports.patchSenha = async (req, res) => {
+    try {
+        await alterarSenhaUsuario(req.body, req.params.usr_id);
+        res.sendStatus(204);
+    } catch (err) {
+        console.error(`Erro no patchSenha - controllerUsuario: ${err}`);
+        res.sendStatus(500);
+    }
+};
+
+module.exports.getUsuariosInativos = async (req, res) => {
+    const inativos = await buscarUsuariosInativos();
+    res.render('inativos', { inativos: inativos });
+};
+
+module.exports.getUsuariosAtivos = async (req, res) => {
+    const usuarios = await buscarUsuariosAtivos();
+    res.render('usuarios', { usuarios: usuarios });
+};
+
+// Atualizando os dados do banco
+module.exports.putCadastroAtualizar = async (req, res) => {
+    try {
+        await atualizarEnderecoCobranca(req.body.endereco_c, req.body.endereco_c.end_id);
+        await atualizarEnderecoEntrega(req.body.endereco_e, req.body.endereco_e.end_id);
+        await atualizarCartao(req.body.cartao, req.body.cartao.crt_id);
+        await atualizarUsuario(req.body.usuario, req.params.usr_id);
+
+        res.sendStatus(200);
+    } catch (err) {
+        console.error(`Erro no putCadastroAtualizar - controllerUsuario: ${err}`);
+        res.sendStatus(500);
+    }
+};
+
+module.exports.patchInativarUsuario = async (req, res) => {
+    try {
+        await inativarUsuario(req.params.usr_id);
+        res.sendStatus(204);
+    } catch (err) {
+        console.error(`Erro no patchInativarUsuario - controllerUsuario: ${err}`);
+        res.sendStatus(500);
+    }
+};
+
+module.exports.patchAtivarUsuario = async (req, res) => {
+    try {
+        await ativarUsuario(req.params.usr_id);
+        res.sendStatus(204);
+    } catch (err) {
+        console.error(`Erro no patchAtivarUsuario - controllerUsuario: ${err}`);
+        res.sendStatus(500);
+    }
+};
+
+// Inserindo dados no banco
 module.exports.postCadastro = async (req, res) => {
-    try{
-
+    try {
         const usr_id = await cadastrarUsuario(req.body.usuario);
 
         req.body.cartao.crt_usr_id = usr_id;
-        req.body.endereco_entrega.end_usr_id = usr_id;
-        req.body.endereco_cobranca.end_usr_id = usr_id;
+        req.body.endereco_c.end_usr_id = usr_id;
+        req.body.endereco_e.end_usr_id = usr_id;
 
         await cadastrarCartao(req.body.cartao);
-        await cadastrarEnderecoEntrega(req.body.endereco_entrega);
-        await cadastrarEnderecoCobranca(req.body.endereco_cobranca);
-        
+        await cadastrarEnderecoCobranca(req.body.endereco_c);
+        await cadastrarEnderecoEntrega(req.body.endereco_e);
+
         res.sendStatus(200);
-    }catch(err){
-        console.error(`Erro no postSignup - usuarioController: ${err}`);
+    } catch (err) {
+        console.error(`Erro no postCadastro - controllerUsuario: ${err}`);
         res.sendStatus(500);
-
     }
 };
 
-module.exports.recuperarUsuario = (req, res) => {
-    const id = req.params.id;
-    Usuario.recuperarPorId(id, (err, results) => {
-        if (err) {
-            return res.status(500).json({ error: err.message });
-        }
-        if (results.length === 0) {
-            return res.status(404).json({ message: 'Usuário não encontrado' });
-        }
-        res.status(200).json(results[0]);
-    });
+module.exports.getApiUsuarioId = async (req, res) => {
+    const usuario = await buscarUsuarioId(req.params.usr_id);
+    res.json(usuario);
 };
 
-module.exports.recuperarDadosUltimoUsuario = (req, res) => {
-    Usuario.recuperarUltimoUsuario((err, usuarioResults) => {
-        if (err) {
-            return res.status(500).json({ error: err.message });
-        }
-
-        if (usuarioResults.length === 0) {
-            return res.status(404).json({ message: 'Nenhum usuário encontrado.' });
-        }
-
-        const usuario = usuarioResults[0];
-
-        usuario.usr_data_de_nascimento = new Date(usuario.usr_data_de_nascimento).toISOString().split('T')[0];
-
-        res.status(200).json({ usuario });
-    });
+module.exports.getApiUsuariosAtivos = async (req, res) => {
+    const usuarios = await buscarUsuariosAtivos();
+    res.json(usuarios);
 };
 
-module.exports.atualizarUsuario = (req, res) => {
-    const id = req.params.id;
-    const usuario = req.body;
-    
-    Usuario.atualizar(id, usuario, (err, results) => {
-        if (err) {
-            return res.status(500).json({ error: err.message });
-        }
-        res.status(200).json({ message: 'Usuário atualizado com sucesso!' });
-    });
-};
-
-// Novo método para atualização parcial
-module.exports.atualizarUsuarioParcial = (req, res) => {
-    const id = req.params.id;
-    const dadosAtualizados = req.body;
-
-    // Primeiro, recupera os dados atuais do usuário
-    Usuario.recuperarPorId(id, (err, results) => {
-        if (err) {
-            return res.status(500).json({ error: err.message });
-        }
-        if (results.length === 0) {
-            return res.status(404).json({ message: 'Usuário não encontrado' });
-        }
-
-        const usuarioAtual = results[0];
-
-        // Combina os dados atuais com os novos dados fornecidos
-        const usuarioCompleto = {
-            usr_nome: dadosAtualizados.usr_nome || usuarioAtual.usr_nome,
-            usr_email: dadosAtualizados.usr_email || usuarioAtual.usr_email,
-            usr_cpf: dadosAtualizados.usr_cpf || usuarioAtual.usr_cpf,
-            usr_senha: dadosAtualizados.usr_senha || usuarioAtual.usr_senha,
-            usr_data_de_nascimento: dadosAtualizados.usr_data_de_nascimento || usuarioAtual.usr_data_de_nascimento,
-            usr_telefone_1: dadosAtualizados.usr_telefone_1 || usuarioAtual.usr_telefone_1,
-            usr_telefone_2: dadosAtualizados.usr_telefone_2 || usuarioAtual.usr_telefone_2,
-            usr_genero: dadosAtualizados.usr_genero || usuarioAtual.usr_genero
-        };
-
-        // Atualiza o usuário no banco de dados
-        Usuario.atualizar(id, usuarioCompleto, (err, results) => {
-            if (err) {
-                return res.status(500).json({ error: err.message });
-            }
-            res.status(200).json({ message: 'Usuário atualizado com sucesso!' });
-        });
-    });
-};
-
-// Função para consultar usuários
-module.exports.consultarUsuarios = (req, res) => {
-    const { coluna, valor } = req.body;
-
-    // Verifica se a coluna e o valor foram fornecidos
-    if (!coluna || !valor) {
-        return res.status(400).json({ success: false, message: "Coluna e valor são obrigatórios." });
-    }
-
-    // Consulta os usuários no banco de dados
-    Usuario.consultar(coluna, valor, (err, resultados) => {
-        if (err) {
-            return res.status(500).json({ success: false, message: "Erro ao consultar usuários." });
-        }
-
-        if (resultados.length === 0) {
-            return res.status(404).json({ success: false, message: "Nenhum usuário encontrado." });
-        }
-
-        // Retorna os resultados
-        res.status(200).json({ success: true, resultados });
-    });
-};
-
-// Função para verificar endereços de cobrança e entrega
-module.exports.verificarEnderecos = (req, res) => {
-    const usuarioId = req.params.id;
-
-    Usuario.verificarEnderecos(usuarioId, (err, resultados) => {
-        if (err) {
-            return res.status(500).json({ success: false, message: "Erro ao verificar endereços." });
-        }
-
-        const possuiEnderecos = resultados[0].endereco_cobranca > 0 && resultados[0].endereco_entrega > 0;
-        res.status(200).json({ success: true, possuiEnderecos });
-    });
-};
-
-// Função para atualizar o status de atividade do usuário
-module.exports.atualizarStatus = (req, res) => {
-    const usuarioId = req.params.id;
-    const novoStatus = req.body.novoStatus;
-
-    // Verifica se o novo status é 1 (Ativo)
-    if (novoStatus === 1) {
-        // Verifica se o usuário possui endereços de cobrança e entrega
-        Usuario.verificarEnderecos(usuarioId, (err, resultados) => {
-            if (err) {
-                return res.status(500).json({ success: false, message: "Erro ao verificar endereços." });
-            }
-
-            const possuiEnderecos = resultados[0].endereco_cobranca > 0 && resultados[0].endereco_entrega > 0;
-
-            if (!possuiEnderecos) {
-                return res.status(400).json({ success: false, message: "O usuário precisa ter pelo menos um endereço de cobrança e um de entrega para ativar o status." });
-            }
-
-            // Atualiza o status
-            Usuario.atualizarStatus(usuarioId, novoStatus, (err, results) => {
-                if (err) {
-                    return res.status(500).json({ success: false, message: "Erro ao atualizar status." });
-                }
-                res.status(200).json({ success: true, message: "Status atualizado com sucesso." });
-            });
-        });
-    } else {
-        // Se o novo status for 0 (Inativo), atualiza diretamente
-        Usuario.atualizarStatus(usuarioId, novoStatus, (err, results) => {
-            if (err) {
-                return res.status(500).json({ success: false, message: "Erro ao atualizar status." });
-            }
-            res.status(200).json({ success: true, message: "Status atualizado com sucesso." });
-        });
-    }
-};
-
-module.exports.recuperarEnderecos = (req, res) => {
-    const usuarioId = req.params.id;
-
-    // Consulta os endereços de cobrança e entrega
-    const query = `
-        SELECT 'Cobrança' AS tipo, end_endereco, end_cep, end_cidade, end_estado FROM endereco_cobranca WHERE usuario_usr_id = ?
-        UNION ALL
-        SELECT 'Entrega' AS tipo, end_endereco, end_cep, end_cidade, end_estado FROM endereco_entrega WHERE usuario_usr_id = ?
-    `;
-    db.query(query, [usuarioId, usuarioId], (err, resultados) => {
-        if (err) {
-            return res.status(500).json({ success: false, message: "Erro ao recuperar endereços." });
-        }
-        res.status(200).json({ success: true, enderecos: resultados });
-    });
+module.exports.getApiUsuariosInativos = async (req, res) => {
+    const usuarios = await buscarUsuariosInativos();
+    res.json(usuarios);
 };
