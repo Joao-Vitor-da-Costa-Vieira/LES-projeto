@@ -1,81 +1,88 @@
 const db = require('../config/db');
-const Usuario = require('../models/usuarioModel');
 
-class Cartao {
-    static criar(cartao, callback) {
-        const query = `
-            INSERT INTO cartao (
-                crt_numero,
-                crt_codigo_seguranca,
-                crt_bandeira,
-                crt_nome,
-                usuario_usr_id
-            ) VALUES (?, ?, ?, ?, ?)
-        `;
-        const values = [
-            cartao.crt_numero,
-            cartao.crt_codigo_seguranca,
-            cartao.crt_bandeira,
-            cartao.crt_nome,
-            cartao.usuario_usr_id
-        ];
+// Inserindo um novo cartão no banco de dados
+async function cadastrarCartao(dados) {
+    // Consulta SQL
+    const sql = `INSERT INTO cartoes (
+        crt_usr_id, 
+        crt_nome, 
+        crt_numero, 
+        crt_bandeira, 
+        crt_codigo_seguranca, 
+    ) VALUES (?, ?, ?, ?, ?)`;
 
-        db.query(query, values, callback);
-    }
+    // Valores a serem inseridos no banco
+    const valores = [
+        dados.crt_usr_id,
+        dados.crt_nome,
+        dados.crt_numero,
+        dados.crt_bandeira,
+        dados.crt_codigo_seguranca
+    ];
 
-    static recuperarPorId(id, callback) {
-        const query = 'SELECT * FROM cartao WHERE crt_id = ?';
-        db.query(query, [id], callback);
-    }
-
-    static recuperarPorUsuarioId(usuarioId, callback) {
-        const query = `
-            SELECT 
-                crt_id, 
-                crt_numero, 
-                crt_bandeira, 
-                crt_nome
-            FROM cartao
-            WHERE usuario_usr_id = ?
-        `;
-        db.query(query, [usuarioId], callback);
-    }
-    
-    static recuperarPorUsuarioId(usuarioId, callback) {
-        const query = `
-            SELECT 
-                crt_id, 
-                crt_numero, 
-                crt_bandeira, 
-                crt_nome
-            FROM cartao
-            WHERE usuario_usr_id = ?
-        `;
-        db.query(query, [usuarioId], callback);
-    }
-
-    static atualizar(id, cartao, callback) {
-        const query = `
-            UPDATE cartao
-            SET 
-                crt_numero = ?,
-                crt_codigo_seguranca = ?,
-                crt_bandeira = ?,
-                crt_nome = ?,
-                usuario_usr_id = ?
-            WHERE crt_id = ?
-        `;
-        const values = [
-            cartao.crt_numero,
-            cartao.crt_codigo_seguranca,
-            cartao.crt_bandeira,
-            cartao.crt_nome,
-            cartao.usuario_usr_id,
-            id
-        ];
-
-        db.query(query, values, callback);
+    try {
+        await db.query(sql, valores);
+    } catch (err) {
+        console.error(`Erro no cadastrarCartao - modelCartão: ${err}`);
+        throw err;
     }
 }
 
-module.exports = Cartao;
+// Atualizando os dados dos cartões no banco
+async function atualizarCartao(dados, crt_id) {
+    const campos = Object.keys(dados).map(key => `${key} = ?`).join(', ');
+    let valores = Object.values(dados);
+    valores.push(crt_id);
+
+    const sql = `UPDATE cartoes SET ${campos} WHERE crt_id = ?`;
+
+    try {
+        const [cartao] = await db.query(sql, valores);
+        return cartao;
+    } catch (err) {
+        console.error(`Erro no atualizarCartao - modelCartão: ${err}`);
+        throw err;
+    }
+}
+
+// Função que pega todos os cartões do banco
+async function buscarTodosCartoes() {
+    try {
+        const [cartoes] = await db.query('SELECT * FROM cartoes');
+        return cartoes;
+    } catch (err) {
+        console.error(`Erro no buscarTodosCartoes - modelCartão: ${err}`);
+        throw err;
+    }
+}
+
+// Função que pega um cartão pelo seu id
+async function buscarCartaoId(id) {
+    try {
+        const [cartao] = await db.query(`SELECT * FROM cartoes WHERE crt_id = ?`, id);
+        return cartao;
+    } catch (err) {
+        console.error(`Erro no buscarCartaoId - modelCartão: ${err}`);
+        throw err;
+    }
+}
+
+// Função que pega cartões de um determinado usuário
+async function buscarCartoesUsuarioId(id) {
+    try {
+        const [cartoes] = await db.query(`SELECT * FROM cartoes WHERE crt_usr_id = ?`, id);
+        return cartoes;
+    } catch (err) {
+        console.error(`Erro no buscarCartoesUsuarioId - modelCartão: ${err}`);
+        throw err;
+    }
+}
+
+// Exportando as funções
+module.exports = {
+    buscarCartoesUsuarioId,
+    buscarTodosCartoes,
+    buscarCartaoId,
+    cadastrarCartao,
+    atualizarCartao
+};

@@ -1,85 +1,93 @@
 const db = require('../config/db');
-const Usuario = require('../models/usuarioModel');
 
-class EnderecoCobranca {
-    static criar(enderecoCobranca, callback) {
-        const query = `
-            INSERT INTO endereco_cobranca (
-                end_estado, 
-                end_cidade, 
-                end_bairro,
-                end_endereco,  
-                end_numero, 
-                end_complemento, 
-                end_cep, 
-                usuario_usr_id
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-        `;
-        const values = [
-            enderecoCobranca.end_estado,
-            enderecoCobranca.end_cidade,
-            enderecoCobranca.end_bairro,
-            enderecoCobranca.end_endereco,
-            enderecoCobranca.end_numero,
-            enderecoCobranca.end_complemento,
-            enderecoCobranca.end_cep,
-            enderecoCobranca.usuario_usr_id
-        ];
+// Cadastrando um novo endereço de cobrança no banco de dados
+async function cadastrarEnderecoCobranca(dados) {
+    // Consulta SQL
+    const sql = `INSERT INTO enderecos_cobranca (
+        end_usr_id, 
+        end_endereco, 
+        end_numero, 
+        end_bairro, 
+        end_cidade, 
+        end_estado, 
+        end_cep, 
+        end_complemento
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
 
-        db.query(query, values, callback);
-    }
+    // Valores a serem inseridos no banco
+    const valores = [
+        dados.end_usr_id,
+        dados.end_endereco,
+        dados.end_numero,
+        dados.end_bairro,
+        dados.end_cidade,
+        dados.end_estado,
+        dados.end_cep,
+        dados.end_complemento
+    ];
 
-    static recuperarPorId(id, callback) {
-        const query = 'SELECT * FROM endereco_cobranca WHERE end_id = ?';
-        db.query(query, [id], callback);
-    }
-
-
-    static recuperarPorUsuarioId(usuarioId, callback) {
-      const query = `
-          SELECT 
-              end_id, 
-              end_estado, 
-              end_cidade, 
-              end_bairro, 
-              end_numero, 
-              end_complemento, 
-              end_cep, 
-              end_endereco
-          FROM endereco_cobranca
-          WHERE usuario_usr_id = ?
-      `;
-      db.query(query, [usuarioId], callback);
-  }
-
-    static atualizar(id, enderecoCobranca, callback) {
-        const query = `
-            UPDATE endereco_cobranca
-            SET 
-                end_estado = ?, 
-                end_cidade = ?, 
-                end_bairro = ?, 
-                end_numero = ?, 
-                end_complemento = ?, 
-                end_cep = ?, 
-                end_endereco = ?, 
-                usuario_usr_id = ?
-            WHERE end_id = ?
-        `;
-        const values = [
-            enderecoCobranca.end_estado,
-            enderecoCobranca.end_cidade,
-            enderecoCobranca.end_bairro,
-            enderecoCobranca.end_numero,
-            enderecoCobranca.end_complemento,
-            enderecoCobranca.end_cep,
-            enderecoCobranca.end_endereco,
-            enderecoCobranca.usuario_usr_id,
-            id
-        ];
-
-        db.query(query, values, callback);
+    try {
+        await db.query(sql, valores);
+    } catch (err) {
+        console.error(`Erro no cadastrarEnderecoCobranca - modelEndereco: ${err}`);
+        throw err;
     }
 }
 
-module.exports = EnderecoCobranca;
+// Atualizando os endereços de cobrança no banco de dados
+async function atualizarEnderecoCobranca(dados, end_id) {
+    const campos = Object.keys(dados).map(key => `${key} = ?`).join(', ');
+    let valores = Object.values(dados);
+    valores.push(end_id);
+
+    const sql = `UPDATE enderecos_cobranca SET ${campos} WHERE end_id = ?`;
+
+    try {
+        const [endereco] = await db.query(sql, valores);
+        return endereco;
+    } catch (err) {
+        console.error(`Erro no atualizarEnderecoCobranca - modelEndereco: ${err}`);
+        throw err;
+    }
+}
+
+// Buscando todos os endereços de cobrança do banco de dados
+async function buscarTodosEnderecosCobranca() {
+    try {
+        const [enderecos] = await db.query('SELECT * FROM enderecos_cobranca');
+        return enderecos;
+    } catch (err) {
+        console.error(`Erro no buscarTodosEnderecosCobranca - modelEndereco: ${err}`);
+        throw err;
+    }
+}
+
+// Buscando endereço de cobrança por id
+async function buscarEnderecoCobrancaId(id) {
+    try {
+        const [endereco] = await db.query(`SELECT * FROM enderecos_cobranca WHERE end_id = ?`, id);
+        return endereco;
+    } catch (err) {
+        console.error(`Erro no buscarEnderecoCobrancaId - modelEndereco: ${err}`);
+        throw err;
+    }
+}
+
+// Buscando endereços de cobrança por id de usuário
+async function buscarEnderecosCobrancaUsuarioId(id) {
+    try {
+        const [enderecos] = await db.query(`SELECT * FROM enderecos_cobranca WHERE end_usr_id = ?`, id);
+        return enderecos;
+    } catch (err) {
+        console.error(`Erro no buscarEnderecosCobrancaUsuarioId - modelEndereco: ${err}`);
+        throw err;
+    }
+}
+
+module.exports = {
+    cadastrarEnderecoCobranca,
+    atualizarEnderecoCobranca,
+    buscarTodosEnderecosCobranca,
+    buscarEnderecoCobrancaId,
+    buscarEnderecosCobrancaUsuarioId
+};

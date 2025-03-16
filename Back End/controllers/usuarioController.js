@@ -1,17 +1,27 @@
-const Usuario = require('../models/usuarioModel');
+const { cadastrarUsuario, buscarUsuarioId, atualizarUsuario } = require('../models/usuarioModel');
 
-exports.cadastrarUsuario = (req, res) => {
-    console.log('Dados recebidos no controller:', req.body);
-    const usuario = req.body;
-    Usuario.criar(usuario, (err, results) => {
-        if (err) {
-            return res.status(500).json({ error: err.message });
-        }
-        res.status(201).json({ message: 'Usuário cadastrado com sucesso!', id: results.insertId });
-    });
+module.exports.postCadastro = async (req, res) => {
+    try{
+
+        const usr_id = await cadastrarUsuario(req.body.usuario);
+
+        req.body.cartao.crt_usr_id = usr_id;
+        req.body.endereco_entrega.end_usr_id = usr_id;
+        req.body.endereco_cobranca.end_usr_id = usr_id;
+
+        await cadastrarCartao(req.body.cartao);
+        await cadastrarEnderecoEntrega(req.body.endereco_entrega);
+        await cadastrarEnderecoCobranca(req.body.endereco_cobranca);
+        
+        res.sendStatus(200);
+    }catch(err){
+        console.error(`Erro no postSignup - usuarioController: ${err}`);
+        res.sendStatus(500);
+
+    }
 };
 
-exports.recuperarUsuario = (req, res) => {
+module.exports.recuperarUsuario = (req, res) => {
     const id = req.params.id;
     Usuario.recuperarPorId(id, (err, results) => {
         if (err) {
@@ -24,7 +34,7 @@ exports.recuperarUsuario = (req, res) => {
     });
 };
 
-exports.recuperarDadosUltimoUsuario = (req, res) => {
+module.exports.recuperarDadosUltimoUsuario = (req, res) => {
     Usuario.recuperarUltimoUsuario((err, usuarioResults) => {
         if (err) {
             return res.status(500).json({ error: err.message });
@@ -42,7 +52,7 @@ exports.recuperarDadosUltimoUsuario = (req, res) => {
     });
 };
 
-exports.atualizarUsuario = (req, res) => {
+module.exports.atualizarUsuario = (req, res) => {
     const id = req.params.id;
     const usuario = req.body;
     
@@ -55,7 +65,7 @@ exports.atualizarUsuario = (req, res) => {
 };
 
 // Novo método para atualização parcial
-exports.atualizarUsuarioParcial = (req, res) => {
+module.exports.atualizarUsuarioParcial = (req, res) => {
     const id = req.params.id;
     const dadosAtualizados = req.body;
 
@@ -93,7 +103,7 @@ exports.atualizarUsuarioParcial = (req, res) => {
 };
 
 // Função para consultar usuários
-exports.consultarUsuarios = (req, res) => {
+module.exports.consultarUsuarios = (req, res) => {
     const { coluna, valor } = req.body;
 
     // Verifica se a coluna e o valor foram fornecidos
@@ -117,7 +127,7 @@ exports.consultarUsuarios = (req, res) => {
 };
 
 // Função para verificar endereços de cobrança e entrega
-exports.verificarEnderecos = (req, res) => {
+module.exports.verificarEnderecos = (req, res) => {
     const usuarioId = req.params.id;
 
     Usuario.verificarEnderecos(usuarioId, (err, resultados) => {
@@ -131,7 +141,7 @@ exports.verificarEnderecos = (req, res) => {
 };
 
 // Função para atualizar o status de atividade do usuário
-exports.atualizarStatus = (req, res) => {
+module.exports.atualizarStatus = (req, res) => {
     const usuarioId = req.params.id;
     const novoStatus = req.body.novoStatus;
 
@@ -168,7 +178,7 @@ exports.atualizarStatus = (req, res) => {
     }
 };
 
-exports.recuperarEnderecos = (req, res) => {
+module.exports.recuperarEnderecos = (req, res) => {
     const usuarioId = req.params.id;
 
     // Consulta os endereços de cobrança e entrega

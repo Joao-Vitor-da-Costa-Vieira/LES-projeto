@@ -1,123 +1,147 @@
 const db = require('../config/db');
 
-class Usuario {
-    static criar(usuario, callback) {
-        const query = `
-            INSERT INTO usuario (
-                usr_nome, 
-                usr_email, 
-                usr_cpf, 
-                usr_senha, 
-                usr_data_de_nascimento, 
-                usr_telefone_1, 
-                usr_telefone_2, 
-                usr_genero
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-        `;
-        const values = [
-            usuario.usr_nome,
-            usuario.usr_email,
-            usuario.usr_cpf,
-            usuario.usr_senha,
-            usuario.usr_data_de_nascimento,
-            usuario.usr_telefone_1,
-            usuario.usr_telefone_2,
-            usuario.usr_genero
-        ];
+// INSERT
 
-        console.log('Query:', query); 
-        console.log('Values:', values);
+// Função que insere um novo usuário no banco
+async function cadastrarUsuario(dados) {
+    // Consulta SQL
+    const sql = `INSERT INTO usuarios (
+        usr_nome, 
+        usr_email, 
+        usr_cpf, 
+        usr_data_de_nascimento, 
+        usr_telefone1,
+        usr_telefone2,  
+        usr_genero, 
+        usr_senha, 
+        usr_status
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1)`;
 
-        db.query(query, values, callback);
-    }
+    // Valores a serem inseridos no banco (na nova ordem)
+    const valores = [
+        dados.usr_nome,
+        dados.usr_email,
+        dados.usr_cpf,
+        dados.usr_data_de_nascimento,
+        dados.usr_telefone1,
+        dados.usr_telefone2,
+        dados.usr_genero,
+        dados.usr_senha
+    ];
 
-
-    static recuperarPorId(usr_id, callback) {
-        const query = 'SELECT * FROM usuario WHERE usr_id = ?';
-        db.query(query, [usr_id], callback);
+    try {
+        const [result] = await db.query(sql, valores);
+        return result.insertId;
+    } catch (err) {
+        console.error(`Erro no cadastrarUsuario - modelUsuarios: ${err}`);
+        throw err;
     }
-
-    static consultar(coluna, valor, callback) {
-        const query = `SELECT * FROM usuario WHERE ${coluna} = ?`;
-        db.query(query, [valor], callback);
-    }
-    
-    static recuperarUltimoUsuario(callback) {
-        const query = `
-            SELECT 
-                usr_id, 
-                usr_nome, 
-                usr_email, 
-                usr_cpf,
-                usr_senha, 
-                usr_data_de_nascimento, 
-                usr_telefone_1, 
-                usr_telefone_2, 
-                usr_genero
-            FROM usuario
-            ORDER BY usr_id DESC
-            LIMIT 1
-        `;
-        db.query(query, callback);
-    }
-
-    static recuperarUltimoId(callback) {
-        const query = 'SELECT MAX(usr_id) AS ultimo_id FROM usuario';
-        db.query(query, callback);
-    }
-
-    static atualizar(usr_id, usuario, callback) {
-        const query = `
-            UPDATE usuario
-            SET 
-                usr_nome = ?, 
-                usr_email = ?, 
-                usr_cpf = ?, 
-                usr_senha = ?, 
-                usr_data_de_nascimento = ?, 
-                usr_telefone_1 = ?, 
-                usr_telefone_2 = ?, 
-                usr_genero = ?
-            WHERE usr_id = ?
-        `;
-        const values = [
-            usuario.usr_nome,
-            usuario.usr_email,
-            usuario.usr_cpf,
-            usuario.usr_senha,
-            usuario.usr_data_de_nascimento,
-            usuario.usr_telefone_1,
-            usuario.usr_telefone_2,
-            usuario.usr_genero,
-            usr_id
-        ];
-        db.query(query, values, callback);
-    }
-
-    static desativar(usr_id, callback) {
-        const query = 'UPDATE usuario SET usr_status_de_atividade = 0 WHERE usr_id = ?';
-        db.query(query, [usr_id], callback);
-    }
-
-    static ativar(usr_id, callback) {
-        const query = 'UPDATE usuario SET usr_status_de_atividade = 1 WHERE usr_id = ?';
-        db.query(query, [usr_id], callback);
-    }
-
-    static verificarEnderecos(usuarioId, callback) {
-        const query = `
-            SELECT 
-                (SELECT COUNT(*) FROM endereco_cobranca WHERE usuario_usr_id = ?) AS endereco_cobranca,
-                (SELECT COUNT(*) FROM endereco_entrega WHERE usuario_usr_id = ?) AS endereco_entrega
-        `;
-        db.query(query, [usuarioId, usuarioId], callback);
-    }
-    
-    static atualizarStatus(usuarioId, novoStatus, callback) {
-        const query = 'UPDATE usuario SET usr_status_de_atividade = ? WHERE usr_id = ?';
-        db.query(query, [novoStatus, usuarioId], callback);
-    }
-    
 }
 
-module.exports = Usuario;
+// UPDATE
+
+// Atualizando os dados dos usuários no banco
+async function atualizarUsuario(dados, usr_id) {
+    const campos = Object.keys(dados).map(key => `${key} = ?`).join(', ');
+    let valores = Object.values(dados);
+    valores.push(usr_id);
+
+    const sql = `UPDATE usuarios SET ${campos} WHERE usr_id = ?`;
+
+    try {
+        const [usuario] = await db.query(sql, valores);
+        return usuario;
+    } catch (err) {
+        console.error(`Erro no atualizarUsuario - modelUsuarios: ${err}`);
+        throw err;
+    }
+}
+
+// Alterar senha de um usuário
+async function alterarSenhaUsuario(senha, id) {
+    try {
+        await db.query(`UPDATE usuarios SET usr_senha = ? WHERE usr_id = ?`, [senha.usr_senha, id]);
+    } catch (err) {
+        console.error(`Erro no alterarSenhaUsuario - modelUsuarios: ${err}`);
+        throw err;
+    }
+}
+
+// Inativando um usuário específico
+async function inativarUsuario(id) {
+    try {
+        await db.query(`UPDATE usuarios SET usr_status = 0 WHERE usr_id = ?`, id);
+    } catch (err) {
+        console.error(`Erro no inativarUsuario - modelUsuarios: ${err}`);
+        throw err;
+    }
+}
+
+// Ativando um usuário específico
+async function ativarUsuario(id) {
+    try {
+        await db.query(`UPDATE usuarios SET usr_status = 1 WHERE usr_id = ?`, id);
+    } catch (err) {
+        console.error(`Erro no ativarUsuario - modelUsuarios: ${err}`);
+        throw err;
+    }
+}
+
+// SELECT
+
+// Buscando usuários ativos
+async function buscarUsuariosAtivos() {
+    try {
+        const [usuarios] = await db.query('SELECT * FROM usuarios WHERE usr_status = 1');
+        return usuarios;
+    } catch (err) {
+        console.error(`Erro no buscarUsuariosAtivos - modelUsuarios: ${err}`);
+        throw err;
+    }
+}
+
+// Buscando usuários inativos
+async function buscarUsuariosInativos() {
+    try {
+        const [usuarios] = await db.query('SELECT * FROM usuarios WHERE usr_status = 0');
+        return usuarios;
+    } catch (err) {
+        console.error(`Erro no buscarUsuariosInativos - modelUsuarios: ${err}`);
+        throw err;
+    }
+}
+
+// Buscando todos os usuários do banco de dados
+async function buscarTodosUsuarios() {
+    try {
+        const [usuarios] = await db.query('SELECT * FROM usuarios');
+        return usuarios;
+    } catch (err) {
+        console.error(`Erro no buscarTodosUsuarios - modelUsuarios: ${err}`);
+        throw err;
+    }
+}
+
+// Buscando usuários por id
+async function buscarUsuarioId(id) {
+    try {
+        const [usuario] = await db.query(`SELECT * FROM usuarios WHERE usr_id = ?`, id);
+        return usuario;
+    } catch (err) {
+        console.error(`Erro no buscarUsuarioId - modelUsuarios: ${err}`);
+        throw err;
+    }
+}
+
+// Exportando as funções de busca
+module.exports = {
+    buscarTodosUsuarios,
+    buscarUsuarioId,
+    buscarUsuariosInativos,
+    buscarUsuariosAtivos,
+    inativarUsuario,
+    ativarUsuario,
+    cadastrarUsuario,
+    atualizarUsuario,
+    alterarSenhaUsuario
+};

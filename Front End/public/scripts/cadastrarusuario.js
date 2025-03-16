@@ -1,58 +1,73 @@
-document.getElementById('formCadastro').addEventListener('submit', function (e) {
+import { cadastroService } from "/scripts/service/cadastroService.js";
+
+document.getElementById('formCadastro').addEventListener('submit', async function (event) {
   e.preventDefault();
 
     // Captura os valores dos campos
-    const senha = document.getElementById('senha').value.trim();
-    const confSenha = document.getElementById('conf_senha').value.trim();
+    const formDados = new FormData(event.target);
+    const dados = Object.fromEntries(formDados.entries());
 
     // Valida se as senhas são iguais
-    if (senha !== confSenha) {
+    if (dados.senha !== dados.conf_senha) {
         document.getElementById('erroConfSenha').style.display = 'inline';
         document.getElementById('erroSenha').style.display = 'inline';
         return;
     }
 
     // Valida se a senha atende aos requisitos
-    if (!validarSenha(senha)) {
+    if (!validarSenha(dados.senha)) {
         document.getElementById('erroSenha').style.display = 'inline';
         return;
     }
 
-
-    // Se tudo estiver correto, envia os dados
     const usuario = {
-        usr_nome: document.getElementById('nome').value,
-        usr_email: document.getElementById('E-mail').value,
-        usr_cpf: document.getElementById('cpf').value,
-        usr_senha: senha, // Usa a senha já validada
-        usr_data_de_nascimento: document.getElementById('data_nascimento').value,
-        usr_telefone_1: document.getElementById('telefone1').value,
-        usr_telefone_2: document.getElementById('telefone2').value,
-        usr_genero: document.querySelector('input[name="genero"]:checked').value
+        usr_nome: dados.nome, 
+        usr_email: dados.E-mail, 
+        usr_cpf: dados.cpf,
+        usr_data_de_nascimento: dados.data_nascimento, 
+        usr_telefone: dados.telefone1,
+        usr_telefone: dados.telefone2,
+        usr_genero: dados.genero,
+        usr_senha: dados.senha
     };
 
-    fetch('http://localhost:3000/api/usuarios', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(usuario)
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert(data.message);
-            window.location.href = 'cadastrar_end_cobranca.html'; // Redireciona após o sucesso
-        } else {
-            alert(data.message || "Erro ao cadastrar usuário.");
-            window.location.href = 'cadastrarusuario.html'; // Redireciona em caso de erro
-        }
-    })
-    .catch(error => {
-        console.error('Erro:', error);
-        alert("Erro ao enviar dados. Tente novamente mais tarde.");
-        window.location.href = 'cadastrarusuario.html'; // Redireciona em caso de erro
-    });
+    const endereco_e = {
+        end_endereco: dados.endereco_e,
+        end_numero: dados.numero_e,
+        end_bairro: dados.bairro_e, 
+        end_cidade: dados.cidade_e,
+        end_estado: dados.estado_e,
+        end_cep: dados.cep_e,
+        end_complemento: dados.complemento_e
+    };
+
+    const endereco_c = {
+        end_endereco: dados.endereco_c,
+        end_numero: dados.numero_c,
+        end_bairro: dados.bairro_c, 
+        end_cidade: dados.cidade_c,
+        end_estado: dados.estado_c,
+        end_cep: dados.cep_c,
+        end_complemento: dados.complemento_c 
+    };
+
+    const cartao = {
+        crt_nome: dados.nome_c,
+        crt_numero: dados.num_cartao,
+        crt_bandeira: dados.bandeira, 
+        crt_codigo_seguranca: dados.cod_sec
+    };
+
+    const cadastroDados = { usuario, endereco_e, endereco_c, cartao }; 
+    
+    const status = await cadastroService(cadastroDados);
+    
+    if(status === 200){
+        alert('Cliente foi Cadastrado com Sucesso!');
+        return;
+    }
+    
+    alert('Não foi posível cadastrar o cliente');
 });
 
     // Função para validar a senha
