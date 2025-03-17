@@ -1,11 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const cartaoController = require('../controllers/cartaoController');
+const controllerCartao = require('../controller/controllerCartao');
 
-router.post('/cartao', cartaoController.cadastrarCartao);
+// Views
+router.get('/cartao/:usr_id', controllerCartao.getCartao);
+router.get('/cartao/:usr_id/adicionar', controllerCartao.getCartaoAdd);
+router.get('/cartao/:usr_id/atualizar/:crt_id', controllerCartao.getCartaoAlt);
 
-router.get('/cartao/:id', cartaoController.recuperarCartao);
+router.put('/cartao/:usr_id/atualizar/:crt_id', controllerCartao.putCartaoAlt);
 
-router.put('/cartao/:id', cartaoController.atualizarCartao);
+router.post('/cartao/:usr_id/adicionar', controllerCartao.postCartaoAdd);
 
 module.exports = router;

@@ -1,16 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const enderecoEntregaController = require('../controllers/end_entregaController');
+const controllerEnderecoEntrega = require('../controller/endEntregaController');
 
-// Cadastrar endereço de entrega
-router.post('/enderecos-entrega', enderecoEntregaController.cadastrarEnderecoEntrega);
+// Views
+router.get('/endereco-entrega/:usr_id', controllerEnderecoEntrega.getEnderecoEntrega);
+router.get('/endereco-entrega/:usr_id/adicionar', controllerEnderecoEntrega.getEnderecoEntregaAdd);
+router.get('/endereco-entrega/:usr_id/atualizar/:end_id', controllerEnderecoEntrega.getEnderecoEntregaAlt);
 
-// Recuperar endereço de entrega por ID
-router.get('/enderecos-entrega/:id', enderecoEntregaController.recuperarEnderecoEntrega);
+router.put('/endereco-entrega/:usr_id/atualizar/:end_id', controllerEnderecoEntrega.putEnderecoEntregaAlt);
 
-// Atualizar endereço de entrega
-router.put('/enderecos-entrega/:id', enderecoEntregaController.atualizarEnderecoEntrega);
+router.post('/endereco-entrega/:usr_id/adicionar', controllerEnderecoEntrega.postEnderecoEntregaAdd);
 
-router.get('/enderecos-entrega/:usuarioId', enderecoEntregaController.recuperarEnderecosEntregaPorUsuario);
+router.get('/api/endereco-entrega/:end_id', controllerEnderecoEntrega.getApiEnderecoEntregaId);
 
 module.exports = router;

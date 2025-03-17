@@ -1,16 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const enderecoCobrancaController = require('../controllers/end_cobrancaController');
+const controllerEnderecoCobranca = require('../controller/endCobrancaController');
 
-// Cadastrar endereço de cobrança
-router.post('/enderecos-cobranca', enderecoCobrancaController.cadastrarEnderecoCobranca);
+//Views
+router.get('/endereco-cobranca/:usr_id', controllerEnderecoCobranca.getEnderecoCobranca);
+router.get('/endereco-cobranca/:usr_id/adicionar', controllerEnderecoCobranca.getEnderecoCobrancaAdd);
+router.get('/endereco-cobranca/:usr_id/atualizar/:end_id', controllerEnderecoCobranca.getEnderecoCobrancaAlt);
 
-// Recuperar endereço de cobrança por ID
-router.get('/enderecos-cobranca/:id', enderecoCobrancaController.recuperarEnderecoCobranca);
+router.put('/endereco-cobranca/:usr_id/atualizar/:end_id', controllerEnderecoCobranca.putEnderecoCobrancaAlt);
 
-// Atualizar endereço de cobrança
-router.put('/enderecos-cobranca/:id', enderecoCobrancaController.atualizarEnderecoCobranca);
+router.post('/endereco-cobranca/:usr_id/adicionar', controllerEnderecoCobranca.postEnderecoCobrancaAdd);
 
-router.get('/enderecos-cobranca/:usuarioId', enderecoCobrancaController.recuperarEnderecosCobrancaPorUsuario);
+router.get('/api/endereco-cobranca/:end_id', controllerEnderecoCobranca.getApiEnderecoCobrancaId);
 
 module.exports = router;
