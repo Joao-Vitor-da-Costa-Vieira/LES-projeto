@@ -4,10 +4,10 @@ const UsuarioController = require('../controllers/usuarioController');
 
 //Views
 router.get('cadastro', UsuarioController.getCadastro)
-router.get(':usr_id', UsuarioController.getCadastroAtualizar);
+router.get('cadastro/:usr_id', UsuarioController.getCadastroAtualizar);
 router.get('/senha/:usr_id', UsuarioController.getSenha);
-router.get('/inativos', UsuarioController.getInativos);
-router.get('cadastro/:usr_id', UsuarioController.getUsuarios);
+router.get('inativos', UsuarioController.getUsuariosInativos);
+router.get(':usr_id', UsuarioController.getUsuariosAtivos);
 
 router.get('/api/usuarios/id/:usr_id', UsuarioController.getApiUsuarioId);
 router.get('/api/usuarios/ativos', UsuarioController.getApiUsuariosAtivos);
