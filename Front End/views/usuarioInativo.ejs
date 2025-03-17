@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/style.css">
+    <title>Usuários Inativos</title>
+</head>
+
+<body>
+    <!--Barra lateral de Navegação-->
+    <div class="sidenav">
+        <a href="index.ejs">Menu</a>
+        <a href="cadastrarUsuario.ejs">Cadastrar</a>
+        <a href="consultarUsuario.ejs">Consultar</a>
+        <a href="atualizarUsuario.ejs">Atualizar</a>
+    </div>
+
+    <div class="main">
+        <div class="inativos">
+            <div class="bloco_titulo">
+                <h1 class="titulo">Usuários Inativos</h1>
+            </div>
+
+            <div id="usuarios-inativos">
+
+                <% inativos.forEach(usuario => { %>
+
+                    <div class="usuario-mostrado">
+                        <div class="usuario">
+                            <p class="invisible usuario-inat-id"><%=usuario.usr_id%></p>
+                            <p><%=usuario.usr_nome%></p>
+                            <p><%=usuario.usr_email%></p>
+                        </div>
+                        <div class="acoes">
+                            <button class="btn-inat">Reativar</button>
+                        </div>
+                    </div>
+
+                <% }); %>                
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="/scripts/usuarioInativo.js"></script>
+</body>
+</html>

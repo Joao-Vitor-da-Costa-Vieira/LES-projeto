@@ -1,7 +1,7 @@
 // Cadastrando um cartão no banco de dados
 export async function cadastrarCartaoService(dados, usr_id) {
     try {
-        const result = await fetch(`/cartao/${usr_id}/add`, {
+        const result = await fetch(`/cartao/${usr_id}/adicionar`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(dados)
@@ -17,7 +17,7 @@ export async function cadastrarCartaoService(dados, usr_id) {
 // Atualizando os cartões do banco de dados
 export async function atualizarCartaoService(dados, usr_id, crt_id) {
     try {
-        const result = await fetch(`/cartao/${usr_id}/alt/${crt_id}`, {
+        const result = await fetch(`/cartao/${usr_id}/atualizar/${crt_id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(dados)

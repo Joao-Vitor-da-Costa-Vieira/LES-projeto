@@ -1,5 +1,5 @@
 // Alterando a senha do usuário
-export async function alterarSenhaUsuarioService(senha, id) {
+export async function atualizarSenhaUsuarioService(senha, id) {
     try {
         let res = await fetch(`/senha/${id}`, {
             method: 'PATCH',

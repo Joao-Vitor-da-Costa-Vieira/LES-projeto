@@ -1,20 +1,18 @@
 <!DOCTYPE html>
+
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="/style/style.css">
 </head>
 <body>
     <!--Barra lateral de Navegação-->
     <div class="sidenav">
-        <a href="index.html">Menu</a>
-        <a href="cadastrarusuario.html">Cadastrar</a>
-        <a href="cadastrar_end_cobranca.html">Cadastrar End. Cobrança</a>
-        <a href="cadastrar_end_entrega.html">Cadastrar End. Entrega</a>
-        <a href="cadastrar_cartao.html">Cadastrar Cartão</a>
-        <a href="consultarusuario.html">Consultar</a>
-        <a href="atualizarusuario.html">Atualizar</a>
+        <a href="index.ejs">Menu</a>
+        <a href="cadastrarUsuario.ejs">Cadastrar</a>
+        <a href="consultarUsuario.ejs">Consultar</a>
+        <a href="atualizarUsuario.ejs">Atualizar</a>
     </div>
 
     <!--Div usada para centralizar o conteudo para da página além da barra lateral-->
@@ -65,7 +63,7 @@
                 <div class="senha">
                     <label class="label" for="conf_senha">Confirmar Senha</label>
                     <div class="erro_div">
-                        <input class="senha_input" type="password" id="conf_senha" name="conf_senha" required>
+                        <input class="senha_confirma_input" type="password" id="conf_senha" name="conf_senha" required>
                         <span id="erroConfSenha" class="erro" style="color: red; display: none;">*</span>
                     </div>
                 </div>
@@ -300,7 +298,7 @@
 
                 <!--Segunda Linha-->
                 <div class="nome">
-                    <label class="label" for="nome_c">Nome</label>
+                    <label class="label" for="nome_c">Nome do Titular</label>
                     <input class="nome_input" type="text" id="nome_c" name="nome_c" required>
                 </div>
 
@@ -323,6 +321,6 @@
     </script>
 
     <!--Script do Submit-->
-    <script type="module" src="scripts/cadastrarusuario.js"></script>
+    <script type="module" src="/scripts/cadastrarUsuario.js"></script>
 </body>
 </html>

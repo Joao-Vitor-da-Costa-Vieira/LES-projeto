@@ -1,7 +1,5 @@
 const db = require('../config/db');
 
-// INSERT
-
 // Função que insere um novo usuário no banco
 async function cadastrarUsuario(dados) {
     // Consulta SQL
@@ -37,8 +35,6 @@ async function cadastrarUsuario(dados) {
         throw err;
     }
 }
-
-// UPDATE
 
 // Atualizando os dados dos usuários no banco
 async function atualizarUsuario(dados, usr_id) {
@@ -86,8 +82,6 @@ async function ativarUsuario(id) {
         throw err;
     }
 }
-
-// SELECT
 
 // Buscando usuários ativos
 async function buscarUsuariosAtivos() {

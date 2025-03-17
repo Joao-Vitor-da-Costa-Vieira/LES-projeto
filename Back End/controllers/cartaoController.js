@@ -8,17 +8,17 @@ const {
 // Views
 module.exports.getCartao = async (req, res) => {
     const cartoes = await buscarCartoesUsuarioId(req.params.usr_id);
-    res.render('cartao/cartao', { cartoes: cartoes });
+    res.render('cartao', { cartoes: cartoes });
 };
 
 module.exports.getCartaoAdicionar = async (req, res) => {
     const cartoes = await buscarCartoesUsuarioId(req.params.usr_id);
-    res.render('cartao/cartao-adicionar', { cartoes: cartoes });
+    res.render('cartao-adicionar', { cartoes: cartoes });
 };
 
 module.exports.getCartaoAtualizar = async (req, res) => {
     const cartoes = await buscarCartaoId(req.params.crt_id);
-    res.render('cartao/cartao-atualizar', { cartoes: cartoes });
+    res.render('cartao-atualizar', { cartoes: cartoes });
 };
 
 // Inserção de dados

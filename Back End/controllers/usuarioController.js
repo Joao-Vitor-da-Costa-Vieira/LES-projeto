@@ -25,7 +25,7 @@ const { cadastrarUsuario,
 
 //Views
 module.exports.getCadastro = (req, res) => {
-    res.render('cadastro/cadastrarusuario');
+    res.render('cadastrarUsuario');
 };
 
 module.exports.getCadastroAtualizar = async (req, res) => {
@@ -34,16 +34,26 @@ module.exports.getCadastroAtualizar = async (req, res) => {
     const enderecos_e = await buscarEnderecosEntregaUsuarioId(req.params.usr_id);
     const cartoes = await buscarCartoesUsuarioId(req.params.usr_id);
 
-    res.render('cadastro/atualizarusuario', {
+    res.render('atualizarUsuario', {
         usuario: usuario,
-        enderecos: enderecos_c,
-        enderecos: enderecos_e,
+        enderecos_c: enderecos_c,
+        enderecos_e: enderecos_e,
         cartoes: cartoes
     });
 };
 
 module.exports.getSenha = (req, res) => {
     res.render('senha');
+};
+
+module.exports.getUsuariosInativos = async (req, res) => {
+    const inativos = await buscarUsuariosInativos();
+    res.render('inativos', { inativos: inativos });
+};
+
+module.exports.getUsuariosAtivos = async (req, res) => {
+    const usuarios = await buscarUsuariosAtivos();
+    res.render('consultarUsuario', { usuarios: usuarios });
 };
 
 module.exports.patchSenha = async (req, res) => {
@@ -54,16 +64,6 @@ module.exports.patchSenha = async (req, res) => {
         console.error(`Erro no patchSenha - controllerUsuario: ${err}`);
         res.sendStatus(500);
     }
-};
-
-module.exports.getUsuariosInativos = async (req, res) => {
-    const inativos = await buscarUsuariosInativos();
-    res.render('inativos', { inativos: inativos });
-};
-
-module.exports.getUsuariosAtivos = async (req, res) => {
-    const usuarios = await buscarUsuariosAtivos();
-    res.render('usuarios', { usuarios: usuarios });
 };
 
 // Atualizando os dados do banco

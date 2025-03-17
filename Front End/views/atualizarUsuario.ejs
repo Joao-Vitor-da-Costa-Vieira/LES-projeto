@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/style.css">
+    <title>Cadastro de Usuários</title>
+</head>
+
+<body>
+    <!--Barra lateral de Navegação-->
+    <div class="sidenav">
+        <a href="index.ejs">Menu</a>
+        <a href="cadastrarUsuario.ejs">Cadastrar</a>
+        <a href="consultarUsuario.ejs">Consultar</a>
+        <a href="atualizarUsuario.ejs">Atualizar</a>
+    </div>
+    
+    <div class="conteudo">
+        <div class="main">
+            <!-- Título Principal -->
+            <div class="bloco_titulo">
+                <h1 class="titulo">Alterando dados de <%=usuario[0].usr_nome%></h1>
+            </div>
+
+            <form method="POST">
+                <div class="container-forms">
+                    <!-- Informações Pessoais -->
+                    <div class="usuario">
+                        <div class="bloco_titulo">
+                            <h1 class="titulo">Informações Pessoais</h1>
+                        </div>
+
+                        <!-- Nome -->
+                        <div class="nome">
+                            <label class="label" for="nome">Nome Completo</label>
+                            <input class="nome_input" type="text" id="nome" name="nome" value="<%=usuario[0].usr_nome%>" required>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="email">
+                            <label class="label" for="email">E-mail</label>
+                            <input class="email_input" type="email" id="email" name="email" value="<%=usuario[0].usr_email%>" required>
+                        </div>
+
+                        <!-- Telefone 1 -->
+                        <div class="telefone">
+                            <label class="label_pequena" for="telefone1">Telefone 1</label>
+                            <input class="telefone_input" type="tel" id="telefone1" name="telefone1" value="<%=usuario[0].usr_telefone%>" required>
+                        </div>
+
+                        <!-- Telefone 2 -->
+                        <div class="telefone">
+                            <label class="label_pequena" for="telefone2">Telefone 2</label>
+                            <input class="telefone_input" type="tel" id="telefone2" name="telefone2" value="<%=usuario[0].usr_telefone2%>">
+                        </div>
+
+                        <!-- CPF -->
+                        <div class="cpf">
+                            <label class="label" for="cpf">CPF</label>
+                            <input class="cpf_input" type="text" id="cpf" name="cpf" value="<%=usuario[0].usr_cpf%>" required>
+                        </div>
+
+                        <!-- Gênero -->
+                        <!--Input de Gênero-->
+                    <div class="genero">
+                        <label class="label_genero">Gênero</label>
+                        <select class="selecao" id="genero" name="genero" required>
+                            <option value="">Selecione</option>
+                            <option value="M">Masculino</option>
+                            <option value="F">Feminino</option>
+                            <option value="NB">Não Binário</option>
+                        </select>
+                    </div>
+
+                        <!-- Data de Nascimento -->
+                        <div class="data_div">
+                            <label class="label_pequena" for="data">Data de Nascimento</label>
+                            <% let dataFormatada = new Date(usuario[0].usr_dataNasc).toISOString().split('T')[0]; %>
+                            <input type="date" id="data" name="data" value="<%=dataFormatada%>" required>
+                        </div>
+
+                        <!-- Senha -->
+                        <div class="senha">
+                            <label class="label" for="senha">Senha</label>
+                            <div class="erro_div">
+                                <input class="senha_input" type="password" id="senha" name="senha" value="<%=usuario[0].usr_senha%>" required>
+                                <span id="erroSenha" class="erro" style="color: red; display: none;">*</span>
+                            </div>
+                        </div>
+
+                        <!-- Confirmação de Senha -->
+                        <div class="senha">
+                            <label class="label" for="conf_senha">Confirme a Senha</label>
+                            <div class="erro_div">
+                                <input class="senha_input" type="password" id="conf_senha" name="conf_senha" value="<%=usuario[0].usr_senha%>" required>
+                                <span id="erroConfSenha" class="erro" style="color: red; display: none;">*</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Endereço de Cobrança -->
+                    <div class="enderecoCobranca">
+                        <div class="bloco_titulo">
+                            <h1 class="titulo">Endereço de Cobrança</h1>
+                        </div>
+
+                        <input class="invisible" type="number" name="end_id_cobranca" value="<%=enderecosCobranca[0].end_id%>">
+
+                        <!-- Cidade -->
+                        <div class="cidade">
+                            <label class="label_pequena" for="cidade_c">Cidade</label>
+                            <input class="cidade_input" type="text" id="cidade_c" name="cidade_c" value="<%=enderecosCobranca[0].end_cidade%>" required>
+                        </div>
+
+                        <!-- Bairro -->
+                        <div class="bairro">
+                            <label class="label_pequena" for="bairro_c">Bairro</label>
+                            <input class="cidade_input" type="text" id="bairro_c" name="bairro_c" value="<%=enderecosCobranca[0].end_bairro%>" required>
+                        </div>
+
+                        <!-- Estado -->
+                        <div class="estado">
+                            <label class="label_genero">Estado</label>
+                            <select class="selecao" id="estado_c" name="estado_c" required>
+                                <option value="">Selecione</option>
+                                <option value="AC" >AC</option>
+                                <option value="AL" >AL</option>
+                                <option value="AP" >AP</option>
+                                <option value="AM" >AM</option>
+                                <option value="BA" >BA</option>
+                                <option value="CE" >CE</option>
+                                <option value="DF" >DF</option>
+                                <option value="ES" >ES</option>
+                                <option value="GO" >GO</option>
+                                <option value="MA" >MA</option>
+                                <option value="MT" >MT</option>
+                                <option value="MS" >MS</option>
+                                <option value="MG" >MG</option>
+                                <option value="PA" >PA</option>
+                                <option value="PB" >PB</option>
+                                <option value="PR" >PR</option>
+                                <option value="PE" >PE</option>
+                                <option value="PI" >PI</option>
+                                <option value="RJ" >RJ</option>
+                                <option value="RN" >RN</option>
+                                <option value="RS" >RS</option>
+                                <option value="RO" >RO</option>
+                                <option value="RR" >RR</option>
+                                <option value="SC" >SC</option>
+                                <option value="SP" >SP</option>
+                                <option value="SE" >SE</option>
+                                <option value="TO" >TO</option>
+                            </select>
+                        </div>
+
+                        <!-- Endereço -->
+                        <div class="endereco">
+                            <label class="label_pequena" for="endereco_c">Endereço</label>
+                            <input class="endereco_input" type="text" id="endereco_c" name="endereco_c" value="<%=enderecosCobranca[0].end_logradouro%>" required>
+                        </div>
+
+                        <!-- Número -->
+                        <div class="numero">
+                            <label class="label_pequena" for="numero_c">Nº.</label>
+                            <input class="numero_input" type="number" id="numero_c" name="numero_c" value="<%=enderecosCobranca[0].end_numero%>" required>
+                        </div>
+
+                        <!-- Complemento -->
+                        <div class="complemento">
+                            <label class="label_pequena" for="complemento_c">Complemento</label>
+                            <input class="cidade_input" type="text" id="complemento_c" name="complemento_c" value="<%=enderecosCobranca[0].end_complemento%>">
+                        </div>
+
+                        <!-- CEP -->
+                        <div class="cep">
+                            <label class="label_pequena" for="cep_c">CEP</label>
+                            <input class="cidade_input" type="text" id="cep_c" name="cep_c" value="<%=enderecosCobranca[0].end_cep%>" required>
+                        </div>
+                    </div>
+
+                    <!-- Endereço de Entrega -->
+                    <div class="enderecoEntrega">
+                        <div class="bloco_titulo">
+                            <h1 class="titulo">Endereço de Entrega</h1>
+                        </div>
+
+                        <input class="invisible" type="number" name="end_id_entrega" value="<%=enderecosEntrega[0].end_id%>">
+
+                        <!-- Cidade -->
+                        <div class="cidade">
+                            <label class="label_pequena" for="cidade_e">Cidade</label>
+                            <input class="cidade_input" type="text" id="cidade_e" name="cidade_e" value="<%=enderecosEntrega[0].end_cidade%>" required>
+                        </div>
+
+                        <!-- Bairro -->
+                        <div class="bairro">
+                            <label class="label_pequena" for="bairro_e">Bairro</label>
+                            <input class="cidade_input" type="text" id="bairro_e" name="bairro_e" value="<%=enderecosEntrega[0].end_bairro%>" required>
+                        </div>
+
+                        <!-- Estado -->
+                        <div class="estado">
+                            <label class="label_genero">Estado</label>
+                            <select class="selecao" id="estado_e" name="estado_e" required>
+                                <option value="">Selecione</option>
+                                <option value="AC" >AC</option>
+                                <option value="AL" >AL</option>
+                                <option value="AP" >AP</option>
+                                <option value="AM" >AM</option>
+                                <option value="BA" >BA</option>
+                                <option value="CE" >CE</option>
+                                <option value="DF" >DF</option>
+                                <option value="ES" >ES</option>
+                                <option value="GO" >GO</option>
+                                <option value="MA" >MA</option>
+                                <option value="MT" >MT</option>
+                                <option value="MS" >MS</option>
+                                <option value="MG" >MG</option>
+                                <option value="PA" >PA</option>
+                                <option value="PB" >PB</option>
+                                <option value="PR" >PR</option>
+                                <option value="PE" >PE</option>
+                                <option value="PI" >PI</option>
+                                <option value="RJ" >RJ</option>
+                                <option value="RN" >RN</option>
+                                <option value="RS" >RS</option>
+                                <option value="RO" >RO</option>
+                                <option value="RR" >RR</option>
+                                <option value="SC" >SC</option>
+                                <option value="SP" >SP</option>
+                                <option value="SE" >SE</option>
+                                <option value="TO" >TO</option>
+                            </select>
+                        </div>
+
+                        <!-- Endereço -->
+                        <div class="endereco">
+                            <label class="label_pequena" for="endereco_e">Endereço</label>
+                            <input class="endereco_input" type="text" id="endereco_e" name="endereco_e" value="<%=enderecosEntrega[0].end_logradouro%>" required>
+                        </div>
+
+                        <!-- Número -->
+                        <div class="numero">
+                            <label class="label_pequena" for="numero_e">Nº.</label>
+                            <input class="numero_input" type="number" id="numero_e" name="numero_e" value="<%=enderecosEntrega[0].end_numero%>" required>
+                        </div>
+
+                        <!-- Complemento -->
+                        <div class="complemento">
+                            <label class="label_pequena" for="complemento_e">Complemento</label>
+                            <input class="cidade_input" type="text" id="complemento_e" name="complemento_e" value="<%=enderecosEntrega[0].end_complemento%>">
+                        </div>
+
+                        <!-- CEP -->
+                        <div class="cep">
+                            <label class="label_pequena" for="cep_e">CEP</label>
+                            <input class="cidade_input" type="text" id="cep_e" name="cep_e" value="<%=enderecosEntrega[0].end_cep%>" required>
+                        </div>
+                    </div>
+
+                    <!-- Cartão de Crédito -->
+                    <div class="cartao">
+
+                        
+                        <div class="bloco_titulo">
+                            <h1 class="titulo">Cadastro de Cartão de Crédito</h1>
+                        </div>
+
+                        <input class="invisible" type="number" name="crt_id" value="<%=cartoes[0].crt_id%>">
+
+                        <div class="linha_centralizada">
+                            <!-- Número do Cartão -->
+                            <div class="num_cartao">
+                                <label class="label" for="numero_cartao">Número</label>
+                                <input class="num_cartao_input" type="text" name="numero_cartao" value="<%=cartoes[0].crt_numero%>" required>
+                            </div>
+
+                            <!-- Bandeira do Cartão -->
+                            <div class="select">
+                                <label class="label_genero">Bandeira</label>
+                                <select class="selecao" id="bandeira" name="bandeira" required>
+                                    <option value="">Selecione</option>
+                                    <option value="Visa">Visa</option>
+                                    <option value="Mastercard">Mastercard</option>
+                                    <option value="Hipercard">Hipercard</option>
+                                    <option value="American Express">American Express</option>
+                                    <option value="Elo">Elo</option>
+                                    <option value="Diners Club">Diners Club</option>
+                                    <option value="Discover">Discover</option>
+                                </select>
+                            </div>
+
+                            <!-- Código de Segurança -->
+                            <div class="cod_sec">
+                                <label for="cod_sec">Código de Segurança</label>
+                                <input class="cod_sec_input" type="password" id="cod_sec" name="cod_sec" value="<%=cartoes[0].crt_codigo_de_seguranca%>" required>
+                            </div>
+                        </div>
+
+                        <!-- Nome no Cartão -->
+                        <div class="nome">
+                            <label class="label" for="nome_c">Nome do Titular</label>
+                            <input class="nome" type="text" name="nome_c" value="<%=cartoes[0].crt_nome_c%>" required>
+                        </div>
+                    </div>
+
+                    <!-- Botão de Confirmação -->
+                    <div class="botoes">
+                        <button type="submit">Confirmar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="/scripts/atualizarUsuario.js"></script>
+</body>
+</html>

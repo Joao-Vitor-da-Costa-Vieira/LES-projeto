@@ -59,6 +59,20 @@ body {
     border: 2px solid black;
 }
 
+.senha_nova_input{
+    width: 700px;
+    box-sizing: border-box;
+    font-size: 20px;
+    border: 2px solid black;
+}
+
+.senha_confirma_input{
+    width: 700px;
+    box-sizing: border-box;
+    font-size: 20px;
+    border: 2px solid black;
+}
+
 .cpf_input{
     width: 700px;
     box-sizing: border-box;
@@ -339,6 +353,15 @@ table,th,td{
     align-items: center;
     display: flex;
     flex-direction: row;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+
+.coluna{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
     gap: 20px;
     margin-bottom: 10px;
 }

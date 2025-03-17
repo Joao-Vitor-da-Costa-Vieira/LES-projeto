@@ -1,5 +1,5 @@
 //Atualizando dados de um usuario do banco de dados
-export async function cadastroAltService(usuario, usr_id) {
+export async function cadastroAtualizarService(usuario, usr_id) {
     try{
 
         const res = await fetch(`/cadastro/${usr_id}`, {
