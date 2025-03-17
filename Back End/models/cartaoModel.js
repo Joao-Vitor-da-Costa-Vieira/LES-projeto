@@ -4,7 +4,7 @@ const db = require('../config/db');
 async function cadastrarCartao(dados) {
     // Consulta SQL
     const sql = `INSERT INTO cartoes (
-        crt_usr_id, 
+        usuario_usr_id, 
         crt_nome, 
         crt_numero, 
         crt_bandeira, 

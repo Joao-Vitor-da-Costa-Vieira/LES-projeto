@@ -4,7 +4,7 @@
 async function cadastrarEnderecoEntrega(dados) {
     // Consulta SQL
     const sql = `INSERT INTO enderecos_entrega (
-        end_usr_id, 
+        usuario_usr_id, 
         end_endereco, 
         end_numero, 
         end_bairro, 

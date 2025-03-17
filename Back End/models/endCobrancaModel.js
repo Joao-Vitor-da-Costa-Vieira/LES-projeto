@@ -4,7 +4,7 @@ const db = require('../config/db');
 async function cadastrarEnderecoCobranca(dados) {
     // Consulta SQL
     const sql = `INSERT INTO enderecos_cobranca (
-        end_usr_id, 
+        usuario_usr_id, 
         end_endereco, 
         end_numero, 
         end_bairro, 
