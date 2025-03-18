@@ -13,12 +13,12 @@ module.exports.getCartao = async (req, res) => {
 
 module.exports.getCartaoAdicionar = async (req, res) => {
     const cartoes = await buscarCartoesUsuarioId(req.params.usr_id);
-    res.render('cartao-adicionar', { cartoes: cartoes });
+    res.render('cartaoAdicionar', { cartoes: cartoes });
 };
 
 module.exports.getCartaoAtualizar = async (req, res) => {
     const cartoes = await buscarCartaoId(req.params.crt_id);
-    res.render('cartao-atualizar', { cartoes: cartoes });
+    res.render('cartaoAtualizar', { cartoes: cartoes });
 };
 
 // Inserção de dados

@@ -15,7 +15,7 @@ if (usuariosInativos.length === 0) {
 }
 
 // Reativando o usuário
-document.querySelectorAll('.btn-inat').forEach(button => {
+document.querySelectorAll('.reativar').forEach(button => {
     button.addEventListener('click', async function() {
         const usuarioMostrado = this.closest('.usuario-mostrado');
         const id = usuarioMostrado.querySelector('.usuario-inat-id').textContent;

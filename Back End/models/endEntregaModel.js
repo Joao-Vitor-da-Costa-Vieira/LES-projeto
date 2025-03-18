@@ -80,7 +80,7 @@ async function buscarEnderecoEntregaId(id) {
 // Buscando endereços de entrega por id de usuário
 async function buscarEnderecosEntregaUsuarioId(id) {
     try {
-        const [enderecos] = await db.query(`SELECT * FROM enderecos_entrega WHERE end_usr_id = ?`, id);
+        const [enderecos] = await db.query(`SELECT * FROM enderecos_entrega WHERE usuario_usr_id = ?`, id);
         return enderecos;
     } catch (err) {
         console.error(`Erro no buscarEnderecosEntregaUsuarioId - modelEndereco: ${err}`);

@@ -48,7 +48,7 @@ module.exports.getSenha = (req, res) => {
 
 module.exports.getUsuariosInativos = async (req, res) => {
     const inativos = await buscarUsuariosInativos();
-    res.render('inativos', { inativos: inativos });
+    res.render('usuarioInativo', { inativos: inativos });
 };
 
 module.exports.getUsuariosAtivos = async (req, res) => {

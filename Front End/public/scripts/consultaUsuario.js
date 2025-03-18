@@ -29,8 +29,11 @@ document.querySelectorAll('.atualizar').forEach(botao => {
              <button class="submenu-botao" onclick="window.location.href='/senha/${id}'">Atualizar senha</button>
     <button class="submenu-botao" onclick="window.location.href='/endereco-cobranca/${id}'">Atualizar endereço de cobrança</button>
     <button class="submenu-botao" onclick="window.location.href='/endereco-entrega/${id}'">Atualizar endereço de entrega</button>
+        <button class="submenu-botao" onclick="window.location.href='/endereco-cobranca/${id}/adicionar'">Adicionar endereço de cobrança</button>
+    <button class="submenu-botao" onclick="window.location.href='/endereco-entrega/${id}/adicionar'">Adicionar endereço de entrega</button>
     <button class="submenu-botao" onclick="window.location.href='/cartao/${id}'">Atualizar cartão</button>
-    <button class="submenu-botao" onclick="window.location.href='/cadastro/${id}'">Atualizar tudo</button>
+        <button class="submenu-botao" onclick="window.location.href='/cartao/${id}/adicionar'">Adicionar cartão</button>
+        <button class="submenu-botao" onclick="window.location.href='/cadastro/${id}'">Atualizar tudo</button>
         `;
 
         // Adicionando submenu ao lado do botão clicado
@@ -46,7 +49,7 @@ document.addEventListener('click', () => {
 // DESATIVANDO USUÁRIOS
 document.querySelectorAll('.inativar').forEach(button => {
     button.addEventListener('click', async function () {
-        let usuarioMostrado = this.closest('.usuario-mostrado');
+        let usuarioMostrado = this.closest('tr');
         let id = usuarioMostrado.querySelector('.usuario-id').textContent;
 
         const status = await inativarUsuarioService(id);
@@ -62,12 +65,20 @@ export function criarBotaoInativados() {
     if (!document.getElementById('btn-inativados')) {
         let botao = document.createElement('a');
         botao.id = 'btn-inativados';
-        botao.href = '/usuarioInativo';
+        botao.href = '/inativos';
         botao.textContent = 'Ver Inativados';
         botao.style.cssText = `
             position: fixed;
             bottom: 20px;
             right: 20px;
+            background-color: #0003c8;
+            width: 250px;
+            height: 50px;
+            align-items: center;
+            color: #ffffff;
+            text-decoration: none;
+            cursor: pointer;
+            border: #0003c8;
         `;
 
         document.body.appendChild(botao);
@@ -89,5 +100,5 @@ let usuariosAtivos = await buscarUsuariosAtivosService();
 if (usuariosAtivos.length === 0) {
     let container = document.querySelector('.msg-usuarios');
     container.innerHTML = '<h1 style="margin: 0">Nenhum Usuário Ativo</h1>';
-    container.style.padding = '40px';
+
 }

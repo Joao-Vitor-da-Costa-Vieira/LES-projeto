@@ -21,23 +21,35 @@
             <div class="bloco_titulo">
                 <h1 class="titulo">Usuários Inativos</h1>
             </div>
+            
+            <br>
 
-            <div id="usuarios-inativos">
-
-                <% inativos.forEach(usuario => { %>
-
-                    <div class="usuario-mostrado">
-                        <div class="usuario">
-                            <p class="invisible usuario-inat-id"><%=usuario.usr_id%></p>
-                            <p><%=usuario.usr_nome%></p>
-                            <p><%=usuario.usr_email%></p>
-                        </div>
-                        <div class="acoes">
-                            <button class="btn-inat">Reativar</button>
-                        </div>
-                    </div>
-
-                <% }); %>                
+            <div class="table_div">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>E-mail</th>
+                            <th>CPF</th>
+                            <th>Opções</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% inativos.forEach(usuario => { %>
+                            <tr class="usuario-mostrado">
+                                <td class="usuario-inat-id"><%= usuario.usr_id %></td>
+                                <td><%= usuario.usr_nome %></td>
+                                <td><%= usuario.usr_email %></td>
+                                <td><%= usuario.usr_cpf %></td>
+                                <td>
+                                    <div class="botoes_resultado">
+                                        <button class="reativar">Reativar</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

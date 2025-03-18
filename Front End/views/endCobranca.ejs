@@ -15,37 +15,52 @@
                 <h1 class="titulo"> Endereço de Cobranca</h1>
             </div>
 
+            <br>
+
             <div class="genero">
-                    <label for="cbr">Endereço</label>
-                    <select name="cobranca" id="cbr">
+                    <label class="label_genero" for="cbr">Endereços</label>
+                    <select class="selecao" name="cobranca" id="cbr">
                         <% enderecos.forEach(endereco => { %>
                             <option value="<%=endereco.end_endereco%>"><%=endereco.end_endereco%></option>
                         <% }); %>
                     </select>
             </div>
 
-            <% enderecos.forEach(enderecos => { %>
-                <div class="endereco-mostrado">
-                    <div class="endereco">
-                        <p class="invisible endereco-id"><%=enderecos.end_id%></p>
-                        <h2><%=endereco.end_endereco%></h2>
-                        <p><%=endereco.end_bairro%></p>
-                        <p><strong>Número: </strong><%=enderecos.end_numero%></p>
-                    </div>
-                    <div class="acoes-endereco">
-                        <a class="atualizar" href="#">Atualizar</a>
-                        <a href="">Excluir</a>
-                    </div>
-                </div>
-            <% }); %>
-            
-            <div class="endereco-adicionar">
-                <a class="adicionar" href="/endereco-cobranca/<%=enderecos[0].end_usr_id%>/adicionar">Adicionar novo endereço</a>
+            <div class="table_div">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Endereço</th>
+                            <th>Bairro</th>
+                            <th>Estado</th>
+                            <th>CEP</th>
+                            <th>Número</th>
+                            <th>Opções</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% enderecos.forEach(endereco => { %>
+                            <tr class="endereco-mostrado">
+                                <td class="endereco-id"><%= endereco.end_id %></td>
+                                <td><%= endereco.end_endereco %></td>
+                                <td><%= endereco.end_bairro %></td>
+                                <td><%= endereco.end_estado %></td>
+                                <td><%= endereco.end_cep %></td>
+                                <td><%= endereco.end_numero %></td>
+                                <td>
+                                    <div class="botoes_resultado">
+                                        <a class="atualizar" href="#">Atualizar</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
             </div>
+        
         </div>
     </div>
 
     <script type="module" src="/scripts/endCobranca.js"></script>
-    <script type="module" src="/scripts/mensagemEndCobranca.js"></script>
 </body>
 </html>

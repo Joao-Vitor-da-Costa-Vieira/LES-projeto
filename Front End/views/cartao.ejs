@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +7,6 @@
     <title>Cartões Cadastrados</title>
 </head>
 <body>
-    <div class="voltar"><a href="/">Voltar</a></div>
 
     <div class="main">
         <div class="main-cartoes">
@@ -15,36 +14,45 @@
                 <h1 class="titulo">Cartões</h1>
             </div>
             
-            <div class="preferencia-cartao">
-                <label>Preferencia</label>
-                <select name="preferencia" id="preferencia">
-                    <% cartoes.forEach(cartoes => { %>
+            <br>
 
-                        <option value=""><%=${cartoes.crt_bandeira}-${cartoes.crt_numero.slice(-4)}%></option>
+            <div class="genero">
+                <label class="label_genero">Cartões</label>
+                <select class="selecao" name="preferencia" id="preferencia">
+                    <% cartoes.forEach(cartao => { %>
+
+                        <option value=""><%= cartao.crt_bandeira%></option>
 
                     <% }); %>
                 </select>
             </div>
 
-            <% cartoes.forEach(cartao => { %>
-
-                <div class="cartoes-mostrado">
-                    <div class="cartoes-main">
-                        <p class="invisible cartoes-id"><%=cartoes.crt_id%></p>
-                        <h2><%=cartao.crt_bandeira%></h2>
-                        <p><%=cartao.crt_nome%></p>
-                        <p><strong>Final: </strong><%=cartoes.crt_numero.slice(-4)%></p>
-                    </div>
-                    <div class="acoes-cartoes">
-                        <a class="atualizar" href="#">Atualizar</a>
-                        <a href="">excluir</a>
-                    </div>
-                </div>
-
-            <% }); %>
-
-            <div class="cartoes-adicionar">
-                <a href="/cartao/<%=cartoes[0].usr_id%>/adicionar">Adicionar novo cartão</a>
+            <div class="table_div">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Bandeira</th>
+                            <th>Nome do Titular</th>
+                            <th>Número</th>
+                            <th>Opções</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% cartoes.forEach(cartao => { %>
+                            <tr class="cartoes-mostrado">
+                                <td class="cartoes-id"><%= cartao.crt_id %></td>
+                                <td><%= cartao.crt_bandeira %></td>
+                                <td><%= cartao.crt_nome %></td>
+                                <td><%= cartao.crt_numero %></td>
+                                <td>
+                                    <div class="botoes_resultado">
+                                        <a class="atualizar" href="#">Atualizar</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

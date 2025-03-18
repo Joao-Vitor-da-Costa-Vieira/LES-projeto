@@ -6,8 +6,6 @@ document.querySelectorAll('.atualizar').forEach(button => {
 
         const path = window.location.pathname + '/atualizar/${id}';
 
-        console.log(path);
-
         window.location.href = path;
     });
 });
