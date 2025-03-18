@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/style.css">
+    <title>Endereço de Entrega</title>
+</head>
+<body>
+    <div class="voltar"><a href="/">Voltar</a></div>
+
+    <div class="main">
+        <div class="container-endereco">
+            <h2 class="title">Endereço de Entrega</h2>
+
+            <div class="seletores">
+                <div>
+                    <label for="etr">Endereço</label>
+                    <select name="entrega" id="etr">
+                        <% enderecos.forEach(endereco => { %>
+                            <option value="<%=endereco.end_endereco%>"><%=endereco.end_endereco%></option>
+                        <% }); %>
+                    </select>
+                </div>
+            </div>
+
+            <% enderecos.forEach(endereco => { %>
+                <div class="endereco-mostrado">
+                    <div class="endereco">
+                        <p class="invisible endereco-id"><%=endereco.end_id%></p>
+                        <h2><%=endereco.end_endereco%></h2>
+                        <p><%=endereco.end_bairro%></p>
+                        <p><strong>Número: </strong><%=endereco.end_numero%></p>
+                    </div>
+                    <div class="acoes-endereco">
+                        <a class="atualizar" href="#">Atualizar</a>
+                        <a href="">Excluir</a>
+                    </div>
+                </div>
+            <% }); %>
+            
+            <div class="endereco-adicionar">
+                <a class="adicionar" href="/endereco/<%=enderecos[0].end_clt_id%>/adicionar">Adicionar novo endereço</a>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="/scripts/endEntrega.js"></script>
+    <script type="module" src="/scripts/popupEndereco.js"></script>
+</body>
+</html>

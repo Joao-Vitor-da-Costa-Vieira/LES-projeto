@@ -1,34 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/style/style.css">
     <title>Alterando Cartão</title>
 </head>
 <body>
-    <div class="voltar"><a href="/cartoes/<%=cartoes[0].usr_clt_id%>">Voltar</a></div>
+    <div class="voltar"><a href="/cartoes/<%=cartoes[0].usr_id%>">Voltar</a></div>
     <div class="container-cartoes">
         <div class="cartoes">
-            <h2>Adição de Cartão</h2>
-        
+
+            <div class="bloco_titulo">
+                <h1 class="titulo">Atualização de Cartão</h1>
+            </div>
+            
             <form class="container-forms-cartoes">
                 <div class="cartoes">
                     <label for="numero_cartao">Número do Cartão</label>
-                    <input type="text" name="numero_cartao" required>
+                    <input type="text" name="numero_cartao" value="<%=cartoes[0].crt_numero%>" required>
+
                     <label for="nome_cartao">Nome Impresso no Cartão</label>
-                    <input type="text" name="nome_cartao" required>
+                    <input type="text" name="nome_cartao" value="<%=cartoes[0].crt_nome%>" required>
+
                     <label for="bandeira_cartao">Bandeira do Cartão</label>
-                    <input type="text" name="bandeira_cartao" required>
+                    <input type="text" name="bandeira_cartao" value="<%=cartoes[0].crt_bandeira%>" required>
+
                     <label for="codigo_seguranca">Código de Segurança</label>
-                    <input type="text" name="codigo_seguranca" required>
+                    <input type="text" name="codigo_seguranca" value="<%=cartoes[0].crt_codigo_seguranca%>" required>
                 </div>
                 
-                <button>Adicionar</button>
+                <button>Alterar</button>
             </form>
         </div>
     </div>
 
-    <script type="module" src="/scripts/cartoes/cartoes-adicionar.js"></script>
+    <script type="module" src="/scripts/cartaoAtualizar.js"></script>
 </body>
 </html>

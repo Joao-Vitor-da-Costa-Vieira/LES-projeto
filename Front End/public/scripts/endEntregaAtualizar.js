@@ -1,4 +1,4 @@
-import { atualizarEnderecoCobrancaService } from "/scripts/service/enderecoCobrancaService.js";
+import { atualizarEnderecoEntregaService } from "/scripts/service/enderecoEntregaService.js";
 
 // Enviando os dados para o backend
 document.querySelector('form').addEventListener('submit', async function(event) {
@@ -23,7 +23,7 @@ document.querySelector('form').addEventListener('submit', async function(event) 
     };
 
     // Passando os dados para o back
-    let result = await atualizarEnderecoCobrancaService(endereco, usr_id, end_id);
+    let result = await atualizarEnderecoEntregaService(endereco, usr_id, end_id);
 
     if (result.status === 200) {
         alert('Endereço foi atualizado com sucesso!');

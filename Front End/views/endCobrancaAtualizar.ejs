@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/style.css">
+    <title>Atualizando Endereço</title>
+</head>
+<body>
+    <div class="voltar"><a href="/endereco/<%=enderecos[0].end_usr_id%>">Voltar</a></div>
+
+    <div class="container-endereco">
+        <div class="bloco_titulo">
+            <h1 class="titulo">Atualização de End. Cobranca</h1>
+        </div>
+
+        <form class="container-forms-endereco">
+            
+            <div class="endereco_cobranca">
+                <label for="tipo_residencia">Tipo de Residência</label>
+                <input type="text" id="tipo_residencia" name="tipo_residencia" value="<%=enderecos[0].end_tipoResidencia%>" required>
+            
+                <label for="tipo_endereco">Tipo de Endereço</label>
+                <input type="text" id="tipo_endereco" name="tipo_endereco" value="<%=enderecos[0].end_tipoEndereco%>" required>
+            
+                <label for="endereco">Endereço</label>
+                <input type="text" id="endereco" name="endereco" value="<%=enderecos[0].end_endereco%>" required>
+            
+                <label for="numero">Número</label>
+                <input type="text" id="numero" name="numero" value="<%=enderecos[0].end_numero%>" required>
+            
+                <label for="bairro">Bairro</label>
+                <input type="text" id="bairro" name="bairro" value="<%=enderecos[0].end_bairro%>" required>
+            
+                <label for="cep">CEP</label>
+                <input type="text" id="cep" name="cep" value="<%=enderecos[0].end_cep%>" required>
+            
+                <label for="cidade">Cidade</label>
+                <input type="text" id="cidade" name="cidade" value="<%=enderecos[0].end_cidade%>" required>
+            
+                <label for="estado">Estado</label>
+                <input type="text" id="estado" name="estado" value="<%=enderecos[0].end_estado%>" required>
+            
+                <label for="pais">País</label>
+                <input type="text" id="pais" name="pais" value="<%=enderecos[0].end_pais%>" required>
+            
+                <label for="observacoes">Observações</label>
+                <input type="text" id="observacoes" name="observacoes" value="<%=enderecos[0].end_observacoes%>">
+            </div>
+            
+            <button>Atualizar</button>
+        </form>
+    </div>
+
+    <script type="module" src="/scripts/enderecoCobrancaAtualizar.js"></script>
+</body>
+</html>
