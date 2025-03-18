@@ -66,7 +66,7 @@ async function alterarSenhaUsuario(senha, id) {
 // Inativando um usuário específico
 async function inativarUsuario(id) {
     try {
-        await db.query(`UPDATE usuarios SET usr_status = 0 WHERE usr_id = ?`, id);
+        await db.query(`UPDATE usuarios SET usr_status_de_atividade = 0 WHERE usr_id = ?`, id);
     } catch (err) {
         console.error(`Erro no inativarUsuario - modelUsuarios: ${err}`);
         throw err;
@@ -76,7 +76,7 @@ async function inativarUsuario(id) {
 // Ativando um usuário específico
 async function ativarUsuario(id) {
     try {
-        await db.query(`UPDATE usuarios SET usr_status = 1 WHERE usr_id = ?`, id);
+        await db.query(`UPDATE usuarios SET usr_status_de_atividade = 1 WHERE usr_id = ?`, id);
     } catch (err) {
         console.error(`Erro no ativarUsuario - modelUsuarios: ${err}`);
         throw err;
@@ -86,7 +86,7 @@ async function ativarUsuario(id) {
 // Buscando usuários ativos
 async function buscarUsuariosAtivos() {
     try {
-        const [usuarios] = await db.query('SELECT * FROM usuarios WHERE usr_status = 1');
+        const [usuarios] = await db.query('SELECT * FROM usuarios WHERE usr_status_de_atividade = 1');
         return usuarios;
     } catch (err) {
         console.error(`Erro no buscarUsuariosAtivos - modelUsuarios: ${err}`);
@@ -97,7 +97,7 @@ async function buscarUsuariosAtivos() {
 // Buscando usuários inativos
 async function buscarUsuariosInativos() {
     try {
-        const [usuarios] = await db.query('SELECT * FROM usuarios WHERE usr_status = 0');
+        const [usuarios] = await db.query('SELECT * FROM usuarios WHERE usr_status_de_atividade = 0');
         return usuarios;
     } catch (err) {
         console.error(`Erro no buscarUsuariosInativos - modelUsuarios: ${err}`);
