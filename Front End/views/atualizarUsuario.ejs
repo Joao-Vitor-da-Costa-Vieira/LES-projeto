@@ -20,7 +20,7 @@
         <div class="main">
             <!-- Título Principal -->
             <div class="bloco_titulo">
-                <h1 class="titulo">Alterando dados de <%=usuario[0].usr_nome%></h1>
+                <h1 class="titulo">Atualizando Usuario</h1>
             </div>
 
             <form method="POST">
@@ -192,18 +192,18 @@
                             <h1 class="titulo">Endereço de Entrega</h1>
                         </div>
 
-                        <input class="invisible" type="number" name="end_id_entrega" value="<%=enderecosEntrega[0].end_id%>">
+                        <input class="invisible" type="number" name="end_id_entrega" value="<%=enderecoEntrega[0].end_id%>">
 
                         <!-- Cidade -->
                         <div class="cidade">
                             <label class="label_pequena" for="cidade_e">Cidade</label>
-                            <input class="cidade_input" type="text" id="cidade_e" name="cidade_e" value="<%=enderecosEntrega[0].end_cidade%>" required>
+                            <input class="cidade_input" type="text" id="cidade_e" name="cidade_e" value="<%=enderecoEntrega[0].end_cidade%>" required>
                         </div>
 
                         <!-- Bairro -->
                         <div class="bairro">
                             <label class="label_pequena" for="bairro_e">Bairro</label>
-                            <input class="cidade_input" type="text" id="bairro_e" name="bairro_e" value="<%=enderecosEntrega[0].end_bairro%>" required>
+                            <input class="cidade_input" type="text" id="bairro_e" name="bairro_e" value="<%=enderecoEntrega[0].end_bairro%>" required>
                         </div>
 
                         <!-- Estado -->
@@ -244,25 +244,25 @@
                         <!-- Endereço -->
                         <div class="endereco">
                             <label class="label_pequena" for="endereco_e">Endereço</label>
-                            <input class="endereco_input" type="text" id="endereco_e" name="endereco_e" value="<%=enderecosEntrega[0].end_logradouro%>" required>
+                            <input class="endereco_input" type="text" id="endereco_e" name="endereco_e" value="<%=enderecoEntrega[0].end_logradouro%>" required>
                         </div>
 
                         <!-- Número -->
                         <div class="numero">
                             <label class="label_pequena" for="numero_e">Nº.</label>
-                            <input class="numero_input" type="number" id="numero_e" name="numero_e" value="<%=enderecosEntrega[0].end_numero%>" required>
+                            <input class="numero_input" type="number" id="numero_e" name="numero_e" value="<%=enderecoEntrega[0].end_numero%>" required>
                         </div>
 
                         <!-- Complemento -->
                         <div class="complemento">
                             <label class="label_pequena" for="complemento_e">Complemento</label>
-                            <input class="cidade_input" type="text" id="complemento_e" name="complemento_e" value="<%=enderecosEntrega[0].end_complemento%>">
+                            <input class="cidade_input" type="text" id="complemento_e" name="complemento_e" value="<%=enderecoEntrega[0].end_complemento%>">
                         </div>
 
                         <!-- CEP -->
                         <div class="cep">
                             <label class="label_pequena" for="cep_e">CEP</label>
-                            <input class="cidade_input" type="text" id="cep_e" name="cep_e" value="<%=enderecosEntrega[0].end_cep%>" required>
+                            <input class="cidade_input" type="text" id="cep_e" name="cep_e" value="<%=enderecoEntrega[0].end_cep%>" required>
                         </div>
                     </div>
 
