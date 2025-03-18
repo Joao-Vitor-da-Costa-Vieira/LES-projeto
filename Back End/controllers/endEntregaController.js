@@ -42,3 +42,8 @@ module.exports.putEnderecoEntregaAtualizar = async (req, res) => {
         res.sendStatus(500);
     }
 };
+
+module.exports.getApiEnderecoEntregaId = async(req, res) => {
+    const endereco = await buscarEnderecoEntregaId(req.params.end_id);
+    res.json(endereco);
+};

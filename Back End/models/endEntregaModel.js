@@ -1,4 +1,4 @@
-// INSERT
+const db = require('../config/db');
 
 // Cadastrando um novo endereço de entrega no banco de dados
 async function cadastrarEnderecoEntrega(dados) {

@@ -8,12 +8,11 @@ async function cadastrarUsuario(dados) {
         usr_email, 
         usr_cpf, 
         usr_data_de_nascimento, 
-        usr_telefone1,
-        usr_telefone2,  
+        usr_telefone_1,
+        usr_telefone_2,  
         usr_genero, 
-        usr_senha, 
-        usr_status
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1)`;
+        usr_senha 
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
 
     // Valores a serem inseridos no banco (na nova ordem)
     const valores = [

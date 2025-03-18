@@ -104,6 +104,7 @@ module.exports.patchAtivarUsuario = async (req, res) => {
 // Inserindo dados no banco
 module.exports.postCadastro = async (req, res) => {
     try {
+        console.log("Dados recebidos no servidor:", req.body);
         const usr_id = await cadastrarUsuario(req.body.usuario);
 
         req.body.cartao.crt_usr_id = usr_id;

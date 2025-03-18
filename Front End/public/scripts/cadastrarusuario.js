@@ -1,7 +1,7 @@
 import { cadastroService } from "/scripts/service/cadastroService.js";
 
 document.getElementById('formCadastro').addEventListener('submit', async function (event) {
-  e.preventDefault();
+  event.preventDefault();
 
     // Captura os valores dos campos
     const formDados = new FormData(event.target);
@@ -22,11 +22,11 @@ document.getElementById('formCadastro').addEventListener('submit', async functio
 
     const usuario = {
         usr_nome: dados.nome, 
-        usr_email: dados.E-mail, 
+        usr_email: dados.email, 
         usr_cpf: dados.cpf,
         usr_data_de_nascimento: dados.data_nascimento, 
-        usr_telefone: dados.telefone1,
-        usr_telefone: dados.telefone2,
+        usr_telefone1: dados.telefone1,
+        usr_telefone2: dados.telefone2,
         usr_genero: dados.genero,
         usr_senha: dados.senha
     };
@@ -58,7 +58,9 @@ document.getElementById('formCadastro').addEventListener('submit', async functio
         crt_codigo_seguranca: dados.cod_sec
     };
 
-    const cadastroDados = { usuario, endereco_e, endereco_c, cartao }; 
+    
+
+    const cadastroDados = {usuario, endereco_e, endereco_c, cartao}; 
     
     const status = await cadastroService(cadastroDados);
     

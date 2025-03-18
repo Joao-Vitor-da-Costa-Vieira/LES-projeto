@@ -8,7 +8,7 @@ async function cadastrarCartao(dados) {
         crt_nome, 
         crt_numero, 
         crt_bandeira, 
-        crt_codigo_seguranca, 
+        crt_codigo_seguranca 
     ) VALUES (?, ?, ?, ?, ?)`;
 
     // Valores a serem inseridos no banco

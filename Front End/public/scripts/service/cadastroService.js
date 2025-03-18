@@ -11,13 +11,16 @@ export async function cadastroAtualizarService(usuario, usr_id) {
         return res.status;
 
     }catch(err){
-        console.error(`Erro no signupAltService - serviceSignup: ${err}`);
+        console.error(`Erro no cadastroAtualizarService - serviceCadastro: ${err}`);
         throw err;
     }
 }
 
 //Inserindo um usuario no banco de dados
 export async function cadastroService(usuario) {
+
+    console.log('Enviando dados para o backend:', usuario);
+    
     try{
 
         const res = await fetch('/cadastro', {
@@ -29,7 +32,7 @@ export async function cadastroService(usuario) {
         return res.status;
 
     }catch(err){
-        console.error(`Erro no signupService - serviceSignup: ${err}`);
+        console.error(`Erro no cadastroService - serviceCadastro: ${err}`);
         throw err;
     }
 }

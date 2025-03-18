@@ -33,7 +33,7 @@ module.exports.postEnderecoCobrancaAdicionar = async (req, res) => {
 };
 
 // Atualizando os dados dos endereços de cobrança
-module.exports.putEnderecoCobrancaAtuallizar = async (req, res) => {
+module.exports.putEnderecoCobrancaAtualizar = async (req, res) => {
     try {
         const endereco = await atualizarEnderecoCobranca(req.body, req.params.end_id);
         res.json(endereco);
@@ -41,4 +41,9 @@ module.exports.putEnderecoCobrancaAtuallizar = async (req, res) => {
         console.error(`Erro no putEnderecoCobrancaAtualizar - controllerEnderecoCobranca: ${err}`);
         res.sendStatus(500);
     }
+};
+
+module.exports.getApiEnderecoCobrancaId = async(req, res) => {
+    const endereco = await buscarEnderecoCobrancaId(req.params.end_id);
+    res.json(endereco);
 };

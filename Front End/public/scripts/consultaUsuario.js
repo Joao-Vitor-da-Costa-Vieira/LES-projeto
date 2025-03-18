@@ -2,19 +2,6 @@ import { buscarUsuariosAtivosService } from "/scripts/service/usuarioService.js"
 import { buscarUsuariosInativosService } from "/scripts/service/usuarioService.js";
 import { inativarUsuarioService } from "/scripts/service/usuarioService.js";
 
-// FILTRO DE USUÁRIOS
-document.querySelector('#flt').addEventListener('click', () => {
-    const filtro = document.querySelector('.filtro_usuarios');
-
-    // Alterando a visibilidade do filtro
-    if (filtro.style.display === 'none' || filtro.style.display === '') {
-        filtro.style.display = 'grid';
-        return;
-    }
-
-    filtro.style.display = 'none';
-});
-
 // ALTERAÇÃO DE USUÁRIO
 document.querySelectorAll('.atualizar').forEach(botao => {
     botao.addEventListener('click', function (event) {
@@ -38,11 +25,11 @@ document.querySelectorAll('.atualizar').forEach(botao => {
         submenu.classList.add('atualizar_submenu');
 
         submenu.innerHTML = `
-            <a href="/senha/${id}">Alterar senha</a>
-            <a href="/endereco-cobranca/${id}">Alterar endereço de cobrança</a>
-            <a href="/endereco-entrega/${id}">Alterar endereço de entrega</a>
-            <a href="/cartao/${id}">Alterar cartão</a>
-            <a href="/cadastro/${id}">Alterar tudo</a>
+            <a href="/senha/${id}">Atualizar senha</a>
+            <a href="/endereco-cobranca/${id}">Atualizar endereço de cobrança</a>
+            <a href="/endereco-entrega/${id}">Atualizar endereço de entrega</a>
+            <a href="/cartao/${id}">Atualizar cartão</a>
+            <a href="/cadastro/${id}">Atualizar tudo</a>
         `;
 
         // Adicionando submenu ao lado do botão clicado
