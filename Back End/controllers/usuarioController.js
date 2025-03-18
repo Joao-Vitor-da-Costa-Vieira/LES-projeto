@@ -30,14 +30,14 @@ module.exports.getCadastro = (req, res) => {
 
 module.exports.getCadastroAtualizar = async (req, res) => {
     const usuario = await buscarUsuarioId(req.params.usr_id);
-    const enderecos_c = await buscarEnderecosCobrancaUsuarioId(req.params.usr_id);
-    const enderecos_e = await buscarEnderecosEntregaUsuarioId(req.params.usr_id);
+    const enderecosCobranca = await buscarEnderecosCobrancaUsuarioId(req.params.usr_id);
+    const enderecosEntrega = await buscarEnderecosEntregaUsuarioId(req.params.usr_id);
     const cartoes = await buscarCartoesUsuarioId(req.params.usr_id);
 
     res.render('atualizarUsuario', {
         usuario: usuario,
-        enderecos_c: enderecos_c,
-        enderecos_e: enderecos_e,
+        enderecosCobranca: enderecosCobranca,
+        enderecosEntrega: enderecosEntrega,
         cartoes: cartoes
     });
 };
