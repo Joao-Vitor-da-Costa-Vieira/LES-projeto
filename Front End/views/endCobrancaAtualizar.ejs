@@ -7,7 +7,7 @@
     <title>Atualizando Endereço</title>
 </head>
 <body>
-    <div class="voltar"><a href="/endereco/<%=enderecos[0].end_usr_id%>">Voltar</a></div>
+    <div class="voltar"><a href="/endereco-cobranca/<%=enderecos[0].end_usr_id%>">Voltar</a></div>
 
     <div class="container-endereco">
         <div class="bloco_titulo">
@@ -17,35 +17,78 @@
         <form class="container-forms-endereco">
             
             <div class="endereco_cobranca">
-                <label for="tipo_residencia">Tipo de Residência</label>
-                <input type="text" id="tipo_residencia" name="tipo_residencia" value="<%=enderecos[0].end_tipoResidencia%>" required>
-            
-                <label for="tipo_endereco">Tipo de Endereço</label>
-                <input type="text" id="tipo_endereco" name="tipo_endereco" value="<%=enderecos[0].end_tipoEndereco%>" required>
-            
-                <label for="endereco">Endereço</label>
-                <input type="text" id="endereco" name="endereco" value="<%=enderecos[0].end_endereco%>" required>
-            
-                <label for="numero">Número</label>
-                <input type="text" id="numero" name="numero" value="<%=enderecos[0].end_numero%>" required>
-            
-                <label for="bairro">Bairro</label>
-                <input type="text" id="bairro" name="bairro" value="<%=enderecos[0].end_bairro%>" required>
-            
-                <label for="cep">CEP</label>
-                <input type="text" id="cep" name="cep" value="<%=enderecos[0].end_cep%>" required>
-            
-                <label for="cidade">Cidade</label>
-                <input type="text" id="cidade" name="cidade" value="<%=enderecos[0].end_cidade%>" required>
-            
-                <label for="estado">Estado</label>
-                <input type="text" id="estado" name="estado" value="<%=enderecos[0].end_estado%>" required>
-            
-                <label for="pais">País</label>
-                <input type="text" id="pais" name="pais" value="<%=enderecos[0].end_pais%>" required>
-            
-                <label for="observacoes">Observações</label>
-                <input type="text" id="observacoes" name="observacoes" value="<%=enderecos[0].end_observacoes%>">
+                <!--Primeira Linha-->
+                <div class="linha_centralizada">
+                    <div class="cidade">
+                        <label class="label_pequena" for="cidade">Cidade</label>
+                        <input class="cidade_input" type="text" id="cidade" name="cidade" value="<%=enderecos[0].end_cidade%>" required>
+                    </div>
+
+                    <div class="bairro">
+                        <label class="label_pequena" for="bairro">Bairro</label>
+                        <input class="cidade_input" type="text" id="bairro" name="bairro" value="<%=enderecos[0].end_bairro%>" required>
+                    </div>
+
+                    <div class="estado">
+                        <label class="label_genero">Estado</label>
+                        <select class="selecao" id="estado" name="estado" required>
+                            <option value="">Selecione</option>
+                            <option value="AC">AC</option>
+                            <option value="AL">AL</option>
+                            <option value="AP">AP</option>
+                            <option value="AM">AM</option>
+                            <option value="BA">BA</option>
+                            <option value="CE">CE</option>
+                            <option value="DF">DF</option>
+                            <option value="ES">ES</option>
+                            <option value="GO">GO</option>
+                            <option value="MA">MA</option>
+                            <option value="MT">MT</option>
+                            <option value="MS">MS</option>
+                            <option value="MG">MG</option>
+                            <option value="PA">PA</option>
+                            <option value="PB">PB</option>
+                            <option value="PR">PR</option>
+                            <option value="PE">PE</option>
+                            <option value="PI">PI</option>
+                            <option value="RJ">RJ</option>
+                            <option value="RN">RN</option>
+                            <option value="RS">RS</option>
+                            <option value="RO">RO</option>
+                            <option value="RR">RR</option>
+                            <option value="SC">SC</option>
+                            <option value="SP">SP</option>
+                            <option value="SE">SE</option>
+                            <option value="TO">TO</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!--Segunda Linha-->
+                <div class="linha_centralizada">
+                    <div class="endereco">
+                        <label class="label_pequena" for="endereco">Endereço</label>
+                        <input class="endereco_input" type="text" id="endereco" name="endereco" value="<%=enderecos[0].end_endereco%>" required>
+                    </div>
+
+                    <div class="numero">
+                        <label class="label_pequena" for="numero">Nº.</label>
+                        <input class="numero_input" type="number" id="numero" name="numero" value="<%=enderecos[0].end_numero%>" required>
+                    </div>
+                </div>
+
+                <!--Terceira Linha-->
+                <div class="linha_centralizada">
+                    <div class="cidade">
+                        <label class="label_pequena" for="complemento">Complemento</label>
+                        <input class="cidade_input" type="text" id="complemento" name="complemento_e" value="<%=enderecos[0].end_complemento%>">
+                    </div>
+
+                    <div class="bairro">
+                        <label class="label_pequena" for="cep">CEP</label>
+                        <input class="cidade_input" type="text" id="cep" name="cep" value="<%=enderecos[0].end_cep%>" required>
+                    </div>
+                </div>
             </div>
             
             <button>Atualizar</button>

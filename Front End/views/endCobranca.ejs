@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,17 +11,17 @@
 
     <div class="main">
         <div class="container-endereco">
-            <h2 class="title">Endereço de Cobrança</h2>
+            <div class="bloco_titulo">
+                <h1 class="titulo"> Endereço de Cobranca</h1>
+            </div>
 
-            <div class="seletores">
-                <div>
+            <div class="genero">
                     <label for="cbr">Endereço</label>
                     <select name="cobranca" id="cbr">
                         <% enderecos.forEach(endereco => { %>
                             <option value="<%=endereco.end_endereco%>"><%=endereco.end_endereco%></option>
                         <% }); %>
                     </select>
-                </div>
             </div>
 
             <% enderecos.forEach(endereco => { %>
@@ -40,12 +40,12 @@
             <% }); %>
             
             <div class="endereco-adicionar">
-                <a class="adicionar" href="/endereco/<%=enderecos[0].end_clt_id%>/adicionar">Adicionar novo endereço</a>
+                <a class="adicionar" href="/endereco-cobranca/<%=enderecos[0].end_usr_id%>/adicionar">Adicionar novo endereço</a>
             </div>
         </div>
     </div>
 
     <script type="module" src="/scripts/endCobranca.js"></script>
-    <script type="module" src="/scripts/popupEndereco.js"></script>
+    <script type="module" src="/scripts/mensagemEndCobranca.js"></script>
 </body>
 </html>

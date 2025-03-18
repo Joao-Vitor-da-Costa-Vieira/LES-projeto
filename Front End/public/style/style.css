@@ -366,6 +366,10 @@ table,th,td{
     margin-bottom: 10px;
 }
 
+.invisible {
+    display: none;
+}
+
 .main {
     font-size: 28px; 
     padding: 0px 10px;
