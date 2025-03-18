@@ -18,8 +18,8 @@
             <div class="genero">            
                 <label for="etr">Endereço</label>
                 <select name="entrega" id="etr">
-                    <% enderecos.forEach(endereco => { %>
-                        <option value="<%=endereco.end_endereco%>"><%=endereco.end_endereco%></option>
+                    <% enderecos.forEach(enderecos => { %>
+                        <option value="<%=enderecos.end_endereco%>"><%=enderecos.end_endereco%></option>
                     <% }); %>
                 </select>  
             </div>
@@ -27,10 +27,10 @@
             <% enderecos.forEach(endereco => { %>
                 <div class="endereco-mostrado">
                     <div class="endereco">
-                        <p class="invisible endereco-id"><%=endereco.end_id%></p>
-                        <h2><%=endereco.end_endereco%></h2>
-                        <p><%=endereco.end_bairro%></p>
-                        <p><strong>Número: </strong><%=endereco.end_numero%></p>
+                        <p class="invisible endereco-id"><%=enderecos.end_id%></p>
+                        <h2><%=enderecos.end_endereco%></h2>
+                        <p><%=enderecos.end_bairro%></p>
+                        <p><strong>Número: </strong><%=enderecos.end_numero%></p>
                     </div>
                     <div class="acoes-endereco">
                         <a class="atualizar" href="#">Atualizar</a>

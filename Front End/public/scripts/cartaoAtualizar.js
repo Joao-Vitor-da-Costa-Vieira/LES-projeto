@@ -12,9 +12,9 @@ document.querySelector('form').addEventListener('submit', async function(event){
     const crt_id = window.location.pathname.split('/').splice(-1)[0];
 
     const cartao = {
-        crt_numero: dados.numero_cartao,
-        crt_nome: dados.nome_cartao,
-        crt_bandeira: dados.bandeira_cartao,
+        crt_numero: dados.num_cartao,
+        crt_nome: dados.nome_c,
+        crt_bandeira: dados.bandeira,
         crt_codigo_seguranca: dados.codigo_seguranca,
     }
 

@@ -13,9 +13,9 @@ document.querySelector('form').addEventListener('submit', async function(event){
 
     const cartao = {
         crt_usr_id: usr_id,
-        crt_numero: dados.numero_cartao,
-        crt_nome: dados.nome_cartao,
-        crt_bandeira: dados.bandeira_cartao,
+        crt_numero: dados.num_cartao,
+        crt_nome: dados.nome_c,
+        crt_bandeira: dados.bandeira,
         crt_codigo_seguranca: dados.codigo_seguranca,
     }
 

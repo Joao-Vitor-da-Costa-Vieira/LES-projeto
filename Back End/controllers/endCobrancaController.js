@@ -8,17 +8,17 @@ const {
 // Views
 module.exports.getEnderecoCobranca = async (req, res) => {
     const enderecos = await buscarEnderecosCobrancaUsuarioId(req.params.usr_id);
-    res.render('endereco-cobranca', { enderecos: enderecos });
+    res.render('endCobranca', { enderecos: enderecos });
 };
 
 module.exports.getEnderecoCobrancaAdicionar = async (req, res) => {
     const enderecos = await buscarEnderecosCobrancaUsuarioId(req.params.usr_id);
-    res.render('endereco-cobranca-adicionar', { enderecos: enderecos });
+    res.render('endCobrancaAdicionar', { enderecos: enderecos });
 };
 
 module.exports.getEnderecoCobrancaAtualizar = async (req, res) => {
     const enderecos = await buscarEnderecoCobrancaId(req.params.end_id);
-    res.render('endereco-cobranca-atualizar', { enderecos: enderecos });
+    res.render('endCobrancaAtualizar', { enderecos: enderecos });
 };
 
 // Inserção de dados

@@ -18,9 +18,9 @@
             <div class="preferencia-cartao">
                 <label>Preferencia</label>
                 <select name="preferencia" id="preferencia">
-                    <% cartoes.forEach(cartao => { %>
+                    <% cartoes.forEach(cartoes => { %>
 
-                        <option value=""><%=${cartao.crt_bandeira}-${cartao.crt_numero.slice(-4)}%></option>
+                        <option value=""><%=${cartoes.crt_bandeira}-${cartoes.crt_numero.slice(-4)}%></option>
 
                     <% }); %>
                 </select>
@@ -30,10 +30,10 @@
 
                 <div class="cartoes-mostrado">
                     <div class="cartoes-main">
-                        <p class="invisible cartoes-id"><%=cartao.crt_id%></p>
+                        <p class="invisible cartoes-id"><%=cartoes.crt_id%></p>
                         <h2><%=cartao.crt_bandeira%></h2>
                         <p><%=cartao.crt_nome%></p>
-                        <p><strong>Final: </strong><%=cartao.crt_numero.slice(-4)%></p>
+                        <p><strong>Final: </strong><%=cartoes.crt_numero.slice(-4)%></p>
                     </div>
                     <div class="acoes-cartoes">
                         <a class="atualizar" href="#">Atualizar</a>
@@ -44,7 +44,7 @@
             <% }); %>
 
             <div class="cartoes-adicionar">
-                <a href="/cartoes/<%=cartoes[0].usr_id%>/adicionar">Adicionar novo cartão</a>
+                <a href="/cartao/<%=cartoes[0].usr_id%>/adicionar">Adicionar novo cartão</a>
             </div>
         </div>
     </div>

@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style/style.css">
-    <title>Alterando Cartão</title>
+    <title>Atualização de Cartão</title>
 </head>
 <body>
-    <div class="voltar"><a href="/cartoes/<%=cartoes[0].usr_id%>">Voltar</a></div>
+    <div class="voltar"><a href="/cartao/<%=cartoes[0].usr_id%>">Voltar</a></div>
     <div class="container-cartoes">
         <div class="cartoes">
 
@@ -16,18 +16,37 @@
             </div>
             
             <form class="container-forms-cartoes">
-                <div class="cartoes">
-                    <label for="numero_cartao">Número do Cartão</label>
-                    <input type="text" name="numero_cartao" value="<%=cartoes[0].crt_numero%>" required>
+                <!--Primeira Linha-->
+                <div class="linha_centralizada">
+                    <div class="num_cartao">
+                        <label for="num_cartao">Número</label>
+                        <input class="num_cartao_input" type="number" id="num_cartao" name="num_cartao" value="<%=cartoes.numero%>" required>
+                    </div>
 
-                    <label for="nome_cartao">Nome Impresso no Cartão</label>
-                    <input type="text" name="nome_cartao" value="<%=cartoes[0].crt_nome%>" required>
+                    <div class="cod_sec">
+                        <label for="cod_sec">Código de Segurança</label>
+                        <input class="cod_sec_input" type="password" id="cod_sec" name="cod_sec" value="<%=cartoes.cod_sec%>" required>
+                    </div>
 
-                    <label for="bandeira_cartao">Bandeira do Cartão</label>
-                    <input type="text" name="bandeira_cartao" value="<%=cartoes[0].crt_bandeira%>" required>
+                    <div class="select">
+                        <label class="label_genero">Bandeira</label>
+                        <select class="selecao" id="bandeira" name="bandeira" required>
+                            <option value="">Selecione</option>
+                            <option value="Visa">Visa</option>
+                            <option value="Mastercard">Mastercard</option>
+                            <option value="Hipercard">Hipercard</option>
+                            <option value="American Express">American Express</option>
+                            <option value="Elo">Elo</option>
+                            <option value="Diners Club">Diners Club</option>
+                            <option value="Discover">Discover</option>
+                        </select>
+                    </div>
+                </div>
 
-                    <label for="codigo_seguranca">Código de Segurança</label>
-                    <input type="text" name="codigo_seguranca" value="<%=cartoes[0].crt_codigo_seguranca%>" required>
+                <!--Segunda Linha-->
+                <div class="nome">
+                    <label class="label" for="nome_c">Nome do Titular</label>
+                    <input class="nome_input" type="text" id="nome_c" name="nome_c" value="<%=cartoes.nome_c%>" required>
                 </div>
                 
                 <button>Alterar</button>
