@@ -6,23 +6,58 @@
     <title>Recuperação de Senha</title>
 </head>
 <body>
-    <div class="main">
-
-        <div class="senha">
-            <div class="bloco_titulo">
-                <h1 class="titulo">Recuperar Senha</h1>
-            </div>
-
-            <form>
-                <input class="senha_input" type="password">
-                <input class="senha_nova_input" type="password">
-                <input class="senha_confirma_input" type="password">
-
-                <button>Confirmar</button>
-            </form>
-        </div>
+    <!--Barra lateral de Navegação-->
+    <div class="sidenav">
+        <a href="index.ejs">Menu</a>
+        <a href="cadastrarUsuario.ejs">Cadastrar</a>
+        <a href="consultarUsuario.ejs">Consultar</a>
+        <a href="atualizarUsuario.ejs">Atualizar</a>
+    </div>
     </div>
 
+    <div class="conteudo">
+        <div class="main">
+
+            <div class="senha">
+                <div class="bloco_titulo">
+                    <h1 class="titulo">Recuperar Senha</h1>
+                </div>
+                
+                <br>
+
+                <form>
+                    <!--Input de confirmação de senha atual-->
+                    <div class="senha">
+                        <label class="label" for="senha">Senha</label>
+                        <div class="erro_div">
+                            <input class="senha_input" type="password" id="senha" name="senha" required>
+                            <span id="erroSenha" class="erro" style="color: red; display: none;">*</span>
+                        </div>
+                    </div>
+                    
+                    <!--Input de senha nova-->
+                    <div class="senha">
+                        <label class="label" for="senhanova">Senha Nova</label>
+                        <div class="erro_div">
+                            <input class="senha_nova_input" type="password" id="senhanova" name="senhanova" required>
+                            <span id="erroSenhaNova" class="erro" style="color: red; display: none;">*</span>
+                        </div>
+                    </div>
+                    
+                    <!--Input de confirmação de senha nova-->
+                    <div class="senha">
+                        <label class="label" for="conf_senha">Confirmar Senha</label>
+                        <div class="erro_div">
+                            <input class="senha_confirma_input" type="password" id="conf_senha" name="conf_senha" required>
+                            <span id="erroConfSenha" class="erro" style="color: red; display: none;">*</span>
+                        </div>
+                    </div>
+
+                    <button class="botao_menu">Confirmar</button>
+                </form>
+            </div>
+        </div>
+    </div>
     <script type="module" src="/scripts/senha.js"></script>
 </body>
 </html>

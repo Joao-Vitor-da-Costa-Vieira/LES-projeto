@@ -13,6 +13,7 @@
         <a href="consultarUsuario.ejs">Consultar</a>
         <a href="atualizarUsuario.ejs">Atualizar</a>
     </div>
+    
 
     <div class="conteudo">
         <div class="main">
@@ -21,30 +22,40 @@
                 <h1 class="titulo">Mostrar Usuarios</h1>
             </div>
             
-            <div class="button">
+
+            <div class="button_menu">
                 <a href="/cadastrarUsuario">Cadastrar Usuário</a>
             </div>
 
-            <%
-                usuarios.forEach(usuario => { %>
-                    <div class="usuario-mostrado">
-                        <div class="usuario">
-                            <p class="invisible usuario-id"><%=usuario.usr_id%></p>
-                            <p><%=usuario.usr_nome%></p>
-                            <p><%=usuario.usr_email%></p>
-                        </div>
-                        <div class="botoes">
-                            <a class="atualizar" href="#">Alterar</a>
-                            <a class="inativar" href="#">Inativar</a>
-                        </div>
-                    </div>
-                    <%
-                });
-            %>
+            <div class="table_div">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>E-mail</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% usuarios.forEach(usuario => { %>
+                            <tr>
+                                <td class="usuario-id"><%= usuario.usr_id %></td>
+                                <td><%= usuario.usr_nome %></td>
+                                <td><%= usuario.usr_email %></td>
+                                <td>
+                                    <div class="botoes_resultado">
+                                        <a class="atualizar" href="#" >Atualizar</a>
+                                        <a class="inativar" href="#" >Inativar</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
     <script type="module" src="/scripts/consultaUsuario.js"></script>
-    <script type="module" src="/scripts/mensagemUsuario.js"></script>
 </body>
 </html>

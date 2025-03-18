@@ -338,14 +338,79 @@ p{
 }
 
 /*Centralização e Estilização da Tabela*/
-.table_div{
+.table_div {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 20px;
 }
 
-table,th,td{
-    border: 2px solid black;
+table {
+    width: 80%; 
+    border-collapse: collapse;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #0003c8;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+/* Estilização dos botões de ação */
+.botoes_resultado {
+    display: flex;
+    gap: 10px;
+}
+
+.botoes_resultado a {
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+.botoes_resultado .atualizar {
+    background-color: #0003c8; 
+}
+
+.botoes_resultado .inativar {
+    background-color: #f44336;
+}
+
+/* Estilização do submenu */
+.atualizar_submenu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    z-index: 1000;
+}
+
+/* Estilização dos botões do submenu */
+.submenu-botao {
+    background-color: #0003c8;
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: left;
+    transition: background-color 0.3s ease;
 }
 
 .linha_centralizada{
@@ -366,7 +431,7 @@ table,th,td{
     margin-bottom: 10px;
 }
 
-.invisible {
+.usuario-id {
     display: none;
 }
 

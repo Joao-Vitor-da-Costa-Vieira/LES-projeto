@@ -2,14 +2,15 @@ import { buscarUsuariosAtivosService } from "/scripts/service/usuarioService.js"
 import { buscarUsuariosInativosService } from "/scripts/service/usuarioService.js";
 import { inativarUsuarioService } from "/scripts/service/usuarioService.js";
 
-// ALTERAÇÃO DE USUÁRIO
+
 document.querySelectorAll('.atualizar').forEach(botao => {
     botao.addEventListener('click', function (event) {
         event.stopPropagation();
 
         // Obtendo o id
-        let usuarioMostrado = this.closest('.usuario-mostrado');
-        let id = usuarioMostrado.querySelector('.usuario-id').textContent;
+        let usuarioMostrado = this.closest('tr');
+        let idElement = usuarioMostrado.querySelector('.usuario-id');
+        let id = idElement.textContent; 
 
         // Retirando o menu ao clicar de novo
         let submenuAtual = this.querySelector('.atualizar_submenu');
@@ -25,11 +26,11 @@ document.querySelectorAll('.atualizar').forEach(botao => {
         submenu.classList.add('atualizar_submenu');
 
         submenu.innerHTML = `
-            <a href="/senha/${id}">Atualizar senha</a>
-            <a href="/endereco-cobranca/${id}">Atualizar endereço de cobrança</a>
-            <a href="/endereco-entrega/${id}">Atualizar endereço de entrega</a>
-            <a href="/cartao/${id}">Atualizar cartão</a>
-            <a href="/cadastro/${id}">Atualizar tudo</a>
+             <button class="submenu-botao" onclick="window.location.href='/senha/${id}'">Atualizar senha</button>
+    <button class="submenu-botao" onclick="window.location.href='/endereco-cobranca/${id}'">Atualizar endereço de cobrança</button>
+    <button class="submenu-botao" onclick="window.location.href='/endereco-entrega/${id}'">Atualizar endereço de entrega</button>
+    <button class="submenu-botao" onclick="window.location.href='/cartao/${id}'">Atualizar cartão</button>
+    <button class="submenu-botao" onclick="window.location.href='/cadastro/${id}'">Atualizar tudo</button>
         `;
 
         // Adicionando submenu ao lado do botão clicado
