@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!--Barra lateral de Navegação-->
+    <div class="sidenav">
+        <a href="carrinho.html">Menu</a>
+    </div>
+
+    <!--Div usada para centralizar o conteudo para da página além da barra lateral-->
+    <div class="conteudo">
+        <div class="bloco_titulo">
+            <h1 class="titulo">Cadastro de Livros</h1>
+        </div>
+
+        <br>
+
+        <!--Input de Autor-->
+        <div class="nome">
+            <label class="label2" for="autor">Autor</label>
+            <input class="nome_input" type="text" id="autor" name="autor" required>
+        </div>
+
+        <!--Input de Categoria-->
+        <div class="categoria">
+            <label class="label2" for="categoria">Categoria</label>
+            <input class="categoria_input" type="text" id="categoria" name="categoria" required>
+        </div>
+        
+        <!--Input de Título-->
+        <div class="livro">
+            <label class="label2" for="livro">Título</label>
+            <input class="livro_input" type="text" id="livro" name="livro" required>
+        </div>
+
+        <!--Input de Editora-->
+        <div class="editora">
+            <label class="label2" for="editora">Editora</label>
+            <input class="editora_input" type="text" id="editora" name="editora" required>
+        </div>
+
+        <!--Input de ISBN-->
+        <div class="isbn">
+            <label class="label2" for="isbn">ISBN</label>
+            <input class="isbn_input" type="text" id="isbn" name="isbn" required>
+        </div>
+
+        <!--Input de Grupo de Precificação-->
+        <div class="grupo_precificacao">
+            <label class="label2" for="grupo_precificacao">Grupo de Precificação</label>
+            <input class="grupo_precificacao_input" type="text" id="grupo_precificacao" name="grupo_precificacao" required>
+        </div>
+
+        <br>
+
+        <div class="linha_centralizada">
+
+            <!-- Input de Edição -->
+            <div class="edicao">
+                <label class="label_pequena" for="edicao">Edição</label>
+                <input class="edicao_input" type="text" id="edicao" name="edicao" required>
+            </div>
+
+            <!-- Input de Número de Páginas -->
+            <div class="numero_paginas">
+                <label class="label_pequena" for="numero_paginas">Nº Páginas</label>
+                <input class="numero_paginas_input" type="number" id="numero_paginas" name="numero_paginas" required>
+            </div>
+
+            <!-- Input de Valor -->
+            <div class="valor">
+                <label class="label_pequena" for="valor">Valor</label>
+                <input class="valor_input" type="number" id="valor" name="valor" required>
+            </div>
+
+            <!-- Input de Código de Barras -->
+            <div class="codigo_barras">
+                <label class="label_pequena" for="codigo_barras">Cód. de Barras</label>
+                <input class="codigo_barras_input" type="number" id="codigo_barras" name="codigo_barras" required>
+            </div>
+    
+        </div>
+
+        <br>
+
+        <div class="linha_centralizada">
+
+            <!-- Input de Altura -->
+            <div class="altura">
+                <label class="label_pequena" for="altura">Altura</label>
+                <input class="altura_input" type="text" id="altura" name="altura" required>
+            </div>
+
+            <!-- Input de Largura -->
+            <div class="largura">
+                <label class="label_pequena" for="largura">Largura</label>
+                <input class="largura_input" type="text" id="largura" name="largura" required>
+            </div>
+
+            <!-- Input de Peso -->
+            <div class="peso">
+                <label class="label_pequena" for="peso">Peso</label>
+                <input class="peso_input" type="text" id="peso" name="peso" required>
+            </div>
+
+            <!-- Input de Profundidade -->
+            <div class="profundidade">
+                <label class="label_pequena" for="profundidade">Profundidade</label>
+                <input class="profundidade_input" type="text" id="profundidade" name="profundidade" required>
+            </div>
+
+        </div>
+
+        <br>
+
+        <!-- Input de Sinopse (Textarea) -->
+        <div class="sinopse">
+            <label class="label_pequena" for="sinopse">Sinopse</label>
+            <textarea class="sinopse_input" id="sinopse" name="sinopse" rows="5" required></textarea>
+        </div>
+
+        <br>
+
+                <!--Input de Botões-->
+                <div class="botoes">
+                    <button class="cancelar" type="button" id="Cancelar">Voltar</button>
+                    <input type="submit" id="submit" name="submit" value="Confirmar">
+                </div>
+
+    </div>
+
+    <!--Script do Submit-->
+    <script type="module" src="/scripts/cadastrarUsuario.js"></script>
+</body>
+</html>
