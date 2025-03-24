@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!--Barra lateral de Navegação-->
+    <div class="sidenav">
+        <a href="carrinho.html">Menu</a>
+    </div>
+
+    <!--Div usada para centralizar o conteudo para da página além da barra lateral-->
+    <div class="conteudo">
+        <div class="bloco_titulo">
+            <h1 class="titulo">Transações do Usuário</h1>
+        </div>
+
+        <br>
+        
+        <div class="table_div">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 50px;">Nº Venda</th>
+                        <th style="width: 200px;">Usuário</th>
+                        <th style="width: 75px;">Data</th>
+                        <th style="width: 80px;">Subtotal</th>
+                        <th style="width: 150px;">Forma de Pagamento</th>
+                        <th style="width: 120px;">Status</th>
+                        <th style="width: 120px;">Opções</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#1001</td>
+                        <td>Joana Silva</td>
+                        <td>10/03/2024</td>
+                        <td>R$ 89,90</td>
+                        <td>Cartão de Crédito</td>
+                        <td>ENTREGUE</td>
+                        <td>
+                            <div class="botoes_resultado">
+                                <a class="ver_mais">Ver Mais</a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>#1002</td>
+                        <td>Joana Silva</td>
+                        <td>12/03/2024</td>
+                        <td>R$ 120,50</td>
+                        <td>Cupom de Troca</td>
+                        <td>TROCA AUTORIZADA</td>
+                        <td>
+                            <div class="botoes_resultado">
+                                <a class="ver_mais">Ver Mais</a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>#1003</td>
+                        <td>Joana Silva</td>
+                        <td>15/03/2024</td>
+                        <td>R$ 45,00</td>
+                        <td>Cupom Promocional</td>
+                        <td>EM TRÂNSITO</td>
+                        <td>
+                            <div class="botoes_resultado">
+                                <a class="ver_mais">Ver Mais</a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>#1004</td>
+                        <td>Joana Silva</td>
+                        <td>18/03/2024</td>
+                        <td>R$ 75,30</td>
+                        <td>Cartão de Crédito</td>
+                        <td>EM PROCESSAMENTO</td>
+                        <td>
+                            <div class="botoes_resultado">
+                                <a class="ver_mais">Ver Mais</a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!--Script do Submit-->
+    <script type="module" src="/scripts/cadastrarUsuario.js"></script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!--Barra lateral de Navegação-->
+    <div class="sidenav">
+        <a href="carrinho.html">Menu</a>
+    </div>
+
+    <!--Div usada para centralizar o conteudo para da página além da barra lateral-->
+    <div class="conteudo">
+        <div class="bloco_titulo">
+            <h1 class="titulo">Pagamento</h1>
+        </div>
+
+        <br>
+
+        <div class="table_div">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 50px;">Nº Venda</th>
+                        <th style="width: 200px;">Usuário</th>
+                        <th style="width: 75px;">Data</th>
+                        <th style="width: 80px;">Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#1001</td>
+                        <td>Joana Silva</td>
+                        <td>10/03/2024</td>
+                        <td>R$ 89,90</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <br>
+
+        <div class="genero">
+            <label class="label_genero">Enderço de Entrega</label>
+            <select class="selecao_grande" id="end_entrega" name="end_entrega" required>
+                <option value="">Selecione um endereço</option>
+                <option value="1">SP, Mogi das Cruzes, Rua das Flores, 123 - Centro</option>
+                <option value="2">SP, Mogi das Cruzes, Avenida Brasil, 456 - Jardim América</option>
+                <option value="3">SP, Mogi das Cruzes, Praça da Sé, 789 - Centro Histórico</option>
+            </select>
+        </div>
+
+        <br>
+
+        <div class="genero">
+            <label class="label_genero">Enderço de Entrega</label>
+            <select class="selecao_grande" id="end_cobranca" name="end_cobranca" required>
+                <option value="">Selecione um endereço</option>
+                <option value="1">SP, Mogi das Cruzes, Rua das Flores, 123 - Centro</option>
+                <option value="2">SP, Mogi das Cruzes, Avenida Brasil, 456 - Jardim América</option>
+                <option value="3">SP, Mogi das Cruzes, Praça da Sé, 789 - Centro Histórico</option>
+            </select>
+        </div>
+
+        <br>
+
+        <div class="linha_centralizada">
+            <div class="genero">
+                <label class="label_genero">Forma de Pag.</label>
+                <select class="selecao_media" id="forma de pagamento" name="forma de pagamento" required>
+                    <option value="">Selecione uma forma de Pagamento</option>
+                    <option value="1">Cartão de Crédito</option>
+                    <option value="2">Cupom de Troca</option>
+                    <option value="3">Cupom de Promoção</option>
+                </select>
+            </div>
+
+            <div class="genero">
+                <label class="label_genero">Cartao</label>
+                <select class="selecao_media" id="forma de pagamento" name="forma de pagamento" required>
+                    <option value="">Selecione</option>
+                    <option value="1">**** **** **** 1023</option>
+                    <option value="2">**** **** **** 4567</option>
+                    <option value="3">**** **** **** 4778</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Input de Valor -->
+        <div class="valor">
+            <label class="label_pequena" for="valor">Valor a ser pago</label>
+            <input class="valor_input" type="number" id="valor" name="valor" required>
+        </div>
+
+        <br>
+
+        <div class="botoes">
+            <button class="atualizar" type="button" id="atualizar">Adicionar forma de pagamento</button>
+        </div>
+
+        <br>
+        
+        <div class="table_div">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 50px;">Valor</th>
+                        <th style="width: 200px;">Desconto</th>
+                        <th style="width: 75px;">Frete</th>
+                        <th style="width: 80px;">Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>R$ 89,90</td>
+                        <td>R$ 0,00</td>
+                        <td>R$ 10,00</td>
+                        <td>R$ 99,90</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <br>
+
+        <!--Input de Botões-->
+        <div class="botoes">
+            <button class="cancelar" type="button" id="Cancelar">Cancelar</button>
+            <button class="adicionar" type="button" id="Adicionar">Confirmar</button>
+        </div>
+    </div>
+
+    <!--Script do Submit-->
+    <script type="module" src="/scripts/cadastrarUsuario.js"></script>
+</body>
+</html>
