@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!--Barra lateral de Navegação-->
+    <div class="sidenav">
+        <a href="carrinho.html">Menu</a>
+    </div>
+
+    <!--Div usada para centralizar o conteudo para da página além da barra lateral-->
+    <div class="conteudo">
+        <div class="bloco_titulo">
+            <h1 class="titulo">Estoque</h1>
+        </div>
+
+        <br>
+
+        <div class="table_div">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 400px;">Livro</th>
+                        <th style="width: 200px;">Autor</th>
+                        <th style="width: 200px;">Editora</th>
+                        <th style="width: 100px;">Edição</th>
+                        <th style="width: 100px;">Estoque</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>O Pequeno Príncipe</td>
+                        <td>Antoine de Saint-Exupéry</td>
+                        <td>Editora Garnier</td>
+                        <td>3ª Edição</td>
+                        <td>12</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    
+        <br>
+
+        <div class="linha_centralizada">
+            <!-- Input de Entrada -->
+            <div class="valor">
+                <label class="label_pequena" for="valor">Entrada</label>
+                <input class="valor_input" type="number" id="entrada" name="entrada" required>
+            </div>
+
+            <button class="atualizar" type="button" id="atualizar">Adicionar ao Estoque</button>
+        </div>
+    </div>
+
+    <!--Script do Submit-->
+    <script type="module" src="/scripts/cadastrarUsuario.js"></script>
+</body>
+</html>
