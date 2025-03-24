@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!--Barra lateral de Navegação-->
+    <div class="sidenav">
+        <a href="carrinho.html">Carrinho</a>
+    </div>
+
+    <!--Div usada para centralizar o conteudo para da página além da barra lateral-->
+    <div class="conteudo">
+        <div class="bloco_titulo">
+            <h1 class="titulo">Carrinho</h1>
+        </div>
+
+        <br>
+        
+        <div class="table_div">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 400px;">Produto</th>
+                        <th style="width: 100px;">Valor</th>
+                        <th style="width: 100px;">Desconto (%)</th>
+                        <th style="width: 80px;">Qtd.</th>
+                        <th style="width: 180px;">Opções</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Dom Quixote</td>
+                        <td>R$ 45,00</td>
+                        <td>0</td>
+                        <td>2</td>
+                        <td>
+                            <div class="botoes_resultado">
+                                <a class="remover">Remover</a>
+                                <a class="alterar">Alterar Qtd.</a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>1984</td>
+                        <td>R$ 30,00</td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>
+                            <div class="botoes_resultado">
+                                <a class="remover">Remover</a>
+                                <a class="alterar">Alterar Qtd.</a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>O Senhor dos Anéis</td>
+                        <td>R$ 120,00</td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>
+                            <div class="botoes_resultado">
+                                <a class="remover">Remover</a>
+                                <a class="alterar">Alterar Qtd.</a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Orgulho e Preconceito</td>
+                        <td>R$ 20,00</td>
+                        <td>0</td>
+                        <td>3</td>
+                        <td>
+                            <div class="botoes_resultado">
+                                <a class="remover">Remover</a>
+                                <a class="alterar">Alterar Qtd.</a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>A Revolução dos Bichos</td>
+                        <td>R$ 20,00</td>
+                        <td>0</td>
+                        <td>2</td>
+                        <td>
+                            <div class="botoes_resultado">
+                                <a class="remover">Remover</a>
+                                <a class="alterar">Alterar Qtd.</a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot class="footable">
+                    <tr>
+                      <td>Subtotal</td>
+                      <td></td>
+                      <td>R$ 0,00</td>
+                      <td></td>
+                      <td class="subtotal">R$ 340,00</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <br>
+
+        <!--Input de Botões-->
+        <div class="botoes">
+            <button class="cancelar" type="button" id="Cancelar">Voltar</button>
+            <input type="submit" id="submit" name="submit" value="Comprar">
+        </div>
+
+    </div>
+    
+    <!--Script do Submit-->
+    <script type="module" src="scripts/carrinho.js"></script>
+</body>
+</html>
