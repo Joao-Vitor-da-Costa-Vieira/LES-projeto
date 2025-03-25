@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!--Barra lateral de Navegação-->
+    <div class="sidenav">
+        <a href="carrinho.html">Menu</a>
+    </div>
+
+    <!--Div usada para centralizar o conteudo para da página além da barra lateral-->
+    <div class="conteudo">
+        <div class="bloco_titulo">
+            <h1 class="titulo">Analise</h1>
+        </div>
+
+        <br>
+
+        <!--Input de Categoria-->
+         <div class="categoria">
+            <label class="label2" for="categoria">Categoria 1</label>
+            <input class="categoria_input" type="text" id="categoria" name="categoria" required>
+        </div>
+        
+        <!--Input de Título-->
+        <div class="livro">
+            <label class="label2" for="livro">Título 1</label>
+            <input class="livro_input" type="text" id="livro" name="livro" required>
+        </div>
+
+        <br>
+
+        <!--Input de Categoria-->
+        <div class="categoria">
+            <label class="label2" for="categoria">Categoria 2</label>
+            <input class="categoria_input" type="text" id="categoria" name="categoria" required>
+        </div>
+        
+        <!--Input de Título-->
+        <div class="livro">
+            <label class="label2" for="livro">Título 2</label>
+            <input class="livro_input" type="text" id="livro" name="livro" required>
+        </div>
+
+        <br>
+
+        <!--Input de data-->
+        <div class="linha_centralizada">
+            <div class="data_div">
+                <label class="label_pequena" for="data_nascimento">Data Inicio</label>
+                <input type="date" id="data_inicio" name="data_inicio" required>
+            </div>
+
+            <div class="data_div">
+                <label class="label_pequena" for="data_nascimento">Data Final</label>
+                <input type="date" id="data_final" name="data_final" required>
+            </div>
+        </div>
+
+        <div class="botoes">
+            <button class="atualizar" type="button" id="atualizar">Gerar analise de vendas</button>
+        </div>
+
+        <br>
+
+        <br>
+        
+    </div>
+
+    <!--Script do Submit-->
+    <script type="module" src="/scripts/cadastrarUsuario.js"></script>
+</body>
+</html>
