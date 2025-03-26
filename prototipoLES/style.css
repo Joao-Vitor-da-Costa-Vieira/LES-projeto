@@ -838,7 +838,6 @@ p{
 }
 
 table {
-    width: 90%; 
     border-collapse: collapse;
     background-color: #ffffff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -855,13 +854,16 @@ th {
     background-color: #0003c8;
     color: #ffffff;
     font-weight: bold;
-} 
+}
+ 
+.imagem-tabela {
+    width: 150px; 
+    height: 80px;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto; 
+}
 
-th {
-    background-color: #0003c8;
-    color: #ffffff;
-    font-weight: bold;
-} 
 
 .footable{
     background-color: #0003c8;
