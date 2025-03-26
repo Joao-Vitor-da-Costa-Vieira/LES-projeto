@@ -1,9 +1,110 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*Header*/
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #0003c8;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.1);
+    height: 80px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.usuario-nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-botao {
+    display: flex;
+    gap: 10px;
+}
+
+.nav-botao button {
+    padding: 8px 15px;
+    background-color: #0003c8;
+    color: white;
+    border: #ffffff;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.nav-botao button:hover {
+    background-color: #0004ff;
+}
+
+.home-link {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.usuario-sessao {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.usuario-nome {
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.usuario-imagem {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.barra-pesquisa {
+    display: flex;
+    width: 250px;
+}
+
+.barra-pesquisa input {
+    padding: 8px 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+}
+
+.barra-pesquisa button {
+    padding: 8px 15px;
+    background-color: #0004ff;
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+}
 
 body {
     font-family: "Lato", sans-serif;
-    align-items: center;
-    display: flex;
-    justify-content: center;
 }
   
 /*Estilização do Label */
@@ -320,27 +421,30 @@ input[type=submit]{
   
 /*Separar o Conteudo Principal da Barra Lateral*/
 .conteudo{
-    margin-left: 200px;
+    margin-left: 150px;
+    padding: 20px;
+    flex: 1;
 }
   
 /*Estlização e Fixação da Barra Lateral*/
 .sidenav {
     height: 100%;
-    width: 200px;
+    width: 150px;
     position: fixed;
     z-index: 1;
     top: 0;
     left: 0;
     background-color: #0003c8;
     overflow-x: hidden;
-    padding-top: 8px;
+    height: calc(100vh - 80px);
+    top: 80px;
 }
   
 .sidenav a {
     padding: 8px;
     text-align: center;
     text-decoration: none;
-    font-size: 25px;
+    font-size: 20px;
     color: #ffffff;
     display: block;
     border-bottom: 2px solid #ffffff;
@@ -743,7 +847,8 @@ th {
 }
 
 .main {
-    font-size: 28px; 
+    display: flex;
+    margin-top: 80px; 
     padding: 0px 10px;
 }
   
