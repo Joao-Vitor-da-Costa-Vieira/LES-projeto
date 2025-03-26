@@ -84,13 +84,14 @@ nav {
 
 .barra-pesquisa {
     display: flex;
-    width: 250px;
+    width: 400px;
 }
 
 .barra-pesquisa input {
     padding: 8px 15px;
     border: 1px solid #ddd;
     border-radius: 4px 0 0 4px;
+    width: 400px;
     outline: none;
 }
 
@@ -489,7 +490,7 @@ input[type=submit]{
     overflow: hidden;
     border-radius: 10px;
     box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-    background-color: white;
+    background-color: #d3d2d2;
 }
 
 .carrosel-slide {
@@ -548,7 +549,7 @@ input[type=submit]{
 }
 
 .texto-container .btn:hover {
-    background-color: #45a049;
+    background-color: #0004ff;
 }
 
 .carrosel-botao {
@@ -566,7 +567,7 @@ input[type=submit]{
 }
 
 .carrosel-botao:hover {
-    background-color: rgba(0,0,0,0.8);
+    background-color: #0003c8;
 }
 
 #botaoAnterior {
@@ -599,7 +600,7 @@ input[type=submit]{
 }
 
 .indicador.ativo {
-    background-color: #4CAF50;
+    background-color: #0004ff;
     transform: scale(1.2);
 }
   
