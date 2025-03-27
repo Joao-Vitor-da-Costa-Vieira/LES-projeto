@@ -559,14 +559,18 @@ input[type=submit]{
     background-color: green;
     color: #ffffff;
     font-weight: bold;
+    font-size: small;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
+    padding: 5px;
 }
 
 .valor-produto {
-    background-color: #ffffff;
-    color: solid black;
+    background-color: black;
+    color: #ffffff;
     font-weight: bold;
+    font-size: small;
+    padding: 5px;
 }
 
 .adicionar-produto {
@@ -575,6 +579,8 @@ input[type=submit]{
     font-weight: bold;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
+    font-size: small;
+    padding: 5px;
 }
 
 .adicionar-produto :hover {
@@ -583,6 +589,8 @@ input[type=submit]{
     font-weight: bold;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
+    font-size: small;
+    padding: 5px;
 }
 
 /*Destaques Home*/
