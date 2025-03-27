@@ -475,6 +475,66 @@ input[type=submit]{
       margin: 0;
 }
 
+.titulo-livro{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+/*Imagem principal da página do livro e seu bloco de texto*/
+
+.capa-livro{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.imagem-capa{
+    width: 300px;
+    height: 450px;
+    border: 1px solid black;
+}
+
+.bloco_texto2{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items:flex-start;
+    width: 425px;
+    height: 350px;
+    background-color: rgb(183, 183, 183);
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.categorias{
+    border: 2px solid #0003c8;
+    border-radius: 8px;
+    background-color: #0003c8;
+    color: #ffffff;
+    padding: 2px 5px;
+}
+
+.linha-categoria{
+    justify-content: flex-start;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: 2px;
+}
+
+/*Bloco de compra d apágina do livro*/
+
+.preco-desconto-carrinho-container{
+    width: 800px;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+}
+
 /*Destaques Home*/
 .destaque-principal{
     width: 100%;
@@ -540,7 +600,7 @@ input[type=submit]{
 .texto-container .btn {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #4CAF50;
+    background-color: #0004ff;
     color: white;
     text-decoration: none;
     border-radius: 5px;

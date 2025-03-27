@@ -7,134 +7,90 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!--Barra lateral de Navegação-->
-    <div class="sidenav">
-        <a href="carrinho.html">Menu</a>
-    </div>
 
-    <!--Div usada para centralizar o conteudo para da página além da barra lateral-->
-    <div class="conteudo">
-        <div class="bloco_titulo">
-            <h1 class="titulo">Consulta de Livros</h1>
-        </div>
-
-        <br>
-
-        <div class="table_div">
-            <table>
-                <thead>
-                    <tr>
-                        <th style="width: 400px;">Livro</th>
-                        <th style="width: 200px;">Autor</th>
-                        <th style="width: 200px;">Editora</th>
-                        <th style="width: 100px;">Edição</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>O Pequeno Príncipe</td>
-                        <td>Antoine de Saint-Exupéry</td>
-                        <td>Editora Garnier</td>
-                        <td>3ª Edição</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    
-        <br>
+    <header>
+        <nav class="main-nav">
+            <a href="home.html" class="home-link">Home</a>
+            <div class="nav-botao">
+                <button>Histórico</button>
+                <button>Carrinho</button>
+                <button>Trocas</button>
+                <button>Chatbot</button>
+            </div>
+        </nav>
         
-        <div class="table_div">
-            <table>
-                <thead>
-                    <tr>
-                        <th style="width: 400px;">Categoria</th>
-                        <th style="width: 200px;">Ano</th>
-                        <th style="width: 200px;">Nº de Páginas</th>
-                        <th style="width: 100px;">Grupo de Precificação</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Literatura Infantil</td>
-                        <td>1943</td>
-                        <td>96</td>
-                        <td>Grupo A</td>
-                    </tr>
-                </tbody>
-            </table>
+        <nav class="usuario-nav">
+            <div class="barra-pesquisa">
+                <input type="text" placeholder="Pesquisar...">
+                <button>🔍</button>
+            </div>
+            
+            <div class="usuario-sessao">
+                <span class="usuario-nome">Usuario</span>
+                <img src="graficoLinha.PNG" alt="Imagem do usuário" class="usuario-imagem">
+            </div>
+        </nav>
+    </header>
+
+    <div class="main">
+        <!--Barra lateral de Navegação-->
+        <div class="sidenav">
+            <a href="/">Opção</a>
         </div>
-    
-        <br>
-        
-        <div class="table_div">
-            <table>
-                <thead>
-                    <tr>
-                        <th style="width: 400px;">Altura (cm)</th>
-                        <th style="width: 200px;">Largura (cm)</th>
-                        <th style="width: 200px;">Peso (g)</th>
-                        <th style="width: 100px;">Profundidade (cm)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>20.5</td>
-                        <td>13.5</td>
-                        <td>250</td>
-                        <td>1.2</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    
-        <br>
-        <div class="table_div">
-            <table>
-                <thead>
-                    <tr>
-                        <th style="width: 400px;">Valor (R$)</th>
-                        <th style="width: 300px;">ISBN</th>
-                        <th style="width: 200px;">Código de Barras</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>39.90</td>
-                        <td>978-85-01-09501-0</td>
-                        <td>7891234567890</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    
+
+        <div class="conteudo">
             <br>
-        
-        <div class="table_div">
-            <table>
-                <thead>
-                    <tr>
-                        <th style="width: 100%;">Sinopse</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Um piloto cai no deserto e encontra um pequeno príncipe, que lhe conta suas aventuras pelos planetas, ensinando valiosas lições sobre amor, amizade e a essência da vida.</td>
-                    </tr>
-                </tbody>
-            </table>
+
+            <div class="titulo-livro">
+                <h1>Titulo</h1>
+            </div>
+            
+            <br>
+
+            <div class="capa-livro">
+                <div class="linha_centralizada">
+                    <img class="imagem-capa" src="graficoLinha.PNG">
+
+                    <div class="coluna">
+                        <div class="bloco_texto2">
+                            <div>
+                                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                            </div>
+                            <div>
+                                <p>Editora: Editora Nome Completo</p>
+                                <p>Autor: Autor Nome Completo</p>
+                                <br>
+                                <div class="linha-categoria">
+                                    <a class="categorias">Categorias</a>
+                                    <a class="categorias">Categorias</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                
+            </div>
+
+            <br>
+
+            <div class="preco-desconto-carrinho-container">
+                <div>
+                    <p>A</p>
+                </div>
+                <div>
+                    <p>B</p>
+                </div>
+            </div>
+
         </div>
 
-        <br>
-
-                <!--Input de Botões-->
-                <div class="botoes">
-                    <button class="cancelar" type="button" id="Cancelar">Voltar</button>
-                    <button class="adicionar" type="button" id="Adicionar">Adicionar ao Carrinho</button>
-                </div>
+        
 
     </div>
+    
 
     <!--Script do Submit-->
-    <script type="module" src="/scripts/cadastrarUsuario.js"></script>
+    <script src="scripts/livroPagina.js"></script>
 </body>
 </html>
