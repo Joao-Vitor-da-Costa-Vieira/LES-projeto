@@ -626,6 +626,31 @@ input[type=submit]{
     border: 10px solid #0b0121;
 }
 
+/*Carrosel do Livro*/
+
+.carrosel-container-livro {
+    position: relative;
+    width: 600px;
+    max-width: 95%;
+    margin: 20px auto;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    background-color: #d3d2d2;
+}
+
+.carrosel-slide-livro {
+    display: flex;
+    width: 100%;
+    height: 300px;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide-item-livro {
+    display: flex;
+    min-width: 100%;
+}
+
 /*Destaques Home*/
 .destaque-principal{
     width: 100%;
