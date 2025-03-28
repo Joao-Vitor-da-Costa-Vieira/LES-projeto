@@ -631,6 +631,7 @@ input[type=submit]{
     background-color: rgb(0, 255, 0);
     color: #ffffff;
     font-weight: bold;
+    cursor: default;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     font-size: small;
@@ -638,8 +639,20 @@ input[type=submit]{
 }
 
 /* Estilização dos botões do submenu de adiconar produto*/
-.submenu-botao {
+.submenu-botao-adicao {
     background-color: #0003c8;
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: left;
+    transition: background-color 0.3s ease;
+}
+
+.submenu-botao-adicao:hover {
+    background-color: #1d21ff;
     color: #ffffff;
     border: none;
     padding: 8px 16px;
@@ -658,6 +671,7 @@ input[type=submit]{
 .submenu-adicionar-produto {
     background-color: green; 
     color: #ffffff;
+    cursor: pointer;
     font-weight: bold;
     border-radius: 5px;
     font-size: small;

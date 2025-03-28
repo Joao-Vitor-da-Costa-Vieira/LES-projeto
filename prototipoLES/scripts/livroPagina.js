@@ -80,9 +80,9 @@ document.querySelectorAll('.adicionar-produto').forEach(botao => {
         </div>
 
         <div class="linha_centralizada">
-            <button class="submenu-botao" type="button"><</button>
+            <button class="submenu-botao-adicao" type="button"><</button>
             <input class="numero_input" type="number" value="1" min="1">
-            <button class="submenu-botao" type="button">></button>
+            <button class="submenu-botao-adicao" type="button">></button>
         </div>
 
         <button class="submenu-adicionar-produto" type="button">Confirmar</button>
@@ -93,8 +93,8 @@ document.querySelectorAll('.adicionar-produto').forEach(botao => {
 
         // Adicionamos os event listeners DEPOIS de criar o elemento
         const input = submenu.querySelector('.numero_input');
-        const btnDecrease = submenu.querySelector('.submenu-botao:first-child');
-        const btnIncrease = submenu.querySelector('.submenu-botao:last-child');
+        const btnDecrease = submenu.querySelector('.submenu-botao-adicao:first-child');
+        const btnIncrease = submenu.querySelector('.submenu-botao-adicao:last-child');
         const btnConfirmar = submenu.querySelector('.submenu-adicionar-produto');
 
         // Função para evitar a propagação do evento
