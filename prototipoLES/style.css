@@ -611,6 +611,42 @@ input[type=submit]{
     padding: 5px;
 }
 
+/* Estilização dos botões do submenu de adiconar produto*/
+.submenu-botao {
+    background-color: #0003c8;
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: left;
+    transition: background-color 0.3s ease;
+}
+
+.confirmar-adicao{
+    font-size: 20px;
+    color: black;
+}
+
+.submenu-adicionar-produto {
+    background-color: green; 
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 5px;
+    font-size: small;
+    padding: 5px;
+}
+
+.submenu-adicionar-produto:hover {
+    background-color: rgb(0, 255, 0);
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 5px;
+    font-size: small;
+    padding: 5px;
+}
+
 /*Bloco de Descrição do Produto*/
 .bloco_texto3{
     display: flex;
