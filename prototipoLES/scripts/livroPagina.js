@@ -125,12 +125,49 @@ document.querySelectorAll('.adicionar-produto').forEach(botao => {
             }
         });
 
-        // Confirmar ação
         btnConfirmar.addEventListener('click', () => {
             const quantidade = parseInt(input.value);
             console.log(`Quantidade confirmada: ${quantidade}`);
             submenu.remove();
-            // Aqui você pode adicionar a lógica para confirmar a ação
+            
+            const mensagemConfirmacao = document.createElement('div');
+            mensagemConfirmacao.classList.add('confirmacao-overlay');
+            
+            mensagemConfirmacao.innerHTML = `
+                <div class="confirmacao-box">
+                    <p>Produto adicionado ao carrinho!</p>
+                    <div class="confirmacao-botoes">
+                        <button class="ver-carrinho">Ver Carrinho</button>
+                        <button class="continuar-comprando">Continuar Comprando</button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(mensagemConfirmacao);
+            
+            mensagemConfirmacao.addEventListener('click', (e) => {
+                if (e.target === mensagemConfirmacao) {
+                    mensagemConfirmacao.remove();
+                }
+            });
+            
+            // Evento para o botão Ver Carrinho
+            const btnVerCarrinho = mensagemConfirmacao.querySelector('.ver-carrinho');
+            btnVerCarrinho.addEventListener('click', (e) => {
+                e.stopPropagation();
+                mensagemConfirmacao.remove();
+                // Aqui você pode adicionar a lógica para redirecionar para o carrinho
+                console.log('Redirecionar para o carrinho');
+                // window.location.href = '/carrinho'; // Exemplo de redirecionamento
+            });
+            
+            // Evento para o botão Continuar Comprando
+            const btnContinuar = mensagemConfirmacao.querySelector('.continuar-comprando');
+            btnContinuar.addEventListener('click', (e) => {
+                e.stopPropagation();
+                mensagemConfirmacao.remove();
+                // Apenas fecha a mensagem e continua na página atual
+            });
         });
     });
 });
