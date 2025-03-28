@@ -520,6 +520,32 @@ input[type=submit]{
     padding: 2px 5px;
 }
 
+.categorias:hover{
+    border: 2px solid #1d21ff;
+    border-radius: 8px;
+    background-color: #1d21ff;
+    color: #ffffff;
+    padding: 2px 5px;
+}
+
+.categorias-botao{
+    border: 2px solid #0003c8;
+    border-radius: 8px;
+    background-color: #0003c8;
+    color: #ffffff;
+    padding: 4px 7px;
+    font-weight: bolder;
+}
+
+.categorias-botao:hover{
+    border: 2px solid #1d21ff;
+    border-radius: 8px;
+    background-color: #1d21ff;
+    color: #ffffff;
+    padding: 4px 7px;
+    font-weight: bolder;
+}
+
 .linha-categoria{
     justify-content: flex-start;
     align-items: center;
