@@ -141,8 +141,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     </select>
                 </div>
             </div>
-            <button class="confirmar-pagamento" type="button">Confirmar</button>
-        `;
+            <div class="linha_centralizada">
+                <button class="confirmar-pagamento" type="button">Confirmar</button>
+            </div>
+            `;
         
         // Insere o submenu antes do botão
         this.parentNode.insertBefore(submenu, this);
@@ -191,14 +193,14 @@ document.addEventListener('DOMContentLoaded', function() {
             
             formaPagamentoItem.innerHTML = `
                 <div class="linha_centralizada">
-                    <div class="genero">
-                        <label class="label_genero">Forma de Pag.</label>
-                        <input type="text" value="${document.getElementById('forma-pagamento-select').selectedOptions[0].text}" readonly>
-                    </div>
+                        <p>${document.getElementById('forma-pagamento-select').selectedOptions[0].text}</p>
                 </div>
                 ${camposAdicionais}
-                <button class="remover-forma" type="button">Remover</button>
-            `;
+                <br>
+                <div class="linha_centralizada">
+                    <button class="remover-forma" type="button">Remover</button>
+                </div>    
+                `;
             
             // Adiciona evento ao botão remover
             formaPagamentoItem.querySelector('.remover-forma').addEventListener('click', function() {
