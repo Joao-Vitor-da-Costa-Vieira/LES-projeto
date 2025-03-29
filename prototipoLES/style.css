@@ -1011,6 +1011,7 @@ p{
     
 .valor {
     width: 170px;
+    justify-self: center;
     font-size: 20px;
 }
     
