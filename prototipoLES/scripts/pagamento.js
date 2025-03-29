@@ -110,3 +110,114 @@ document.querySelectorAll('.adicionar-endereco').forEach(botao => {
 document.addEventListener('click', () => {
     document.querySelectorAll('.atualizar_submenu_endereco').forEach(menu => menu.remove());
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const btnAdicionar = document.querySelector('.adicionar-forma-pagamento');
+    const containerFormas = document.querySelector('.formas-pagamento-adicionadas');
+    
+    btnAdicionar.addEventListener('click', function(e) {
+        e.stopPropagation();
+        
+        // Verifica se já existe um submenu aberto
+        const submenuAtual = document.querySelector('.submenu-pagamento');
+        if (submenuAtual) {
+            submenuAtual.remove();
+            return;
+        }
+        
+        // Cria o submenu
+        const submenu = document.createElement('div');
+        submenu.classList.add('submenu-pagamento');
+        
+        submenu.innerHTML = `
+            <div class="linha_centralizada">
+                <div class="genero">
+                    <label class="label_genero">Forma de Pag.</label>
+                    <select class="selecao_media" id="forma-pagamento-select" name="forma de pagamento" required>
+                        <option value="">Selecione uma forma de Pagamento</option>
+                        <option value="1">Cartão de Crédito</option>
+                        <option value="2">Cupom de Troca</option>
+                        <option value="3">Cupom de Promoção</option>
+                    </select>
+                </div>
+            </div>
+            <button class="confirmar-pagamento" type="button">Confirmar</button>
+        `;
+        
+        // Insere o submenu antes do botão
+        this.parentNode.insertBefore(submenu, this);
+        
+        // Adiciona evento ao botão confirmar
+        submenu.querySelector('.confirmar-pagamento').addEventListener('click', function() {
+            const formaSelecionada = document.getElementById('forma-pagamento-select').value;
+            
+            if (!formaSelecionada) {
+                alert('Selecione uma forma de pagamento');
+                return;
+            }
+            
+            // Cria o elemento da forma de pagamento
+            const formaPagamentoItem = document.createElement('div');
+            formaPagamentoItem.classList.add('forma-pagamento-item');
+            
+            let camposAdicionais = '';
+            
+            if (formaSelecionada === '1') { // Cartão de Crédito
+                camposAdicionais = `
+                    <div class="linha_centralizada">
+                        <div class="genero">
+                            <label class="label_genero">Cartão</label>
+                            <select class="selecao_media" name="cartao" required>
+                                <option value="">Selecione</option>
+                                <option value="1">**** **** **** 1023</option>
+                                <option value="2">**** **** **** 4567</option>
+                                <option value="3">**** **** **** 4778</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="valor">
+                        <label class="label_pequena" for="valor">Valor a ser pago</label>
+                        <input class="valor_input" type="number" name="valor" required>
+                    </div>
+                `;
+            } else { // Cupons
+                camposAdicionais = `
+                    <div class="valor">
+                        <label class="label_pequena" for="valor">Valor a ser pago</label>
+                        <input class="valor_input" type="number" name="valor" required>
+                    </div>
+                `;
+            }
+            
+            formaPagamentoItem.innerHTML = `
+                <div class="linha_centralizada">
+                    <div class="genero">
+                        <label class="label_genero">Forma de Pag.</label>
+                        <input type="text" value="${document.getElementById('forma-pagamento-select').selectedOptions[0].text}" readonly>
+                    </div>
+                </div>
+                ${camposAdicionais}
+                <button class="remover-forma" type="button">Remover</button>
+            `;
+            
+            // Adiciona evento ao botão remover
+            formaPagamentoItem.querySelector('.remover-forma').addEventListener('click', function() {
+                formaPagamentoItem.remove();
+            });
+            
+            // Adiciona ao container
+            containerFormas.appendChild(formaPagamentoItem);
+            
+            // Remove o submenu
+            submenu.remove();
+        });
+    });
+    
+    // Fecha o submenu ao clicar fora
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.submenu-pagamento') && !e.target.closest('.adicionar-forma-pagamento')) {
+            const submenu = document.querySelector('.submenu-pagamento');
+            if (submenu) submenu.remove();
+        }
+    });
+});
