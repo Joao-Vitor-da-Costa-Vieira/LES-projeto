@@ -902,6 +902,18 @@ input[type=submit]{
     transform: scale(1.2);
 }
   
+
+/*Submenu de pagamento*/
+
+.atualizar_submenu_endereco {
+    display: block; /* Garante que está visível */
+    position: absolute; /* Ou relative/fixed, dependendo do layout */
+    background: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 1000; /* Garante que aparece acima de outros elementos */
+}
+
 /*Estilização e Centralização do Bloco de Texto da Senha*/
 .bloco_texto{
     display: flex;
