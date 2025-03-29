@@ -905,13 +905,23 @@ input[type=submit]{
 
 /*Submenu de pagamento*/
 
+.adicionar-endereco{
+    position: relative;
+    background-color: #0003c8;
+    color: #ffffff;
+    border: 6px #0003c8;
+    border-radius: 5px;
+    padding: 4px;
+}
+
 .atualizar_submenu_endereco {
-    display: block; /* Garante que está visível */
-    position: absolute; /* Ou relative/fixed, dependendo do layout */
+    display: block; 
+    position: absolute; 
     background: white;
-    border: 1px solid #ccc;
+    border: 5px solid #0003c8;
+    border-radius: 3px;
     padding: 10px;
-    z-index: 1000; /* Garante que aparece acima de outros elementos */
+    z-index: 1000;
 }
 
 /*Estilização e Centralização do Bloco de Texto da Senha*/

@@ -14,6 +14,9 @@ document.querySelectorAll('.adicionar-endereco').forEach(botao => {
         let submenu = document.createElement('div');
         submenu.classList.add('atualizar_submenu_endereco');
 
+        submenu.style.left = '50%';
+        submenu.style.transform = 'translateX(-50%)';
+
         submenu.innerHTML = `
         <div class="bloco_titulo">
             <h1 class="titulo">Adição de End. Entrega</h1>
