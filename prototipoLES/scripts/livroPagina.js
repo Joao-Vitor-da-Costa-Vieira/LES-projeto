@@ -88,19 +88,15 @@ document.querySelectorAll('.adicionar-produto').forEach(botao => {
         <button class="submenu-adicionar-produto" type="button">Confirmar</button>
         `;
 
-        // Adicionando submenu ao lado do botão clicado
         this.appendChild(submenu);
 
-        // Adicionamos os event listeners DEPOIS de criar o elemento
         const input = submenu.querySelector('.numero_input');
         const btnDecrease = submenu.querySelector('.submenu-botao-adicao:first-child');
         const btnIncrease = submenu.querySelector('.submenu-botao-adicao:last-child');
         const btnConfirmar = submenu.querySelector('.submenu-adicionar-produto');
 
-        // Função para evitar a propagação do evento
         const stopProp = (e) => e.stopPropagation();
 
-        // Previnir que o clique nos botões feche o menu
         btnDecrease.addEventListener('click', stopProp);
         btnIncrease.addEventListener('click', stopProp);
         input.addEventListener('click', stopProp);
@@ -156,9 +152,7 @@ document.querySelectorAll('.adicionar-produto').forEach(botao => {
             btnVerCarrinho.addEventListener('click', (e) => {
                 e.stopPropagation();
                 mensagemConfirmacao.remove();
-                // Aqui você pode adicionar a lógica para redirecionar para o carrinho
                 console.log('Redirecionar para o carrinho');
-                // window.location.href = '/carrinho'; // Exemplo de redirecionamento
             });
             
             // Evento para o botão Continuar Comprando
