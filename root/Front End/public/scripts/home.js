@@ -1,3 +1,5 @@
+import {getHome} from "/scripts/service/telaInicialService.js";
+
 document.addEventListener('DOMContentLoaded', function() {
     const slide = document.querySelector('.carrosel-slide');
     const slides = document.querySelectorAll('.slide-item');
@@ -56,4 +58,12 @@ document.addEventListener('DOMContentLoaded', function() {
         slide.style.transition = "none";
         slide.style.transform = 'translateX(' + (-slides[0].clientWidth * counter) + 'px)';
     });
+
+    document.querySelectorAll('.home-link').forEach(botao => {
+            botao.addEventListener('click', (event) => {
+                event.stopPropagation();
+                console.log("Botão clicado!");
+                getHome('1');
+            });
+        });
 });
