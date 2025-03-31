@@ -1,5 +1,5 @@
 
 //View
-module.exports.getIndex = (req, res) => {
-    res.render('index');
+module.exports.getTela = (req, res) => {
+    res.render('telaInicial');
 };

@@ -6,10 +6,11 @@ const enderecoEntregaRoutes = require('./enderecoEntregaRoutes');
 const cartaoRoutes = require('./cartaoRoutes');
 const telaInicialRoutes = require('./telaInicialRoutes');
 
-router.use('/', usuarioRoutes);
+router.use('/', telaInicialRoutes);
 router.use('/', enderecoCobrancaRoutes);
 router.use('/', enderecoEntregaRoutes);
 router.use('/', cartaoRoutes);
-router.use('/', telaInicialRoutes);
+router.use('/', usuarioRoutes);
+
 
 module.exports = router;
