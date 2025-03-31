@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="icon" href="/imagens/livro-16.ico">
+</head>
+<body>
+
+    <header>
+        <nav class="main-nav">
+            <a class="home-link">Home</a>
+            <div class="nav-botao">
+                <button>Histórico</button>
+                <button>Carrinho</button>
+                <button>Trocas</button>
+                <button>Chatbot</button>
+            </div>
+        </nav>
+        
+        <nav class="usuario-nav">
+            <div class="barra-pesquisa">
+                <input type="text" placeholder="Pesquisar...">
+                <button>🔍</button>
+            </div>
+            
+            <div class="usuario-sessao">
+                <span class="usuario-nome"><%= Array.isArray(usuario) ? usuario[0]?.usr_nome : usuario?.usr_nome %></span>
+                <img src="/imagens/graficoLinha.PNG" alt="Imagem do usuário" class="usuario-imagem">
+            </div>
+        </nav>
+    </header>
+
+    <div class="main">
+        <!--Barra lateral de Navegação-->
+        <div class="sidenav">
+            <a href="/">Opção</a>
+        </div>
+
+        <div class="conteudo">
+            <img src="/imagens/graficoLinha.PNG" class="destaque-principal">
+
+            <br>
+            <br>
+
+            <div class="carrosel-container">
+                <div class="carrosel-slide">
+                    <!-- Slide 1 -->
+                    <div class="slide-item">
+                        <div class="imagem-container">
+                            <img src="/imagens/graficoLinha.PNG" alt="Imagem 1">
+                        </div>
+                        <div class="texto-container">
+                            <h2>Título do Slide 1</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula.</p>
+                            <a href="#" class="botao">Saiba Mais</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 2 -->
+                    <div class="slide-item">
+                        <div class="imagem-container">
+                            <img src="/imagens/graficoLinha.PNG" alt="Imagem 2">
+                        </div>
+                        <div class="texto-container">
+                            <h2>Título do Slide 2</h2>
+                            <p>Fusce convallis metus id felis luctus adipiscing. Pellentesque egestas, neque sit amet convallis pulvinar.</p>
+                            <a href="#" class="botao">Ver Detalhes</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 3 -->
+                    <div class="slide-item">
+                        <div class="imagem-container">
+                            <img src="/imagens/graficoLinha.PNG" alt="Imagem 3">
+                        </div>
+                        <div class="texto-container">
+                            <h2>Título do Slide 3</h2>
+                            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                            <a href="#" class="botao">Conheça</a>
+                        </div>
+                    </div>
+                </div>
+        
+                <button class="carrosel-botao" id="botaoAnterior">&#10094;</button>
+                <button class="carrosel-botao" id="botaoProximo">&#10095;</button>
+        
+                <div class="carrosel-indicadores">
+                    <span class="indicador ativo" data-index="0"></span>
+                    <span class="indicador" data-index="1"></span>
+                    <span class="indicador" data-index="2"></span>
+                </div>
+            </div>
+
+            <br>
+            <br>
+
+            <div class="table_div">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 150px">Promoções em Destaque</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <th style="width: 100px;"></th>
+                            <th style="width: 300px;">Livro</th>
+                            <th style="width: 300px">Sinopse</th>
+                            <th style="width: 80px;">Desconto</th>
+                            <th style="width: 120px;">Preço</th>
+                            <th style="width: 150px;">Opções</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img src="/imagens/graficoLinha.PNG" class="imagem-tabela"></td>
+                            <td>Don Quixote</td>
+                            <td>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</td>
+                            <td>10%</td>
+                            <td>R$ 45,00</td>
+                            <td>
+                                <div class="botoes_resultado">
+                                    <a class="alterar">Ver Mais</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><img src="/imagens/graficoLinha.PNG" class="imagem-tabela"></td>
+                            <td>Don Quixote</td>
+                            <td>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</td>
+                            <td>10%</td>
+                            <td>R$ 45,00</td>
+                            <td>
+                                <div class="botoes_resultado">
+                                    <a class="alterar">Ver Mais</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><img src="/imagens/graficoLinha.PNG" class="imagem-tabela"></td>
+                            <td>Don Quixote</td>
+                            <td>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</td>
+                            <td>10%</td>
+                            <td>R$ 45,00</td>
+                            <td>
+                                <div class="botoes_resultado">
+                                    <a class="alterar">Ver Mais</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><img src="/imagens/graficoLinha.PNG" class="imagem-tabela"></td>
+                            <td>Don Quixote</td>
+                            <td>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</td>
+                            <td>10%</td>
+                            <td>R$ 45,00</td>
+                            <td>
+                                <div class="botoes_resultado">
+                                    <a class="alterar">Ver Mais</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><img src="/imagens/graficoLinha.PNG" class="imagem-tabela"></td>
+                            <td>Don Quixote</td>
+                            <td>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</td>
+                            <td>10%</td>
+                            <td>R$ 45,00</td>
+                            <td>
+                                <div class="botoes_resultado">
+                                    <a class="alterar">Ver Mais</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        
+
+    </div>
+
+    <script>
+        console.log("Dados do usuário:", <%- JSON.stringify(usuario) %>);
+      </script>
+    
+
+    <!--Script do Submit-->
+    <script type="module" src="/scripts/home.js"></script>
+</body>
+</html>
