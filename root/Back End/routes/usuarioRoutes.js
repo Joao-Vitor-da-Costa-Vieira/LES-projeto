@@ -3,7 +3,7 @@ const router = express.Router();
 const UsuarioController = require('../controllers/usuarioController');
 
 //Views
-router.get('/cadastro', UsuarioController.getCadastro)
+router.get('/cadastro', UsuarioController.getCadastro);
 router.get('/cadastro/:usr_id', UsuarioController.getCadastroAtualizar);
 router.get('/senha/:usr_id', UsuarioController.getSenha);
 router.get('/inativos', UsuarioController.getUsuariosInativos);
