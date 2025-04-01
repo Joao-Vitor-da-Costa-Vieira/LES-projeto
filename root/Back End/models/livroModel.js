@@ -10,3 +10,7 @@ async function buscarLivrosTitulo(titulo) {
         throw err;
     }
 }
+
+module.exports = {
+    buscarLivrosTitulo
+};
