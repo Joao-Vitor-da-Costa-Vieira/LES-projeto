@@ -221,12 +221,6 @@ body {
     border: 2px solid black;
 }
 
-.nome_input{
-    width: 695px;
-    font-size: 20px;
-    border: 2px solid black;
-}
-
 /* Input de Título */
 .livro_input {
     width: 695px;
@@ -595,6 +589,12 @@ input[type=submit]{
     border: #0003c8;
 }
 
+.label-pesquisa-filtro-data{
+    font-size: 15px;
+    display: flex;
+    align-items: flex-start;
+    align-self: flex-start;
+}
 /*Imagem principal da página do livro e seu bloco de texto*/
 
 .capa-livro{
