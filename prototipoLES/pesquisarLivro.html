@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/style/style.css">
-    <link rel="icon" href="/imagens/livro-16.ico">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -27,8 +26,8 @@
             </div>
             
             <div class="usuario-sessao">
-                <span class="usuario-nome"><%= Array.isArray(usuario) ? usuario[0]?.usr_nome : usuario?.usr_nome %></span>
-                <img src="/imagens/graficoLinha.PNG" alt="Imagem do usuário" class="usuario-imagem">
+                <span class="usuario-nome">Usuario</span>
+                <img src="graficoLinha.PNG" alt="Imagem do usuário" class="usuario-imagem">
             </div>
         </nav>
     </header>
@@ -56,13 +55,8 @@
         
 
     </div>
-
-    <script>
-        console.log("Dados do usuário:", <%- JSON.stringify(usuario) %>);
-    </script>
     
     <!--Script do Submit-->
-    <script type="module" src="/scripts/pesquisarLivro.js"></script>
-    <script type="module" src="/scripts/navbar.js"></script>
+    <script src="scripts/pesquisarLivro.js"></script>
 </body>
 </html>
