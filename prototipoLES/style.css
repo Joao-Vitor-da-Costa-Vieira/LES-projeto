@@ -558,6 +558,43 @@ input[type=submit]{
 
 }
 
+/*Estilização da página de pesquisa de Livros*/
+
+.linha-input-pesquisa{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+
+.linha-input-pesquisa input {
+    padding: 8px 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px 0 0 4px;
+    width: 400px;
+    outline: none;
+}
+
+.linha-input-pesquisa button {
+    padding: 8px 15px;
+    background-color: #0004ff;
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+}
+
+.selecao-pesquisa{
+    background-color: #0003c8;
+    padding: 8px 15px;
+    width: 85px;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    border: #0003c8;
+}
+
 /*Imagem principal da página do livro e seu bloco de texto*/
 
 .capa-livro{
