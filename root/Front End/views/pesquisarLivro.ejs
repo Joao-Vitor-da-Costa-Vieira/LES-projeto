@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="icon" href="/imagens/livro-16.ico">
+</head>
+<body>
+
+    <header>
+        <nav class="main-nav">
+            <a class="home-link">Home</a>
+            <div class="nav-botao">
+                <button>Histórico</button>
+                <button>Carrinho</button>
+                <button>Trocas</button>
+                <button>Chatbot</button>
+            </div>
+        </nav>
+        
+        <nav class="usuario-nav">
+            <div class="barra-pesquisa">
+                <input type="text" placeholder="Pesquisar...">
+                <button>🔍</button>
+            </div>
+            
+            <div class="usuario-sessao">
+                <span class="usuario-nome"><%= Array.isArray(usuario) ? usuario[0]?.usr_nome : usuario?.usr_nome %></span>
+                <img src="/imagens/graficoLinha.PNG" alt="Imagem do usuário" class="usuario-imagem">
+            </div>
+        </nav>
+    </header>
+
+    <div class="main">
+        <!--Barra lateral de Navegação-->
+        <div class="sidenav">
+            <a href="/">Opção</a>
+        </div>
+
+        <div class="conteudo">
+        </div>
+
+        
+
+    </div>
+
+    <script>
+        console.log("Dados do usuário:", <%- JSON.stringify(usuario) %>);
+    </script>
+    
+    <!--Script do Submit-->
+    <script type="module" src="/scripts/pesquisarLivro.js"></script>
+    <script type="module" src="/scripts/navbar.js"></script>
+</body>
+</html>
