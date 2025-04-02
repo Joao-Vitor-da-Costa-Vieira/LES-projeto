@@ -599,6 +599,34 @@ input[type=submit]{
 .range-input{
     width: 350px;
 }
+
+.filtro-pesquisa-numero input {
+    padding: 8px 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px 0 0 4px;
+    width: 400px;
+    outline: none;
+}
+
+.filtro-pesquisa-numero button {
+    padding: 8px 13px;
+    background-color: #0004ff;
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+}
+
+.selecao-pesquisa-numero{
+    background-color: #0003c8;
+    padding: 8px 15px;
+    width: 120px;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    border: #0003c8;
+}
+
 /*Imagem principal da página do livro e seu bloco de texto*/
 
 .capa-livro{
