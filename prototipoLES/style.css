@@ -595,6 +595,10 @@ input[type=submit]{
     align-items: flex-start;
     align-self: flex-start;
 }
+
+.range-input{
+    width: 350px;
+}
 /*Imagem principal da página do livro e seu bloco de texto*/
 
 .capa-livro{
