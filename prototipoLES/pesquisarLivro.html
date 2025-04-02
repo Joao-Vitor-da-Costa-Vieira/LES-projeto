@@ -75,12 +75,20 @@
                     <label class="label-pesquisa-filtro-data" for="data_nascimento">Data Limite Final</label>
                     <input type="date" id="data_final" name="data_final">
                 </div>
+
+                <select class="selecao-pesquisa-tamanho" id="tamanho">
+                    <option value="1">Pequeno</option>
+                    <option value="2">Médio</option>
+                    <option value="3">Grande</option>
+                </select>
             </div>
+
+            <br>
 
             <!--Barrra de Pesquisa Numérica-->
             <div class="linha-input-pesquisa">
                 <input type="number" class="filtro-pesquisa-numero" placeholder="Pesquisar...">
-                <select class="selecao-pesquisa-numero" id="tipoConsulta">
+                <select class="selecao-pesquisa-numero" id="tipoConsultaNumero">
                     <option value="1">Nº Páginas</option>
                     <option value="2">ISBN</option>
                     <option value="3">Cód. Barras</option>

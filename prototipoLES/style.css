@@ -627,6 +627,16 @@ input[type=submit]{
     border: #0003c8;
 }
 
+.selecao-pesquisa-tamanho{
+    background-color: #0003c8;
+    padding: 8px 15px;
+    width: 105px;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    border: #0003c8;
+}
+
 /*Imagem principal da página do livro e seu bloco de texto*/
 
 .capa-livro{
