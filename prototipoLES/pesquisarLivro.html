@@ -44,13 +44,22 @@
 
             <!--Barrra de Pesquisa Principal-->
             <div class="linha-input-pesquisa">
+                <label class="label_pequena">Titulo</label>
                 <input type="text" class="filtro-pesquisa-input" placeholder="Pesquisar...">
-                <select class="selecao-pesquisa" id="tipoConsulta" required>
-                    <option value="1">Titulo</option>
-                    <option value="2">Autor</option>
-                    <option value="3">Editora</option>
-                </select>
-                <button id="filtro-pesquisa-botao">🔍</button>
+            </div>
+
+            <br>
+
+            <button>Mais opções</button>
+
+            <div class="linha-input-pesquisa-hidden">
+                <label class="label_pequena">Autor</label>
+                <input type="text" class="filtro-pesquisa-input-autor" placeholder="Pesquisar...">
+            </div>
+
+            <div class="linha-input-pesquisa-hidden">
+                <label class="label_pequena">Editora</label>
+                <input type="text" class="filtro-pesquisa-input-editora" placeholder="Pesquisar...">
             </div>
 
             <br>

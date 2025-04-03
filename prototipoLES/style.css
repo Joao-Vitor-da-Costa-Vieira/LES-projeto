@@ -562,13 +562,39 @@ input[type=submit]{
     margin-bottom: 10px;
 }
 
-.linha-input-pesquisa input {
+.linha-input-pesquisa{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+    display: none;
+}
+
+.filtro-pesquisa-input {
     padding: 8px 15px;
     border: 1px solid #ddd;
     border-radius: 4px 0 0 4px;
     width: 400px;
     outline: none;
 }
+
+.filtro-pesquisa-input-autor {
+    padding: 8px 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px 0 0 4px;
+    width: 400px;
+    outline: none;
+}
+
+.filtro-pesquisa-input-editora {
+    padding: 8px 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px 0 0 4px;
+    width: 400px;
+    outline: none;
+}
+
 
 .linha-input-pesquisa button {
     padding: 8px 15px;
