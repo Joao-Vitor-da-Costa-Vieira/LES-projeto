@@ -40,26 +40,98 @@
         </div>
 
         <div class="conteudo">
+
+            <br>
+
+            <!--Barrra de Pesquisa Principal-->
+            <div class="linha-input-pesquisa">
+                <label class="label_pequena">Titulo</label>
+                <input type="text" class="filtro-pesquisa-input" placeholder="Pesquisar...">
+                <button id="pesquisa-botao">🔍</button>
+            </div>
+
+            <br>
+
+            <!--Input Slider de Valor Máximo-->
             <div class="linha_centralizada">
-                <div class="coluna">
-                    <input type="text" class="filtro-pesquisa-input" placeholder="Pesquisar...">
-                    <select class="selecao" id="tipoConsulta" required>
-                        <option value="1">Titulo</option>
-                        <option value="2">Autor</option>
-                        <option value="3">Editora</option>
+                <p>Valor Máximo: <output id="cifra"></output><output id="valor"></output></p>
+                <input class="range-input" type="range" id="preco" name="preco" min="1" max="501" value="501" />
+                <label class="label" for="preco">Preço</label>
+            </div>
+
+            <br>
+
+            <div class="linha_centralizada">
+                <button class="botao-mais-filtro">Mais opções de filtragem</button>
+            </div>
+
+            <br>
+
+            <div class="linha-input-pesquisa hidden">
+                <label class="label_pequena">Autor</label>
+                <input type="text" class="filtro-pesquisa-input-autor" placeholder="Pesquisar...">
+            </div>
+
+            <div class="linha-input-pesquisa hidden">
+                <label class="label_pequena">Editora</label>
+                <input type="text" class="filtro-pesquisa-input-editora" placeholder="Pesquisar...">
+            </div>
+
+            <br>
+
+            <!--Input de data-->
+            <div class="linha_centralizada">
+                <div class="data_div hidden">
+                    <label class="label-pesquisa-filtro-data" for="data_inicio">Data Limite Inicio</label>
+                    <input type="date" id="data_inicio" name="data_inicio">
+                </div>
+
+                <div class="data_div hidden">
+                    <label class="label-pesquisa-filtro-data" for="data_final">Data Limite Final</label>
+                    <input type="date" id="data_final" name="data_final">
+                </div>
+
+                <div class="genero">
+                    <label class="label-pesquisa-filtro-tamanho hidden" for="tamanho">Tamanho</label>
+                    <select class="selecao-pesquisa-tamanho hidden" id="tamanho">
+                        <option value="">Selecione</option>
+                        <option value="1">Pequeno</option>
+                        <option value="2">Médio</option>
+                        <option value="3">Grande</option>
                     </select>
-                    <button id="filtro-pesquisa-botao">🔍</button>
                 </div>
             </div>
+
+            <br>
+
+            <!--Barrra de Pesquisa Numérica-->
+            <div class="linha-input-pesquisa hidden">
+                <label class="label_pequena">Nº Páginas Máximo</label>
+                <input type="number" class="filtro-pesquisa-numero" placeholder="Pesquisar...">
+            </div>
+
+            <br>
+
+            <div class="linha-input-pesquisa hidden">
+                <label class="label_pequena">ISBN</label>
+                <input type="number" class="filtro-pesquisa-numero-isbn" placeholder="Pesquisar...">
+            </div>
+
+            <br>
+
+            <div class="linha-input-pesquisa hidden">
+                <label class="label_pequena">Cód. Barras</label>
+                <input type="number" class="filtro-pesquisa-numero-codigo" placeholder="Pesquisar...">
+            </div>
+
+            <br>
+
         </div>
 
         
 
     </div>
 
-    <script>
-        console.log("Dados do usuário:", <%- JSON.stringify(usuario) %>);
-    </script>
     
     <!--Script do Submit-->
     <script type="module" src="/scripts/pesquisarLivro.js"></script>
