@@ -126,6 +126,44 @@
 
             <br>
 
+            
+            <div class="table_div">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Autor</th>
+                            <th>Editora</th>
+                            <th>Ano</th>
+                            <th>Preço</th>
+                            <th>Opções</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if (livros && livros.length > 0) { %>
+                            <% livros.forEach(livro => { %>
+                                <tr>
+                                    <td><%= livro.lvr_titulo %></td>
+                                    <td><%= livro.atr_nome || 'N/A' %></td>
+                                    <td><%= livro.edi_nome || 'N/A' %></td>
+                                    <td><%= livro.lvr_ano %></td>
+                                    <td>R$ <%= livro.lvr_custo.toFixed(2) %></td>
+                                    <td>
+                                        <div class="botoes_resultado">
+                                            <a class="detalhes" href="/livros/<%= livro.lvr_id %>">Detalhes</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <% }); %>
+                        <% } else { %>
+                            <tr>
+                                <td colspan="6">Nenhum livro encontrado</td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+
         </div>
 
         

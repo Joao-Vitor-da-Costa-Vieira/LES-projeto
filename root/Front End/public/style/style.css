@@ -221,12 +221,6 @@ body {
     border: 2px solid black;
 }
 
-.nome_input{
-    width: 695px;
-    font-size: 20px;
-    border: 2px solid black;
-}
-
 /* Input de Título */
 .livro_input {
     width: 695px;
@@ -558,6 +552,148 @@ input[type=submit]{
 
 }
 
+/*Estilização da página de pesquisa de Livros*/
+
+.linha-input-pesquisa{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+
+.linha-input-pesquisa-hidden{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+    display: none;
+}
+
+.filtro-pesquisa-input {
+    padding: 8px 15px;
+    border: 2px solid black;
+    border-radius: 4px 0 0 4px;
+    width: 400px;
+    margin-left: 5px;
+    outline: none;
+}
+
+.filtro-pesquisa-input-autor {
+    padding: 8px 15px;
+    border: 2px solid black;
+    border-radius: 4px 0 0 4px;
+    width: 400px;
+    margin-left: 5px;
+    outline: none;
+}
+
+.filtro-pesquisa-input-editora {
+    padding: 8px 15px;
+    border: 2px solid black;
+    border-radius: 4px 0 0 4px;
+    width: 400px;
+    margin-left: 5px;
+    outline: none;
+}
+
+.botao-mais-filtro {
+    padding: 5px 10px;
+    background-color: #0004ff;
+    color: white;
+    border: none;
+    border-radius: 0;
+    justify-self: center;
+    cursor: pointer;
+}
+
+.linha-input-pesquisa button {
+    padding: 8px 15px;
+    background-color: #0004ff;
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+}
+
+.selecao-pesquisa{
+    background-color: #0003c8;
+    padding: 8px 15px;
+    width: 85px;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    border: #0003c8;
+}
+
+.label-pesquisa-filtro-data{
+    font-size: 15px;
+    display: flex;
+    align-items: flex-start;
+    align-self: flex-start;
+}
+
+.range-input{
+    width: 350px;
+}
+
+.label-pesquisa-filtro-tamanho{
+    font-size: 15px;
+    align-items: center;
+    align-self: center;
+}
+
+.filtro-pesquisa-numero {
+    padding: 8px 15px;
+    border: 2px solid black;
+    border-radius: 4px 0 0 4px;
+    width: 100px;
+    margin-left: 15px;
+    outline: none;
+}
+
+.filtro-pesquisa-numero-isbn {
+    padding: 8px 15px;
+    border: 2px solid black;
+    border-radius: 4px 0 0 4px;
+    width: 200px;
+    margin-left: 15px;
+    outline: none;
+}
+
+.filtro-pesquisa-numero-codigo {
+    padding: 8px 15px;
+    border: 2px solid black;
+    border-radius: 4px 0 0 4px;
+    width: 200px;
+    margin-left: 15px;
+    outline: none;
+}
+
+.selecao-pesquisa-numero{
+    background-color: #0003c8;
+    padding: 8px 15px;
+    width: 120px;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    border: #0003c8;
+}
+
+.selecao-pesquisa-tamanho{
+    background-color: #0003c8;
+    padding: 8px 15px;
+    width: 105px;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    border: #0003c8;
+}
+
+.linha_centralizada-hidden{
+    display: none;
+}
 /*Imagem principal da página do livro e seu bloco de texto*/
 
 .capa-livro{
