@@ -13,20 +13,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const botaoPesquisa = document.getElementById('navbarBotaoPesquisa');
     const pesquisaInput = document.getElementById('navbarInput');
     
-    botaoPesquisa.addEventListener('click', function() {
+    // Obter o ID do usuário do elemento HTML
+    const userDataElement = document.getElementById('user-data');
+    const usuarioId = userDataElement ? userDataElement.dataset.userId : null;
+    
+    botaoPesquisa.addEventListener('click', async () => {
         const titulo = pesquisaInput.value.trim();
-        const usuarioId = '<%= Array.isArray(usuario) ? usuario[0]?.usr_id : usuario?.usr_id %>';
+        const userDataElement = document.getElementById('user-data');
+        const usuarioId = userDataElement ? userDataElement.dataset.userId : null;
         
-        if (termoPesquisa) {
+        if (titulo) {
             try {
                 await pesquisarLivroService(titulo, usuarioId);
-                console.log('Dados enviados para o serviço com sucesso');
             } catch (error) {
-                console.error('Erro ao enviar dados para o serviço:', error);
-                alert('Ocorreu um erro ao enviar a pesquisa. Por favor, tente novamente.');
+                console.error('Erro ao pesquisar:', error);
+                alert('Erro ao pesquisar. Tente novamente.');
             }
         } else {
-            alert('Por favor, digite algo para pesquisar.');
+            alert('Digite um título para pesquisar.');
         }
     });
 });

@@ -9,19 +9,42 @@ const {
 
 module.exports.pesquisarLivrosTitulo = async (req, res) => {
     try {
+        // 1. Primeiro extraia os parâmetros da query
         const { titulo, usr_id } = req.query;
         
-        const livros = await buscarLivrosTitulo(titulo);
-        const usuario = await buscarUsuarioId(usr_id);
+        // 2. Validação do parâmetro obrigatório
+        if (!titulo) {
+            return res.status(400).render('pesquisarLivro', {
+                livros: [],
+                usuario: null,
+                error: 'O parâmetro "titulo" é obrigatório'
+            });
+        }
         
-        res.render('pesquisarLivro', { 
-            livros, 
-            usuario 
+        // 3. Busque os livros (agora a variável está corretamente declarada)
+        const livros = await buscarLivrosTitulo(titulo);
+        
+        // 4. Busque o usuário se houver ID
+        let usuario = null;
+        if (usr_id) {
+            usuario = await buscarUsuarioId(usr_id);
+        }
+        
+        // 5. Renderize a view com todos os dados
+        res.render('pesquisarLivro', {
+            livros: livros || [], // Garante que sempre terá um array
+            usuario: usuario || null, // Garante que será null se não houver usuário
+            tituloPesquisado: titulo // Mantém o título pesquisado
         });
         
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Erro ao pesquisar livros' });
+        console.error('Erro ao pesquisar livros:', err);
+        // Renderiza a view mesmo com erro, mas com mensagem
+        res.status(500).render('pesquisarLivro', {
+            livros: [],
+            usuario: null,
+            error: 'Erro ao carregar os livros'
+        });
     }
 };
 
@@ -50,7 +73,7 @@ module.exports.getApiFiltrarLivros = async (req, res) => {
             LEFT JOIN autor a ON e.autor_atr_id = a.atr_id
             LEFT JOIN editou ed ON l.lvr_id = ed.livros_lvr_id
             LEFT JOIN editora et ON ed.editora_edi_id = et.edi_id
-            LEFT JOIN "possui 4" p ON l.lvr_id = p.livros_lvr_id
+            LEFT JOIN "possui4" p ON l.lvr_id = p.livros_lvr_id
             LEFT JOIN categoria c ON p.categoria_cat_id = c.cat_id
         `;
 
@@ -97,13 +120,13 @@ module.exports.getApiFiltrarLivros = async (req, res) => {
             let sizeCondition;
             switch (tamanho) {
                 case '1': // Pequeno
-                    sizeCondition = 'l.lvr_profundidade < 15';
+                    sizeCondition = 'l.lvr_profundidade < 1';
                     break;
                 case '2': // Médio
-                    sizeCondition = 'l.lvr_profundidade >= 15 AND l.lvr_profundidade < 25';
+                    sizeCondition = 'l.lvr_profundidade >= 1 AND l.lvr_profundidade < 2';
                     break;
                 case '3': // Grande
-                    sizeCondition = 'l.lvr_profundidade >= 25';
+                    sizeCondition = 'l.lvr_profundidade >= 2';
                     break;
             }
             if (sizeCondition) {

@@ -3,15 +3,17 @@ const db = require('../config/db');
 // Buscando os livros do banco de dados pelo titulo
 async function buscarLivrosTitulo(titulo) {
     try {
-        const [livros] = await db.query('SELECT * FROM livros WHERE lvr_titulo LIKE ?',[`%${titulo}%`]);
+        const [livros] = await db.query(
+            'SELECT * FROM livros WHERE lvr_titulo LIKE ?', 
+            [`%${titulo}%`]
+        );
         return livros;
     } catch (err) {
-        console.error(`Erro no buscarLivrosTitulo - modelLivros: ${err}`);
-        throw err;
+        console.error('Erro ao buscar livros:', err);
+        throw err; 
     }
 }
-
-async function consultaFiltroLivro(){
+async function consultaFiltroLivro(query, params){
     try {
         console.log('Executando query:', query);
         console.log('Com parâmetros:', params);

@@ -27,8 +27,13 @@
             </div>
             
             <div class="usuario-sessao">
-                <span class="usuario-nome"><%= Array.isArray(usuario) ? usuario[0]?.usr_nome : usuario?.usr_nome %></span>
-                <img src="/imagens/graficoLinha.PNG" alt="Imagem do usuário" class="usuario-imagem">
+                <% if (usuario) { %>
+                    <div id="user-data" data-user-id="<%= usuario.usr_id %>" style="display:none;"></div>
+                    <span class="usuario-nome"><%= usuario.usr_nome %></span>
+                    <img src="/imagens/graficoLinha.PNG" alt="Imagem do usuário" class="usuario-imagem">
+                <% } else { %>
+                    <span class="usuario-nome">Visitante</span>
+                <% } %>
             </div>
         </nav>
     </header>
@@ -152,7 +157,7 @@
                                     <td><%= livro.atr_nome || 'N/A' %></td>
                                     <td><%= livro.edi_nome || 'N/A' %></td>
                                     <td><%= livro.lvr_ano %></td>
-                                    <td>R$ <%= livro.lvr_custo.toFixed(2) %></td>
+                                    <td>R$ <td>R$ <%= Number(livro.lvr_custo) %></td></td>
                                     <td>
                                         <div class="botoes_resultado">
                                             <a class="detalhes" href="/livros/<%= livro.lvr_id %>">Detalhes</a>
@@ -175,6 +180,7 @@
 
     </div>
 
+    <% console.log('Dados recebidos na view:', { livros, usuario }); %>
     
     <!--Script do Submit-->
     <script type="module" src="/scripts/pesquisarLivro.js"></script>
