@@ -33,6 +33,7 @@ module.exports.getApiFiltrarLivros = async (req, res) => {
             precoMax,
             autor,
             editora,
+            categoria,
             dataInicio,
             dataFinal,
             tamanho,
@@ -49,6 +50,8 @@ module.exports.getApiFiltrarLivros = async (req, res) => {
             LEFT JOIN autor a ON e.autor_atr_id = a.atr_id
             LEFT JOIN editou ed ON l.lvr_id = ed.livros_lvr_id
             LEFT JOIN editora et ON ed.editora_edi_id = et.edi_id
+            LEFT JOIN "possui 4" p ON l.lvr_id = p.livros_lvr_id
+            LEFT JOIN categoria c ON p.categoria_cat_id = c.cat_id
         `;
 
         const conditions = [];
@@ -73,6 +76,11 @@ module.exports.getApiFiltrarLivros = async (req, res) => {
         if (editora) {
             conditions.push(`et.edi_nome LIKE ?`);
             params.push(`%${editora}%`);
+        }
+
+        if (categoria) {
+            conditions.push(`c.cat_nome LIKE ?`);
+            params.push(`%${categoria}%`);
         }
 
         if (dataInicio) {

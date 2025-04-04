@@ -598,6 +598,15 @@ input[type=submit]{
     outline: none;
 }
 
+.filtro-pesquisa-input-categoria {
+    padding: 8px 15px;
+    border: 2px solid black;
+    border-radius: 4px 0 0 4px;
+    width: 400px;
+    margin-left: 5px;
+    outline: none;
+}
+
 .botao-mais-filtro {
     padding: 5px 10px;
     background-color: #0004ff;
