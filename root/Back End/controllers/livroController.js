@@ -1,5 +1,6 @@
 const {
-    buscarLivrosTitulo
+    buscarLivrosTitulo,
+    consultaFiltroLivro
 } = require("../models/livroModel");
 
 const { 
@@ -126,7 +127,7 @@ module.exports.getApiFiltrarLivros = async (req, res) => {
         queryBase += ` GROUP BY l.lvr_id`;
 
         // Chamar o model para executar a query
-        const livros = await LivroModel.consultaFiltroLivro(queryBase, params);
+        const livros = await consultaFiltroLivro(queryBase, params);
 
         // Retornar os resultados
         res.json(livros);

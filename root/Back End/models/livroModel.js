@@ -11,6 +11,20 @@ async function buscarLivrosTitulo(titulo) {
     }
 }
 
+async function consultaFiltroLivro(){
+    try {
+        console.log('Executando query:', query);
+        console.log('Com parâmetros:', params);
+        
+        const [livros] = await db.query(query, params);
+        return livros;
+    } catch (err) {
+        console.error(`Erro no consultaFiltroLivro - modelLivros: ${err}`);
+        throw err;
+    }
+}
+
 module.exports = {
-    buscarLivrosTitulo
+    buscarLivrosTitulo,
+    consultaFiltroLivro
 };
