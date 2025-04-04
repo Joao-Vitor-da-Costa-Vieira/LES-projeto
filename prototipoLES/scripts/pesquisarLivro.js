@@ -13,3 +13,21 @@ slider.addEventListener("input", (event) => {
         value.textContent = event.target.value;
     }
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const botaoFiltro = document.querySelector('.botao-mais-filtro');
+    const elementosOcultos = document.querySelectorAll('.hidden');
+
+    botaoFiltro.addEventListener('click', function() {
+        elementosOcultos.forEach(function(elemento) {
+            elemento.classList.toggle('hidden'); // Alterna a classe
+        });
+
+        // Alterna o texto do botão
+        if (botaoFiltro.textContent.includes('Mais')) {
+            botaoFiltro.textContent = 'Menos opções de filtragem';
+        } else {
+            botaoFiltro.textContent = 'Mais opções de filtragem';
+        }
+    });
+});
