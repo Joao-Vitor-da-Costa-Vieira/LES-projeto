@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/style/style.css">
+</head>
+<body>
+
+    <header>
+        <nav class="main-nav">
+            <a href="home.html" class="home-link">Home</a>
+            <div class="nav-botao">
+                <button>Histórico</button>
+                <button>Carrinho</button>
+                <button>Trocas</button>
+                <button>Chatbot</button>
+            </div>
+        </nav>
+        
+        <nav class="usuario-nav">
+            <div class="barra-pesquisa">
+                <input type="text" placeholder="Pesquisar...">
+                <button>🔍</button>
+            </div>
+            
+            <div class="usuario-sessao">
+                <span class="usuario-nome">Usuario</span>
+                <img src="/imagens/graficoLinha.PNG" alt="Imagem do usuário" class="usuario-imagem">
+            </div>
+        </nav>
+    </header>
+
+    <div class="main">
+        <!--Barra lateral de Navegação-->
+        <div class="sidenav">
+            <a href="/">Opção</a>
+        </div>
+
+        <div class="conteudo">
+            <br>
+            <br>
+
+            <div class="capa-livro">
+                <div class="linha_centralizada">
+                    <div class="coluna">
+                        <div class="titulo-livro">
+                            <h1><%= livro.lvr_titulo %></h1>
+                        </div>
+                        <img class="imagem-capa" src="/imagens/graficoLinha.PNG">
+                    </div>
+
+                    <div class="coluna">
+                        <div class="bloco_texto2">
+                            <div>
+                                <p><%= livro.lvr_sinopse %></p>
+                            </div>
+                            <div>
+                                <p>Editora: <%= livro.edi_nome || 'N/A' %></p>
+                                <p>Autor: <%= livro.atr_nome || 'N/A' %></p>
+                                <p><%= livro.lvr_edicao %>, <%= Number(livro.lvr_ano) %></p>
+                                <br>
+                                <div class="linha-categoria">
+                                    <a class="categorias"><%= livro.cat_nome || 'N/A' %></a>
+                                    <button class="categorias-botao">+</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                
+            </div>
+
+            <br>
+
+            <div class="estoque-div">
+                <span class="estoque">Em Estoque</span>
+                <span class="estoque hidden">Sem Estoque</span>     
+            </div>
+
+
+            <div class="preco-desconto-carrinho-container">
+                <div class="coluna">
+                    <a class="texto-adicionar">Comprar Produto?</a>
+                </div>
+                <div class="coluna">
+                    <p></p>
+                    <p></p>
+                    <div class="desconto-adicionar">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="desconto-do-produto"><%= Number(livro.lvr_desconto) %>% de Desconto</th>
+                                    <th class="valor-produto">R$ <%= Number(livro.lvr_custo) %></th>
+                                    <th class="adicionar-produto">Adicionar ao Carrinho</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="bloco_texto3">
+                <p>Sinopse Completa: <%= livro.lvr_sinopse %></p>
+                <br>
+                <p>Autor:<%= livro.atr_nome || 'N/A' %></p>
+                <p><%= livro.edi_nome || 'N/A' %></p>
+                <p><%= livro.lvr_edicao %>, <%= Number(livro.lvr_ano) %></p>
+                <br>
+                <p>Dimensões:</p>
+                <p>Altura: <%= Number(livro.lvr_altura) %>cm</p>
+                <p>Largura: <%= Number(livro.lvr_largura) %>cm</p>
+                <p>Peso: <%= Number(livro.lvr_peso) %>g</p>
+                <p>Profundidade: <%= Number(livro.lvr_profundidade) %>cm</p>
+                <br>
+                <p>ISBN: <%= livro.lvr_isbn %></p>
+                <p>Código de Barras: <%= livro.lvr_codigo_de_barras %></p>
+            </div>
+
+
+        </div>
+    </div>
+    
+
+    <!--Script do Submit-->
+    <script type="module" src="/scripts/livroPagina.js"></script>
+</body>
+</html>

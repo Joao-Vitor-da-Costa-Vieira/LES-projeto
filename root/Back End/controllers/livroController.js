@@ -48,6 +48,15 @@ module.exports.pesquisarLivrosTitulo = async (req, res) => {
     }
 };
 
+module.exports.livroPagina = async (req, res) => {
+    const livro = await buscarLivrosId(req.params.lvr_id);
+    const autor = await buscarAutorId(req.params.lvr_id);
+    const editora = await buscarEditoraId(req.params.lvr_id);
+    const categorias = await buscarCategoriasId(req.params.lvr_id);
+
+    
+};
+
 module.exports.getApiFiltrarLivros = async (req, res) => {
     try {
         // Obter todos os parâmetros de query da requisição
@@ -153,3 +162,4 @@ module.exports.getApiFiltrarLivros = async (req, res) => {
         res.status(500).json({ error: 'Erro interno ao processar a filtragem de livros' });
     }
 };
+
