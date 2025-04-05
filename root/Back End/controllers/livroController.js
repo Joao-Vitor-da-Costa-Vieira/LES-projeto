@@ -1,6 +1,7 @@
 const {
     buscarLivrosTitulo,
-    consultaFiltroLivro
+    consultaFiltroLivro,
+    buscarLivroId
 } = require("../models/livroModel");
 
 const { 
@@ -23,13 +24,11 @@ module.exports.pesquisarLivrosTitulo = async (req, res) => {
         
         const livros = await buscarLivrosTitulo(titulo);
         
-        // 4. Busque o usuário se houver ID
         let usuario = null;
         if (usr_id) {
             usuario = await buscarUsuarioId(usr_id);
         }
         
-        // 5. Renderize a view com todos os dados
         res.render('pesquisarLivro', {
             livros: livros || [], 
             usuario: usuario || null,
@@ -74,9 +73,6 @@ module.exports.livroPagina = async (req, res) => {
         });
     } catch (err) {
         console.error('Erro ao carregar página do livro:', err);
-        res.status(500).render('paginaErro', {
-            mensagem: 'Erro ao carregar informações do livro'
-        });
     }
 };
 
