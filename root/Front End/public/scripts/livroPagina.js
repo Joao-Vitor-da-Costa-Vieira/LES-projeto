@@ -2,6 +2,9 @@ document.querySelectorAll('.adicionar-produto').forEach(botao => {
     botao.addEventListener('click', function (event) {
         event.stopPropagation();
 
+        const userDataElement = document.getElementById('user-data');
+        const usr_id = userDataElement ? userDataElement.dataset.userId : null;
+
         let submenuAtual = this.querySelector('.atualizar_submenu');
 
         if (submenuAtual) {
@@ -61,47 +64,52 @@ document.querySelectorAll('.adicionar-produto').forEach(botao => {
             }
         });
 
-        btnConfirmar.addEventListener('click', () => {
+        btnConfirmar.addEventListener('click', async () => {
             const quantidade = parseInt(input.value);
-            console.log(`Quantidade confirmada: ${quantidade}`);
-            submenu.remove();
+            const lvr_id = this.closest('[data-livro-id]').dataset.livroId;
             
-            const mensagemConfirmacao = document.createElement('div');
-            mensagemConfirmacao.classList.add('confirmacao-overlay');
-            
-            mensagemConfirmacao.innerHTML = `
-                <div class="confirmacao-box">
-                    <p>Produto adicionado ao carrinho!</p>
-                    <div class="confirmacao-botoes">
-                        <button class="ver-carrinho">Ver Carrinho</button>
-                        <button class="continuar-comprando">Continuar Comprando</button>
+            try {
+                const resultado = await adicionarCarrinho(lvr_id, usr_id, quantidade);
+                
+                submenu.remove();
+                
+                const mensagemConfirmacao = document.createElement('div');
+                mensagemConfirmacao.classList.add('confirmacao-overlay');
+                
+                mensagemConfirmacao.innerHTML = `
+                    <div class="confirmacao-box">
+                        <p>${resultado.message || 'Produto adicionado ao carrinho!'}</p>
+                        <div class="confirmacao-botoes">
+                            <button class="ver-carrinho">Ver Carrinho</button>
+                            <button class="continuar-comprando">Continuar Comprando</button>
+                        </div>
                     </div>
-                </div>
-            `;
-            
-            document.body.appendChild(mensagemConfirmacao);
-            
-            mensagemConfirmacao.addEventListener('click', (e) => {
-                if (e.target === mensagemConfirmacao) {
+                `;
+                
+                document.body.appendChild(mensagemConfirmacao);
+                
+                mensagemConfirmacao.addEventListener('click', (e) => {
+                    if (e.target === mensagemConfirmacao) {
+                        mensagemConfirmacao.remove();
+                    }
+                });
+                
+                const btnVerCarrinho = mensagemConfirmacao.querySelector('.ver-carrinho');
+                btnVerCarrinho.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    window.location.href = '/carrinho';
+                });
+                
+                const btnContinuar = mensagemConfirmacao.querySelector('.continuar-comprando');
+                btnContinuar.addEventListener('click', (e) => {
+                    e.stopPropagation();
                     mensagemConfirmacao.remove();
-                }
-            });
-            
-            // Evento para o botão Ver Carrinho
-            const btnVerCarrinho = mensagemConfirmacao.querySelector('.ver-carrinho');
-            btnVerCarrinho.addEventListener('click', (e) => {
-                e.stopPropagation();
-                mensagemConfirmacao.remove();
-                console.log('Redirecionar para o carrinho');
-            });
-            
-            // Evento para o botão Continuar Comprando
-            const btnContinuar = mensagemConfirmacao.querySelector('.continuar-comprando');
-            btnContinuar.addEventListener('click', (e) => {
-                e.stopPropagation();
-                mensagemConfirmacao.remove();
-                // Apenas fecha a mensagem e continua na página atual
-            });
+                });
+
+            } catch (error) {
+                console.error('Erro ao adicionar ao carrinho:', error);
+                alert('Erro ao adicionar produto ao carrinho');
+            }
         });
     });
 });
