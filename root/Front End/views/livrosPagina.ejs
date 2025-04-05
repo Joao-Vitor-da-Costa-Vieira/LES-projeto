@@ -76,8 +76,13 @@
             <br>
 
             <div class="estoque-div">
-                <span class="estoque">Em Estoque</span>
-                <span class="estoque hidden">Sem Estoque</span>     
+                <% if (livro.emEstoque) { %>
+                    <span class="estoque">Em Estoque</span>
+                    <span class="estoque hidden">Sem Estoque</span>
+                <% } else { %>
+                    <span class="estoque hidden">Em Estoque</span>
+                    <span class="estoque">Sem Estoque</span>
+                <% } %>     
             </div>
 
 

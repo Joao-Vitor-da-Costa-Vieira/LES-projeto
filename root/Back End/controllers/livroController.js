@@ -21,7 +21,6 @@ module.exports.pesquisarLivrosTitulo = async (req, res) => {
             });
         }
         
-        // 3. Busque os livros (agora a variável está corretamente declarada)
         const livros = await buscarLivrosTitulo(titulo);
         
         // 4. Busque o usuário se houver ID
@@ -32,14 +31,14 @@ module.exports.pesquisarLivrosTitulo = async (req, res) => {
         
         // 5. Renderize a view com todos os dados
         res.render('pesquisarLivro', {
-            livros: livros || [], // Garante que sempre terá um array
-            usuario: usuario || null, // Garante que será null se não houver usuário
-            tituloPesquisado: titulo // Mantém o título pesquisado
+            livros: livros || [], 
+            usuario: usuario || null,
+            tituloPesquisado: titulo
         });
         
     } catch (err) {
         console.error('Erro ao pesquisar livros:', err);
-        // Renderiza a view mesmo com erro, mas com mensagem
+
         res.status(500).render('pesquisarLivro', {
             livros: [],
             usuario: null,
@@ -49,12 +48,36 @@ module.exports.pesquisarLivrosTitulo = async (req, res) => {
 };
 
 module.exports.livroPagina = async (req, res) => {
-    const livro = await buscarLivrosId(req.params.lvr_id);
-    const autor = await buscarAutorId(req.params.lvr_id);
-    const editora = await buscarEditoraId(req.params.lvr_id);
-    const categorias = await buscarCategoriasId(req.params.lvr_id);
+    try {
+        const lvr_id = req.params.lvr_id;
+        
+        if (!lvr_id || isNaN(lvr_id)) {
+            return res.status(400).send('ID do livro inválido');
+        }
 
-    
+        const [livro, usuario] = await Promise.all([
+            buscarLivroId(lvr_id),
+            buscarUsuarioId(1)
+        ]);
+        
+        if (!livro) {
+            return res.status(404).render('paginaErro', {
+                mensagem: 'Livro não encontrado'
+            });
+        }
+
+        livro.emEstoque = livro.lvr_qtd_estoque > 0;
+        
+        res.render('livrosPagina', { 
+            livro,
+            usuario: usuario || null
+        });
+    } catch (err) {
+        console.error('Erro ao carregar página do livro:', err);
+        res.status(500).render('paginaErro', {
+            mensagem: 'Erro ao carregar informações do livro'
+        });
+    }
 };
 
 module.exports.getApiFiltrarLivros = async (req, res) => {
