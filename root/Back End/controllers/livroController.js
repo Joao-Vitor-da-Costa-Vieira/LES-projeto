@@ -51,36 +51,28 @@ module.exports.pesquisarLivrosTitulo = async (req, res) => {
 module.exports.getApiFiltrarLivros = async (req, res) => {
     try {
         // Obter todos os parâmetros de query da requisição
-        const {
-            titulo,
-            precoMax,
-            autor,
-            editora,
-            categoria,
-            dataInicio,
-            dataFinal,
-            tamanho,
-            paginasMax,
-            isbn,
-            codigoBarras
-        } = req.query;
+        const { titulo, precoMax, autor, editora, categoria, dataInicio, dataFinal, tamanho, paginasMax, isbn, codigoBarras } = req.query;
 
-        // Iniciar a construção da query
+        // Query modificada para MySQL
         let queryBase = `
-            SELECT l.* 
+            SELECT 
+                l.*,
+                GROUP_CONCAT(DISTINCT a.atr_nome SEPARATOR ', ') AS atr_nome,
+                GROUP_CONCAT(DISTINCT et.edi_nome SEPARATOR ', ') AS edi_nome,
+                GROUP_CONCAT(DISTINCT c.cat_nome SEPARATOR ', ') AS cat_nome
             FROM livros l
             LEFT JOIN escreveu e ON l.lvr_id = e.livros_lvr_id
             LEFT JOIN autor a ON e.autor_atr_id = a.atr_id
             LEFT JOIN editou ed ON l.lvr_id = ed.livros_lvr_id
             LEFT JOIN editora et ON ed.editora_edi_id = et.edi_id
-            LEFT JOIN "possui4" p ON l.lvr_id = p.livros_lvr_id
+            LEFT JOIN possui4 p ON l.lvr_id = p.livros_lvr_id
             LEFT JOIN categoria c ON p.categoria_cat_id = c.cat_id
         `;
 
         const conditions = [];
         const params = [];
 
-        // Adicionar condições para cada filtro fornecido
+        // [Restante das condições permanece igual...]
         if (titulo) {
             conditions.push(`l.lvr_titulo LIKE ?`);
             params.push(`%${titulo}%`);
@@ -119,19 +111,11 @@ module.exports.getApiFiltrarLivros = async (req, res) => {
         if (tamanho) {
             let sizeCondition;
             switch (tamanho) {
-                case '1': // Pequeno
-                    sizeCondition = 'l.lvr_profundidade < 1';
-                    break;
-                case '2': // Médio
-                    sizeCondition = 'l.lvr_profundidade >= 1 AND l.lvr_profundidade < 2';
-                    break;
-                case '3': // Grande
-                    sizeCondition = 'l.lvr_profundidade >= 2';
-                    break;
+                case '1': sizeCondition = 'l.lvr_profundidade < 1'; break;
+                case '2': sizeCondition = 'l.lvr_profundidade >= 1 AND l.lvr_profundidade < 2'; break;
+                case '3': sizeCondition = 'l.lvr_profundidade >= 2'; break;
             }
-            if (sizeCondition) {
-                conditions.push(sizeCondition);
-            }
+            if (sizeCondition) conditions.push(sizeCondition);
         }
 
         if (paginasMax && !isNaN(paginasMax)) {
@@ -149,18 +133,20 @@ module.exports.getApiFiltrarLivros = async (req, res) => {
             params.push(codigoBarras);
         }
 
-        // Combinar todas as condições com AND
+        // Combinar condições
         if (conditions.length > 0) {
             queryBase += ` WHERE ` + conditions.join(' AND ');
         }
 
-        // Adicionar GROUP BY para evitar duplicatas devido aos JOINs
+        // Agrupar apenas por ID do livro
         queryBase += ` GROUP BY l.lvr_id`;
 
-        // Chamar o model para executar a query
+        // Executar a query
         const livros = await consultaFiltroLivro(queryBase, params);
 
-        // Retornar os resultados
+        // Verificar os resultados no console
+        console.log('Resultados da query:', livros);
+        
         res.json(livros);
     } catch (error) {
         console.error('Erro ao filtrar livros:', error);

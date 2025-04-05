@@ -4,7 +4,20 @@ const db = require('../config/db');
 async function buscarLivrosTitulo(titulo) {
     try {
         const [livros] = await db.query(
-            'SELECT * FROM livros WHERE lvr_titulo LIKE ?', 
+            `SELECT 
+                l.*,
+                GROUP_CONCAT(DISTINCT a.atr_nome SEPARATOR ', ') AS atr_nome,
+                GROUP_CONCAT(DISTINCT e.edi_nome SEPARATOR ', ') AS edi_nome,
+                GROUP_CONCAT(DISTINCT c.cat_nome SEPARATOR ', ') AS cat_nome
+             FROM livros l
+             LEFT JOIN escreveu es ON l.lvr_id = es.livros_lvr_id
+             LEFT JOIN autor a ON es.autor_atr_id = a.atr_id
+             LEFT JOIN editou ed ON l.lvr_id = ed.livros_lvr_id
+             LEFT JOIN editora e ON ed.editora_edi_id = e.edi_id
+             LEFT JOIN possui4 p ON l.lvr_id = p.livros_lvr_id
+             LEFT JOIN categoria c ON p.categoria_cat_id = c.cat_id
+             WHERE l.lvr_titulo LIKE ?
+             GROUP BY l.lvr_id`, 
             [`%${titulo}%`]
         );
         return livros;
@@ -13,6 +26,7 @@ async function buscarLivrosTitulo(titulo) {
         throw err; 
     }
 }
+
 async function consultaFiltroLivro(query, params){
     try {
         console.log('Executando query:', query);

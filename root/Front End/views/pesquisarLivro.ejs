@@ -157,10 +157,10 @@
                                     <td><%= livro.atr_nome || 'N/A' %></td>
                                     <td><%= livro.edi_nome || 'N/A' %></td>
                                     <td><%= livro.lvr_ano %></td>
-                                    <td>R$ <td>R$ <%= Number(livro.lvr_custo) %></td></td>
+                                    <td>R$<%= Number(livro.lvr_custo) %></td>
                                     <td>
                                         <div class="botoes_resultado">
-                                            <a class="detalhes" href="/livros/<%= livro.lvr_id %>">Detalhes</a>
+                                            <a class="atualizar" href="/livros/<%= livro.lvr_id %>">Detalhes</a>
                                         </div>
                                     </td>
                                 </tr>

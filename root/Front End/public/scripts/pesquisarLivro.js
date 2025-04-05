@@ -1,3 +1,5 @@
+import { filtroLivroService } from "/scripts/service/livroService.js";
+
 const value = document.querySelector("#valor");
 const slider = document.querySelector("#preco");
 const cifra = document.querySelector("#cifra");
@@ -49,11 +51,10 @@ function atualizarTabela(livros) {
             <td>${livro.atr_nome || 'N/A'}</td>
             <td>${livro.edi_nome || 'N/A'}</td>
             <td>${livro.lvr_ano}</td>
-            <td>R$ ${livro.lvr_custo.toFixed(2)}</td>
+            <td>R$ ${livro.lvr_custo}</td>
             <td>
                 <div class="botoes_resultado">
-                    <a class="detalhes" href="/livros/${livro.lvr_id}">Detalhes</a>
-                    <a class="comprar" href="#" data-id="${livro.lvr_id}">Adicionar ao Carrinho</a>
+                    <a class="atualizar" href="/livros/${livro.lvr_id}">Detalhes</a>
                 </div>
             </td>
         `;
@@ -81,11 +82,11 @@ function coletarFiltros() {
 }
 
 pesquisaBotao.addEventListener('click', async (e) => {
-    e.preventDefault(); // Previne qualquer comportamento padrão
+    e.preventDefault();
     
     try {
         const filtros = coletarFiltros();
-        const livros = await filtroLivroService(filtros); // Usando a nova função
+        const livros = await filtroLivroService(filtros);
         atualizarTabela(livros);
     } catch (error) {
         console.error('Erro ao pesquisar livros:', error);
