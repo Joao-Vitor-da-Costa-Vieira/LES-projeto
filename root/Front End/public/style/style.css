@@ -966,6 +966,111 @@ input[type=submit]{
     color: white;
 }
 
+/*Estilização dos submenus do Carrinho:*/
+.submenu-botao-atualizacao {
+    background-color: #0003c8;
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: left;
+    transition: background-color 0.3s ease;
+}
+
+.submenu-botao-atualizacao:hover {
+    background-color: #1d21ff;
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: left;
+    transition: background-color 0.3s ease;
+}
+
+.confirmar-atualizacao{
+    font-size: 20px;
+    color: black;
+}
+
+.submenu-atualizar-produto {
+    background-color: green; 
+    color: #ffffff;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
+    font-size: small;
+    padding: 5px;
+}
+
+.submenu-atualizar-produto:hover {
+    background-color: rgb(0, 255, 0);
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 5px;
+    font-size: small;
+    padding: 5px;
+}
+
+.deletar_submenu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    z-index: 1000;
+}
+
+.submenu-deletar-produto {
+    background-color: #d32f2f; 
+    color: #ffffff;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
+    font-size: small;
+    padding: 5px;
+}
+
+.submenu-deletar-produto:hover {
+    background-color: #ff6767;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 5px;
+    font-size: small;
+    padding: 5px;
+}
+
+.submenu-sair {
+    background-color: #0003c8; 
+    color: #ffffff;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
+    font-size: small;
+    padding: 5px;
+}
+
+.submenu-sair:hover {
+    background-color: #1d21ff;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 5px;
+    font-size: small;
+    padding: 5px;
+}
+
+.confirmar-remocao{
+    font-size: 20px;
+    color: black;
+}
+
 /*Bloco de Descrição do Produto*/
 .bloco_texto3{
     display: flex;

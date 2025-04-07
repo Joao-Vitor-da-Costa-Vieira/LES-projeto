@@ -63,15 +63,12 @@
                             <% itensCarrinho.forEach(item => { %>
                                 <tr>
                                     <td><%= item.livro.lvr_titulo %></td>
-                                    <td>R$ <%= item.livro.lvr_custo.toFixed(2) %></td>
+                                    <td>R$ <%= item.livro.lvr_custo%></td>
                                     <td><%= item.livro.lvr_desconto || '0' %>%</td>
-                                    <td>
-                                        <input type="number" value="<%= item.car_qtd_item %>" min="1" 
-                                               data-car-id="<%= item.car_id %>" class="quantidade-input">
-                                    </td>
+                                    <td><%= item.car_qtd_item %>"</td>
                                     <td>
                                         <div class="botoes_resultado">
-                                            <button class="atualizar" data-car-id="<%= item.car_id %>">Atualizar</button>
+                                            <button class="atualizar" data-lvr-id="<%= item.lvr_id %>">Atualizar</button>
                                             <button class="remover" data-car-id="<%= item.car_id %>">Remover</button>
                                         </div>
                                     </td>
