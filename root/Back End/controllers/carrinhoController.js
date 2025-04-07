@@ -6,14 +6,20 @@ const {
     adicionarItemCarrinho
 } = require("../models/carrinhoModel");
 
+const {
+    buscarLivroId
+} = require("../models/livroModel");
+
 module.exports.getCarrinho = async (req, res) => {
     try {
-        const usuario = req.body.usr_id;
+        const usuario = req.query;
 
-        const [carrinho] = await buscarItensCarrinho(usr_id);
+        const [carrinhos] = await buscarItensCarrinho(usuario.usr_id);
+        const [livros] = await buscarLivroId(carrinhos.livros_lvr_id);
         
         res.render('carrinho', { 
-            carrinho,
+            livros,
+            carrinhos,
             usuario: usuario || null
         });
     } catch (err) {
