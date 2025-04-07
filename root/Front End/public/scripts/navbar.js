@@ -1,5 +1,6 @@
-import {getHome} from "/scripts/service/telaInicialService.js";
+import { getHome } from "/scripts/service/telaInicialService.js";
 import { pesquisarLivroService } from "/scripts/service/livroService.js";
+import { getCarrinho } from "/scripts/service/carrinhoService.js"
 
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.home-link').forEach(botao => {
@@ -10,17 +11,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    const usuarioId = userDataElement ? userDataElement.dataset.userId : null;
+
+    document.querySelectorAll('#botao-carrinho').forEach(botao => {
+        botao.addEventListener('click', (event) => {
+            event.stopPropagation();
+            console.log("Botão clicado!");
+            getCarrinho(usuarioId);
+        });
+    });
+
     const botaoPesquisa = document.getElementById('navbarBotaoPesquisa');
     const pesquisaInput = document.getElementById('navbarInput');
     
-    // Obter o ID do usuário do elemento HTML
-    const userDataElement = document.getElementById('user-data');
-    const usuarioId = userDataElement ? userDataElement.dataset.userId : null;
     
     botaoPesquisa.addEventListener('click', async () => {
         const titulo = pesquisaInput.value.trim();
-        const userDataElement = document.getElementById('user-data');
-        const usuarioId = userDataElement ? userDataElement.dataset.userId : null;
         
         if (titulo) {
             try {
@@ -34,5 +40,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
-
 
