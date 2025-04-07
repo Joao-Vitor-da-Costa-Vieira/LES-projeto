@@ -1,3 +1,5 @@
+import { alterarCarrinho } from "/scripts/service/carrinhoService.js";
+
 function calcularSubtotal(itens) {
     if (!itens || itens.length === 0) return 0;
     
