@@ -6,5 +6,6 @@ const carrinhoController = require('../controllers/carrinhoController');
 router.get('/carrinho', carrinhoController.getCarrinho);
 
 router.post('/carrinho/adicionar', carrinhoController.adicionarCarrinho);
+router.put('/carrinho/alterar',carrinhoController.alterarCarrinho);
 
 module.exports = router;

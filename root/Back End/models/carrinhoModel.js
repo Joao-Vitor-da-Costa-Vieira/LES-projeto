@@ -19,16 +19,6 @@ async function deletarItensCarrinho(car_id) {
     }
 }
 
-async function atualizarItensCarrinho(car_id,qtd) {
-    try {
-        const [carrinho] = await db.query('UPDATE carrinho SET car_qtd_item = ? WHERE car_id = ?', [qtd, car_id]);
-        return carrinho;
-    } catch (err) {
-        console.error("Erro no atualizarItensCarrinho - modelCarrinho: ${err}");
-        throw err;
-    }
-}
-
 async function adicionarItemCarrinho(usr_id, lvr_id, qtd) {
     try {
         const [livro] = await db.query('SELECT lvr_qtd_estoque FROM livros WHERE lvr_id = ?', [lvr_id]);
@@ -71,6 +61,42 @@ async function adicionarItemCarrinho(usr_id, lvr_id, qtd) {
     }
 }
 
+async function alterarItemCarrinho(usr_id, lvr_id, qtd) {
+    try {
+        const [livro] = await db.query('SELECT lvr_qtd_estoque FROM livros WHERE lvr_id = ?', [lvr_id]);
+        
+        if (livro.length === 0) {
+            throw new Error('Livro não encontrado');
+        }
+        
+        const estoqueDisponivel = livro[0].lvr_qtd_estoque;
+        
+        if (qtd > estoqueDisponivel) {
+            throw new Error(`Quantidade solicitada (${qtd}) excede o estoque disponível (${estoqueDisponivel})`);
+        }
+        
+        const [itemExistente] = await db.query(
+            'SELECT * FROM carrinho WHERE usuarios_usr_id = ? AND livros_lvr_id = ?',
+            [usr_id, lvr_id]
+        );
+        
+        const novaQtd = itemExistente[0].car_qtd_item + qtd;
+        if (novaQtd > estoqueDisponivel) {
+            throw new Error(`Quantidade total no carrinho (${novaQtd}) excederia o estoque disponível (${estoqueDisponivel})`);
+        }
+        await db.query(
+            'UPDATE carrinho SET car_qtd_item = ? WHERE car_id = ?',
+            [novaQtd, itemExistente[0].car_id]
+        );
+        
+        const [itens] = await db.query('SELECT * FROM carrinho WHERE usuarios_usr_id = ?',  [usr_id]);
+        return itens;
+    } catch (err) {
+        console.error(`Erro no alterarItemCarrinho - modelCarrinho: ${err}`);
+        throw err;
+    }
+}
+
 async function buscarItemCarrinho(usr_id,lvr_id) {
     try {
         const [item] = await db.query('SELECT * FROM carrinho WHERE usuarios_usr_id = ? AND livros_lvr_id = ?',  [usr_id, lvr_id]);
@@ -84,7 +110,7 @@ async function buscarItemCarrinho(usr_id,lvr_id) {
 module.exports = {
     buscarItensCarrinho,
     deletarItensCarrinho,
-    atualizarItensCarrinho,
     buscarItemCarrinho,
+    alterarItemCarrinho,
     adicionarItemCarrinho
 };

@@ -1,8 +1,8 @@
 const {
     buscarItensCarrinho,
     deletarItensCarrinho,
-    atualizarItensCarrinho,
     buscarItemCarrinho,
+    alterarItemCarrinho,
     adicionarItemCarrinho
 } = require("../models/carrinhoModel");
 
@@ -52,16 +52,32 @@ module.exports.adicionarCarrinho = async (req, res) => {
     }
 };
 
-module.exports.atualizarCarrinho = async (req, res) => {
+module.exports.alterarCarrinho = async (req, res) => {
     try {
-        await atualizarItensCarrinho(
-            req.body.car_id,
+        const carrinhos = await alterarItemCarrinho(
+            req.body.usr_id, 
+            req.body.lvr_id, 
             req.body.quantidade
-            );
-        res.sendStatus(200);        
+        );
+        
+        const livrosComDetalhes = await Promise.all(
+            carrinhos.map(async (carrinho) => {
+                const livro = await buscarLivroId(carrinho.livros_lvr_id);
+                return {
+                    ...carrinho,
+                    livro: livro
+                };
+            })
+        );
+        
+        res.json(livrosComDetalhes);
+
     } catch (err) {
-        console.error(`Erro no atualizarCarrinho - controllerCarrinho: ${err}`);
-        res.sendStatus(500);
+        console.error(`Erro no alterarCarrinho - controllerCarrinho: ${err}`);
+        res.status(400).json({ 
+            success: false, 
+            message: err.message || 'Erro ao alterar item no carrinho' 
+        });
     }
 };
 
