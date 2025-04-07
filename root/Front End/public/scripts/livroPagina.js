@@ -1,4 +1,5 @@
 import { adicionarCarrinho } from "/scripts/service/carrinhoService.js";
+import { getCarrinho } from "/scripts/service/carrinhoService.js"
 
 document.querySelectorAll('.adicionar-produto').forEach(botao => {
     botao.addEventListener('click', function (event) {
@@ -99,7 +100,7 @@ document.querySelectorAll('.adicionar-produto').forEach(botao => {
                 const btnVerCarrinho = mensagemConfirmacao.querySelector('.ver-carrinho');
                 btnVerCarrinho.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    window.location.href = '/carrinho/1';
+                   getCarrinho(usr_id);
                 });
                 
                 const btnContinuar = mensagemConfirmacao.querySelector('.continuar-comprando');

@@ -10,10 +10,8 @@ const {
 
 module.exports.pesquisarLivrosTitulo = async (req, res) => {
     try {
-        // 1. Primeiro extraia os parâmetros da query
         const { titulo, usr_id } = req.query;
         
-        // 2. Validação do parâmetro obrigatório
         if (!titulo) {
             return res.status(400).render('pesquisarLivro', {
                 livros: [],

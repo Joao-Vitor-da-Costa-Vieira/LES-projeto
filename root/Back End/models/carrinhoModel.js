@@ -1,3 +1,5 @@
+const db = require('../config/db');
+
 async function buscarItensCarrinho(usr_id) {
     try {
         const [itens] = await db.query('SELECT * FROM carrinho WHERE usuarios_usr_id = ?',  [usr_id]);
