@@ -13,35 +13,51 @@ const {
 module.exports.getCarrinho = async (req, res) => {
     try {
         const usuario = req.query;
-
-        const [carrinhos] = await buscarItensCarrinho(usuario.usr_id);
-        const [livros] = await buscarLivroId(carrinhos.livros_lvr_id);
+        const carrinhos = await buscarItensCarrinho(usuario.usr_id);
+        
+        const livrosComDetalhes = await Promise.all(
+            carrinhos.map(async (carrinho) => {
+                const livro = await buscarLivroId(carrinho.livros_lvr_id);
+                return {
+                    ...carrinho,
+                    livro: livro
+                };
+            })
+        );
         
         res.render('carrinho', { 
-            livros,
-            carrinhos,
+            itensCarrinho: livrosComDetalhes,
             usuario: usuario || null
         });
     } catch (err) {
         console.error('Erro ao carregar página do carrinho:', err);
+        res.status(500).send('Erro ao carregar carrinho');
     }
 };
 
 module.exports.adicionarCarrinho = async (req, res) => {
     try {
-
-        await adicionarItemCarrinho(req.body.usr_id, req.body.lvr_id, req.body.quantidade);
-        res.sendStatus(204);
-        
+        const resultado = await adicionarItemCarrinho(
+            req.body.usr_id, 
+            req.body.lvr_id, 
+            req.body.quantidade
+        );
+        res.status(200).json(resultado);
     } catch (err) {
         console.error(`Erro no adicionarCarrinho - controllerCarrinho: ${err}`);
-        res.sendStatus(500);
+        res.status(400).json({ 
+            success: false, 
+            message: err.message || 'Erro ao adicionar item ao carrinho' 
+        });
     }
 };
 
 module.exports.atualizarCarrinho = async (req, res) => {
     try {
-        await atualizarItensCarrinho(req.body.car_id, req.body.quantidade);
+        await atualizarItensCarrinho(
+            req.body.car_id,
+            req.body.quantidade
+            );
         res.sendStatus(200);        
     } catch (err) {
         console.error(`Erro no atualizarCarrinho - controllerCarrinho: ${err}`);

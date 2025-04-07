@@ -72,7 +72,14 @@ document.querySelectorAll('.adicionar-produto').forEach(botao => {
             const lvr_id = this.closest('[data-livro-id]').dataset.livroId;
             
             try {
-                const resultado = await adicionarCarrinho(lvr_id, usr_id, quantidade);
+                const response = await adicionarCarrinho(lvr_id, usr_id, quantidade);
+                
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message);
+                }
+                
+                const resultado = await response.json();
                 
                 submenu.remove();
                 
@@ -100,7 +107,7 @@ document.querySelectorAll('.adicionar-produto').forEach(botao => {
                 const btnVerCarrinho = mensagemConfirmacao.querySelector('.ver-carrinho');
                 btnVerCarrinho.addEventListener('click', (e) => {
                     e.stopPropagation();
-                   getCarrinho(usr_id);
+                    getCarrinho(usr_id);
                 });
                 
                 const btnContinuar = mensagemConfirmacao.querySelector('.continuar-comprando');
@@ -108,10 +115,32 @@ document.querySelectorAll('.adicionar-produto').forEach(botao => {
                     e.stopPropagation();
                     mensagemConfirmacao.remove();
                 });
-
+        
             } catch (error) {
                 console.error('Erro ao adicionar ao carrinho:', error);
-                alert('Erro ao adicionar produto ao carrinho');
+                
+                const mensagemErro = document.createElement('div');
+                mensagemErro.classList.add('confirmacao-overlay');
+                
+                mensagemErro.innerHTML = `
+                    <div class="confirmacao-box erro">
+                        <p>${error.message}</p>
+                        <button class="fechar-erro">OK</button>
+                    </div>
+                `;
+                
+                document.body.appendChild(mensagemErro);
+                
+                const btnFechar = mensagemErro.querySelector('.fechar-erro');
+                btnFechar.addEventListener('click', () => {
+                    mensagemErro.remove();
+                });
+                
+                mensagemErro.addEventListener('click', (e) => {
+                    if (e.target === mensagemErro) {
+                        mensagemErro.remove();
+                    }
+                });
             }
         });
     });
