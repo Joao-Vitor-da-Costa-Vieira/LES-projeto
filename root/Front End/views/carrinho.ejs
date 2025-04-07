@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta charset="UTF-8">
@@ -60,34 +59,34 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% if (carrinhos && carrinhos.length > 0) { %>
-                            <% carrinhos.forEach(carrinho => { %>
+                        <% if (itensCarrinho && itensCarrinho.length > 0) { %>
+                            <% itensCarrinho.forEach(item => { %>
                                 <tr>
-                                    <td><%= livros.lvr_titulo %></td>
-                                    <td><%= carrinho.atr_nome || 'N/A' %></td>
-                                    <td><%= carrinho.edi_nome || 'N/A' %></td>
-                                    <td><%= carrinho.lvr_ano %></td>
-                                    <td>R$<%= Number(carrinho.lvr_custo) %></td>
+                                    <td><%= item.livro.lvr_titulo %></td>
+                                    <td>R$ <%= item.livro.lvr_custo.toFixed(2) %></td>
+                                    <td><%= item.livro.lvr_desconto || '0' %>%</td>
+                                    <td>
+                                        <input type="number" value="<%= item.car_qtd_item %>" min="1" 
+                                               data-car-id="<%= item.car_id %>" class="quantidade-input">
+                                    </td>
                                     <td>
                                         <div class="botoes_resultado">
-                                            <a class="atualizar" href="/livros/<%= livro.lvr_id %>">Detalhes</a>
+                                            <button class="atualizar" data-car-id="<%= item.car_id %>">Atualizar</button>
+                                            <button class="remover" data-car-id="<%= item.car_id %>">Remover</button>
                                         </div>
                                     </td>
                                 </tr>
                             <% }); %>
                         <% } else { %>
                             <tr>
-                                <td colspan="6">Nenhum livro encontrado</td>
+                                <td colspan="5">Seu carrinho está vazio</td>
                             </tr>
                         <% } %>
                     </tbody>
                     <tfoot class="footable">
                         <tr>
-                        <td>Subtotal</td>
-                        <td></td>
-                        <td>R$ 0,00</td>
-                        <td></td>
-                        <td class="subtotal">R$ 340,00</td>
+                            <td colspan="4">Subtotal</td>
+                            <td class="subtotal">R$ <%= calcularSubtotal(itensCarrinho).toFixed(2) %></td>
                         </tr>
                     </tfoot>
                 </table>
@@ -98,14 +97,13 @@
             <!--Input de Botões-->
             <div class="botoes">
                 <button class="cancelar" type="button" id="Cancelar">Voltar</button>
-                <input type="submit" id="submit" name="submit" value="Comprar">
+                <button type="button" id="finalizar-compra" <%= (itensCarrinho && itensCarrinho.length > 0) ? '' : 'disabled' %>>Comprar</button>
             </div>
 
         </div>
     </div>
     
-    <!--Script do Submit-->
-    <script type="module" src="/scripts/navbar.js"
+    <script type="module" src="/scripts/navbar.js"></script>
     <script type="module" src="/scripts/carrinho.js"></script>
 </body>
 </html>
