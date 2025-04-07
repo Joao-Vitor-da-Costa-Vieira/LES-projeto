@@ -12,8 +12,7 @@ async function buscarItensCarrinho(usr_id) {
 
 async function deletarItensCarrinho(car_id) {
     try {
-        const [resultado] = await db.query('DELETE * FROM carrinho WHERE car_id = ?', [car_id]);
-        return resultado;
+        await db.query('DELETE * FROM carrinho WHERE car_id = ?', [car_id]);
     } catch (err) {
         console.error("Erro no deletarItensCarrinho - modelCarrinho: ${err}");
         throw err;
@@ -22,8 +21,8 @@ async function deletarItensCarrinho(car_id) {
 
 async function atualizarItensCarrinho(car_id,qtd) {
     try {
-        const [resultado] = await db.query('UPDATE carrinho SET car_qtd_item = ? WHERE car_id = ?', [qtd, car_id]);
-        return resultado;
+        const [carrinho] = await db.query('UPDATE carrinho SET car_qtd_item = ? WHERE car_id = ?', [qtd, car_id]);
+        return carrinho;
     } catch (err) {
         console.error("Erro no atualizarItensCarrinho - modelCarrinho: ${err}");
         throw err;
