@@ -1,6 +1,5 @@
 export async function pesquisarLivroService(titulo, usr_id) {
     try {
-        // Redireciona diretamente sem esperar resposta
         window.location.href = `/buscar-titulo?titulo=${encodeURIComponent(titulo)}&usr_id=${encodeURIComponent(usr_id || '')}`;
     } catch (err) {
         console.error(`Erro no pesquisarLivroService: ${err}`);

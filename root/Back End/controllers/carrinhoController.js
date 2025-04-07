@@ -24,9 +24,14 @@ module.exports.getCarrinho = async (req, res) => {
                 };
             })
         );
+
+        const subtotalTotal = livrosComDetalhes.reduce((total, item) => {
+            return total + (item.livro.lvr_custo * item.car_qtd_item);
+        }, 0);
         
         res.render('carrinho', { 
             itensCarrinho: livrosComDetalhes,
+            subtotalTotal,
             usuario: usuario || null
         });
     } catch (err) {
@@ -37,12 +42,15 @@ module.exports.getCarrinho = async (req, res) => {
 
 module.exports.adicionarCarrinho = async (req, res) => {
     try {
-        const resultado = await adicionarItemCarrinho(
+        await adicionarItemCarrinho(
             req.body.usr_id, 
             req.body.lvr_id, 
             req.body.quantidade
         );
-        res.status(200).json(resultado);
+        res.status(200).json({ 
+            success: true, 
+            message: 'Item adicionado ao carrinho com sucesso' 
+        });
     } catch (err) {
         console.error(`Erro no adicionarCarrinho - controllerCarrinho: ${err}`);
         res.status(400).json({ 
@@ -70,7 +78,11 @@ module.exports.alterarCarrinho = async (req, res) => {
             })
         );
         
-        res.json(livrosComDetalhes);
+        res.json({
+            success: true,
+            itensCarrinho: livrosComDetalhes,
+            message: 'Quantidade atualizada com sucesso'
+        });
 
     } catch (err) {
         console.error(`Erro no alterarCarrinho - controllerCarrinho: ${err}`);

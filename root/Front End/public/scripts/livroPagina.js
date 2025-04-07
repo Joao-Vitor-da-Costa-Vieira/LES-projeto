@@ -73,12 +73,6 @@ document.querySelectorAll('.adicionar-produto').forEach(botao => {
             
             try {
                 const response = await adicionarCarrinho(lvr_id, usr_id, quantidade);
-                
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.message);
-                }
-                
                 const resultado = await response.json();
                 
                 submenu.remove();
@@ -105,9 +99,10 @@ document.querySelectorAll('.adicionar-produto').forEach(botao => {
                 });
                 
                 const btnVerCarrinho = mensagemConfirmacao.querySelector('.ver-carrinho');
-                btnVerCarrinho.addEventListener('click', (e) => {
+                btnVerCarrinho.addEventListener('click', async (e) => {
                     e.stopPropagation();
-                    getCarrinho(usr_id);
+                    await getCarrinho(usr_id);
+                    window.location.href = `/carrinho?usr_id=${usr_id}`;
                 });
                 
                 const btnContinuar = mensagemConfirmacao.querySelector('.continuar-comprando');

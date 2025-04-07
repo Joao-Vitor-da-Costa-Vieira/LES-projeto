@@ -48,7 +48,7 @@
             <br>
 
             <div class="table_div">
-                <table>
+                <table id="tabela-carrinho" >
                     <thead>
                         <tr>
                             <th style="width: 400px;">Livro</th>
@@ -65,10 +65,10 @@
                                     <td><%= item.livro.lvr_titulo %></td>
                                     <td>R$ <%= item.livro.lvr_custo%></td>
                                     <td><%= item.livro.lvr_desconto || '0' %>%</td>
-                                    <td><%= item.car_qtd_item %>"</td>
+                                    <td><%= item.car_qtd_item %></td>
                                     <td>
                                         <div class="botoes_resultado">
-                                            <button class="atualizar" data-lvr-id="<%= item.lvr_id %>">Atualizar</button>
+                                            <button class="atualizar" data-lvr-id="<%= item.livro.lvr_id %>">Atualizar</button>
                                             <button class="remover" data-car-id="<%= item.car_id %>">Remover</button>
                                         </div>
                                     </td>
@@ -83,7 +83,7 @@
                     <tfoot class="footable">
                         <tr>
                             <td colspan="4">Subtotal</td>
-                            <td class="subtotal">R$ <%= calcularSubtotal(itensCarrinho) %></td>
+                            <td class="subtotal">R$ <%= subtotalTotal %></td>
                         </tr>
                     </tfoot>
                 </table>

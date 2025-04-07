@@ -67,7 +67,7 @@ module.exports.livroPagina = async (req, res) => {
         
         res.render('livrosPagina', { 
             livro,
-            usuario: usuario || null
+            usuario: usuario
         });
     } catch (err) {
         console.error('Erro ao carregar página do livro:', err);

@@ -1,19 +1,12 @@
 import { alterarCarrinho } from "/scripts/service/carrinhoService.js";
 import { deletarCarrinho } from "/scripts/service/carrinhoService.js";
 
-function calcularSubtotal(itens) {
-    if (!itens || itens.length === 0) return 0;
-    
-    return itens.reduce((total, item) => {
-        const precoComDesconto = item.livro.lvr_custo * (1 - (item.livro.lvr_desconto || 0) / 100);
-        return total + (precoComDesconto * item.car_qtd_item);
-    }, 0);
-}
+const tabelaBody = document.querySelector('#tabela-carrinho tbody'); 
 
 function atualizarTabela(itensCarrinho) {
     tabelaBody.innerHTML = '';
 
-    if (livros.length === 0) {
+    if (itensCarrinho.length === 0) {
         tabelaBody.innerHTML = '<tr><td colspan="6">Nenhum livro encontrado</td></tr>';
         return;
     }
@@ -54,7 +47,8 @@ document.querySelectorAll('.atualizar').forEach(botao => {
 
         let submenu = document.createElement('div');
         submenu.classList.add('atualizar_submenu');
-
+        
+        const quantidadeAtual = this.closest('tr').querySelector('td:nth-child(4)').textContent;
         submenu.innerHTML = `
         <div class="linha_centralizada">
             <p class="confirmar-atualizacao">Confirmar Alteração?</p>
@@ -62,7 +56,7 @@ document.querySelectorAll('.atualizar').forEach(botao => {
 
         <div class="linha_centralizada">
             <button class="submenu-botao-atualizacao" type="button"><</button>
-            <input class="numero_input" type="number" value="<%= item.car_qtd_item %>" min="1">
+            <input class="numero_input" type="number" value="${quantidadeAtual.replace('"', '')}" min="1">
             <button class="submenu-botao-atualizacao" type="button">></button>
         </div>
 
@@ -104,19 +98,16 @@ document.querySelectorAll('.atualizar').forEach(botao => {
 
         btnConfirmar.addEventListener('click', async () => {
             const quantidade = parseInt(input.value);
-            const lvr_id = this.closest('[data-lvr-id]').dataset.livroId;
+            const lvr_id = this.closest('tr').querySelector('.atualizar').dataset.lvrId;
             
             try {
-                const response = await alterarCarrinho(lvr_id, usr_id, quantidade);
+                const resultado = await alterarCarrinho(lvr_id, usr_id, quantidade);
                 
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.message);
+                if (!resultado.success) {
+                    throw new Error(resultado.message);
                 }
                 
-                const itensCarrinho = await response.json();
-                atualizarTabela(itensCarrinho);
-
+                atualizarTabela(resultado.itensCarrinho);
                 submenu.remove();
                 
                 const mensagemConfirmacao = document.createElement('div');
@@ -124,10 +115,8 @@ document.querySelectorAll('.atualizar').forEach(botao => {
                 
                 mensagemConfirmacao.innerHTML = `
                     <div class="confirmacao-box">
-                        <p>${resultado.message || 'Produto alterado no carrinho!'}</p>
-                        <div class="confirmacao-botoes">
-                            <button class="continuar-comprando">Continuar</button>
-                        </div>
+                        <p>${resultado.message}</p>
+                        <button class="continuar-comprando">Continuar</button>
                     </div>
                 `;
                 
@@ -179,9 +168,6 @@ document.querySelectorAll('.remover').forEach(botao => {
     botao.addEventListener('click', function (event) {
         event.stopPropagation();
 
-        const userDataElement = document.getElementById('user-data');
-        const usr_id = userDataElement ? userDataElement.dataset.userId : null;
-
         let submenuAtual = this.querySelector('.deletar_submenu');
 
         if (submenuAtual) {
@@ -212,7 +198,7 @@ document.querySelectorAll('.remover').forEach(botao => {
         btnConfirmar.addEventListener('click', stopProp);
 
         btnConfirmar.addEventListener('click', async () => {
-            const car_id = this.closest('[data-car-id]').dataset.carrinhoId;
+            const car_id = this.closest('tr').querySelector('.remover').dataset.carId;
             
             try {
                 const response = await deletarCarrinho(car_id);
@@ -222,8 +208,8 @@ document.querySelectorAll('.remover').forEach(botao => {
                     throw new Error(errorData.message);
                 }
                 
-                const itensCarrinho = await response.json();
-                atualizarTabela(itensCarrinho);
+                const resultado = await response.json();
+                atualizarTabela(resultado.itensCarrinho);
 
                 submenu.remove();
                 

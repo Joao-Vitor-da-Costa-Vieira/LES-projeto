@@ -82,16 +82,16 @@ async function alterarItemCarrinho(usr_id, lvr_id, qtd) {
             [usr_id, lvr_id]
         );
         
-        const novaQtd = itemExistente[0].car_qtd_item + qtd;
-        if (novaQtd > estoqueDisponivel) {
-            throw new Error(`Quantidade total no carrinho (${novaQtd}) excederia o estoque disponível (${estoqueDisponivel})`);
+        if (itemExistente.length === 0) {
+            throw new Error('Item não encontrado no carrinho');
         }
+        
         await db.query(
             'UPDATE carrinho SET car_qtd_item = ? WHERE car_id = ?',
-            [novaQtd, itemExistente[0].car_id]
+            [qtd, itemExistente[0].car_id]
         );
         
-        const [itens] = await db.query('SELECT * FROM carrinho WHERE usuarios_usr_id = ?',  [usr_id]);
+        const [itens] = await db.query('SELECT * FROM carrinho WHERE usuarios_usr_id = ?', [usr_id]);
         return itens;
     } catch (err) {
         console.error(`Erro no alterarItemCarrinho - modelCarrinho: ${err}`);

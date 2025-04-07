@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/style/style.css">
+    <link rel="icon" href="/imagens/livro-16.ico">
 </head>
 <body>
 
     <header>
         <nav class="main-nav">
-            <a href="home.html" class="home-link">Home</a>
+            <a class="home-link">Home</a>
             <div class="nav-botao">
                 <button>Histórico</button>
                 <button id="botao-carrinho">Carrinho</button>
@@ -21,12 +22,13 @@
         
         <nav class="usuario-nav">
             <div class="barra-pesquisa">
-                <input type="text" placeholder="Pesquisar...">
-                <button>🔍</button>
+                <input type="text" id="navbarInput" placeholder="Pesquisar...">
+                <button id="navbarBotaoPesquisa">🔍</button>
             </div>
             
             <div class="usuario-sessao">
-                <span class="usuario-nome">Usuario</span>
+                <div id="user-data" data-user-id="<%= Array.isArray(usuario) ? usuario[0]?.usr_id : usuario?.usr_id %>" style="display:none;"></div>
+                <span class="usuario-nome"><%= Array.isArray(usuario) ? usuario[0]?.usr_nome : usuario?.usr_nome %></span>
                 <img src="/imagens/graficoLinha.PNG" alt="Imagem do usuário" class="usuario-imagem">
             </div>
         </nav>
