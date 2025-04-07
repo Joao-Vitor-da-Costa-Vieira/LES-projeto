@@ -179,13 +179,12 @@ CREATE TABLE livros (
 
 ALTER TABLE livros ADD CONSTRAINT livros_pk PRIMARY KEY ( lvr_id );
 
-CREATE TABLE "possui 4" (
+CREATE TABLE possui4 (
     categoria_cat_id INTEGER NOT NULL,
     livros_lvr_id    INTEGER NOT NULL
 );
 
-ALTER TABLE "possui 4" ADD CONSTRAINT relation_16_pk PRIMARY KEY ( categoria_cat_id,
-                                                                   livros_lvr_id );
+ALTER TABLE possui4 ADD CONSTRAINT relation_16_pk PRIMARY KEY ( categoria_cat_id, livros_lvr_id );
 
 CREATE TABLE transacoes (
     tra_id                   INTEGER NOT NULL,
@@ -304,10 +303,10 @@ ALTER TABLE escreveu
     ADD CONSTRAINT relation_15_livros_fk FOREIGN KEY ( livros_lvr_id )
         REFERENCES livros ( lvr_id );
 
-ALTER TABLE "possui 4"
+ALTER TABLE possui4
     ADD CONSTRAINT relation_16_categoria_fk FOREIGN KEY ( categoria_cat_id )
         REFERENCES categoria ( cat_id );
 
-ALTER TABLE "possui 4"
+ALTER TABLE possui4
     ADD CONSTRAINT relation_16_livros_fk FOREIGN KEY ( livros_lvr_id )
         REFERENCES livros ( lvr_id );
