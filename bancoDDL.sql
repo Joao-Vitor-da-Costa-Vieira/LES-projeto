@@ -6,7 +6,7 @@ CREATE TABLE autor (
 ALTER TABLE autor ADD CONSTRAINT autor_pk PRIMARY KEY ( atr_id );
 
 CREATE TABLE carrinho (
-    car_id          INTEGER NOT NULL,
+    car_id          INTEGER NOT NULL AUTO_INCREMENT,
     car_qtd_item    INTEGER NOT NULL,
     usuarios_usr_id INTEGER,
     livros_lvr_id   INTEGER
@@ -203,7 +203,7 @@ CREATE TABLE transacoes (
 ALTER TABLE transacoes ADD CONSTRAINT transacoes_pk PRIMARY KEY ( tra_id );
 
 CREATE TABLE usuarios (
-    usr_id                  INTEGER NOT NULL,
+    usr_id                  INTEGER NOT NULL AUTO_INCREMENT,
     usr_nome                VARCHAR2(75) NOT NULL,
     usr_email               VARCHAR2(50) NOT NULL,
     usr_cpf                 VARCHAR2(11) NOT NULL,

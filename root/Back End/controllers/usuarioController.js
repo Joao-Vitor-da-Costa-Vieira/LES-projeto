@@ -66,7 +66,6 @@ module.exports.patchSenha = async (req, res) => {
     }
 };
 
-// Atualizando os dados do banco
 module.exports.putCadastroAtualizar = async (req, res) => {
     try {
         await atualizarEnderecoCobranca(req.body.endereco_c, req.body.endereco_c.end_id);

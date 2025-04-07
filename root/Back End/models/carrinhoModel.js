@@ -30,6 +30,15 @@ async function atualizarItensCarrinho(car_id,qtd) {
     }
 }
 
+async function adicionarItemCarrinho(usr_id, lvr_id, qtd) {
+    try {
+        await db.query("INSERT INTO carrinho (car_qtd_item, usuarios_usr_id, livros_lvr_id) VALUES (?, ?, ?)", [qtd, usr_id, lvr_id]);
+    } catch (err) {
+        console.error("Erro no adicionarItemCarrinho - modelCarrinho: ${err}");
+        throw err;
+    }
+}
+
 async function buscarItemCarrinho(usr_id,lvr_id) {
     try {
         const [item] = await db.query('SELECT * FROM carrinho WHERE usuarios_usr_id = ? AND livros_lvr_id = ?',  [usr_id, lvr_id]);
@@ -44,5 +53,6 @@ module.exports = {
     buscarItensCarrinho,
     deletarItensCarrinho,
     atualizarItensCarrinho,
-    buscarItemCarrinho
+    buscarItemCarrinho,
+    adicionarItemCarrinho
 };
