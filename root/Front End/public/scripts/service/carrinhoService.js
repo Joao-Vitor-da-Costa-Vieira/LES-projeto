@@ -52,18 +52,16 @@ export async function alterarCarrinho(lvr_id, usr_id, quantidade) {
 
 export async function deletarCarrinho(car_id) {
     try {
-        const response = await fetch('/carrinho/deletar', {
+        const response = await fetch(`/carrinho/delete?car_id=${car_id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ 
-                car_id
-            })
+            }
         });
 
         if (!response.ok) {
-            throw new Error('Erro na requisição');
+            const errorData = await response.json();
+            throw new Error(errorData.message || 'Erro na requisição');
         }
 
         return await response.json();

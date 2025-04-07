@@ -1,5 +1,6 @@
 import { getHome } from "/scripts/service/telaInicialService.js";
 import { pesquisarLivroService } from "/scripts/service/livroService.js";
+import { getCarrinho } from "/scripts/service/carrinhoService.js"
 
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.home-link').forEach(botao => {
@@ -10,14 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    const userDataElement = document.getElementById('user-data');
-    const usuarioId = userDataElement.getAttribute('data-user-id');
+    const usuarioId = document.querySelector('#user-data');
 
     document.querySelectorAll('#botao-carrinho').forEach(botao => {
         botao.addEventListener('click', (event) => {
             event.stopPropagation();
             console.log("Botão clicado!");
-            window.location.href = `/carrinho?usr_id=${usuarioId}`;
+            getCarrinho(usuarioId);
         });
     });
 

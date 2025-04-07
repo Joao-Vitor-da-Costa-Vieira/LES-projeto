@@ -12,11 +12,27 @@ async function buscarItensCarrinho(usr_id) {
 
 async function deletarItensCarrinho(car_id) {
     try {
-        const usr_id = await db.query("SELECT usuarios_usr_id FROM carrinho WHERE car_id = ?", [car_id]);
-        await db.query('DELETE * FROM carrinho WHERE car_id = ?', [car_id]);
+        // Primeiro obtém o usr_id antes de deletar
+        const [result] = await db.query(
+            "SELECT usuarios_usr_id FROM carrinho WHERE car_id = ?", 
+            [car_id]
+        );
+        
+        if (result.length === 0) {
+            throw new Error('Item do carrinho não encontrado');
+        }
+        
+        const usr_id = result[0].usuarios_usr_id;
+        
+        // Depois deleta o item
+        await db.query(
+            'DELETE FROM carrinho WHERE car_id = ?',
+            [car_id]
+        );
+        
         return usr_id;
     } catch (err) {
-        console.error("Erro no deletarItensCarrinho - modelCarrinho: ${err}");
+        console.error(`Erro no deletarItensCarrinho - modelCarrinho: ${err}`);
         throw err;
     }
 }

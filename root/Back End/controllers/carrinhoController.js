@@ -95,7 +95,9 @@ module.exports.alterarCarrinho = async (req, res) => {
 
 module.exports.deletarCarrinho = async (req, res) => {
     try {
-        const usr_id = await deletarItensCarrinho(req.body.car_id);
+        const { car_id } = req.query;
+
+        const usr_id = await deletarItensCarrinho(car_id);
         const carrinhos = await buscarItensCarrinho(usr_id);
         
         const livrosComDetalhes = await Promise.all(
@@ -108,7 +110,11 @@ module.exports.deletarCarrinho = async (req, res) => {
             })
         );
         
-        res.json(livrosComDetalhes);
+        res.json({
+            success: true,
+            itensCarrinho: livrosComDetalhes,
+            message: 'Item removido do carrinho com sucesso'
+        });
     } catch (err) {
         console.error(`Erro no deletarCarrinho - controllerCarrinho: ${err}`);
         res.sendStatus(500);
