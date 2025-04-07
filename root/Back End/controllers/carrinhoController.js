@@ -83,8 +83,20 @@ module.exports.alterarCarrinho = async (req, res) => {
 
 module.exports.deletarCarrinho = async (req, res) => {
     try {
-        await deletarItensCarrinho(req.body.car_id);
-        res.sendStatus(204);        
+        const usr_id = await deletarItensCarrinho(req.body.car_id);
+        const carrinhos = await buscarItensCarrinho(usr_id);
+        
+        const livrosComDetalhes = await Promise.all(
+            carrinhos.map(async (carrinho) => {
+                const livro = await buscarLivroId(carrinho.livros_lvr_id);
+                return {
+                    ...carrinho,
+                    livro: livro
+                };
+            })
+        );
+        
+        res.json(livrosComDetalhes);
     } catch (err) {
         console.error(`Erro no deletarCarrinho - controllerCarrinho: ${err}`);
         res.sendStatus(500);

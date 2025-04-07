@@ -12,7 +12,9 @@ async function buscarItensCarrinho(usr_id) {
 
 async function deletarItensCarrinho(car_id) {
     try {
+        const usr_id = await db.query("SELECT usuarios_usr_id FROM carrinho WHERE car_id = ?", [car_id]);
         await db.query('DELETE * FROM carrinho WHERE car_id = ?', [car_id]);
+        return usr_id;
     } catch (err) {
         console.error("Erro no deletarItensCarrinho - modelCarrinho: ${err}");
         throw err;
