@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="icon" href="/imagens/livro-16.ico">
+</head>
+<body>
+
+    <header>
+        <nav class="main-nav">
+            <a class="home-link">Home</a>
+            <div class="nav-botao">
+                <button>Histórico</button>
+                <button id="botao-carrinho">Carrinho</button>
+                <button>Trocas</button>
+                <button>Chatbot</button>
+            </div>
+        </nav>
+        
+        <nav class="usuario-nav">
+            <div class="barra-pesquisa">
+                <input type="text" id="navbarInput" placeholder="Pesquisar...">
+                <button id="navbarBotaoPesquisa">🔍</button>
+            </div>
+            
+            <div class="usuario-sessao">
+                <% if (usuario) { %>
+                    <div id="user-data" data-user-id="<%= usuario.usr_id %>" style="display:none;"></div>
+                    <span class="usuario-nome"><%= usuario.usr_nome %></span>
+                    <img src="/imagens/graficoLinha.PNG" alt="Imagem do usuário" class="usuario-imagem">
+                <% } else { %>
+                    <span class="usuario-nome">Visitante</span>
+                <% } %>
+            </div>
+        </nav>
+    </header>
+
+    <div class="main">
+        <!--Barra lateral de Navegação-->
+        <div class="sidenav">
+            <a href="/">Opção</a>
+        </div>
+
+        <!--Div usada para centralizar o conteudo para da página além da barra lateral-->
+        <div class="conteudo">
+            <div class="bloco_titulo">
+                <h1 class="titulo">Pagamento</h1>
+            </div>
+
+            <br>
+
+            <div class="table_div">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 50px;">Nº Venda</th>
+                            <th style="width: 200px;">Usuário</th>
+                            <th style="width: 75px;">Data</th>
+                            <th style="width: 80px;">Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#1001</td>
+                            <td>Joana Silva</td>
+                            <td>10/03/2024</td>
+                            <td>R$ 89,90</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <br>
+
+            <div class="genero">
+                <label class="label_genero">Enderço de Entrega</label>
+                <select class="selecao_grande" id="end_entrega" name="end_entrega" required>
+                    <option value="">Selecione um endereço</option>
+                    <option value="1">SP, Mogi das Cruzes, Rua das Flores, 123 - Centro</option>
+                    <option value="2">SP, Mogi das Cruzes, Avenida Brasil, 456 - Jardim América</option>
+                    <option value="3">SP, Mogi das Cruzes, Praça da Sé, 789 - Centro Histórico</option>
+                </select>
+            </div>
+
+            <br>
+
+            <div class="botoes">
+                <button class="adicionar-endereco">Adicionar Novo Endereço</button>
+            </div>
+
+            <br>
+
+            <div class="container-pagamento">
+                <div class="formas-pagamento-adicionadas">
+                    <!-- Aqui serão inseridas as formas de pagamento adicionadas -->
+                </div>
+                
+                <div class="botoes">
+                    <button class="adicionar-forma-pagamento" type="button" id="atualizar">Adicionar forma de pagamento</button>
+                </div>
+            </div>
+
+            <br>
+            
+            <div class="table_div">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 50px;">Valor</th>
+                            <th style="width: 200px;">Desconto</th>
+                            <th style="width: 75px;">Frete</th>
+                            <th style="width: 80px;">Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>R$ 89,90</td>
+                            <td>R$ 0,00</td>
+                            <td>R$ 10,00</td>
+                            <td>R$ 99,90</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <br>
+
+            <!--Input de Botões-->
+            <div class="botoes">
+                <button class="cancelar" type="button" id="Cancelar">Cancelar</button>
+                <button class="adicionar" type="button" id="Adicionar">Confirmar</button>
+            </div>
+        </div>
+
+    </div>
+    
+
+    <!--Script do Submit-->
+    <script type="module" src="/scripts/navbar.js"></script>
+    <script type="module" src="/scripts/pagamento.js"></script>
+</body>
+</html>
