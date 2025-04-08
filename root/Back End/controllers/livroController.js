@@ -29,7 +29,7 @@ module.exports.pesquisarLivrosTitulo = async (req, res) => {
         
         res.render('pesquisarLivro', {
             livros: livros || [], 
-            usuario: usuario || null,
+            usuario: usuario,
             tituloPesquisado: titulo
         });
         
