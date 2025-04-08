@@ -15,7 +15,7 @@ CREATE TABLE carrinho (
 ALTER TABLE carrinho ADD CONSTRAINT carrinho_pk PRIMARY KEY ( car_id );
 
 CREATE TABLE cartoes (
-    crt_id               INTEGER NOT NULL,
+    crt_id               INTEGER NOT NULL AUTO_INCREMENT,
     crt_numero           INTEGER NOT NULL,
     crt_bandeira         VARCHAR2(20) NOT NULL,
     crt_codigo_seguranca INTEGER NOT NULL,
@@ -63,7 +63,7 @@ ALTER TABLE editou ADD CONSTRAINT relation_14_pk PRIMARY KEY ( editora_edi_id,
                                                                livros_lvr_id );
 
 CREATE TABLE enderecos_cobranca (
-    end_id          INTEGER NOT NULL,
+    end_id          INTEGER NOT NULL AUTO_INCREMENT,
     end_estado      VARCHAR2(2) NOT NULL,
     end_cidade      VARCHAR2(50) NOT NULL,
     end_bairro      VARCHAR2(25) NOT NULL,
@@ -98,7 +98,7 @@ COMMENT ON COLUMN enderecos_cobranca.end_cep IS
 ALTER TABLE enderecos_cobranca ADD CONSTRAINT endereço_cobrança_pk PRIMARY KEY ( end_id );
 
 CREATE TABLE enderecos_entrega (
-    end_id          INTEGER NOT NULL,
+    end_id          INTEGER NOT NULL AUTO_INCREMENT,
     end_estado      VARCHAR2(2) NOT NULL,
     end_cidade      VARCHAR2(50) NOT NULL,
     end_bairro      VARCHAR2(25) NOT NULL,
@@ -189,7 +189,7 @@ CREATE TABLE possui4 (
 ALTER TABLE possui4 ADD CONSTRAINT relation_16_pk PRIMARY KEY ( categoria_cat_id, livros_lvr_id );
 
 CREATE TABLE transacoes (
-    tra_id                   INTEGER NOT NULL,
+    tra_id                   INTEGER NOT NULL AUTO_INCREMENT,
     tra_numero_venda         INTEGER NOT NULL,
     tra_data                 DATE NOT NULL,
     tra_valor_frete          NUMBER(5, 2) NOT NULL,

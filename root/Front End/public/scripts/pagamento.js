@@ -194,7 +194,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     const result = await response.json();
 
                     if (response.ok) {
-                        // Recarregar a página para mostrar o novo endereço
                         window.location.reload();
                     } else {
                         throw new Error(result.message || 'Erro ao adicionar endereço');
