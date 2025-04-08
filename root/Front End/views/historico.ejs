@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="icon" href="/imagens/livro-16.ico">
+</head>
+<body>
+
+    <header>
+        <nav class="main-nav">
+            <a class="home-link">Home</a>
+            <div class="nav-botao">
+                <button>Histórico</button>
+                <button id="botao-carrinho">Carrinho</button>
+                <button>Trocas</button>
+                <button>Chatbot</button>
+            </div>
+        </nav>
+        
+        <nav class="usuario-nav">
+            <div class="barra-pesquisa">
+                <input type="text" id="navbarInput" placeholder="Pesquisar...">
+                <button id="navbarBotaoPesquisa">🔍</button>
+            </div>
+            
+            <div class="usuario-sessao">
+                <div id="user-data" data-user-id="<%= usuario.usr_id %>" style="display:none;"></div>
+                <span class="usuario-nome"><%= usuario.usr_nome %></span>
+                <img src="/imagens/graficoLinha.PNG" alt="Imagem do usuário" class="usuario-imagem">
+            </div>
+        </nav>
+    </header>
+
+    <div class="main">
+        <!--Barra lateral de Navegação-->
+        <div class="sidenav">
+            <a href="/">Opção</a>
+        </div>
+
+        <!--Div usada para centralizar o conteudo para da página além da barra lateral-->
+        <div class="conteudo">
+            <div class="bloco_titulo">
+                <h1 class="titulo">Histórico de Transações</h1>
+            </div>
+
+            <br>
+            
+            <div class="table_div">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 100px;">Nº Venda</th>
+                            <th style="width: 100px;">Data</th>
+                            <th style="width: 100px;">Valor</th>
+                            <th style="width: 100px;">Subtotal</th>
+                            <th style="width: 150px;">Forma de Pagamento</th>
+                            <th style="width: 150px;">Status</th>
+                            <th style="width: 100px;">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if (transacoes && transacoes.length > 0) { %>
+                            <% transacoes.forEach(transacao => { %>
+                                <tr>
+                                    <td>#<%= transacao.tra_numero_venda %></td>
+                                    <td><%= transacao.tra_data_formatada %></td>
+                                    <td>R$ <%= transacao.tra_valor.toFixed(2).replace('.', ',') %></td>
+                                    <td>R$ <%= transacao.tra_subtotal.toFixed(2).replace('.', ',') %></td>
+                                    <td><%= transacao.tra_forma_de_pagamento %></td>
+                                    <td><%= transacao.tra_status %></td>
+                                    <td>
+                                        <div class="botoes_resultado">
+                                            <a class="ver_mais" href="/pagamento/detalhes?tra_id=<%= transacao.tra_id %>">Ver Mais</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <% }); %>
+                        <% } else { %>
+                            <tr>
+                                <td colspan="7">Nenhuma transação encontrada</td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="/scripts/navbar.js"></script>
+</body>
+</html>

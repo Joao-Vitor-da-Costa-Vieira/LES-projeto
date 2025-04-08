@@ -44,7 +44,25 @@ async function criarItemVenda(itemVendaData) {
     );
 }
 
+async function buscarTransacao(usr_id){
+    await db.query(
+        `SELECT 
+            tra_id,
+            tra_numero_venda,
+            DATE_FORMAT(tra_data, '%d/%m/%Y') as tra_data_formatada,
+            tra_valor,
+            tra_subtotal,
+            tra_forma_de_pagamento,
+            tra_status
+        FROM transacoes 
+        WHERE usuarios_usr_id = ?
+        ORDER BY tra_data DESC`,
+        [usr_id]
+    );
+}
+
 module.exports = {
     criarItemVenda,
-    criarTransacao
+    criarTransacao,
+    buscarTransacao
 };

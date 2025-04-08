@@ -22,6 +22,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    document.querySelectorAll('.nav-botao button').forEach(btn => {
+        if (btn.textContent.trim() === 'Histórico') {
+            btn.addEventListener('click', (event) => {
+                event.stopPropagation();
+                window.location.href = `/pagamento/historico?usr_id=${usuarioId}`;
+            });
+        }
+    });
+
     const botaoPesquisa = document.getElementById('navbarBotaoPesquisa');
     const pesquisaInput = document.getElementById('navbarInput');
     

@@ -1,6 +1,7 @@
 const {
     criarItemVenda,
-    criarTransacao
+    criarTransacao,
+    buscarTransacao
 } = require("../models/vendaModel");
 
 const {
@@ -64,6 +65,26 @@ module.exports.getPagamento = async (req, res) => {
     } catch (err) {
         console.error('Erro ao carregar página do carrinho:', err);
         res.status(500).send('Erro ao carregar carrinho');
+    }
+};
+
+const db = require('../config/db');
+
+module.exports.getHistorico = async (req, res) => {
+    const { usr_id } = req.query;
+
+    try {
+        const [usuario] = await buscarUsuarioId(usr_id);
+
+        const [transacoes] = await buscarTransacao(usr_id);
+
+        res.render('historico', {
+            usuario: usuario[0],
+            transacoes
+        });
+    } catch (error) {
+        console.error('Erro ao buscar histórico:', error);
+        res.status(500).send('Erro ao carregar histórico');
     }
 };
 
