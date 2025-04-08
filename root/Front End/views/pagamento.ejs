@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta charset="UTF-8">
@@ -27,13 +26,9 @@
             </div>
             
             <div class="usuario-sessao">
-                <% if (usuario) { %>
-                    <div id="user-data" data-user-id="<%= usuario.usr_id %>" style="display:none;"></div>
-                    <span class="usuario-nome"><%= usuario.usr_nome %></span>
-                    <img src="/imagens/graficoLinha.PNG" alt="Imagem do usuário" class="usuario-imagem">
-                <% } else { %>
-                    <span class="usuario-nome">Visitante</span>
-                <% } %>
+                <div id="user-data" data-user-id="<%= Array.isArray(usuario) ? usuario[0]?.usr_id : usuario?.usr_id %>" style="display:none;"></div>
+                <span class="usuario-nome"><%= Array.isArray(usuario) ? usuario[0]?.usr_nome : usuario?.usr_nome %></span>
+                <img src="/imagens/graficoLinha.PNG" alt="Imagem do usuário" class="usuario-imagem">
             </div>
         </nav>
     </header>
@@ -53,22 +48,32 @@
             <br>
 
             <div class="table_div">
-                <table>
+                <table id="tabela-carrinho">
                     <thead>
                         <tr>
-                            <th style="width: 50px;">Nº Venda</th>
-                            <th style="width: 200px;">Usuário</th>
-                            <th style="width: 75px;">Data</th>
-                            <th style="width: 80px;">Subtotal</th>
+                            <th style="width: 400px;">Livro</th>
+                            <th style="width: 100px;">Valor Unit.</th>
+                            <th style="width: 100px;">Desconto</th>
+                            <th style="width: 80px;">Qtd.</th>
+                            <th style="width: 100px;">Subtotal</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>#1001</td>
-                            <td>Joana Silva</td>
-                            <td>10/03/2024</td>
-                            <td>R$ 89,90</td>
-                        </tr>
+                        <% if (itensCarrinho && itensCarrinho.length > 0) { %>
+                            <% itensCarrinho.forEach(item => { %>
+                                <tr>
+                                    <td><%= item.livro.lvr_titulo %></td>
+                                    <td>R$ <%= item.livro.lvr_custo %></td>
+                                    <td><%= item.livro.lvr_desconto || '0' %>%</td>
+                                    <td><%= item.car_qtd_item %></td>
+                                    <td>R$ <%= (item.livro.lvr_custo * item.car_qtd_item).toFixed(2) %></td>
+                                </tr>
+                            <% }); %>
+                        <% } else { %>
+                            <tr>
+                                <td colspan="5">Seu carrinho está vazio</td>
+                            </tr>
+                        <% } %>
                     </tbody>
                 </table>
             </div>
@@ -76,12 +81,14 @@
             <br>
 
             <div class="genero">
-                <label class="label_genero">Enderço de Entrega</label>
+                <label class="label_genero">Endereço de Entrega</label>
                 <select class="selecao_grande" id="end_entrega" name="end_entrega" required>
                     <option value="">Selecione um endereço</option>
-                    <option value="1">SP, Mogi das Cruzes, Rua das Flores, 123 - Centro</option>
-                    <option value="2">SP, Mogi das Cruzes, Avenida Brasil, 456 - Jardim América</option>
-                    <option value="3">SP, Mogi das Cruzes, Praça da Sé, 789 - Centro Histórico</option>
+                    <% enderecos.forEach(endereco => { %>
+                        <option value="<%= endereco.end_id %>">
+                            <%= endereco.end_estado %>, <%= endereco.end_cidade %>, <%= endereco.end_bairro %>, <%= endereco.end_endereco %>, <%= endereco.end_numero %> - <%= endereco.end_complemento || '' %>
+                        </option>
+                    <% }); %>
                 </select>
             </div>
 
@@ -95,7 +102,7 @@
 
             <div class="container-pagamento">
                 <div class="formas-pagamento-adicionadas">
-                    <!-- Aqui serão inseridas as formas de pagamento adicionadas -->
+                    
                 </div>
                 
                 <div class="botoes">
@@ -109,18 +116,16 @@
                 <table>
                     <thead>
                         <tr>
-                            <th style="width: 50px;">Valor</th>
-                            <th style="width: 200px;">Desconto</th>
-                            <th style="width: 75px;">Frete</th>
-                            <th style="width: 80px;">Subtotal</th>
+                            <th style="width: 100px;">Valor</th>
+                            <th style="width: 100px;">Frete</th>
+                            <th style="width: 100px;">Total</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>R$ 89,90</td>
-                            <td>R$ 0,00</td>
+                            <td>R$ <%= subtotalTotal %></td>
                             <td>R$ 10,00</td>
-                            <td>R$ 99,90</td>
+                            <td>R$ <%= (subtotalTotal + 10) %></td>
                         </tr>
                     </tbody>
                 </table>
@@ -131,12 +136,15 @@
             <!--Input de Botões-->
             <div class="botoes">
                 <button class="cancelar" type="button" id="Cancelar">Cancelar</button>
-                <button class="adicionar" type="button" id="Adicionar">Confirmar</button>
+                <button class="adicionar" type="button" id="Confirmar">Confirmar</button>
             </div>
         </div>
-
     </div>
     
+
+    <script id="cartoes-data" type="application/json">
+        <%- JSON.stringify(cartoes) %>
+    </script>
 
     <!--Script do Submit-->
     <script type="module" src="/scripts/navbar.js"></script>

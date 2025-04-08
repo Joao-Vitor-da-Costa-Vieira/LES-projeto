@@ -12,7 +12,6 @@ async function buscarItensCarrinho(usr_id) {
 
 async function deletarItensCarrinho(car_id) {
     try {
-        // Primeiro obtém o usr_id antes de deletar
         const [result] = await db.query(
             "SELECT usuarios_usr_id FROM carrinho WHERE car_id = ?", 
             [car_id]

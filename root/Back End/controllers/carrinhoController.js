@@ -6,14 +6,22 @@ const {
     adicionarItemCarrinho
 } = require("../models/carrinhoModel");
 
+const { 
+    buscarUsuarioId
+} = require("../models/usuarioModel");
+
 const {
     buscarLivroId
 } = require("../models/livroModel");
 
+
 module.exports.getCarrinho = async (req, res) => {
     try {
-        const usuario = req.query;
-        const carrinhos = await buscarItensCarrinho(usuario.usr_id);
+        const { usr_id } = req.query;
+        console.log('Usuário recebido Carrinho:', usr_id);
+        const usuario = await buscarUsuarioId(usr_id);
+        console.log('Usuário recebido Carrinho:', usuario);
+        const carrinhos = await buscarItensCarrinho(usr_id);
         
         const livrosComDetalhes = await Promise.all(
             carrinhos.map(async (carrinho) => {

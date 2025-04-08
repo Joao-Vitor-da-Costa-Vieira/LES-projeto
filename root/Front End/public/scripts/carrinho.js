@@ -289,11 +289,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    const btnComprar = document.getElementById('finalizar-compra');
+    const btnComprar = document.getElementById('comprar');
     if (btnComprar) {
         btnComprar.addEventListener('click', function() {
             if (usr_id) {
-                window.location.href = `/pagamento?usuario=${encodeURIComponent(JSON.stringify({usr_id: usr_id}))}`;
+                window.location.href = `/pagamento?usr_id=${usr_id}`;
             } else {
                 console.error('ID do usuário não encontrado');
             }

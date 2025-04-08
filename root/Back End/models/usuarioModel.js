@@ -117,7 +117,7 @@ async function buscarTodosUsuarios() {
 // Buscando usuários por id
 async function buscarUsuarioId(id) {
     try {
-        const [usuario] = await db.query(`SELECT * FROM usuarios WHERE usr_id = ?`, id);
+        const [usuario] = await db.query(`SELECT * FROM usuarios WHERE usr_id = ?`, [id]);
         return usuario;
     } catch (err) {
         console.error(`Erro no buscarUsuarioId - modelUsuarios: ${err}`);

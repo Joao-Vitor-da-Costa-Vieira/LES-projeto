@@ -68,6 +68,7 @@ CREATE TABLE enderecos_cobranca (
     end_cidade      VARCHAR2(50) NOT NULL,
     end_bairro      VARCHAR2(25) NOT NULL,
     end_numero      INTEGER NOT NULL,
+    end_endereco    VARCHAR2(100) NOT NULL,
     end_complemento VARCHAR2(20),
     end_cep         INTEGER NOT NULL,
     usuarios_usr_id  INTEGER NOT NULL
@@ -102,6 +103,7 @@ CREATE TABLE enderecos_entrega (
     end_cidade      VARCHAR2(50) NOT NULL,
     end_bairro      VARCHAR2(25) NOT NULL,
     end_numero      INTEGER NOT NULL,
+    end_endereco    VARCHAR2(100) NOT NULL,
     end_complemento VARCHAR2(20),
     end_cep         INTEGER NOT NULL,
     usuarios_usr_id  INTEGER NOT NULL

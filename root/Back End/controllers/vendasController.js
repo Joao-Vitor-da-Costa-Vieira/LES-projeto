@@ -14,12 +14,29 @@ const {
     buscarCartoesUsuarioId
 } = require("../models/cartaoModel");
 
+const { 
+    buscarUsuarioId
+} = require("../models/usuarioModel");
+
+const {
+    buscarLivroId
+} = require("../models/livroModel");
+
 module.exports.getPagamento = async (req, res) => {
     try {
-        const { usuario } = req.query;
-        const carrinhos = await buscarItensCarrinho(usuario.usr_id);
-        const enderecos = await buscarEnderecosEntregaUsuarioId(usuario.usr_id);
-        const cartoes = await buscarCartoesUsuarioId(usuario.usr_id);
+        const { usr_id } = req.query;
+
+        console.log('Usuário recebido Pagamento:', usr_id); 
+
+        const [usuario, carrinhos, enderecos, cartoes] = await Promise.all([
+            buscarUsuarioId(usr_id),
+            buscarItensCarrinho(usr_id),
+            buscarEnderecosEntregaUsuarioId(usr_id),
+            buscarCartoesUsuarioId(usr_id)
+        ]);
+
+        console.log('Usuário recebido Pagamento:', usuario);
+        console.log('Cartoes recebidos Pagamento:', cartoes);  
 
         const livrosComDetalhes = await Promise.all(
             carrinhos.map(async (carrinho) => {

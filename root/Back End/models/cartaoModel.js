@@ -66,7 +66,7 @@ async function buscarCartaoId(id) {
 
 async function buscarCartoesUsuarioId(id) {
     try {
-        const [cartoes] = await db.query(`SELECT * FROM cartoes WHERE usuarios_usr_id = ?`, id);
+        const [cartoes] = await db.query(`SELECT * FROM cartoes WHERE usuarios_usr_id = ?`, [id]);
         return cartoes;
     } catch (err) {
         console.error(`Erro no buscarCartoesUsuarioId - modelCartão: ${err}`);
