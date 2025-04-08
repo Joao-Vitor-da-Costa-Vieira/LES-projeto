@@ -1313,7 +1313,7 @@ input[type=submit]{
 .atualizar_submenu_endereco {
     display: block; 
     position: absolute; 
-    background: white;
+    background: #0003c8;
     border: 5px solid #0003c8;
     border-radius: 3px;
     padding: 10px;

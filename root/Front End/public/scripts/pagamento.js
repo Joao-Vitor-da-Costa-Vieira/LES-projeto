@@ -24,7 +24,6 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Coletar dados das formas de pagamento
         const pagamentos = Array.from(formasPagamento).map(forma => {
             const tipo = forma.querySelector('p').textContent.trim();
             const valor = forma.querySelector('input[type="number"]').value;
@@ -54,7 +53,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const result = await response.json();
 
             if (response.ok) {
-                // Redirecionar para página de confirmação ou mostrar mensagem de sucesso
                 window.location.href = `/pagamento/cupom/${result.vendaId}`;
             } else {
                 throw new Error(result.message || 'Erro ao processar pagamento');
@@ -65,10 +63,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Restante do código para adicionar endereços e formas de pagamento...
+
     document.querySelectorAll('.adicionar-endereco').forEach(botao => {
         botao.addEventListener('click', function (event) {
-            event.stopPropagation();
+            event.preventDefault();
+            event.stopImmediatePropagation();
 
             let submenuAtual = this.querySelector('.atualizar_submenu_endereco');
 
@@ -109,7 +108,31 @@ document.addEventListener('DOMContentLoaded', function() {
                             <option value="">Selecione</option>
                             <option value="AC">AC</option>
                             <option value="AL">AL</option>
-                            <!-- Outros estados... -->
+                            <option value="AP">AP</option>
+                            <option value="AM">AM</option>
+                            <option value="BA">BA</option>
+                            <option value="CE">CE</option>
+                            <option value="DF">DF</option>
+                            <option value="ES">ES</option>
+                            <option value="GO">GO</option>
+                            <option value="MA">MA</option>
+                            <option value="MT">MT</option>
+                            <option value="MS">MS</option>
+                            <option value="MG">MG</option>
+                            <option value="PA">PA</option>
+                            <option value="PB">PB</option>
+                            <option value="PR">PR</option>
+                            <option value="PE">PE</option>
+                            <option value="PI">PI</option>
+                            <option value="RJ">RJ</option>
+                            <option value="RN">RN</option>
+                            <option value="RS">RS</option>
+                            <option value="RO">RO</option>
+                            <option value="RR">RR</option>
+                            <option value="SC">SC</option>
+                            <option value="SP">SP</option>
+                            <option value="SE">SE</option>
+                            <option value="TO">TO</option>
                         </select>
                     </div>
                 </div>
@@ -180,6 +203,45 @@ document.addEventListener('DOMContentLoaded', function() {
                     console.error('Erro:', error);
                     alert(error.message);
                 }
+            });
+
+            submenu.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+
+            const form = submenu.querySelector('form');
+            form.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                document.querySelector('form').addEventListener('submit', async function(event) {
+                    event.preventDefault();
+                
+                    const formDados = new FormData(event.target);
+                    let dados = Object.fromEntries(formDados.entries());        
+                
+                    const endereco = {
+                        end_usr_id: usr_id,
+                        end_bairro: dados.bairro,
+                        end_cep: dados.cep,
+                        end_cidade: dados.cidade,
+                        end_estado: dados.estado,
+                        end_endereco: dados.endereco, 
+                        end_numero: dados.numero,
+                        end_complemento: dados.complemento
+                    };
+                
+                    let result = await cadastrarEnderecoEntregaService(endereco, usr_id);
+                
+                    if (result.status === 200) {
+                        alert('Endereço foi cadastrado com sucesso!');
+                        return;
+                    }
+                
+                    alert('Não foi possível cadastrar o endereço');
+                });
             });
 
             this.appendChild(submenu);
