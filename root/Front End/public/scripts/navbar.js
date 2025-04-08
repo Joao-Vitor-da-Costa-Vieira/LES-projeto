@@ -11,7 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    const usuarioId = document.querySelector('#user-data');
+    const userDataElement = document.getElementById('user-data');
+    const usuarioId = userDataElement.getAttribute('data-user-id');
 
     document.querySelectorAll('#botao-carrinho').forEach(botao => {
         botao.addEventListener('click', (event) => {
