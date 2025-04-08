@@ -124,7 +124,7 @@
                         <tr>
                             <td>R$ <%= subtotalTotal %></td>
                             <td id="frete-valor">R$ <%= enderecos.length > 0 ? (enderecos[0].end_id + 10) : '0' %></td>
-                <td id="total-valor">R$ <%= (subtotalTotal + (enderecos.length > 0 ? (enderecos[0].end_id + 10) : 0)) %></td>
+                            <td id="total-valor">R$ <%= (subtotalTotal + (enderecos.length > 0 ? (enderecos[0].end_id + 10) : 0)) %></td>
                         </tr>
                     </tbody>
                 </table>
@@ -165,7 +165,6 @@
         <%- JSON.stringify(cartoes) %>
     </script>
 
-    <!--Script do Submit-->
     <script type="module" src="/scripts/navbar.js"></script>
     <script type="module" src="/scripts/pagamento.js"></script>
 </body>

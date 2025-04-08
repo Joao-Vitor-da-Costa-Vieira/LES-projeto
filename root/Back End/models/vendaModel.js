@@ -1,17 +1,6 @@
 const db = require('../config/db');
 
-async function criarTransacao(transacaoData) {
-    const { 
-        numeroVenda, 
-        data, 
-        frete, 
-        formaPagamento, 
-        status, 
-        valor, 
-        subtotal, 
-        enderecoId, 
-        usuarioId 
-    } = transacaoData;
+async function criarTransacao(numeroVenda, data, frete, formaPagamento, status, valor, subtotal, enderecoId, usuarioId ) {
 
     const [result] = await db.query(
         `INSERT INTO transacoes (
@@ -31,8 +20,7 @@ async function criarTransacao(transacaoData) {
     return result.insertId;
 }
 
-async function criarItemVenda(itemVendaData) {
-    const { quantidade, transacaoId, livroId } = itemVendaData;
+async function criarItemVenda(quantidade, transacaoId, livroId) {
     
     await db.query(
         `INSERT INTO itens_de_venda (
@@ -42,6 +30,12 @@ async function criarItemVenda(itemVendaData) {
         ) VALUES (?, ?, ?)`,
         [quantidade, transacaoId, livroId]
     );
+}
+
+async function buscarTransacaoId(usuarioId) {
+    const [result] = await db.query(`SELECT tra_id FROM transacoes WHERE usuarios_usr_id = ?`,[usuarioId]);
+
+        return result;
 }
 
 async function buscarTransacao(usr_id){
@@ -64,5 +58,6 @@ async function buscarTransacao(usr_id){
 module.exports = {
     criarItemVenda,
     criarTransacao,
+    buscarTransacaoId,
     buscarTransacao
 };

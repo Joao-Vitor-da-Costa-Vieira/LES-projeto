@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const enderecoId = document.getElementById('end_entrega').value;
         const formasPagamento = document.querySelectorAll('.forma-pagamento-item');
         const frete = parseFloat(document.getElementById('frete-valor').textContent.replace('R$ ', ''));
-        const subtotal = parseFloat(document.getElementById('subtotal-valor').textContent.replace('R$ ', ''));
-        const total = subtotal + frete;
+        const subtotal = parseFloat(document.getElementById('total-valor').textContent.replace('R$ ', ''));
+        let total;
         const dataAtual = new Date().toISOString().split('T')[0];
     
         if (!enderecoId) {
@@ -30,7 +30,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
         const pagamentos = Array.from(formasPagamento).map(forma => {
             const tipo = forma.querySelector('p').textContent.trim();
-            const valor = parseFloat(forma.querySelector('input[type="number"]').value);
+            const valor = parseFloat(forma.querySelector('input[name="valor"]').value);
+            total = total + valor;
             const cartaoSelect = forma.querySelector('select[name="cartao"]');
             const cartaoId = cartaoSelect ? parseInt(cartaoSelect.value) : null;
             
@@ -267,12 +268,20 @@ document.addEventListener('DOMContentLoaded', function() {
             formaPagamentoItem.classList.add('forma-pagamento-item');
             
             let camposAdicionais = '';
+            const cartoesDataElement = document.getElementById('cartoes-data');
+            const cartoes = cartoesDataElement ? JSON.parse(cartoesDataElement.textContent) : [];
+            
+            camposAdicionais += `
+                <div class="linha_centralizada">
+                    <div class="valor">
+                        <label class="label_pequena" for="valor">Valor a ser pago</label>
+                        <input class="valor_input" type="number" name="valor" min="0.01" step="0.01" required>
+                    </div>
+                </div>
+            `;
             
             if (formaSelecionada === '1') {
-                const cartoesDataElement = document.getElementById('cartoes-data');
-                const cartoes = cartoesDataElement ? JSON.parse(cartoesDataElement.textContent) : [];
-
-                camposAdicionais = `
+                camposAdicionais += `
                     <div class="linha_centralizada">
                         <div class="genero">
                             <label class="label_genero">Cartão</label>
@@ -286,13 +295,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>
                     </div>
                 `;
-            } else {
-                camposAdicionais = `
-                    <div class="valor">
-                        <label class="label_pequena" for="valor">Valor a ser pago</label>
-                        <input class="valor_input" type="number" name="valor" min="0.01" step="0.01" required>
-                    </div>
-                `;
             }
             
             formaPagamentoItem.innerHTML = `
@@ -304,7 +306,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="linha_centralizada">
                     <button class="remover-forma" type="button">Remover</button>
                 </div>    
-                `;
+            `;
             
             formaPagamentoItem.querySelector('.remover-forma').addEventListener('click', function() {
                 formaPagamentoItem.remove();

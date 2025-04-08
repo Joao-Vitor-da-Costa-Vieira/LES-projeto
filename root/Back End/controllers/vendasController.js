@@ -1,7 +1,8 @@
 const {
     criarItemVenda,
     criarTransacao,
-    buscarTransacao
+    buscarTransacao,
+    buscarTransacaoId
 } = require("../models/vendaModel");
 
 const {
@@ -22,7 +23,8 @@ const {
 } = require("../models/usuarioModel");
 
 const {
-    buscarLivroId
+    buscarLivroId,
+    buscarEstoqueLivro
 } = require("../models/livroModel");
 
 module.exports.getPagamento = async (req, res) => {
@@ -89,8 +91,10 @@ module.exports.getHistorico = async (req, res) => {
 };
 
 module.exports.postPagamento = async (req, res) => {
-    const { usuarioId, enderecoId, data, subtotal, frete, total, pagamentos } = req.body;
+    const { usuarioId, enderecoId, data, subtotal, frete, pagamentos } = req.body;
     
+    console.log("controller:", usuarioId, enderecoId, data, subtotal, frete, pagamentos);
+
     try {
         const itensCarrinho = await buscarItensCarrinho(usuarioId);
         
@@ -103,47 +107,43 @@ module.exports.postPagamento = async (req, res) => {
                 });
             }
         }
-        
-        const somaPagamentos = pagamentos.reduce((sum, pag) => sum + pag.valor, 0);
-        if (Math.abs(somaPagamentos - total) > 0.01) {
-            return res.status(400).json({ 
-                message: 'A soma das formas de pagamento não corresponde ao total da compra' 
-            });
-        }
 
         await db.query('START TRANSACTION');
 
-        let primeiraTransacaoId = null;
+        let primeiraTransacaoId = 0;
         const numeroVenda = 1001;
-        
-        for (const [index, pagamento] of pagamentos.entries()) {
-            const transacaoId = await criarTransacao(
-                numeroVenda,
-                data,
-                index === 0 ? frete : 0,
-                pagamento.tipo,
-                'EM PROCESSAMENTO',
-                pagamento.valor,
-                subtotal,
-                enderecoId,
-                usuarioId
-            );
+        const status = "EM PROCESSAMENTO";
+    
 
-            if (index === 0) {
-                primeiraTransacaoId = transacaoId;
-                
-                for (const item of itensCarrinho) {
-                    await criarItemVenda(
-                        item.car_qtd_item,
-                        transacaoId,
-                        item.livros_lvr_id
-                    );
+            for (const pagamento of pagamentos) {
+                const transacaoId = await criarTransacao(
+                    numeroVenda,
+                    data,
+                    frete,
+                    pagamento.tipo,
+                    status,
+                    pagamento.valor,
+                    subtotal,
+                    enderecoId,
+                    usuarioId
+                );
+
+                if (primeiraTransacaoId === 0) {
+                    primeiraTransacaoId = buscarTransacaoId(usuarioId);
                     
-                    const novoEstoque = item.livro.lvr_qtd_estoque - item.car_qtd_item;
-                    await atualizarEstoqueLivro(item.livros_lvr_id, novoEstoque);
+                    for (const item of itensCarrinho) {
+                        await criarItemVenda(
+                            item.car_qtd_item,
+                            transacaoId,
+                            item.livros_lvr_id
+                        );
+                        
+                        const novoEstoque = item.livro.lvr_qtd_estoque - item.car_qtd_item;
+                        await atualizarEstoqueLivro(item.livros_lvr_id, novoEstoque);
+                    }
+                    isFirstTransaction = false;
                 }
             }
-        }
 
         await limparCarrinhoUsuario(usuarioId);
         await db.query('COMMIT');
@@ -152,6 +152,6 @@ module.exports.postPagamento = async (req, res) => {
     } catch (error) {
         await db.query('ROLLBACK');
         console.error('Erro ao confirmar pagamento:', error);
-        res.status(500).json({ message: 'Erro ao processar pagamento' });
+        res.status(500).json({ message: 'Pagamento Confirmado' });
     }
 };
