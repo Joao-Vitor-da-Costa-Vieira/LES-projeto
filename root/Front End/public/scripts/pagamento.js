@@ -1,3 +1,5 @@
+import { cadastrarEnderecoEntregaService } from "/scripts/service/enderecoEntregaService.js";
+
 document.addEventListener('DOMContentLoaded', function() {
     const userDataElement = document.getElementById('user-data');
     const usr_id = userDataElement ? userDataElement.dataset.userId : null;
@@ -172,75 +174,32 @@ document.addEventListener('DOMContentLoaded', function() {
                 e.preventDefault();
                 
                 const formData = {
-                    estado: this.estado.value,
-                    cidade: this.cidade.value,
-                    bairro: this.bairro.value,
-                    endereco: this.endereco.value,
-                    numero: this.numero.value,
-                    complemento: this.complemento.value,
-                    cep: this.cep.value,
-                    usuarioId: parseInt(usr_id)
+                    end_estado: this.estado.value,
+                    end_cidade: this.cidade.value,
+                    end_bairro: this.bairro.value,
+                    end_endereco: this.endereco.value,
+                    end_numero: this.numero.value,
+                    end_complemento: this.complemento.value,
+                    end_cep: this.cep.value,
+                    end_usr_id: parseInt(usr_id)
                 };
-
+    
                 try {
-                    const response = await fetch('/enderecos/entrega', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(formData)
-                    });
-
-                    const result = await response.json();
-
-                    if (response.ok) {
-                        window.location.reload();
+                    const result = await cadastrarEnderecoEntregaService(formData, usr_id);
+                    
+                    if (result.status === 200) {
+                        window.location.reload(); // Recarrega a página para mostrar o novo endereço
                     } else {
-                        throw new Error(result.message || 'Erro ao adicionar endereço');
+                        throw new Error('Erro ao adicionar endereço');
                     }
                 } catch (error) {
                     console.error('Erro:', error);
-                    alert(error.message);
+                    alert('Não foi possível cadastrar o endereço');
                 }
             });
-
+    
             submenu.addEventListener('click', function(e) {
                 e.stopPropagation();
-            });
-
-            const form = submenu.querySelector('form');
-            form.addEventListener('click', function(e) {
-                e.stopPropagation();
-            });
-
-            form.addEventListener('submit', async function(e) {
-                e.preventDefault();
-                document.querySelector('form').addEventListener('submit', async function(event) {
-                    event.preventDefault();
-                
-                    const formDados = new FormData(event.target);
-                    let dados = Object.fromEntries(formDados.entries());        
-                
-                    const endereco = {
-                        end_usr_id: usr_id,
-                        end_bairro: dados.bairro,
-                        end_cep: dados.cep,
-                        end_cidade: dados.cidade,
-                        end_estado: dados.estado,
-                        end_endereco: dados.endereco, 
-                        end_numero: dados.numero,
-                        end_complemento: dados.complemento
-                    };
-                
-                    let result = await cadastrarEnderecoEntregaService(endereco, usr_id);
-                
-                    if (result.status === 200) {
-                        alert('Endereço foi cadastrado com sucesso!');
-                        return;
-                    }
-                
-                    alert('Não foi possível cadastrar o endereço');
-                });
             });
 
             this.appendChild(submenu);

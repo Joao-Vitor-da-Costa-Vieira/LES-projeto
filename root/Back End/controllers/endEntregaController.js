@@ -24,7 +24,7 @@ module.exports.getEnderecoEntregaAtualizar = async (req, res) => {
 // Inserção de dados
 module.exports.postEnderecoEntregaAdicionar = async (req, res) => {
     try {
-        await cadastrarEnderecoEntrega(req.body);
+        await cadastrarEnderecoEntrega(req.body, req.params.usr_id);
         res.sendStatus(200);
     } catch (err) {
         console.error(`Erro no postEnderecoEntregaAdicionar - controllerEnderecoEntrega: ${err}`);
