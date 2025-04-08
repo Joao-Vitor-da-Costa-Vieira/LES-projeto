@@ -124,10 +124,15 @@ async function buscarItemCarrinho(usr_id,lvr_id) {
     }
 }
 
+async function limparCarrinhoUsuario(usuarioId) {
+    await db.query('DELETE FROM carrinho WHERE usuarios_usr_id = ?', [usuarioId]);
+}
+
 module.exports = {
     buscarItensCarrinho,
     deletarItensCarrinho,
     buscarItemCarrinho,
     alterarItemCarrinho,
-    adicionarItemCarrinho
+    adicionarItemCarrinho,
+    limparCarrinhoUsuario
 };

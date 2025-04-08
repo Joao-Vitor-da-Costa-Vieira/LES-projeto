@@ -66,8 +66,25 @@ async function buscarLivroId(lvr_id) {
     }
 }
 
+async function buscarEstoqueLivro(livroId) {
+    const [[livro]] = await db.query(
+        'SELECT lvr_qtd_estoque FROM livros WHERE lvr_id = ?', 
+        [livroId]
+    );
+    return livro.lvr_qtd_estoque;
+}
+
+async function atualizarEstoqueLivro(livroId, novaQuantidade) {
+    await db.query(
+        'UPDATE livros SET lvr_qtd_estoque = ? WHERE lvr_id = ?',
+        [novaQuantidade, livroId]
+    );
+}
+
 module.exports = {
     buscarLivrosTitulo,
     consultaFiltroLivro,
-    buscarLivroId 
+    buscarLivroId,
+    atualizarEstoqueLivro,
+    buscarEstoqueLivro 
 };

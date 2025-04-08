@@ -1,9 +1,11 @@
 const {
-    cadastrarVenda
+    criarItemVenda,
+    criarTransacao
 } = require("../models/vendaModel");
 
 const {
-    buscarItensCarrinho
+    buscarItensCarrinho,
+    limparCarrinhoUsuario
 } = require("../models/carrinhoModel");
 
 const {
@@ -62,5 +64,73 @@ module.exports.getPagamento = async (req, res) => {
     } catch (err) {
         console.error('Erro ao carregar página do carrinho:', err);
         res.status(500).send('Erro ao carregar carrinho');
+    }
+};
+
+module.exports.postPagamento = async (req, res) => {
+    const { usuarioId, enderecoId, data, subtotal, frete, total, pagamentos } = req.body;
+    
+    try {
+        const itensCarrinho = await buscarItensCarrinho(usuarioId);
+        
+        for (const item of itensCarrinho) {
+            const estoqueAtual = await buscarEstoqueLivro(item.livros_lvr_id);
+            if (item.car_qtd_item > estoqueAtual) {
+                return res.status(400).json({ 
+                    message: `Estoque insuficiente para o livro ${item.livro.lvr_titulo}. 
+                    Quantidade disponível: ${estoqueAtual}`
+                });
+            }
+        }
+        
+        const somaPagamentos = pagamentos.reduce((sum, pag) => sum + pag.valor, 0);
+        if (Math.abs(somaPagamentos - total) > 0.01) {
+            return res.status(400).json({ 
+                message: 'A soma das formas de pagamento não corresponde ao total da compra' 
+            });
+        }
+
+        await db.query('START TRANSACTION');
+
+        let primeiraTransacaoId = null;
+        const numeroVenda = 1001;
+        
+        for (const [index, pagamento] of pagamentos.entries()) {
+            const transacaoId = await criarTransacao(
+                numeroVenda,
+                data,
+                index === 0 ? frete : 0,
+                pagamento.tipo,
+                'EM PROCESSAMENTO',
+                pagamento.valor,
+                subtotal,
+                enderecoId,
+                usuarioId
+            );
+
+            if (index === 0) {
+                primeiraTransacaoId = transacaoId;
+                
+                for (const item of itensCarrinho) {
+                    await criarItemVenda(
+                        item.car_qtd_item,
+                        transacaoId,
+                        item.livros_lvr_id
+                    );
+                    
+                    const novoEstoque = item.livro.lvr_qtd_estoque - item.car_qtd_item;
+                    await atualizarEstoqueLivro(item.livros_lvr_id, novoEstoque);
+                }
+            }
+        }
+
+        await limparCarrinhoUsuario(usuarioId);
+        await db.query('COMMIT');
+
+        res.status(200).json({ vendaId: primeiraTransacaoId });
+    } catch (error) {
+        await db.query('ROLLBACK');
+        console.error('Erro ao confirmar pagamento:', error);
+        res.status(500).json({ message: 'Erro ao processar pagamento' });
     }
 };

@@ -83,7 +83,6 @@
             <div class="genero">
                 <label class="label_genero">Endereço de Entrega</label>
                 <select class="selecao_grande" id="end_entrega" name="end_entrega" required>
-                    <option value="">Selecione um endereço</option>
                     <% enderecos.forEach(endereco => { %>
                         <option value="<%= endereco.end_id %>">
                             <%= endereco.end_estado %>, <%= endereco.end_cidade %>, <%= endereco.end_bairro %>, <%= endereco.end_endereco %>, <%= endereco.end_numero %> - <%= endereco.end_complemento || '' %>
@@ -124,8 +123,8 @@
                     <tbody>
                         <tr>
                             <td>R$ <%= subtotalTotal %></td>
-                            <td>R$ 10,00</td>
-                            <td>R$ <%= (subtotalTotal + 10) %></td>
+                            <td id="frete-valor">R$ <%= enderecos.length > 0 ? (enderecos[0].end_id + 10) : '0' %></td>
+                <td id="total-valor">R$ <%= (subtotalTotal + (enderecos.length > 0 ? (enderecos[0].end_id + 10) : 0)) %></td>
                         </tr>
                     </tbody>
                 </table>
@@ -141,6 +140,26 @@
         </div>
     </div>
     
+    <script>
+        document.getElementById('end_entrega')?.addEventListener('change', function() {
+            const selectedOption = this.options[this.selectedIndex];
+            if (selectedOption.value) {
+                const endId = parseInt(selectedOption.value);
+                const frete = endId + 10;
+                
+                document.getElementById('frete-valor').textContent = 'R$ ' + frete;
+                
+                const subtotalText = document.getElementById('subtotal-valor').textContent;
+                const subtotal = parseFloat(subtotalText.replace('R$ ', ''));
+                const total = subtotal + frete;
+                document.getElementById('total-valor').textContent = 'R$ ' + total;
+            } else {
+                document.getElementById('frete-valor').textContent = 'R$ 10.00';
+                const subtotal = parseFloat(document.getElementById('subtotal-valor').textContent.replace('R$ ', ''));
+                document.getElementById('total-valor').textContent = 'R$ ' + (subtotal + 10);
+            }
+        });
+    </script>
 
     <script id="cartoes-data" type="application/json">
         <%- JSON.stringify(cartoes) %>

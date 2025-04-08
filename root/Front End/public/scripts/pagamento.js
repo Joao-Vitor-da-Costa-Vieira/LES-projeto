@@ -4,41 +4,53 @@ document.addEventListener('DOMContentLoaded', function() {
     const userDataElement = document.getElementById('user-data');
     const usr_id = userDataElement ? userDataElement.dataset.userId : null;
 
-    // Botão Cancelar - Volta para a home
     document.getElementById('Cancelar')?.addEventListener('click', function() {
         if (usr_id) {
             window.location.href = `/home/${usr_id}`;
         }
     });
 
-    // Botão Confirmar - Finaliza a compra
     document.getElementById('Confirmar')?.addEventListener('click', async function() {
         const enderecoId = document.getElementById('end_entrega').value;
         const formasPagamento = document.querySelectorAll('.forma-pagamento-item');
-        
+        const frete = parseFloat(document.getElementById('frete-valor').textContent.replace('R$ ', ''));
+        const subtotal = parseFloat(document.getElementById('subtotal-valor').textContent.replace('R$ ', ''));
+        const total = subtotal + frete;
+        const dataAtual = new Date().toISOString().split('T')[0];
+    
         if (!enderecoId) {
             alert('Selecione um endereço de entrega');
             return;
         }
-
+    
         if (formasPagamento.length === 0) {
             alert('Adicione pelo menos uma forma de pagamento');
             return;
         }
-
+    
         const pagamentos = Array.from(formasPagamento).map(forma => {
             const tipo = forma.querySelector('p').textContent.trim();
-            const valor = forma.querySelector('input[type="number"]').value;
+            const valor = parseFloat(forma.querySelector('input[type="number"]').value);
             const cartaoSelect = forma.querySelector('select[name="cartao"]');
-            const cartaoId = cartaoSelect ? cartaoSelect.value : null;
+            const cartaoId = cartaoSelect ? parseInt(cartaoSelect.value) : null;
+            
+            if (valor < 10) {
+                throw new Error('O valor mínimo para cada forma de pagamento é R$ 10,00');
+            }
             
             return {
                 tipo,
-                valor: parseFloat(valor),
-                cartaoId: cartaoId ? parseInt(cartaoId) : null
+                valor,
+                cartaoId
             };
         });
-
+    
+        const somaPagamentos = pagamentos.reduce((sum, pagamento) => sum + pagamento.valor, 0);
+        if (Math.abs(somaPagamentos - total) > 0.01) {
+            alert(`A soma das formas de pagamento (R$ ${somaPagamentos}) não corresponde ao total da compra (R$ ${total})`);
+            return;
+        }
+    
         try {
             const response = await fetch('/pagamento/confirmar', {
                 method: 'POST',
@@ -48,14 +60,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 body: JSON.stringify({
                     usuarioId: parseInt(usr_id),
                     enderecoId: parseInt(enderecoId),
-                    pagamentos
+                    data: dataAtual,
+                    subtotal: subtotal,
+                    frete: frete,
+                    total: total,
+                    pagamentos: pagamentos
                 })
             });
-
+    
             const result = await response.json();
-
+    
             if (response.ok) {
-                window.location.href = `/pagamento/cupom/${result.vendaId}`;
+                window.location.href = `/pagamento/historico/${result.vendaId}`;
             } else {
                 throw new Error(result.message || 'Erro ao processar pagamento');
             }
@@ -169,7 +185,6 @@ document.addEventListener('DOMContentLoaded', function() {
             </form>
             `;
 
-            // Adiciona evento de submit ao formulário
             submenu.querySelector('form').addEventListener('submit', async function(e) {
                 e.preventDefault();
                 
@@ -188,7 +203,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     const result = await cadastrarEnderecoEntregaService(formData, usr_id);
                     
                     if (result.status === 200) {
-                        window.location.reload(); // Recarrega a página para mostrar o novo endereço
+                        window.location.reload(); 
                     } else {
                         throw new Error('Erro ao adicionar endereço');
                     }
@@ -206,7 +221,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Código para adicionar formas de pagamento (mantido igual, mas atualizando para usar os cartões do usuário)
     const btnAdicionar = document.querySelector('.adicionar-forma-pagamento');
     const containerFormas = document.querySelector('.formas-pagamento-adicionadas');
     
@@ -263,7 +277,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div class="genero">
                             <label class="label_genero">Cartão</label>
                             <select class="selecao_media" name="cartao" required>
-                                <option value="">Selecione</option>
                                 ${cartoes.map(cartao => `
                                     <option value="${cartao.crt_id}">
                                         ${cartao.crt_bandeira} **** **** **** ${cartao.crt_numero.toString().slice(-4)}

@@ -1,44 +1,50 @@
 const db = require('../config/db');
 
-async function cadastrarVenda(dados,end_id,usr_id) {
+async function criarTransacao(transacaoData) {
+    const { 
+        numeroVenda, 
+        data, 
+        frete, 
+        formaPagamento, 
+        status, 
+        valor, 
+        subtotal, 
+        enderecoId, 
+        usuarioId 
+    } = transacaoData;
 
-    const sql = `INSERT INTO transacoes (
-        tra_id,
-        tra_numero_venda,
-        tra_data,
-        tra_valor_frete,
-        tra_forma_de_pagamento,
-        tra_status,
-        tra_valor,
-        tra_desconto,
-        tra_subtotal,
-        enderecos_entrega_end_id,
-        usuarios_usr_id           
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    const [result] = await db.query(
+        `INSERT INTO transacoes (
+            tra_numero_venda,
+            tra_data,
+            tra_valor_frete,
+            tra_forma_de_pagamento,
+            tra_status,
+            tra_valor,
+            tra_subtotal,
+            enderecos_entrega_end_id,
+            usuarios_usr_id
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        [numeroVenda, data, frete, formaPagamento, status, valor, subtotal, enderecoId, usuarioId]
+    );
 
-    const valores = [
-        dados.tra_id,
-        dados.tra_numero_venda,
-        dados.tra_data,
-        dados.tra_valor_frete,
-        dados.tra_forma_de_pagamento,
-        dados.tra_status,
-        dados.tra_valor,
-        dados.tra_desconto,
-        dados.tra_subtotal,
-        end_id,
-        usr_id 
-    ];
+    return result.insertId;
+}
 
-    try {
-        const [result] = await db.query(sql, valores);
-        return result.insertId;
-    } catch (err) {
-        console.error(`Erro no cadastrarUsuario - modelUsuarios: ${err}`);
-        throw err;
-    }
+async function criarItemVenda(itemVendaData) {
+    const { quantidade, transacaoId, livroId } = itemVendaData;
+    
+    await db.query(
+        `INSERT INTO itens_de_venda (
+            itv_qtd_item,
+            transacoes_tra_id,
+            livros_lvr_id
+        ) VALUES (?, ?, ?)`,
+        [quantidade, transacaoId, livroId]
+    );
 }
 
 module.exports = {
-    cadastrarVenda
+    criarItemVenda,
+    criarTransacao
 };
