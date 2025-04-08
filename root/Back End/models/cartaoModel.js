@@ -28,7 +28,6 @@ async function cadastrarCartao(dados) {
     }
 }
 
-// Atualizando os dados dos cartões no banco
 async function atualizarCartao(dados, crt_id) {
     const campos = Object.keys(dados).map(key => `${key} = ?`).join(', ');
     let valores = Object.values(dados);
@@ -45,7 +44,6 @@ async function atualizarCartao(dados, crt_id) {
     }
 }
 
-// Função que pega todos os cartões do banco
 async function buscarTodosCartoes() {
     try {
         const [cartoes] = await db.query('SELECT * FROM cartoes');
@@ -56,7 +54,6 @@ async function buscarTodosCartoes() {
     }
 }
 
-// Função que pega um cartão pelo seu id
 async function buscarCartaoId(id) {
     try {
         const [cartao] = await db.query(`SELECT * FROM cartoes WHERE crt_id = ?`, id);
@@ -67,10 +64,9 @@ async function buscarCartaoId(id) {
     }
 }
 
-// Função que pega cartões de um determinado usuário
 async function buscarCartoesUsuarioId(id) {
     try {
-        const [cartoes] = await db.query(`SELECT * FROM cartoes WHERE usuario_usr_id = ?`, id);
+        const [cartoes] = await db.query(`SELECT * FROM cartoes WHERE usuarios_usr_id = ?`, id);
         return cartoes;
     } catch (err) {
         console.error(`Erro no buscarCartoesUsuarioId - modelCartão: ${err}`);
@@ -78,7 +74,6 @@ async function buscarCartoesUsuarioId(id) {
     }
 }
 
-// Exportando as funções
 module.exports = {
     buscarCartoesUsuarioId,
     buscarTodosCartoes,

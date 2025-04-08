@@ -273,3 +273,30 @@ document.addEventListener('click', () => {
     document.querySelectorAll('.atualizar_submenu').forEach(menu => menu.remove());
     document.querySelectorAll('.deletar_submenu').forEach(menu => menu.remove());
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const userDataElement = document.getElementById('user-data');
+    const usr_id = userDataElement ? userDataElement.dataset.userId : null;
+    
+    const btnCancelar = document.getElementById('Cancelar');
+    if (btnCancelar) {
+        btnCancelar.addEventListener('click', function() {
+            if (usr_id) {
+                window.location.href = `/home/${usr_id}`;
+            } else {
+                console.error('ID do usuário não encontrado');
+            }
+        });
+    }
+
+    const btnComprar = document.getElementById('finalizar-compra');
+    if (btnComprar) {
+        btnComprar.addEventListener('click', function() {
+            if (usr_id) {
+                window.location.href = `/pagamento?usuario=${encodeURIComponent(JSON.stringify({usr_id: usr_id}))}`;
+            } else {
+                console.error('ID do usuário não encontrado');
+            }
+        });
+    }
+});

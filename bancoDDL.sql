@@ -20,7 +20,7 @@ CREATE TABLE cartoes (
     crt_bandeira         VARCHAR2(20) NOT NULL,
     crt_codigo_seguranca INTEGER NOT NULL,
     crt_nome             VARCHAR2(50) NOT NULL,
-    usuário_usr_id       INTEGER NOT NULL
+    usuarios_usr_id       INTEGER NOT NULL
 );
 
 COMMENT ON COLUMN cartoes.crt_id IS
@@ -70,7 +70,7 @@ CREATE TABLE enderecos_cobranca (
     end_numero      INTEGER NOT NULL,
     end_complemento VARCHAR2(20),
     end_cep         INTEGER NOT NULL,
-    usuário_usr_id  INTEGER NOT NULL
+    usuarios_usr_id  INTEGER NOT NULL
 );
 
 COMMENT ON COLUMN enderecos_cobranca.end_id IS
@@ -104,7 +104,7 @@ CREATE TABLE enderecos_entrega (
     end_numero      INTEGER NOT NULL,
     end_complemento VARCHAR2(20),
     end_cep         INTEGER NOT NULL,
-    usuário_usr_id  INTEGER NOT NULL
+    usuarios_usr_id  INTEGER NOT NULL
 );
 
 COMMENT ON COLUMN enderecos_entrega.end_id IS
@@ -256,15 +256,15 @@ ALTER TABLE carrinho
         REFERENCES usuarios ( usr_id );
 
 ALTER TABLE cartoes
-    ADD CONSTRAINT fk_crt_usr FOREIGN KEY ( usuário_usr_id )
+    ADD CONSTRAINT fk_crt_usr FOREIGN KEY ( usuarios_usr_id )
         REFERENCES usuarios ( usr_id );
 
 ALTER TABLE enderecos_cobranca
-    ADD CONSTRAINT fk_endc_usr FOREIGN KEY ( usuário_usr_id )
+    ADD CONSTRAINT fk_endc_usr FOREIGN KEY ( usuarios_usr_id )
         REFERENCES usuarios ( usr_id );
 
 ALTER TABLE enderecos_entrega
-    ADD CONSTRAINT fk_ende_usr FOREIGN KEY ( usuário_usr_id )
+    ADD CONSTRAINT fk_ende_usr FOREIGN KEY ( usuarios_usr_id )
         REFERENCES usuarios ( usr_id );
 
 ALTER TABLE itens_de_venda

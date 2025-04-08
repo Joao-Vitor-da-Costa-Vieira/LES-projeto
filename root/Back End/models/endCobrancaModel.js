@@ -1,8 +1,7 @@
 const db = require('../config/db');
 
-// Cadastrando um novo endereço de cobrança no banco de dados
 async function cadastrarEnderecoCobranca(dados) {
-    // Consulta SQL
+
     const sql = `INSERT INTO enderecos_cobranca (
         usuario_usr_id, 
         end_endereco, 
@@ -14,7 +13,6 @@ async function cadastrarEnderecoCobranca(dados) {
         end_complemento
     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
 
-    // Valores a serem inseridos no banco
     const valores = [
         dados.end_usr_id,
         dados.end_endereco,
@@ -34,7 +32,6 @@ async function cadastrarEnderecoCobranca(dados) {
     }
 }
 
-// Atualizando os endereços de cobrança no banco de dados
 async function atualizarEnderecoCobranca(dados, end_id) {
     const campos = Object.keys(dados).map(key => `${key} = ?`).join(', ');
     let valores = Object.values(dados);
@@ -51,7 +48,6 @@ async function atualizarEnderecoCobranca(dados, end_id) {
     }
 }
 
-// Buscando todos os endereços de cobrança do banco de dados
 async function buscarTodosEnderecosCobranca() {
     try {
         const [enderecos] = await db.query('SELECT * FROM enderecos_cobranca');
@@ -62,7 +58,6 @@ async function buscarTodosEnderecosCobranca() {
     }
 }
 
-// Buscando endereço de cobrança por id
 async function buscarEnderecoCobrancaId(id) {
     try {
         const [endereco] = await db.query(`SELECT * FROM enderecos_cobranca WHERE end_id = ?`, id);
@@ -73,7 +68,6 @@ async function buscarEnderecoCobrancaId(id) {
     }
 }
 
-// Buscando endereços de cobrança por id de usuário
 async function buscarEnderecosCobrancaUsuarioId(id) {
     try {
         const [enderecos] = await db.query(`SELECT * FROM enderecos_cobranca WHERE usuario_usr_id = ?`, id);

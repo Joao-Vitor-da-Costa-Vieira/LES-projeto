@@ -2,7 +2,7 @@ const db = require('../config/db');
 
 // Função que insere um novo usuário no banco
 async function cadastrarUsuario(dados) {
-    // Consulta SQL
+
     const sql = `INSERT INTO usuarios (
         usr_nome, 
         usr_email, 
@@ -14,7 +14,6 @@ async function cadastrarUsuario(dados) {
         usr_senha 
     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
 
-    // Valores a serem inseridos no banco (na nova ordem)
     const valores = [
         dados.usr_nome,
         dados.usr_email,

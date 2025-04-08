@@ -426,6 +426,16 @@ body {
     border: red;
 }
 
+.comprar{
+    background-color: green;
+    width: 80px;
+    height: 30px;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    border: green;
+}
+
 .adicionar{
     background-color: green;
     width: 160px;

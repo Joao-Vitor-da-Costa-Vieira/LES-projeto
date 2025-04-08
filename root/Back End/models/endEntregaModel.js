@@ -1,8 +1,6 @@
 const db = require('../config/db');
 
-// Cadastrando um novo endereço de entrega no banco de dados
 async function cadastrarEnderecoEntrega(dados) {
-    // Consulta SQL
     const sql = `INSERT INTO enderecos_entrega (
         usuario_usr_id, 
         end_endereco, 
@@ -14,7 +12,6 @@ async function cadastrarEnderecoEntrega(dados) {
         end_complemento
     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
 
-    // Valores a serem inseridos no banco
     const valores = [
         dados.end_usr_id,
         dados.end_endereco,
@@ -34,9 +31,6 @@ async function cadastrarEnderecoEntrega(dados) {
     }
 }
 
-// UPDATE
-
-// Atualizando os endereços de entrega no banco de dados
 async function atualizarEnderecoEntrega(dados, end_id) {
     const campos = Object.keys(dados).map(key => `${key} = ?`).join(', ');
     let valores = Object.values(dados);
@@ -53,9 +47,6 @@ async function atualizarEnderecoEntrega(dados, end_id) {
     }
 }
 
-// SELECT
-
-// Buscando todos os endereços de entrega do banco de dados
 async function buscarTodosEnderecosEntrega() {
     try {
         const [enderecos] = await db.query('SELECT * FROM enderecos_entrega');
@@ -66,7 +57,6 @@ async function buscarTodosEnderecosEntrega() {
     }
 }
 
-// Buscando endereço de entrega por id
 async function buscarEnderecoEntregaId(id) {
     try {
         const [endereco] = await db.query(`SELECT * FROM enderecos_entrega WHERE end_id = ?`, id);
@@ -77,10 +67,9 @@ async function buscarEnderecoEntregaId(id) {
     }
 }
 
-// Buscando endereços de entrega por id de usuário
 async function buscarEnderecosEntregaUsuarioId(id) {
     try {
-        const [enderecos] = await db.query(`SELECT * FROM enderecos_entrega WHERE usuario_usr_id = ?`, id);
+        const [enderecos] = await db.query(`SELECT * FROM enderecos_entrega WHERE usuarios_usr_id = ?`, id);
         return enderecos;
     } catch (err) {
         console.error(`Erro no buscarEnderecosEntregaUsuarioId - modelEndereco: ${err}`);
