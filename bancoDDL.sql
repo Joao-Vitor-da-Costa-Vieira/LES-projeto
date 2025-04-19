@@ -87,6 +87,7 @@ ALTER TABLE escreveu ADD CONSTRAINT relation_15_pk PRIMARY KEY ( autor_atr_id,
 CREATE TABLE forma_de_pagamento (
     fpg_id             INTEGER NOT NULL AUTO_INCREMENT,
     fpg_tipo           VARCHAR(20) NOT NULL,
+    fpg_valor          DECIMAL(6, 2) NOT NULL,
     transacoes_tra_id  INTEGER NOT NULL,
     cartoes_crt_id     INTEGER
     );
@@ -151,7 +152,7 @@ ALTER TABLE possui4 ADD CONSTRAINT relation_16_pk PRIMARY KEY ( categoria_cat_id
 
 CREATE TABLE transacoes (
     tra_id                   INTEGER NOT NULL AUTO_INCREMENT,
-    tra_data                 DATE NOT NULL,
+    tra_data                 DATETIME NOT NULL,
     tra_valor_frete          DECIMAL(5, 2) NOT NULL,
     tra_status               VARCHAR(15) NOT NULL,
     tra_valor                DECIMAL(6, 2) NOT NULL,

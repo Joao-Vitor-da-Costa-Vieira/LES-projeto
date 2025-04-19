@@ -1,4 +1,4 @@
---Categorias
+-- Categorias
 INSERT INTO categoria (cat_id, cat_nome) VALUES (1, 'Ficção Científica');
 INSERT INTO categoria (cat_id, cat_nome) VALUES (2, 'Fantasia');
 INSERT INTO categoria (cat_id, cat_nome) VALUES (3, 'Romance');
@@ -15,7 +15,7 @@ INSERT INTO categoria (cat_id, cat_nome) VALUES (13, 'Arte');
 INSERT INTO categoria (cat_id, cat_nome) VALUES (14, 'Culinária');
 INSERT INTO categoria (cat_id, cat_nome) VALUES (15, 'Infantil');
 
---Autores
+-- Autores
 INSERT INTO autor (atr_id, atr_nome) VALUES (1, 'J.K. Rowling');
 INSERT INTO autor (atr_id, atr_nome) VALUES (2, 'Stephen King');
 INSERT INTO autor (atr_id, atr_nome) VALUES (3, 'George R.R. Martin');
@@ -23,7 +23,7 @@ INSERT INTO autor (atr_id, atr_nome) VALUES (4, 'Agatha Christie');
 INSERT INTO autor (atr_id, atr_nome) VALUES (5, 'Machado de Assis');
 INSERT INTO autor (atr_id, atr_nome) VALUES (6, 'Clarice Lispector');
 
---Editoras
+-- Editoras
 INSERT INTO editora (edi_id, edi_nome) VALUES (1, 'Companhia das Letras');
 INSERT INTO editora (edi_id, edi_nome) VALUES (2, 'Editora Rocco');
 INSERT INTO editora (edi_id, edi_nome) VALUES (3, 'Editora Arqueiro');
@@ -35,7 +35,7 @@ INSERT INTO editora (edi_id, edi_nome) VALUES (8, 'Editora Nova Fronteira');
 INSERT INTO editora (edi_id, edi_nome) VALUES (9, 'Editora Martins Fontes');
 INSERT INTO editora (edi_id, edi_nome) VALUES (10, 'Editora Leya');
 
---Grupos de Precificação
+-- Grupos de Precificação
 INSERT INTO grupo_de_precificacao (grp_id, grp_nome, grp_margem_lucro) VALUES 
 (1, 'Grupo A', 20.00),
 (2, 'Grupo B', 30.00),
@@ -43,7 +43,7 @@ INSERT INTO grupo_de_precificacao (grp_id, grp_nome, grp_margem_lucro) VALUES
 (4, 'Grupo D', 15.00),
 (5, 'Grupo E', 35.00);
 
---Livros
+-- Livros
 INSERT INTO livros (
     lvr_id, lvr_ano, lvr_titulo, lvr_edicao, lvr_isbn, 
     lvr_numero_de_paginas, lvr_sinopse, lvr_altura, lvr_largura, 
@@ -102,7 +102,7 @@ INSERT INTO possui4 (categoria_cat_id, livros_lvr_id) VALUES
 (3, 9), (3, 10),   -- Romance
 (3, 11), (3, 12);  -- Romance
 
---Usuario
+-- Usuario
 INSERT INTO usuarios (
     usr_id,
     usr_nome,
@@ -127,6 +127,7 @@ INSERT INTO usuarios (
     'A'
 );
 
+-- Endereços de Entrega
 INSERT INTO enderecos_entrega ( 
 end_estado,
 end_cidade,
@@ -167,6 +168,8 @@ usuarios_usr_id
     '1'
 );
 
+-- Cartões
+
 INSERT INTO cartoes ( 
 crt_numero,
 crt_bandeira,
@@ -193,4 +196,218 @@ usuarios_usr_id
     '123154',
     'João da Silva',
     '1'
+);
+
+-- Transações
+INSERT INTO transacoes (
+    tra_data,
+    tra_valor_frete,
+    tra_status,
+    tra_valor,
+    tra_desconto,
+    tra_subtotal,
+    enderecos_entrega_end_id,
+    usuarios_usr_id
+) VALUES (
+    '2023-05-15',
+    15.90,
+    'APROVADO',
+    150.75,
+    10.00,
+    140.75,
+    1,
+    1
+);
+
+INSERT INTO transacoes (
+    tra_data,
+    tra_valor_frete,
+    tra_status,
+    tra_valor,
+    tra_desconto,
+    tra_subtotal,
+    enderecos_entrega_end_id,
+    usuarios_usr_id
+) VALUES (
+    '2023-06-20',
+    12.50,
+    'APROVADO',
+    89.90,
+    5.00,
+    84.90,
+    1,
+    1
+);
+
+INSERT INTO transacoes (
+    tra_data,
+    tra_valor_frete,
+    tra_status,
+    tra_valor,
+    tra_desconto,
+    tra_subtotal,
+    enderecos_entrega_end_id,
+    usuarios_usr_id
+) VALUES (
+    '2023-07-10',
+    0.00,
+    'APROVADO',
+    230.50,
+    20.00,
+    210.50,
+    1,
+    1
+);
+
+INSERT INTO transacoes (
+    tra_data,
+    tra_valor_frete,
+    tra_status,
+    tra_valor,
+    tra_desconto,
+    tra_subtotal,
+    enderecos_entrega_end_id,
+    usuarios_usr_id
+) VALUES (
+    '2023-08-05',
+    8.75,
+    'APROVADO',
+    75.25,
+    0.00,
+    75.25,
+    1,
+    1
+);
+
+INSERT INTO transacoes (
+    tra_data,
+    tra_valor_frete,
+    tra_status,
+    tra_valor,
+    tra_desconto,
+    tra_subtotal,
+    enderecos_entrega_end_id,
+    usuarios_usr_id
+) VALUES (
+    '2023-09-12',
+    18.30,
+    'APROVADO',
+    320.00,
+    30.00,
+    290.00,
+    1,
+    1
+);
+
+INSERT INTO transacoes (
+    tra_data,
+    tra_valor_frete,
+    tra_status,
+    tra_valor,
+    tra_desconto,
+    tra_subtotal,
+    enderecos_entrega_end_id,
+    usuarios_usr_id
+) VALUES (
+    '2023-08-05',
+    8.75,
+    'APROVADO',
+    75.25,
+    0.00,
+    75.25,
+    1,
+    1
+);
+
+INSERT INTO transacoes (
+    tra_data,
+    tra_valor_frete,
+    tra_status,
+    tra_valor,
+    tra_desconto,
+    tra_subtotal,
+    enderecos_entrega_end_id,
+    usuarios_usr_id
+) VALUES (
+    '2023-09-12',
+    18.30,
+    'APROVADO',
+    320.00,
+    30.00,
+    290.00,
+    1,
+    1
+);
+
+-- Formas de Pagamento
+INSERT INTO forma_de_pagamento (
+    fpg_tipo,
+    fpg_valor,
+    transacoes_tra_id,
+    cartoes_crt_id
+) VALUES (
+    'Cartao de Credito',
+    210.5,
+    6,
+    1
+);
+
+INSERT INTO forma_de_pagamento (
+    fpg_tipo,
+    fpg_valor,
+    transacoes_tra_id,
+    cartoes_crt_id
+) VALUES (
+    'Cartao de Credito',
+    50.25,
+    7,
+    1
+);
+
+INSERT INTO forma_de_pagamento (
+    fpg_tipo,
+    fpg_valor,
+    transacoes_tra_id,
+    cartoes_crt_id
+) VALUES (
+    'Cupom',
+    25.00,
+    7,
+    1
+);
+
+INSERT INTO forma_de_pagamento (
+    fpg_tipo,
+    fpg_valor,
+    transacoes_tra_id,
+    cartoes_crt_id
+) VALUES (
+    'Cartao de Credito',
+    290.00,
+    8,
+    1
+);
+
+INSERT INTO forma_de_pagamento (
+    fpg_tipo,
+    fpg_valor,
+    transacoes_tra_id,
+    cartoes_crt_id
+) VALUES (
+    'Cartao de Credito',
+    84.90,
+    9,
+    1
+);
+
+INSERT INTO forma_de_pagamento (
+    fpg_tipo,
+    fpg_valor,
+    transacoes_tra_id,
+    cartoes_crt_id
+) VALUES (
+    'Cartao de Credito',
+    140.75,
+    10,
+    1
 );
