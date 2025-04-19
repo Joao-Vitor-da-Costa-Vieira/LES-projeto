@@ -39,7 +39,7 @@ async function buscarTransacaoId(usuarioId) {
 }
 
 async function buscarTransacao(usr_id){
-    await db.query(
+    const [result] = await db.query(
         `SELECT 
             tra_id,
             tra_numero_venda,
@@ -53,10 +53,12 @@ async function buscarTransacao(usr_id){
         ORDER BY tra_data DESC`,
         [usr_id]
     );
+
+    return result;
 }
 
 async function buscarTransacoesPrioridade(){
-    await db.query(
+    const [result] = await db.query(
         `SELECT *
         FROM transacoes
         WHERE tra_status IN ('APROVADO', 'TROCA SOLICITADA', 'DEVOLUÇÃO SOLICITADA')
@@ -68,6 +70,19 @@ async function buscarTransacoesPrioridade(){
         END ASC,
         tra_data DESC;`
     );
+
+    return result;
+}
+
+async function formaPagamentoId(tra_id) {
+    const [result] = await db.query(
+        `SELECT fpg_tipo
+        FROM forma_de_pagamento
+        WHERE transacoes_tra_id = ?`,
+        [tra_id]
+    );
+    
+    return result;
 }
 
 module.exports = {
@@ -75,5 +90,6 @@ module.exports = {
     criarTransacao,
     buscarTransacaoId,
     buscarTransacao,
-    buscarTransacoesPrioridade
+    buscarTransacoesPrioridade,
+    formaPagamentoId
 };

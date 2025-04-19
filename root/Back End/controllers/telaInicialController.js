@@ -1,4 +1,5 @@
 const { buscarUsuarioId } = require("../models/usuarioModel");
+const { buscarTransacoesPrioridade, formaPagamentoId } = require("../models/vendaModel");
 
 //Views
 module.exports.getTela = (req, res) => {
@@ -11,5 +12,14 @@ module.exports.getHome = async (req, res) => {
 
     res.render('home',{
         usuario
+    });
+};
+
+module.exports.getHomeAdm = async (req, res) => {
+    const transacoes = await buscarTransacoesPrioridade;
+    console.log("Transações retornadas:", transacoes);
+
+    res.render('homeAdm',{
+        transacoes
     });
 };
