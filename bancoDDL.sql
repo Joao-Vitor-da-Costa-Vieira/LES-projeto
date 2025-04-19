@@ -140,6 +140,16 @@ CREATE TABLE escreveu (
 ALTER TABLE escreveu ADD CONSTRAINT relation_15_pk PRIMARY KEY ( autor_atr_id,
                                                                  livros_lvr_id );
 
+
+CREATE TABLE forma_de_pagamento (
+    fpg_id             INTEGER NOT NULL AUTO_INCREMENT,
+    fpg_tipo           VARCHAR2(20) NOT NULL,
+    transacoes_tra_id  INTEGER NOT NULL,
+    cartoes_crt_id     INTEGER
+    );
+
+ALTER TABLE forma_de_pagamento ADD CONSTRAINT forma_de_pagamento_pk PRIMARY KEY ( fpg_id );
+
 CREATE TABLE grupo_de_precificacao (
     grp_id           INTEGER NOT NULL,
     grp_nome         VARCHAR2(50) NOT NULL,
@@ -149,7 +159,7 @@ CREATE TABLE grupo_de_precificacao (
 ALTER TABLE grupo_de_precificacao ADD CONSTRAINT grupo_de_precificacao_pk PRIMARY KEY ( grp_id );
 
 CREATE TABLE itens_de_venda (
-    itv_id            INTEGER NOT NULL,
+    itv_id            INTEGER NOT NULL AUTO_INCREMENT,
     itv_qtd_item      INTEGER NOT NULL,
     transacoes_tra_id INTEGER NOT NULL,
     livros_lvr_id     INTEGER
@@ -181,6 +191,14 @@ CREATE TABLE livros (
 
 ALTER TABLE livros ADD CONSTRAINT livros_pk PRIMARY KEY ( lvr_id );
 
+CREATE TABLE notificacao (
+    ntf_id INTEGER NOT NULL AUTO_INCREMENT,
+    ntf_mensagem VARCHAR2(150) NOT NULL,
+    usuarios_usr_id INTEGER NOT NULL
+);
+
+ALTER TABLE notificacao ADD CONSTRAINT notificacao_pk PRIMARY KEY ( ntf_id );
+
 CREATE TABLE possui4 (
     categoria_cat_id INTEGER NOT NULL,
     livros_lvr_id    INTEGER NOT NULL
@@ -190,10 +208,8 @@ ALTER TABLE possui4 ADD CONSTRAINT relation_16_pk PRIMARY KEY ( categoria_cat_id
 
 CREATE TABLE transacoes (
     tra_id                   INTEGER NOT NULL AUTO_INCREMENT,
-    tra_numero_venda         INTEGER NOT NULL,
     tra_data                 DATE NOT NULL,
     tra_valor_frete          NUMBER(5, 2) NOT NULL,
-    tra_forma_de_pagamento   VARCHAR2(20) NOT NULL,
     tra_status               VARCHAR2(15) NOT NULL,
     tra_valor                NUMBER(6, 2) NOT NULL,
     tra_desconto             NUMBER(6, 2),
@@ -214,6 +230,7 @@ CREATE TABLE usuarios (
     usr_telefone_1          INTEGER NOT NULL,
     usr_telefone_2          INTEGER,
     usr_genero              VARCHAR2(10) NOT NULL,
+    usr_ranking             INTEGER,
     usr_status_de_atividade CHAR(1) NOT NULL
 );
 
