@@ -1,4 +1,20 @@
 use projetoles;
+
+CREATE TABLE administradores (
+    adm_id                  INTEGER NOT NULL auto_increment,
+    adm_nome                VARCHAR(75) NOT NULL,
+    adm_email               VARCHAR(50) NOT NULL,
+    adm_cpf                 VARCHAR(11) NOT NULL,
+    adm_senha               VARCHAR(20) NOT NULL,
+    adm_data_de_nascimento  DATE NOT NULL,
+    adm_telefone_1          INTEGER NOT NULL,
+    adm_telefone_2          INTEGER,
+    adm_genero              VARCHAR(10) NOT NULL,
+    adm_status_de_atividade CHAR(1) NOT NULL
+);
+
+ALTER TABLE administradores ADD CONSTRAINT administradores_pk PRIMARY KEY ( adm_id );
+
 CREATE TABLE autor (
     atr_id   INTEGER NOT NULL,
     atr_nome VARCHAR(75) NOT NULL
