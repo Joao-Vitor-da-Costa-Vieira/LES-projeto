@@ -1,4 +1,6 @@
 import { filtroLivroService } from "/scripts/service/livroService.js";
+import { adicionarCarrinho } from "/scripts/service/carrinhoService.js";
+import { getCarrinho } from "/scripts/service/carrinhoService.js";
 
 const value = document.querySelector("#valor");
 const slider = document.querySelector("#preco");
@@ -7,10 +9,10 @@ const pesquisaBotao = document.querySelector("#pesquisa-botao");
 const tabelaBody = document.querySelector("tbody");
 
 // Configuração do slider de preço
-value.textContent = slider.value === "501" ? "Nulo" : slider.value;
+value.textContent = slider.value === "301" ? "Nulo" : slider.value;
 
 slider.addEventListener("input", (event) => {
-    if (event.target.value === "501") {
+    if (event.target.value === "301") {
         cifra.textContent = "";
         value.textContent = "Nulo";
     } else {
@@ -52,9 +54,10 @@ function atualizarTabela(livros) {
             <td>${livro.edi_nome || 'N/A'}</td>
             <td>${livro.lvr_ano}</td>
             <td>R$ ${livro.lvr_custo}</td>
-            <td>
+            <td data-livro-id="${livro.lvr_id}">
                 <div class="botoes_resultado">
                     <a class="atualizar" href="/livros/${livro.lvr_id}">Detalhes</a>
+                    <button class="adicionar"> Adicionar </button>
                 </div>
             </td>
         `;
@@ -64,7 +67,7 @@ function atualizarTabela(livros) {
 
 // Função para coletar os filtros do formulário
 function coletarFiltros() {
-    const precoMax = slider.value === "501" ? null : slider.value;
+    const precoMax = slider.value === "301" ? null : slider.value;
     
     return {
         titulo: document.querySelector('.filtro-pesquisa-input').value,
@@ -92,4 +95,151 @@ pesquisaBotao.addEventListener('click', async (e) => {
         console.error('Erro ao pesquisar livros:', error);
         tabelaBody.innerHTML = '<tr><td colspan="6">Erro ao carregar os livros</td></tr>';
     }
+});
+
+// Event Delegation para os botões de adicionar
+tabelaBody.addEventListener('click', function(event) {
+    if (event.target.classList.contains('adicionar')) {
+        const botao = event.target;
+        event.stopPropagation();
+
+        const userDataElement = document.getElementById('user-data');
+        const usr_id = userDataElement ? userDataElement.dataset.userId : null;
+
+        let submenuAtual = botao.querySelector('.atualizar_submenu');
+
+        if (submenuAtual) {
+            submenuAtual.remove();
+            return;
+        }
+
+        document.querySelectorAll('.atualizar_submenu').forEach(menu => menu.remove());
+
+        let submenu = document.createElement('div');
+        submenu.classList.add('atualizar_submenu');
+
+        submenu.innerHTML = `
+        <div class="linha_centralizada">
+            <p class="confirmar-adicao">Confirmar Adição?</p>
+        </div>
+
+        <div class="linha_centralizada">
+            <button class="submenu-botao-adicao" type="button"><</button>
+            <input class="numero_input" type="number" value="1" min="1">
+            <button class="submenu-botao-adicao" type="button">></button>
+        </div>
+
+        <button class="submenu-adicionar-produto" type="button">Confirmar</button>
+        `;
+
+        botao.appendChild(submenu);
+
+        const input = submenu.querySelector('.numero_input');
+        const btnDecrease = submenu.querySelector('.submenu-botao-adicao:first-child');
+        const btnIncrease = submenu.querySelector('.submenu-botao-adicao:last-child');
+        const btnConfirmar = submenu.querySelector('.submenu-adicionar-produto');
+
+        const stopProp = (e) => e.stopPropagation();
+
+        btnDecrease.addEventListener('click', stopProp);
+        btnIncrease.addEventListener('click', stopProp);
+        input.addEventListener('click', stopProp);
+        btnConfirmar.addEventListener('click', stopProp);
+
+        // Controle dos valores
+        btnDecrease.addEventListener('click', () => {
+            let value = parseInt(input.value);
+            if (value > 1) {
+                input.value = value - 1;
+            }
+        });
+
+        btnIncrease.addEventListener('click', () => {
+            let value = parseInt(input.value);
+            input.value = value + 1;
+        });
+
+        input.addEventListener('change', () => {
+            if (parseInt(input.value) < 1 || isNaN(parseInt(input.value))) {
+                input.value = 1;
+            }
+        });
+
+        btnConfirmar.addEventListener('click', async () => {
+            const quantidade = parseInt(input.value);
+            const lvr_id = botao.closest('[data-livro-id]').dataset.livroId;
+            
+            try {
+                const response = await adicionarCarrinho(lvr_id, usr_id, quantidade);
+                const resultado = await response.json();
+                
+                submenu.remove();
+                
+                const mensagemConfirmacao = document.createElement('div');
+                mensagemConfirmacao.classList.add('confirmacao-overlay');
+                
+                mensagemConfirmacao.innerHTML = `
+                    <div class="confirmacao-box">
+                        <p>${resultado.message || 'Produto adicionado ao carrinho!'}</p>
+                        <div class="confirmacao-botoes">
+                            <button class="ver-carrinho">Ver Carrinho</button>
+                            <button class="continuar-comprando">Continuar Comprando</button>
+                        </div>
+                    </div>
+                `;
+                
+                document.body.appendChild(mensagemConfirmacao);
+                
+                mensagemConfirmacao.addEventListener('click', (e) => {
+                    if (e.target === mensagemConfirmacao) {
+                        mensagemConfirmacao.remove();
+                    }
+                });
+                
+                const btnVerCarrinho = mensagemConfirmacao.querySelector('.ver-carrinho');
+                btnVerCarrinho.addEventListener('click', async (e) => {
+                    e.stopPropagation();
+                    await getCarrinho(usr_id);
+                    window.location.href = `/carrinho?usr_id=${usr_id}`;
+                });
+                
+                const btnContinuar = mensagemConfirmacao.querySelector('.continuar-comprando');
+                btnContinuar.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    mensagemConfirmacao.remove();
+                });
+        
+            } catch (error) {
+                console.error('Erro ao adicionar ao carrinho:', error);
+                
+                const mensagemErro = document.createElement('div');
+                mensagemErro.classList.add('confirmacao-overlay');
+                
+                mensagemErro.innerHTML = `
+                    <div class="confirmacao-box erro">
+                        <p>${error.message}</p>
+                        <button class="fechar-erro">OK</button>
+                    </div>
+                `;
+                
+                document.body.appendChild(mensagemErro);
+                
+                const btnFechar = mensagemErro.querySelector('.fechar-erro');
+                btnFechar.addEventListener('click', () => {
+                    mensagemErro.remove();
+                });
+                
+                mensagemErro.addEventListener('click', (e) => {
+                    if (e.target === mensagemErro) {
+                        mensagemErro.remove();
+                    }
+                });
+            }
+        });
+    }
+});
+
+// Removendo o submenu ao clicar fora da tela
+document.addEventListener('click', () => {
+    document.querySelectorAll('.atualizar_submenu').forEach(menu => menu.remove());
 });

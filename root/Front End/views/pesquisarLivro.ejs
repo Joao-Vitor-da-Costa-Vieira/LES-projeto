@@ -56,7 +56,7 @@
             <!--Input Slider de Valor Máximo-->
             <div class="linha_centralizada">
                 <p>Valor Máximo: <output id="cifra"></output><output id="valor"></output></p>
-                <input class="range-input" type="range" id="preco" name="preco" min="1" max="501" value="501" />
+                <input class="range-input" type="range" id="preco" name="preco" min="1" max="301" value="301" />
                 <label class="label" for="preco">Preço</label>
             </div>
 
@@ -141,7 +141,7 @@
                             <th>Editora</th>
                             <th>Ano</th>
                             <th>Preço</th>
-                            <th>Opções</th>
+                            <th style="width: 280px;">Opções</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -153,9 +153,10 @@
                                     <td><%= livro.edi_nome || 'N/A' %></td>
                                     <td><%= livro.lvr_ano %></td>
                                     <td>R$<%= Number(livro.lvr_custo) %></td>
-                                    <td>
+                                    <td data-livro-id="<%= livro.lvr_id %>">
                                         <div class="botoes_resultado">
                                             <a class="atualizar" href="/livros/<%= livro.lvr_id %>">Detalhes</a>
+                                            <button class="adicionar"> Adicionar </button>
                                         </div>
                                     </td>
                                 </tr>

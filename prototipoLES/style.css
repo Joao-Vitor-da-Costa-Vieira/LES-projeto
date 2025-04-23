@@ -436,6 +436,16 @@ body {
     border: green;
 }
 
+.adicionar :hover{
+    background-color: rgb(1, 255, 1);
+    width: 160px;
+    height: 30px;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    border: rgb(1, 255, 1);
+}
+
 .carrinho_botao{
     background-color: #3d3d3d;
     width: 80px;
