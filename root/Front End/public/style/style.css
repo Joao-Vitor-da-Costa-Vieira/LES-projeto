@@ -866,6 +866,48 @@ input[type=submit]{
     padding: 5px;
 }
 
+.adicionar-produto-2 {
+    background-color: green;
+    color: #ffffff;
+    font-weight: bold;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    font-size: small;
+    padding: 5px;
+}
+
+.adicionar-produto-2:hover {
+    background-color: rgb(0, 255, 0);
+    color: #ffffff;
+    font-weight: bold;
+    cursor: default;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    font-size: small;
+    padding: 5px;
+}
+
+.adicionar-produto-3 {
+    background-color: green;
+    color: #ffffff;
+    font-weight: bold;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    font-size: small;
+    padding: 5px;
+}
+
+.adicionar-produto-3:hover {
+    background-color: rgb(0, 255, 0);
+    color: #ffffff;
+    font-weight: bold;
+    cursor: default;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    font-size: small;
+    padding: 5px;
+}
+
 /* Estilização dos botões do submenu de adiconar produto*/
 .submenu-botao-adicao {
     background-color: #0003c8;
