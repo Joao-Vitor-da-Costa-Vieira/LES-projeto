@@ -1666,6 +1666,7 @@ th {
 
 .botoes_resultado .alterar {
     background-color: #0003c8; 
+    cursor: pointer;
 }
 
 .botoes_resultado .remover {
