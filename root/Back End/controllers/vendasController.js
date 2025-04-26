@@ -1,8 +1,7 @@
 const {
-    criarItemVenda,
-    criarTransacao,
-    buscarTransacao,
-    buscarTransacaoId
+    processarPagamentoCompleto,
+    buscarTransacaoId,
+    buscarTransacao
 } = require("../models/vendaModel");
 
 const {
@@ -24,7 +23,8 @@ const {
 
 const {
     buscarLivroId,
-    buscarEstoqueLivro
+    buscarEstoqueLivro,
+    atualizarEstoqueLivro
 } = require("../models/livroModel");
 
 const {buscarItensCupom,
@@ -98,67 +98,52 @@ module.exports.getHistorico = async (req, res) => {
 };
 
 module.exports.postPagamento = async (req, res) => {
-    const { usuarioId, enderecoId, data, subtotal, frete, pagamentos } = req.body;
+    const { usuarioId, enderecoId, data, subtotal, frete, pagamentos, total } = req.body;
     
-    console.log("controller:", usuarioId, enderecoId, data, subtotal, frete, pagamentos);
-
     try {
+        // 1. Validar estoque
         const itensCarrinho = await buscarItensCarrinho(usuarioId);
-        
         for (const item of itensCarrinho) {
-            const estoqueAtual = await buscarEstoqueLivro(item.livros_lvr_id);
-            if (item.car_qtd_item > estoqueAtual) {
+            const livro = await buscarLivroId(item.livros_lvr_id);
+            if (item.car_qtd_item > livro.lvr_qtd_estoque) {
                 return res.status(400).json({ 
-                    message: `Estoque insuficiente para o livro ${item.livro.lvr_titulo}. 
-                    Quantidade disponível: ${estoqueAtual}`
+                    message: `Estoque insuficiente para ${livro.lvr_titulo} (Disponível: ${livro.lvr_qtd_estoque})`
                 });
             }
         }
 
-        await db.query('START TRANSACTION');
+        // 2. Validar cupons
+        const cuponsUsados = pagamentos.filter(p => p.tipo === '2' || p.tipo === '3');
+        if (cuponsUsados.length > 2) {
+            return res.status(400).json({ message: 'Máximo de 2 cupons por compra' });
+        }
 
-        let primeiraTransacaoId = 0;
-        const numeroVenda = 1001;
-        const status = "EM PROCESSAMENTO";
-    
+        // 3. Validar valores
+        const totalCalculado = parseFloat((subtotal + frete).toFixed(2));
+        const totalPago = parseFloat(pagamentos.reduce((sum, p) => sum + p.valor, 0).toFixed(2));
+        
+        if (totalPago !== totalCalculado) {
+            return res.status(400).json({ 
+                message: `Valor pago (R$ ${totalPago}) não corresponde ao total (R$ ${totalCalculado})`
+            });
+        }
 
-            for (const pagamento of pagamentos) {
-                const transacaoId = await criarTransacao(
-                    numeroVenda,
-                    data,
-                    frete,
-                    pagamento.tipo,
-                    status,
-                    pagamento.valor,
-                    subtotal,
-                    enderecoId,
-                    usuarioId
-                );
+        // 4. Processar tudo no model
+        const tra_id = await processarPagamentoCompleto({
+            usuarioId,
+            enderecoId,
+            data,
+            subtotal,
+            frete,
+            total: totalCalculado,
+            pagamentos,
+            itensCarrinho
+        });
 
-                if (primeiraTransacaoId === 0) {
-                    primeiraTransacaoId = buscarTransacaoId(usuarioId);
-                    
-                    for (const item of itensCarrinho) {
-                        await criarItemVenda(
-                            item.car_qtd_item,
-                            transacaoId,
-                            item.livros_lvr_id
-                        );
-                        
-                        const novoEstoque = item.livro.lvr_qtd_estoque - item.car_qtd_item;
-                        await atualizarEstoqueLivro(item.livros_lvr_id, novoEstoque);
-                    }
-                    isFirstTransaction = false;
-                }
-            }
-
-        await limparCarrinhoUsuario(usuarioId);
-        await db.query('COMMIT');
-
-        res.status(200).json({ vendaId: primeiraTransacaoId });
+        res.status(200).json({ tra_id });
+        
     } catch (error) {
-        await db.query('ROLLBACK');
-        console.error('Erro ao confirmar pagamento:', error);
-        res.status(500).json({ message: 'Pagamento Confirmado' });
+        console.error('Erro no pagamento:', error);
+        res.status(500).json({ message: error.message || 'Erro no processamento' });
     }
 };

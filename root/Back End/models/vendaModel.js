@@ -1,45 +1,102 @@
 const db = require('../config/db');
 
-async function criarTransacao(numeroVenda, data, frete, status, valor, subtotal, enderecoId, usuarioId) {
-    const [result] = await db.query(
-        `INSERT INTO transacoes (
-            tra_numero_venda,
-            tra_data,
-            tra_valor_frete,
-            tra_status,
-            tra_valor,
-            tra_subtotal,
-            enderecos_entrega_end_id,
-            usuarios_usr_id
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-        [numeroVenda, data, frete, status, valor, subtotal, enderecoId, usuarioId]
-    );
-    return result.insertId;
-}
+async function processarPagamentoCompleto({
+    usuarioId,
+    enderecoId,
+    data,
+    subtotal,
+    frete,
+    total,
+    pagamentos,
+    itensCarrinho
+}) {
+    const connection = await db.getConnection();
+    try {
+        await connection.beginTransaction();
 
-async function criarFormaPagamento(tipo, valor, tra_id, cartaoId, cupomId) {
-    await db.query(
-        `INSERT INTO forma_de_pagamento (
-            fpg_tipo,
-            fpg_valor,
-            transacoes_tra_id,
-            cartoes_crt_id,
-            cupom_cup_id
-        ) VALUES (?, ?, ?, ?, ?)`,
-        [tipo, valor, tra_id, cartaoId || null, cupomId || null]
-    );
-}
+        // Criar transação principal
+        const numeroVenda = Math.floor(1000 + Math.random() * 9000);
+        const [transacaoResult] = await connection.query(
+            `INSERT INTO transacoes (
+                tra_numero_venda,
+                tra_data,
+                tra_valor_frete,
+                tra_status,
+                tra_valor,
+                tra_subtotal,
+                enderecos_entrega_end_id,
+                usuarios_usr_id
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+            [numeroVenda, data, frete, 'EM PROCESSAMENTO', total, subtotal, enderecoId, usuarioId]
+        );
+        const tra_id = transacaoResult.insertId;
 
-async function criarItemVenda(quantidade, transacaoId, livroId) {
-    
-    await db.query(
-        `INSERT INTO itens_de_venda (
-            itv_qtd_item,
-            transacoes_tra_id,
-            livros_lvr_id
-        ) VALUES (?, ?, ?)`,
-        [quantidade, transacaoId, livroId]
-    );
+        // Registrar formas de pagamento
+        for (const pagamento of pagamentos) {
+            let tipo;
+            switch(pagamento.tipo) {
+                case '1': tipo = 'Cartão de Crédito'; break;
+                case '2': tipo = 'Cupom de Troca'; break;
+                case '3': tipo = 'Cupom de Promoção'; break;
+                default: throw new Error('Tipo de pagamento inválido');
+            }
+
+            await connection.query(
+                `INSERT INTO forma_de_pagamento (
+                    fpg_tipo,
+                    fpg_valor,
+                    transacoes_tra_id,
+                    cartoes_crt_id,
+                    cupom_cup_id
+                ) VALUES (?, ?, ?, ?, ?)`,
+                [tipo, pagamento.valor, tra_id, pagamento.cartaoId || null, pagamento.cupomId || null]
+            );
+        }
+
+        // Registrar itens e atualizar estoque
+        for (const item of itensCarrinho) {
+            await connection.query(
+                `INSERT INTO itens_de_venda (
+                    itv_qtd_item,
+                    transacoes_tra_id,
+                    livros_lvr_id
+                ) VALUES (?, ?, ?)`,
+                [item.car_qtd_item, tra_id, item.livros_lvr_id]
+            );
+
+            await connection.query(
+                'UPDATE livros SET lvr_qtd_estoque = lvr_qtd_estoque - ? WHERE lvr_id = ?',
+                [item.car_qtd_item, item.livros_lvr_id]
+            );
+        }
+
+        // Limpar carrinho
+        await connection.query(
+            'DELETE FROM carrinho WHERE usuarios_usr_id = ?',
+            [usuarioId]
+        );
+
+        // Remover cupons utilizados
+        const cuponsIds = pagamentos
+            .filter(p => p.cupomId)
+            .map(p => p.cupomId);
+
+        if (cuponsIds.length > 0) {
+            await connection.query(
+                'DELETE FROM cupom WHERE cup_id IN (?)',
+                [cuponsIds]
+            );
+        }
+
+        await connection.commit();
+        return tra_id;
+
+    } catch (error) {
+        await connection.rollback();
+        throw error;
+    } finally {
+        connection.release();
+    }
 }
 
 async function buscarTransacaoId(usuarioId) {
@@ -96,9 +153,7 @@ async function formaPagamentoId(tra_id) {
 }
 
 module.exports = {
-    criarTransacao,
-    criarFormaPagamento,
-    criarItemVenda,
+    processarPagamentoCompleto,
     buscarTransacaoId,
     buscarTransacao,
     buscarTransacoesPrioridade,
