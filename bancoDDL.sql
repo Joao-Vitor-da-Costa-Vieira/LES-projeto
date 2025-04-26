@@ -115,7 +115,8 @@ CREATE TABLE forma_de_pagamento (
     fpg_tipo           VARCHAR(20) NOT NULL,
     fpg_valor          DECIMAL(6, 2) NOT NULL,
     transacoes_tra_id  INTEGER NOT NULL,
-    cartoes_crt_id     INTEGER
+    cartoes_crt_id     INTEGER,
+    cupom_cup_id     INTEGER
     );
 
 ALTER TABLE forma_de_pagamento ADD CONSTRAINT forma_de_pagamento_pk PRIMARY KEY ( fpg_id );
@@ -285,3 +286,7 @@ ALTER TABLE forma_de_pagamento
 ALTER TABLE forma_de_pagamento
     ADD CONSTRAINT fk_fpg_tra FOREIGN KEY ( transacoes_tra_id )
         REFERENCES transacoes ( tra_id );
+
+ALTER TABLE forma_de_pforma_de_pagamento
+    ADD CONSTRAINT fk_fpg_cup FOREIGN KEY ( cupom_cup_id )
+        REFERENCES cupom ( cup_id );
