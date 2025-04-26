@@ -49,6 +49,15 @@ CREATE TABLE categoria (
 
 ALTER TABLE categoria ADD CONSTRAINT categoria_pk PRIMARY KEY ( cat_id );
 
+CREATE TABLE cupom (
+    cup_id   INTEGER NOT NULL,
+    cup_nome VARCHAR(25) NOT NULL,
+    cup_valor DECIMAL(6,2),
+    usuarios_usr_id INTEGER NOT NULL
+);
+
+ALTER TABLE cupom ADD CONSTRAINT cupom_pk PRIMARY KEY ( cup_id );
+
 CREATE TABLE editora (
     edi_id   INTEGER NOT NULL,
     edi_nome VARCHAR(50) NOT NULL
@@ -206,6 +215,10 @@ ALTER TABLE carrinho
 
 ALTER TABLE cartoes
     ADD CONSTRAINT fk_crt_usr FOREIGN KEY ( usuarios_usr_id )
+        REFERENCES usuarios ( usr_id );
+
+	ALTER TABLE cupom
+    ADD CONSTRAINT fk_cup_usr FOREIGN KEY ( usuarios_usr_id )
         REFERENCES usuarios ( usr_id );
 
 ALTER TABLE enderecos_cobranca
