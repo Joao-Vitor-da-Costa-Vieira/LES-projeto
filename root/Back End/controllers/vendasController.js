@@ -101,24 +101,33 @@ module.exports.postPagamento = async (req, res) => {
     const { usuarioId, enderecoId, data, subtotal, frete, pagamentos, total } = req.body;
     
     try {
-        // 1. Validar estoque
+        // 1. Buscar itens do carrinho (formato original)
         const itensCarrinho = await buscarItensCarrinho(usuarioId);
+        
+        // 2. Validar estoque e obter detalhes dos livros
+        const itensDetalhados = [];
         for (const item of itensCarrinho) {
             const livro = await buscarLivroId(item.livros_lvr_id);
+            
             if (item.car_qtd_item > livro.lvr_qtd_estoque) {
                 return res.status(400).json({ 
                     message: `Estoque insuficiente para ${livro.lvr_titulo} (Disponível: ${livro.lvr_qtd_estoque})`
                 });
             }
+            
+            itensDetalhados.push({
+                ...item,
+                livro
+            });
         }
 
-        // 2. Validar cupons
+        // 3. Validar cupons
         const cuponsUsados = pagamentos.filter(p => p.tipo === '2' || p.tipo === '3');
         if (cuponsUsados.length > 2) {
             return res.status(400).json({ message: 'Máximo de 2 cupons por compra' });
         }
 
-        // 3. Validar valores
+        // 4. Validar valores
         const totalCalculado = parseFloat((subtotal + frete).toFixed(2));
         const totalPago = parseFloat(pagamentos.reduce((sum, p) => sum + p.valor, 0).toFixed(2));
         
@@ -128,7 +137,7 @@ module.exports.postPagamento = async (req, res) => {
             });
         }
 
-        // 4. Processar tudo no model
+        // 5. Processar pagamento (mantendo o formato original do carrinho)
         const tra_id = await processarPagamentoCompleto({
             usuarioId,
             enderecoId,
@@ -137,7 +146,7 @@ module.exports.postPagamento = async (req, res) => {
             frete,
             total: totalCalculado,
             pagamentos,
-            itensCarrinho
+            itensCarrinho // Envia os itens no formato original
         });
 
         res.status(200).json({ tra_id });
