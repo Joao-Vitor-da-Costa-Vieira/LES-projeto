@@ -1,23 +1,33 @@
 const db = require('../config/db');
 
-async function criarTransacao(numeroVenda, data, frete, formaPagamento, status, valor, subtotal, enderecoId, usuarioId ) {
-
+async function criarTransacao(numeroVenda, data, frete, status, valor, subtotal, enderecoId, usuarioId) {
     const [result] = await db.query(
         `INSERT INTO transacoes (
             tra_numero_venda,
             tra_data,
             tra_valor_frete,
-            tra_forma_de_pagamento,
             tra_status,
             tra_valor,
             tra_subtotal,
             enderecos_entrega_end_id,
             usuarios_usr_id
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-        [numeroVenda, data, frete, formaPagamento, status, valor, subtotal, enderecoId, usuarioId]
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+        [numeroVenda, data, frete, status, valor, subtotal, enderecoId, usuarioId]
     );
-
     return result.insertId;
+}
+
+async function criarFormaPagamento(tipo, valor, tra_id, cartaoId, cupomId) {
+    await db.query(
+        `INSERT INTO forma_de_pagamento (
+            fpg_tipo,
+            fpg_valor,
+            transacoes_tra_id,
+            cartoes_crt_id,
+            cupom_cup_id
+        ) VALUES (?, ?, ?, ?, ?)`,
+        [tipo, valor, tra_id, cartaoId || null, cupomId || null]
+    );
 }
 
 async function criarItemVenda(quantidade, transacaoId, livroId) {
@@ -86,8 +96,9 @@ async function formaPagamentoId(tra_id) {
 }
 
 module.exports = {
-    criarItemVenda,
     criarTransacao,
+    criarFormaPagamento,
+    criarItemVenda,
     buscarTransacaoId,
     buscarTransacao,
     buscarTransacoesPrioridade,
