@@ -1,12 +1,10 @@
 const {
     processarPagamentoCompleto,
-    buscarTransacaoId,
     buscarTransacao
 } = require("../models/vendaModel");
 
 const {
-    buscarItensCarrinho,
-    limparCarrinhoUsuario
+    buscarItensCarrinho
 } = require("../models/carrinhoModel");
 
 const {
@@ -22,15 +20,11 @@ const {
 } = require("../models/usuarioModel");
 
 const {
-    buscarLivroId,
-    buscarEstoqueLivro,
-    atualizarEstoqueLivro
+    buscarLivroId
 } = require("../models/livroModel");
 
-const {buscarItensCupom,
-    deletarItensCupom,
-    adicionarItemCupom
- }= require("../models/cupomModel");
+const {buscarItensCupom
+}= require("../models/cupomModel");
 
 module.exports.getPagamento = async (req, res) => {
     try {
