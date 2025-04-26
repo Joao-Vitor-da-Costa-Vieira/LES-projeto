@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const formasPagamento = document.querySelectorAll('.forma-pagamento-item');
         const frete = parseFloat(document.getElementById('frete-valor').textContent.replace('R$ ', ''));
         const subtotal = parseFloat(document.getElementById('total-valor').textContent.replace('R$ ', ''));
-        let total;
+        let total = subtotal + frete;
         const dataAtual = new Date().toISOString().split('T')[0];
     
         if (!enderecoId) {
@@ -31,9 +31,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const pagamentos = Array.from(formasPagamento).map(forma => {
             const tipo = forma.querySelector('p').textContent.trim();
             const valor = parseFloat(forma.querySelector('input[name="valor"]').value);
-            total = total + valor;
             const cartaoSelect = forma.querySelector('select[name="cartao"]');
             const cartaoId = cartaoSelect ? parseInt(cartaoSelect.value) : null;
+            const cupomSelect = forma.querySelector('select[name="cupom"]');
+            const cupomId = cupomSelect ? parseInt(cupomSelect.value) : null;
             
             if (valor < 10) {
                 throw new Error('O valor mínimo para cada forma de pagamento é R$ 10,00');
@@ -42,13 +43,14 @@ document.addEventListener('DOMContentLoaded', function() {
             return {
                 tipo,
                 valor,
-                cartaoId
+                cartaoId,
+                cupomId
             };
         });
     
         const somaPagamentos = pagamentos.reduce((sum, pagamento) => sum + pagamento.valor, 0);
         if (Math.abs(somaPagamentos - total) > 0.01) {
-            alert(`A soma das formas de pagamento (R$ ${somaPagamentos}) não corresponde ao total da compra (R$ ${total})`);
+            alert(`A soma das formas de pagamento (R$ ${somaPagamentos.toFixed(2)}) não corresponde ao total da compra (R$ ${total.toFixed(2)})`);
             return;
         }
     
@@ -271,6 +273,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const cartoesDataElement = document.getElementById('cartoes-data');
             const cartoes = cartoesDataElement ? JSON.parse(cartoesDataElement.textContent) : [];
             
+            const cuponsDataElement = document.getElementById('cupons-data');
+            const cupons = cuponsDataElement ? JSON.parse(cuponsDataElement.textContent) : [];
+            
             camposAdicionais += `
                 <div class="linha_centralizada">
                     <div class="valor">
@@ -280,7 +285,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             `;
             
-            if (formaSelecionada === '1') {
+            if (formaSelecionada === '1') { // Cartão de crédito
                 camposAdicionais += `
                     <div class="linha_centralizada">
                         <div class="genero">
@@ -289,6 +294,21 @@ document.addEventListener('DOMContentLoaded', function() {
                                 ${cartoes.map(cartao => `
                                     <option value="${cartao.crt_id}">
                                         ${cartao.crt_bandeira} **** **** **** ${cartao.crt_numero.toString().slice(-4)}
+                                    </option>
+                                `).join('')}
+                            </select>
+                        </div>
+                    </div>
+                `;
+            } else if (formaSelecionada === '2' || formaSelecionada === '3') { // Cupom de troca ou promoção
+                camposAdicionais += `
+                    <div class="linha_centralizada">
+                        <div class="genero">
+                            <label class="label_genero">Cupom</label>
+                            <select class="selecao_media" name="cupom" required>
+                                ${cupons.map(cupom => `
+                                    <option value="${cupom.cup_id}">
+                                        ${cupom.cup_nome} - R$ ${cupom.cup_valor.toFixed(2)}
                                     </option>
                                 `).join('')}
                             </select>
@@ -316,6 +336,7 @@ document.addEventListener('DOMContentLoaded', function() {
             submenu.remove();
         });
     });
+    
     
     document.addEventListener('click', function(e) {
         if (!e.target.closest('.submenu-pagamento') && !e.target.closest('.adicionar-forma-pagamento')) {
