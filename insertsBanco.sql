@@ -411,3 +411,27 @@ INSERT INTO forma_de_pagamento (
     10,
     1
 );
+
+INSERT INTO cupom (
+    cup_data,
+    cup_nome,
+    cup_valor,
+    usuarios_usr_id
+) VALUES (
+    '2023-08-05',
+    ' Cupom de Troca',
+    75.00,
+    1
+);
+
+INSERT INTO cupom (
+    cup_data,
+    cup_nome,
+    cup_valor,
+    usuarios_usr_id
+) VALUES (
+    '2023-08-06',
+    ' Cupom de Troca',
+    100.00,
+    1
+);
