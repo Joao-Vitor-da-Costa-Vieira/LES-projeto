@@ -50,9 +50,10 @@ CREATE TABLE categoria (
 ALTER TABLE categoria ADD CONSTRAINT categoria_pk PRIMARY KEY ( cat_id );
 
 CREATE TABLE cupom (
-    cup_id   INTEGER NOT NULL,
+    cup_id   INTEGER NOT NULL AUTO_INCREMENT,
     cup_nome VARCHAR(50) NOT NULL,
-    cup_valor DECIMAL(6,2),
+    cup_valor DECIMAL(6,2) NOT NULL,
+    cup_data DATE NOT NULL,
     usuarios_usr_id INTEGER NOT NULL
 );
 
