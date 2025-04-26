@@ -300,7 +300,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>
                     </div>
                 `;
-            } else if (formaSelecionada === '2' || formaSelecionada === '3') { // Cupom de troca ou promoção
+            } else if (formaSelecionada === '2' || formaSelecionada === '3') { 
                 camposAdicionais += `
                     <div class="linha_centralizada">
                         <div class="genero">
@@ -308,7 +308,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <select class="selecao_media" name="cupom" required>
                                 ${cupons.map(cupom => `
                                     <option value="${cupom.cup_id}">
-                                        ${cupom.cup_nome} - R$ ${cupom.cup_valor.toFixed(2)}
+                                        ${cupom.cup_nome} - R$ ${cupom.cup_valor}
                                     </option>
                                 `).join('')}
                             </select>
