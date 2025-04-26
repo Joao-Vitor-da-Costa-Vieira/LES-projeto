@@ -27,17 +27,23 @@ const {
     buscarEstoqueLivro
 } = require("../models/livroModel");
 
+const {buscarItensCupom,
+    deletarItensCupom,
+    adicionarItemCupom
+ }= require("../models/cupomModel");
+
 module.exports.getPagamento = async (req, res) => {
     try {
         const { usr_id } = req.query;
 
         console.log('Usuário recebido Pagamento:', usr_id); 
 
-        const [usuario, carrinhos, enderecos, cartoes] = await Promise.all([
+        const [usuario, carrinhos, enderecos, cartoes, cupons] = await Promise.all([
             buscarUsuarioId(usr_id),
             buscarItensCarrinho(usr_id),
             buscarEnderecosEntregaUsuarioId(usr_id),
-            buscarCartoesUsuarioId(usr_id)
+            buscarCartoesUsuarioId(usr_id),
+            buscarItensCupom(usr_id)
         ]);
 
         console.log('Usuário recebido Pagamento:', usuario);
@@ -62,6 +68,7 @@ module.exports.getPagamento = async (req, res) => {
             subtotalTotal,
             enderecos: enderecos,
             cartoes: cartoes,
+            cupons: cupons,
             usuario: usuario
         });
     } catch (err) {
