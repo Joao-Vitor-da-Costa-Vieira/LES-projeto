@@ -122,7 +122,7 @@ module.exports.postPagamento = async (req, res) => {
         }
 
         // 4. Validar valores
-        const totalCalculado = parseFloat((subtotal + frete).toFixed(2));
+        const totalCalculado = parseFloat((subtotal).toFixed(2));
         const totalPago = parseFloat(pagamentos.reduce((sum, p) => sum + p.valor, 0).toFixed(2));
         
         if (totalPago !== totalCalculado) {
@@ -131,7 +131,7 @@ module.exports.postPagamento = async (req, res) => {
             });
         }
 
-        // 5. Processar pagamento (mantendo o formato original do carrinho)
+        // 5. Processar pagamento
         const tra_id = await processarPagamentoCompleto({
             usuarioId,
             enderecoId,
@@ -140,7 +140,7 @@ module.exports.postPagamento = async (req, res) => {
             frete,
             total: totalCalculado,
             pagamentos,
-            itensCarrinho // Envia os itens no formato original
+            itensCarrinho
         });
 
         res.status(200).json({ tra_id });

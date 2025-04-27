@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const formasPagamento = document.querySelectorAll('.forma-pagamento-item');
         const frete = parseFloat(document.getElementById('frete-valor').textContent.replace('R$ ', ''));
         const subtotal = parseFloat(document.getElementById('total-valor').textContent.replace('R$ ', ''));
-        let total = subtotal + frete;
+        let total = subtotal;
         const dataAtual = new Date().toISOString().split('T')[0];
     
         if (!enderecoId) {

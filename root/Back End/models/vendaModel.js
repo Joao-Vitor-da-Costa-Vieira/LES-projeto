@@ -15,10 +15,8 @@ async function processarPagamentoCompleto({
         await connection.beginTransaction();
 
         // Criar transação principal
-        const numeroVenda = Math.floor(1000 + Math.random() * 9000);
         const [transacaoResult] = await connection.query(
             `INSERT INTO transacoes (
-                tra_numero_venda,
                 tra_data,
                 tra_valor_frete,
                 tra_status,
@@ -26,8 +24,8 @@ async function processarPagamentoCompleto({
                 tra_subtotal,
                 enderecos_entrega_end_id,
                 usuarios_usr_id
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-            [numeroVenda, data, frete, 'EM PROCESSAMENTO', total, subtotal, enderecoId, usuarioId]
+            ) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+            [data, frete, 'EM PROCESSAMENTO', total, subtotal, enderecoId, usuarioId]
         );
         const tra_id = transacaoResult.insertId;
 
