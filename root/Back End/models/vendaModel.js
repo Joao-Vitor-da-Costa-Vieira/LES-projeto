@@ -166,28 +166,17 @@ async function buscarFormasPagamento(tra_id) {
     }));
 }
 
-async function buscarTransacoesPrioridade(){
-    const [result] = await db.query(
-        `SELECT *
-        FROM transacoes
-        WHERE tra_status IN ('APROVADO', 'TROCA SOLICITADA', 'DEVOLUÇÃO SOLICITADA')
-        ORDER BY 
-        CASE 
-            WHEN tra_status = 'APROVADO' THEN 1
-            WHEN tra_status = 'TROCA SOLICITADA' THEN 2
-            WHEN tra_status = 'DEVOLUÇÃO SOLICITADA' THEN 3
-        END ASC,
-        tra_data DESC
-        LIMIT 20;`
-    );
-
-    return result;
+async function buscarTransacoesPrioridade() {
+    return buscarTransacoesFiltradas({
+        status: ['APROVADO', 'TROCA SOLICITADA', 'DEVOLUÇÃO SOLICITADA']
+    });
 }
 
 async function buscarTransacoesFiltradas(filtros = {}) {
     let query = `
         SELECT 
             t.*,
+            u.usr_id AS usuarios_usr_id,
             u.usr_nome
         FROM transacoes t
         INNER JOIN usuarios u ON t.usuarios_usr_id = u.usr_id

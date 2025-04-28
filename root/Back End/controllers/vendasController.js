@@ -1,7 +1,9 @@
 const {
     processarPagamentoCompleto,
     buscarTransacao,
-    buscarFormasPagamento
+    buscarFormasPagamento,
+    buscarTransacoesPrioridade,
+    buscarTransacoesFiltradas
 } = require("../models/vendaModel");
 
 const {
@@ -208,25 +210,16 @@ module.exports.postPagamento = async (req, res) => {
 
 module.exports.filterPedidos = async (req, res) => {
     try {
-        const filters = {
-            status: req.query.status,
-            valorMaximo: req.query.valorMaximo,
-            dataInicio: req.query.dataInicio,
-            dataFim: req.query.dataFim,
-            nomeUsuario: req.query.nomeUsuario
-        };
-
-        const transacoesFiltradas = await buscarTransacoesFiltradas(filters);
+        const filters = req.query;
         
-        const transacoesComUsuarios = await Promise.all(
-            transacoesFiltradas.map(async (transacao) => {
-                const [usuario] = await buscarUsuarioId(transacao.usuarios_usr_id);
-                return {
-                    ...transacao,
-                    usuario: usuario[0]
-                };
-            })
-        );
+        const transacoesFiltradas = await buscarTransacoesFiltradas(filters);
+
+        const transacoesComUsuarios = transacoesFiltradas.map(transacao => ({
+            ...transacao,
+            usuario: {
+                usr_nome: transacao.usr_nome
+            }
+        }));
 
         res.json(transacoesComUsuarios);
 
