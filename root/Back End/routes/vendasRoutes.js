@@ -6,6 +6,7 @@ const vendasController = require('../controllers/vendasController');
 router.get('/pagamento',vendasController.getPagamento);
 router.get('/pagamento/historico',vendasController.getHistorico);
 router.get('/pedidos', vendasController.getPedidos);
+router.post('/pedidos-adm/detalhes',vendasController.getPedidoItem);
 
 router.post('/pagamento/confirmar',vendasController.postPagamento);
 
