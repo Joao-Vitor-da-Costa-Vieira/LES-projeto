@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="icon" href="/imagens/livro-16.ico">
+</head>
+<body>
+
+    <header>
+        <nav class="main-nav">
+            <a href="/home-adm" class="home-link">Home</a>
+            <div class="nav-botao">
+                <button>Clientes</button>
+                <button>Livros</button>
+            </div>
+        </nav>
+        
+        <nav class="usuario-nav">
+            <div class="usuario-sessao">
+                <span class="usuario-nome">Adm</span>
+                <img src="/imagens/graficoLinha.PNG" alt="Imagem do usuário" class="usuario-imagem">
+            </div>
+        </nav>
+    </header>
+
+    <div class="main">
+        <!--Barra lateral de Navegação-->
+        <div class="sidenav">
+            <a href="/pedidos">Pedidos</a>
+            <a href="/">Estoque</a>
+            <a href="/">Análise</a>
+        </div>
+
+        <div class="conteudo">
+        <div class="bloco_titulo">
+            <h1 class="titulo">Transação #<%= transacao.tra_id %></h1>
+        </div>
+
+        <div class="table_div">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 200px;">Usuário</th>
+                        <th style="width: 75px;">Data</th>
+                        <th style="width: 80px;">Subtotal</th>
+                        <th style="width: 120px;">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><%= usuario.usr_nome %></td>
+                        <td><%= new Date(transacao.tra_data).toLocaleDateString('pt-BR') %></td>
+                        <td>R$ <%= transacao.tra_subtotal %></td>
+                        <td><%= transacao.tra_status %></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table_div">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 50px;">Endereço de Entrega</th>
+                        <th style="width: 200px;">Nº</th>
+                        <th style="width: 75px;">Cidade</th>
+                        <th style="width: 80px;">Estado</th>
+                        <th style="width: 150px;">Bairro</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><%= endereco.end_endereco %></td>
+                        <td><%= endereco.end_numero %></td>
+                        <td><%= endereco.end_cidade %></td>
+                        <td><%= endereco.end_estado %></td>
+                        <td><%= endereco.end_bairro %></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table_div">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 150px;">Forma de Pagamento</th>
+                        <th style="width: 150px;">Valor</th>
+                        <th style="width: 200px;">Cartão Usado</th>
+                        <th style="width: 200px;">Cupom Usado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% formaPagamentos.forEach(pagamento => { %>
+                    <tr>
+                        <td><%= pagamento.fpg_tipo %></td>
+                        <td>R$ <%= pagamento.fpg_valor %></td>
+                        <td>
+                            <% if (pagamento.cartao) { %>
+                                **** **** **** <%= pagamento.cartao.crt_numero.toString().slice(-4) %>
+                            <% } else { %>
+                                N/A
+                            <% } %>
+                        </td>
+                        <td>
+                            <% if (pagamento.cupom) { %>
+                                <%= pagamento.cupom.cup_nome %>, 
+                                <%= new Date(pagamento.cupom.cup_data).toLocaleDateString('pt-BR') %>, 
+                                R$ <%= pagamento.cupom.cup_valor %>
+                            <% } else { %>
+                                N/A
+                            <% } %>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table_div">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 400px;">Itens</th>
+                        <th style="width: 100px;">Valor</th>
+                        <th style="width: 80px;">Qtd.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% itens.forEach(item => { %>
+                    <tr>
+                        <td><%= item.livro.lvr_titulo %></td>
+                        <td>R$ <%= (item.livro.lvr_custo * (1 + item.livro.grupo.gr_margem_lucro)) %></td>
+                        <td><%= item.itv_qtd_item %></td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+
+        <br>
+
+        <div class="botoes">
+            <button class="atualizar" type="button" id="atualizar" data-transacao-id="<%= transacao.tra_id %>">
+                Alterar Status
+            </button>
+        </div>
+    </div>
+
+    <!--Script do Submit-->
+    <script type="module" src="/scripts/itemPedidoAdm.js"></script>
+</body>
+</html>
