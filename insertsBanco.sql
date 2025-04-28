@@ -368,12 +368,12 @@ INSERT INTO forma_de_pagamento (
     fpg_tipo,
     fpg_valor,
     transacoes_tra_id,
-    cartoes_crt_id
+    cupom_cup_id
 ) VALUES (
     'Cupom',
     25.00,
     7,
-    1
+    3
 );
 
 INSERT INTO forma_de_pagamento (
@@ -433,5 +433,19 @@ INSERT INTO cupom (
     '2023-08-06',
     ' Cupom de Troca',
     100.00,
+    1
+);
+
+INSERT INTO cupom (
+    cup_data,
+    cup_nome,
+    cup_valor,
+    cup_status,
+    usuarios_usr_id
+) VALUES (
+    '2023-08-06',
+    ' Cupom de Troca',
+    25.00,
+    0,
     1
 );
