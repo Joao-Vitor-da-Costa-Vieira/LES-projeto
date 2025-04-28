@@ -231,11 +231,41 @@ async function buscarTransacoesFiltradas(filtros = {}) {
     return result;
 }
 
+async function buscarTransacaoPorId(tra_id) {
+    const [result] = await db.query(
+        `SELECT 
+            t.*,
+            DATE_FORMAT(t.tra_data, '%d/%m/%Y %H:%i') AS tra_data_formatada
+        FROM transacoes t
+        WHERE t.tra_id = ?`,
+        [tra_id]
+    );
+    return result[0];
+}
+
+async function buscarItensVendaPorTransacao(tra_id) {
+    const [itens] = await db.query(
+        `SELECT 
+            itv.*,
+            l.lvr_titulo,
+            l.lvr_custo,
+            g.grp_margem_lucro
+        FROM itens_de_venda itv
+        INNER JOIN livros l ON itv.livros_lvr_id = l.lvr_id
+        INNER JOIN grupo_de_precificacao g ON l.grupo_de_precificacao_grp_id = g.grp_id
+        WHERE itv.transacoes_tra_id = ?`,
+        [tra_id]
+    );
+    return itens;
+}
+
 module.exports = {
     processarPagamentoCompleto,
     buscarTransacaoId,
     buscarTransacao,
     buscarTransacoesPrioridade,
     buscarFormasPagamento,
-    buscarTransacoesFiltradas
+    buscarTransacoesFiltradas,
+    buscarItensVendaPorTransacao,
+    buscarTransacaoPorId
 };

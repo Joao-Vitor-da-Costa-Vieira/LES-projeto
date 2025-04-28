@@ -132,7 +132,7 @@
                     <% itens.forEach(item => { %>
                     <tr>
                         <td><%= item.livro.lvr_titulo %></td>
-                        <td>R$ <%= (item.livro.lvr_custo * (1 + item.livro.grupo.gr_margem_lucro)) %></td>
+                        <td>R$ <%= item.livro.lvr_custo %></td>
                         <td><%= item.itv_qtd_item %></td>
                     </tr>
                     <% }) %>

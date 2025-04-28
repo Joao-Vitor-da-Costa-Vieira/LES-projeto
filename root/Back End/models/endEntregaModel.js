@@ -77,11 +77,30 @@ async function buscarEnderecosEntregaUsuarioId(id) {
     }
 }
 
+async function buscarEnderecoEntregaPorTransacao(tra_id) {
+    const [endereco] = await db.query(
+        `SELECT 
+            e.end_endereco,
+            e.end_numero,
+            e.end_complemento,
+            e.end_bairro,
+            e.end_cidade,
+            e.end_estado,
+            e.end_cep
+        FROM transacoes t
+        INNER JOIN enderecos_entrega e ON t.enderecos_entrega_end_id = e.end_id
+        WHERE t.tra_id = ?`,
+        [tra_id]
+    );
+    return endereco[0];
+}
+
 // Exportando as funções
 module.exports = {
     cadastrarEnderecoEntrega,
     atualizarEnderecoEntrega,
     buscarTodosEnderecosEntrega,
     buscarEnderecoEntregaId,
-    buscarEnderecosEntregaUsuarioId
+    buscarEnderecosEntregaUsuarioId,
+    buscarEnderecoEntregaPorTransacao
 };

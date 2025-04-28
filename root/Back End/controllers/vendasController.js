@@ -3,7 +3,9 @@ const {
     buscarTransacao,
     buscarFormasPagamento,
     buscarTransacoesPrioridade,
-    buscarTransacoesFiltradas
+    buscarTransacoesFiltradas,
+    buscarTransacaoPorId,
+    buscarItensVendaPorTransacao
 } = require("../models/vendaModel");
 
 const {
@@ -11,7 +13,8 @@ const {
 } = require("../models/carrinhoModel");
 
 const {
-    buscarEnderecosEntregaUsuarioId
+    buscarEnderecosEntregaUsuarioId,
+    buscarEnderecoEntregaPorTransacao
 } = require("../models/endEntregaModel");
 
 const {
@@ -226,5 +229,38 @@ module.exports.filterPedidos = async (req, res) => {
     } catch (error) {
         console.error('Erro ao filtrar pedidos:', error);
         res.status(500).json({ error: 'Erro ao filtrar pedidos' });
+    }
+};
+
+module.exports.getPedidoItem = async (req, res) => {
+    try {
+        const { tra_id } = req.body;
+
+        // Buscar dados básicos da transação
+        const transacao = await buscarTransacaoPorId(tra_id);
+        
+        // Buscar itens da venda com detalhes dos livros
+        const itens = await buscarItensVendaPorTransacao(tra_id);
+        
+        // Buscar endereço de entrega
+        const endereco = await buscarEnderecoEntregaPorTransacao(tra_id);
+        
+        // Buscar formas de pagamento
+        const formaPagamentos = await buscarFormasPagamento(tra_id);
+        
+        // Buscar dados do usuário
+        const [usuario] = await buscarUsuarioId(transacao.usuarios_usr_id);
+
+        res.render('itemPedidoAdm', {
+            transacao,
+            usuario,
+            endereco,
+            formaPagamentos,
+            itens
+        });
+
+    } catch (error) {
+        console.error('Erro ao buscar detalhes do pedido:', error);
+        res.status(500).send('Erro ao carregar detalhes do pedido');
     }
 };
