@@ -104,55 +104,60 @@ async function buscarTransacaoId(usuarioId) {
 }
 
 async function buscarTransacao(usr_id) {
-    const [result] = await db.query(
-        `SELECT 
-            t.tra_id,
-            DATE_FORMAT(t.tra_data, '%d/%m/%Y') AS tra_data_formatada,
-            t.tra_valor,
-            t.tra_subtotal,
-            t.tra_status,
-            t.tra_frete,
-            e.end_endereco,
-            e.end_numero,
-            e.end_complemento,
-            e.end_bairro,
-            e.end_cidade,
-            e.end_estado,
-            e.end_cep
-        FROM transacoes t
-        INNER JOIN enderecos_entrega e ON t.endereco_entrega_end_entrega_id = e.end_entrega_id
-        WHERE t.usuarios_usr_id = ?
-        ORDER BY t.tra_data DESC`,
-        [usr_id]
-    );
+    try{
+        const [result] = await db.query(
+            `SELECT 
+                t.tra_id,
+                DATE_FORMAT(t.tra_data, '%d/%m/%Y') AS tra_data_formatada,
+                t.tra_valor,
+                t.tra_subtotal,
+                t.tra_status,
+                t.tra_valor_frete,
+                e.end_endereco,
+                e.end_numero,
+                e.end_complemento,
+                e.end_bairro,
+                e.end_cidade,
+                e.end_estado,
+                e.end_cep
+            FROM transacoes t
+            INNER JOIN enderecos_entrega e ON t.enderecos_entrega_end_id = e.end_id
+            WHERE t.usuarios_usr_id = ?
+            ORDER BY t.tra_data DESC`,
+            [usr_id]
+        );
 
-    return result;
+        return result || [];
+    } catch(error) {
+        console.error('Erro na busca de transações:', error);
+        return [];
+    }
 }
 
 async function buscarFormasPagamento(tra_id) {
     const [formas] = await db.query(
         `SELECT 
-            fp.tipo_pagamento,
-            fp.valor,
+            fp.fpg_tipo,
+            fp.fpg_valor,
             c.crt_bandeira,
             c.crt_numero,
-            c.crt_validade,
+            c.crt_nome,
             cup.cup_nome,
             cup.cup_valor
-        FROM transacoes_formas_pagamento fp
+        FROM forma_de_pagamento fp
         LEFT JOIN cartoes c ON fp.cartoes_crt_id = c.crt_id
-        LEFT JOIN cupons cup ON fp.cupons_cup_id = cup.cup_id
+        LEFT JOIN cupom cup ON fp.cupom_cup_id = cup.cup_id
         WHERE fp.transacoes_tra_id = ?`,
         [tra_id]
     );
 
     return formas.map(forma => ({
-        tipo: forma.tipo_pagamento,
-        valor: forma.valor,
+        fpg_tipo: forma.fpg_tipo,
+        fpg_valor: forma.fpg_valor,
         cartao: forma.crt_numero ? {
             bandeira: forma.crt_bandeira,
             numero: `**** **** **** ${forma.crt_numero.toString().slice(-4)}`,
-            validade: forma.crt_validade
+            nome: forma.crt_nome
         } : null,
         cupom: forma.cup_nome ? {
             nome: forma.cup_nome,

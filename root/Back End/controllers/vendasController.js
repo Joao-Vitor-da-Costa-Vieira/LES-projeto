@@ -78,12 +78,22 @@ module.exports.getHistorico = async (req, res) => {
 
     try {
         const [usuario] = await buscarUsuarioId(usr_id);
-        const [transacoes] = await buscarTransacao(usr_id);
+        const transacoes = await buscarTransacao(usr_id);
+
+        if (!Array.isArray(transacoes)) {
+            throw new Error('Formato inválido de transações retornado');
+        }
+
+
+        console.log('Tipo de transacoes:', typeof transacoes);
+        console.log('Conteúdo de transacoes:', transacoes);
+
 
         // Buscar formas de pagamento para cada transação
         const transacoesCompletas = await Promise.all(
             transacoes.map(async (transacao) => {
                 const formasPagamento = await buscarFormasPagamento(transacao.tra_id);
+                console.log(formasPagamento);
                 return {
                     ...transacao,
                     formasPagamento,
@@ -101,7 +111,7 @@ module.exports.getHistorico = async (req, res) => {
         );
 
         res.render('historico', {
-            usuario: usuario[0],
+            usuario: usuario,
             transacoes: transacoesCompletas
         });
         

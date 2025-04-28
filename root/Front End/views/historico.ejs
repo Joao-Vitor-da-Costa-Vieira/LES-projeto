@@ -63,17 +63,10 @@
                             <% transacoes.forEach(transacao => { %>
                                 <tr>
                                     <td><%= transacao.tra_data_formatada %></td>
-                                    <td>R$ <%= transacao.tra_valor.toFixed(2).replace('.', ',') %></td>
+                                    <td>R$ <%= transacao.tra_valor %></td>
                                     <td>
                                         <% transacao.formasPagamento.forEach((forma, index) => { %>
-                                            <% let tipoPagamento; %>
-                                            <% switch(forma.tipo) { 
-                                                case '1': tipoPagamento = 'Cartão de Crédito'; break;
-                                                case '2': tipoPagamento = 'Cupom de Troca'; break;
-                                                case '3': tipoPagamento = 'Cupom de Promoção'; break;
-                                                default: tipoPagamento = 'Desconhecido';
-                                            } %>
-                                            <%= tipoPagamento %> (R$ <%= forma.valor.toFixed(2).replace('.', ',') %>)<% if(index < transacao.formasPagamento.length - 1) { %>, <% } %>
+                                            <%= forma.fpg_tipo %> (R$ <%= forma.fpg_valor %>)<% if(index < transacao.formasPagamento.length - 1) { %>, <% } %>
                                         <% }); %>
                                     </td>
                                     <td><%= transacao.tra_status %></td>
