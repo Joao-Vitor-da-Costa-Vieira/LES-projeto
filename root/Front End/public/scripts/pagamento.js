@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     
         const pagamentos = Array.from(formasPagamento).map(forma => {
-            const tipo = forma.querySelector('p').textContent.trim();
+            const tipo = forma.querySelector('p').dataset.tipo;
             const valor = parseFloat(forma.querySelector('input[name="valor"]').value);
             const cartaoSelect = forma.querySelector('select[name="cartao"]');
             const cartaoId = cartaoSelect ? parseInt(cartaoSelect.value) : null;
@@ -317,9 +317,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 `;
             }
             
+            const valorSelecionado = document.getElementById('forma-pagamento-select').value;
+            const textoSelecionado = document.getElementById('forma-pagamento-select').selectedOptions[0].text;
+
             formaPagamentoItem.innerHTML = `
                 <div class="linha_centralizada">
-                    <p>${document.getElementById('forma-pagamento-select').selectedOptions[0].text}</p>
+                    <p data-tipo="${valorSelecionado}">${textoSelecionado}</p>
                 </div>
                 ${camposAdicionais}
                 <br>
