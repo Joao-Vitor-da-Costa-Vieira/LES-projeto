@@ -103,23 +103,62 @@ async function buscarTransacaoId(usuarioId) {
         return result;
 }
 
-async function buscarTransacao(usr_id){
+async function buscarTransacao(usr_id) {
     const [result] = await db.query(
         `SELECT 
-            tra_id,
-            tra_numero_venda,
-            DATE_FORMAT(tra_data, '%d/%m/%Y') as tra_data_formatada,
-            tra_valor,
-            tra_subtotal,
-            tra_forma_de_pagamento,
-            tra_status
-        FROM transacoes 
-        WHERE usuarios_usr_id = ?
-        ORDER BY tra_data DESC`,
+            t.tra_id,
+            DATE_FORMAT(t.tra_data, '%d/%m/%Y') AS tra_data_formatada,
+            t.tra_valor,
+            t.tra_subtotal,
+            t.tra_status,
+            t.tra_frete,
+            e.end_endereco,
+            e.end_numero,
+            e.end_complemento,
+            e.end_bairro,
+            e.end_cidade,
+            e.end_estado,
+            e.end_cep
+        FROM transacoes t
+        INNER JOIN enderecos_entrega e ON t.endereco_entrega_end_entrega_id = e.end_entrega_id
+        WHERE t.usuarios_usr_id = ?
+        ORDER BY t.tra_data DESC`,
         [usr_id]
     );
 
     return result;
+}
+
+async function buscarFormasPagamento(tra_id) {
+    const [formas] = await db.query(
+        `SELECT 
+            fp.tipo_pagamento,
+            fp.valor,
+            c.crt_bandeira,
+            c.crt_numero,
+            c.crt_validade,
+            cup.cup_nome,
+            cup.cup_valor
+        FROM transacoes_formas_pagamento fp
+        LEFT JOIN cartoes c ON fp.cartoes_crt_id = c.crt_id
+        LEFT JOIN cupons cup ON fp.cupons_cup_id = cup.cup_id
+        WHERE fp.transacoes_tra_id = ?`,
+        [tra_id]
+    );
+
+    return formas.map(forma => ({
+        tipo: forma.tipo_pagamento,
+        valor: forma.valor,
+        cartao: forma.crt_numero ? {
+            bandeira: forma.crt_bandeira,
+            numero: `**** **** **** ${forma.crt_numero.toString().slice(-4)}`,
+            validade: forma.crt_validade
+        } : null,
+        cupom: forma.cup_nome ? {
+            nome: forma.cup_nome,
+            valor: forma.cup_valor
+        } : null
+    }));
 }
 
 async function buscarTransacoesPrioridade(){
@@ -139,21 +178,10 @@ async function buscarTransacoesPrioridade(){
     return result;
 }
 
-async function formaPagamentoId(tra_id) {
-    const [result] = await db.query(
-        `SELECT fpg_tipo
-        FROM forma_de_pagamento
-        WHERE transacoes_tra_id = ?`,
-        [tra_id]
-    );
-    
-    return result;
-}
-
 module.exports = {
     processarPagamentoCompleto,
     buscarTransacaoId,
     buscarTransacao,
     buscarTransacoesPrioridade,
-    formaPagamentoId
+    buscarFormasPagamento
 };

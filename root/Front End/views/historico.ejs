@@ -51,11 +51,9 @@
                 <table>
                     <thead>
                         <tr>
-                            <th style="width: 100px;">Nº Venda</th>
                             <th style="width: 100px;">Data</th>
-                            <th style="width: 100px;">Valor</th>
-                            <th style="width: 100px;">Subtotal</th>
-                            <th style="width: 150px;">Forma de Pagamento</th>
+                            <th style="width: 100px;">Valor Total</th>
+                            <th style="width: 150px;">Formas de Pagamento</th>
                             <th style="width: 150px;">Status</th>
                             <th style="width: 100px;">Ações</th>
                         </tr>
@@ -64,11 +62,20 @@
                         <% if (transacoes && transacoes.length > 0) { %>
                             <% transacoes.forEach(transacao => { %>
                                 <tr>
-                                    <td>#<%= transacao.tra_numero_venda %></td>
                                     <td><%= transacao.tra_data_formatada %></td>
                                     <td>R$ <%= transacao.tra_valor.toFixed(2).replace('.', ',') %></td>
-                                    <td>R$ <%= transacao.tra_subtotal.toFixed(2).replace('.', ',') %></td>
-                                    <td><%= transacao.tra_forma_de_pagamento %></td>
+                                    <td>
+                                        <% transacao.formasPagamento.forEach((forma, index) => { %>
+                                            <% let tipoPagamento; %>
+                                            <% switch(forma.tipo) { 
+                                                case '1': tipoPagamento = 'Cartão de Crédito'; break;
+                                                case '2': tipoPagamento = 'Cupom de Troca'; break;
+                                                case '3': tipoPagamento = 'Cupom de Promoção'; break;
+                                                default: tipoPagamento = 'Desconhecido';
+                                            } %>
+                                            <%= tipoPagamento %> (R$ <%= forma.valor.toFixed(2).replace('.', ',') %>)<% if(index < transacao.formasPagamento.length - 1) { %>, <% } %>
+                                        <% }); %>
+                                    </td>
                                     <td><%= transacao.tra_status %></td>
                                     <td>
                                         <div class="botoes_resultado">

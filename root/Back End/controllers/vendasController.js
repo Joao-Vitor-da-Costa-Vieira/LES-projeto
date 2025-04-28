@@ -1,6 +1,7 @@
 const {
     processarPagamentoCompleto,
-    buscarTransacao
+    buscarTransacao,
+    buscarFormasPagamento
 } = require("../models/vendaModel");
 
 const {
@@ -71,20 +72,39 @@ module.exports.getPagamento = async (req, res) => {
     }
 };
 
-const db = require('../config/db');
 
 module.exports.getHistorico = async (req, res) => {
     const { usr_id } = req.query;
 
     try {
         const [usuario] = await buscarUsuarioId(usr_id);
-
         const [transacoes] = await buscarTransacao(usr_id);
+
+        // Buscar formas de pagamento para cada transação
+        const transacoesCompletas = await Promise.all(
+            transacoes.map(async (transacao) => {
+                const formasPagamento = await buscarFormasPagamento(transacao.tra_id);
+                return {
+                    ...transacao,
+                    formasPagamento,
+                    endereco: {
+                        logradouro: transacao.end_endereco,
+                        numero: transacao.end_numero,
+                        complemento: transacao.end_complemento,
+                        bairro: transacao.end_bairro,
+                        cidade: transacao.end_cidade,
+                        estado: transacao.end_estado,
+                        cep: transacao.end_cep
+                    }
+                };
+            })
+        );
 
         res.render('historico', {
             usuario: usuario[0],
-            transacoes
+            transacoes: transacoesCompletas
         });
+        
     } catch (error) {
         console.error('Erro ao buscar histórico:', error);
         res.status(500).send('Erro ao carregar histórico');
