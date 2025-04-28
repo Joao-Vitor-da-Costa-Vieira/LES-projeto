@@ -7,13 +7,38 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!--Barra lateral de Navegação-->
-    <div class="sidenav">
-        <a href="carrinho.html">Menu</a>
-    </div>
 
-    <!--Div usada para centralizar o conteudo para da página além da barra lateral-->
-    <div class="conteudo">
+    <header>
+        <nav class="main-nav">
+            <a href="home.html" class="home-link">Home</a>
+            <div class="nav-botao">
+                <button>Clientes</button>
+                <button>Livros</button>
+            </div>
+        </nav>
+        
+        <nav class="usuario-nav">
+            <div class="barra-pesquisa">
+                <input type="text" placeholder="Pesquisar...">
+                <button>🔍</button>
+            </div>
+            
+            <div class="usuario-sessao">
+                <span class="usuario-nome">Adm</span>
+                <img src="graficoLinha.PNG" alt="Imagem do usuário" class="usuario-imagem">
+            </div>
+        </nav>
+    </header>
+
+    <div class="main">
+        <!--Barra lateral de Navegação-->
+        <div class="sidenav">
+            <a href="/">Pedidos</a>
+            <a href="/">Estoque</a>
+            <a href="/">Análise</a>
+        </div>
+
+        <div class="conteudo">
         <div class="bloco_titulo">
             <h1 class="titulo">Transação</h1>
         </div>
@@ -25,7 +50,6 @@
                         <th style="width: 200px;">Usuário</th>
                         <th style="width: 75px;">Data</th>
                         <th style="width: 80px;">Subtotal</th>
-                        <th style="width: 150px;">Forma de Pagamento</th>
                         <th style="width: 120px;">Status</th>
                     </tr>
                 </thead>
@@ -34,7 +58,6 @@
                         <td>Joana Silva</td>
                         <td>10/03/2024</td>
                         <td>R$ 89,90</td>
-                        <td>Cartão de Crédito</td>
                         <td>ENTREGUE</td>
                     </tr>
                 </tbody>
@@ -68,20 +91,43 @@
             <table>
                 <thead>
                     <tr>
-                        <th style="width: 50px;">Endereco de Cobrança</th>
-                        <th style="width: 200px;">Nº</th>
-                        <th style="width: 75px;">Cidade</th>
-                        <th style="width: 80px;">Estado</th>
-                        <th style="width: 150px;">Bairro</th>
+                        <th style="width: 150px;">Forma de Pagamento</th>
+                        <th style="width: 150px;">Valor</th>
+                        <th style="width: 200px;">Cartao Usado</th>
+                        <th style="width: 200px;">Cupom Usado</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Rua das Flores</td>
-                        <td>123</td>
-                        <td>Mogi das Cruzes</td>
-                        <td>SP</td>
-                        <td>Centro</td>
+                        <td>Cartão de Crédito</td>
+                        <td>R$ 49,99</td>
+                        <td>**** **** **** 1424</td>
+                        <td>N/A</td>
+                    </tr>
+                    <tr>
+                        <td>Cupom</td>
+                        <td>R$ 40,00</td>
+                        <td>N/A</td>
+                        <td> Cupom de Troca, 25/02/2023, R$40,00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table_div">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 400px;">Itens</th>
+                        <th style="width: 100px;">Valor</th>
+                        <th style="width: 80px;">Qtd.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Dom Quixote</td>
+                        <td>R$ 89,90</td>
+                        <td>1</td>
                     </tr>
                 </tbody>
             </table>
