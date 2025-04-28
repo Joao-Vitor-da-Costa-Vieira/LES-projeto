@@ -121,6 +121,31 @@ module.exports.getHistorico = async (req, res) => {
     }
 };
 
+module.exports.getPedidos = async (req, res) => {
+    try {
+        const transacoes = await buscarTransacoesPrioridade();
+        
+        const transacoesComUsuarios = await Promise.all(
+            transacoes.map(async (transacao) => {
+                const [usuario] = await buscarUsuarioId(transacao.usuarios_usr_id);
+                return {
+                    ...transacao,
+                    usuario: usuario
+                };
+            })
+        );
+
+        res.render('pedidos', {
+            transacoes: transacoesComUsuarios
+        });
+
+    } catch (error) {
+        console.error('Erro ao carregar pedidos:', error);
+        res.status(500).send('Erro ao carregar pedidos');
+    }
+};
+
+
 module.exports.postPagamento = async (req, res) => {
     const { usuarioId, enderecoId, data, subtotal, frete, pagamentos, total } = req.body;
     
@@ -178,5 +203,35 @@ module.exports.postPagamento = async (req, res) => {
     } catch (error) {
         console.error('Erro no pagamento:', error);
         res.status(500).json({ message: error.message || 'Erro no processamento' });
+    }
+};
+
+module.exports.filterPedidos = async (req, res) => {
+    try {
+        const filters = {
+            status: req.query.status,
+            valorMaximo: req.query.valorMaximo,
+            dataInicio: req.query.dataInicio,
+            dataFim: req.query.dataFim,
+            nomeUsuario: req.query.nomeUsuario
+        };
+
+        const transacoesFiltradas = await buscarTransacoesFiltradas(filters);
+        
+        const transacoesComUsuarios = await Promise.all(
+            transacoesFiltradas.map(async (transacao) => {
+                const [usuario] = await buscarUsuarioId(transacao.usuarios_usr_id);
+                return {
+                    ...transacao,
+                    usuario: usuario[0]
+                };
+            })
+        );
+
+        res.json(transacoesComUsuarios);
+
+    } catch (error) {
+        console.error('Erro ao filtrar pedidos:', error);
+        res.status(500).json({ error: 'Erro ao filtrar pedidos' });
     }
 };
