@@ -181,7 +181,7 @@ CREATE TABLE transacoes (
     tra_id                   INTEGER NOT NULL AUTO_INCREMENT,
     tra_data                 DATETIME NOT NULL,
     tra_valor_frete          DECIMAL(5, 2) NOT NULL,
-    tra_status               VARCHAR(15) NOT NULL,
+    tra_status               VARCHAR(25) NOT NULL,
     tra_valor                DECIMAL(6, 2) NOT NULL,
     tra_desconto             DECIMAL(6, 2),
     tra_subtotal             DECIMAL(6, 2) NOT NULL,
