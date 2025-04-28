@@ -150,6 +150,42 @@ module.exports.getPedidos = async (req, res) => {
     }
 };
 
+module.exports.getPedidoItem = async (req, res) => {
+    try {
+        const { tra_id } = req.query;
+
+        // Buscar dados básicos da transação
+        const transacao = await buscarTransacaoPorId(tra_id);
+        console.log('Transação:', transacao); 
+
+        // Buscar itens da venda com detalhes dos livros
+        const itens = await buscarItensVendaPorTransacao(tra_id);
+        console.log('Itens:', itens); 
+
+        // Buscar endereço de entrega
+        const endereco = await buscarEnderecoEntregaPorTransacao(tra_id);
+        
+        // Buscar formas de pagamento
+        const formaPagamentos = await buscarFormasPagamento(tra_id);
+        
+        // Buscar dados do usuário
+        const [usuario] = await buscarUsuarioId(transacao.usuarios_usr_id);
+        console.log('Usuário encontrado:', usuario);
+
+        res.render('itemPedidoAdm', {
+            transacao,
+            usuario,
+            endereco,
+            formaPagamentos,
+            itens
+        });
+
+    } catch (error) {
+        console.error('Erro ao buscar detalhes do pedido:', error);
+        res.status(500).send('Erro ao carregar detalhes do pedido');
+    }
+};
+
 
 module.exports.postPagamento = async (req, res) => {
     const { usuarioId, enderecoId, data, subtotal, frete, pagamentos, total } = req.body;
@@ -229,38 +265,5 @@ module.exports.filterPedidos = async (req, res) => {
     } catch (error) {
         console.error('Erro ao filtrar pedidos:', error);
         res.status(500).json({ error: 'Erro ao filtrar pedidos' });
-    }
-};
-
-module.exports.getPedidoItem = async (req, res) => {
-    try {
-        const { tra_id } = req.body;
-
-        // Buscar dados básicos da transação
-        const transacao = await buscarTransacaoPorId(tra_id);
-        
-        // Buscar itens da venda com detalhes dos livros
-        const itens = await buscarItensVendaPorTransacao(tra_id);
-        
-        // Buscar endereço de entrega
-        const endereco = await buscarEnderecoEntregaPorTransacao(tra_id);
-        
-        // Buscar formas de pagamento
-        const formaPagamentos = await buscarFormasPagamento(tra_id);
-        
-        // Buscar dados do usuário
-        const [usuario] = await buscarUsuarioId(transacao.usuarios_usr_id);
-
-        res.render('itemPedidoAdm', {
-            transacao,
-            usuario,
-            endereco,
-            formaPagamentos,
-            itens
-        });
-
-    } catch (error) {
-        console.error('Erro ao buscar detalhes do pedido:', error);
-        res.status(500).send('Erro ao carregar detalhes do pedido');
     }
 };
