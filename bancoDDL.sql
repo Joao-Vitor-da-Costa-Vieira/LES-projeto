@@ -54,6 +54,7 @@ CREATE TABLE cupom (
     cup_nome VARCHAR(50) NOT NULL,
     cup_valor DECIMAL(6,2) NOT NULL,
     cup_data DATE NOT NULL,
+    cup_status INTEGER NOT NULL DEFAULT 1,
     usuarios_usr_id INTEGER NOT NULL
 );
 

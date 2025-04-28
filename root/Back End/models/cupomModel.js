@@ -2,7 +2,7 @@ const db = require('../config/db');
 
 async function buscarItensCupom(usr_id) {
     try {
-        const [itens] = await db.query('SELECT * FROM cupom WHERE usuarios_usr_id = ?',  [usr_id]);
+        const [itens] = await db.query('SELECT * FROM cupom WHERE usuarios_usr_id = ? AND cup_status = 1',  [usr_id]);
         return itens;
     } catch (err) {
         console.error("Erro no buscarItensCupom - modelCupom: ${err}");
