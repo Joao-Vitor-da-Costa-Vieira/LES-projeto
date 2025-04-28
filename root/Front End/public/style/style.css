@@ -181,6 +181,15 @@ body {
     object-fit: cover;
 }
 
+/*Container do Filtro*/
+.filtros-container {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
 /*Estilização do Label */
 
 .label{
