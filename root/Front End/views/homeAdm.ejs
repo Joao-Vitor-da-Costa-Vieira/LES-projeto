@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="icon" href="/imagens/livro-16.ico">
+</head>
+<body>
+
+    <header>
+        <nav class="main-nav">
+            <a href="/home-adm" class="home-link">Home</a>
+            <div class="nav-botao">
+                <button>Clientes</button>
+                <button>Livros</button>
+            </div>
+        </nav>
+        
+        <nav class="usuario-nav">
+            <div class="usuario-sessao">
+                <span class="usuario-nome">Adm</span>
+                <img src="/imagens/graficoLinha.PNG" alt="Imagem do usuário" class="usuario-imagem">
+            </div>
+        </nav>
+    </header>
+
+    <div class="main">
+        <!--Barra lateral de Navegação-->
+        <div class="sidenav">
+            <a href="/">Pedidos</a>
+            <a href="/">Estoque</a>
+            <a href="/">Análise</a>
+        </div>
+
+        <div class="conteudo">
+            <div class="table_div">
+                <table>
+                    <thead>
+                        <tr>
+                            <th colspan="7">Principais Pedidos</th>
+                        </tr>
+                        <tr>
+                            <th style="width: 50px;"></th>
+                            <th style="width: 200px;">Usuário</th>
+                            <th>Valor Total</th>
+                            <th>Data</th>
+                            <th>Status</th>
+                            <th>Opções</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if (transacoes && transacoes.length > 0) { %>
+                            <% transacoes.forEach(transacao => { %>
+                                <tr>
+                                    <td></td>
+                                    <td><%= transacao.usuario.usr_nome %></td>
+                                    <td>R$ <%= transacao.tra_valor %></td>
+                                    <td><%= new Date(transacao.tra_data).toLocaleDateString() %></td>
+                                    <td class="status-<%= transacao.tra_status %>">
+                                        <%= transacao.tra_status %>
+                                    </td>
+                                    <td>
+                                        <div class="botoes_resultado">
+                                            <a class="alterar" href="/pagamento-adm/detalhes?tra_id=<%= transacao.tra_id %>">
+                                                Ver Mais
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <% }); %>
+                        <% } else { %>
+                            <tr>
+                                <td colspan="7">Nenhum pedido prioritário encontrado</td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="/scripts/homeAdm.js"></script>
+</body>
+</html>

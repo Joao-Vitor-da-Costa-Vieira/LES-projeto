@@ -1,5 +1,5 @@
 const { buscarUsuarioId } = require("../models/usuarioModel");
-const { buscarTransacoesPrioridade, formaPagamentoId } = require("../models/vendaModel");
+const { buscarTransacoesPrioridade } = require("../models/vendaModel");
 
 //Views
 module.exports.getTela = (req, res) => {
@@ -16,20 +16,27 @@ module.exports.getHome = async (req, res) => {
 };
 
 module.exports.getHomeAdm = async (req, res) => {
-    const [transacoes] = await buscarTransacoesPrioridade;
-    console.log("Transações retornadas:", transacoes);
-    const [usuarios] = await buscarUsuarioId(transacoes.usuarios_usr_id);
+    try {
+        // Buscar transações prioritárias
+        const transacoes = await buscarTransacoesPrioridade();
+        
+        // Buscar informações dos usuários para cada transação
+        const transacoesComUsuarios = await Promise.all(
+            transacoes.map(async (transacao) => {
+                const [usuario] = await buscarUsuarioId(transacao.usuarios_usr_id);
+                return {
+                    ...transacao,
+                    usuario: usuario
+                };
+            })
+        );
 
-    for(const usuario of usuarios){
-        for(const transacao of transacoes){
-            if(usuario.usr_id === transacao.usuarios_usr_id){
-                transacao.usuario_nome = usuario.usr_nome;
-            }
-        }
+        res.render('homeAdm', {
+            transacoes: transacoesComUsuarios
+        });
+
+    } catch (error) {
+        console.error('Erro ao carregar página admin:', error);
+        res.status(500).send('Erro ao carregar dados administrativos');
     }
-
-
-    res.render('homeAdm',{
-        transacoes
-    });
 };

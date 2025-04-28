@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
         botao.addEventListener('click', (event) => {
             event.stopPropagation();
             console.log("Botão clicado!");
-            getHomeAdm;
+            getHomeAdm();
         });
     });
 });

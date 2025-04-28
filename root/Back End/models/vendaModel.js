@@ -177,7 +177,8 @@ async function buscarTransacoesPrioridade(){
             WHEN tra_status = 'TROCA SOLICITADA' THEN 2
             WHEN tra_status = 'DEVOLUÇÃO SOLICITADA' THEN 3
         END ASC,
-        tra_data DESC;`
+        tra_data DESC
+        LIMIT 20;`
     );
 
     return result;
