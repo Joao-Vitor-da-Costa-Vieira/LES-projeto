@@ -184,10 +184,69 @@ async function buscarTransacoesPrioridade(){
     return result;
 }
 
+async function buscarTransacoesFiltradas(filtros = {}) {
+    let query = `
+        SELECT 
+            t.*,
+            u.usr_nome
+        FROM transacoes t
+        INNER JOIN usuarios u ON t.usuarios_usr_id = u.usr_id
+        WHERE 1=1
+    `;
+
+    const params = [];
+
+    // Filtro de status
+    if (filtros.status) {
+        if (Array.isArray(filtros.status)) {
+            query += ` AND t.tra_status IN (${filtros.status.map(() => '?').join(',')})`;
+            params.push(...filtros.status);
+        } else {
+            query += ' AND t.tra_status = ?';
+            params.push(filtros.status);
+        }
+    }
+
+    // Filtro de valor máximo
+    if (filtros.valorMaximo) {
+        query += ' AND t.tra_valor <= ?';
+        params.push(parseFloat(filtros.valorMaximo));
+    }
+
+    // Filtro de data
+    if (filtros.dataInicio && filtros.dataFim) {
+        query += ' AND t.tra_data BETWEEN ? AND ?';
+        params.push(filtros.dataInicio, filtros.dataFim + ' 23:59:59');
+    }
+
+    // Filtro de nome do usuário
+    if (filtros.nomeUsuario) {
+        query += ' AND u.usr_nome LIKE ?';
+        params.push(`%${filtros.nomeUsuario}%`);
+    }
+
+    // Ordenação padrão
+    query += `
+        ORDER BY 
+            CASE 
+                WHEN t.tra_status = 'APROVADO' THEN 1
+                WHEN t.tra_status = 'TROCA SOLICITADA' THEN 2
+                WHEN t.tra_status = 'DEVOLUÇÃO SOLICITADA' THEN 3
+                ELSE 4
+            END ASC,
+            t.tra_data DESC
+        LIMIT 20
+    `;
+
+    const [result] = await db.query(query, params);
+    return result;
+}
+
 module.exports = {
     processarPagamentoCompleto,
     buscarTransacaoId,
     buscarTransacao,
     buscarTransacoesPrioridade,
-    buscarFormasPagamento
+    buscarFormasPagamento,
+    buscarTransacoesFiltradas
 };

@@ -70,21 +70,27 @@ function atualizarTabelaPedidos(pedidos) {
     const tbody = document.querySelector('tbody');
     tbody.innerHTML = '';
 
+    if (pedidos.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6">Nenhum pedido encontrado</td></tr>';
+        return;
+    }
+
     pedidos.forEach(pedido => {
-        const row = `
-            <tr>
-                <td>${pedido.id}</td>
-                <td>${pedido.usuario}</td>
-                <td>R$ ${pedido.valor}</td>
-                <td>${new Date(pedido.data).toLocaleDateString()}</td>
-                <td class="status-${pedido.status.toLowerCase().replace(/ /g, '-')}">
-                    ${pedido.status}
-                </td>
-                <td>
-                    <a href="/pedidos/${pedido.id}" class="ver-detalhes">Ver Detalhes</a>
-                </td>
-            </tr>
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td></td>
+            <td>${pedido.usuario.usr_nome}</td>
+            <td>R$ ${pedido.tra_valor.toFixed(2).replace('.', ',')}</td>
+            <td>${new Date(pedido.tra_data).toLocaleDateString()}</td>
+            <td class="status-${pedido.tra_status.toLowerCase().replace(/ /g, '-')}">
+                ${pedido.tra_status}
+            </td>
+            <td>
+                <a href="/pagamento-adm/detalhes?tra_id=${pedido.tra_id}" class="alterar">
+                    Ver Mais
+                </a>
+            </td>
         `;
-        tbody.insertAdjacentHTML('beforeend', row);
+        tbody.appendChild(row);
     });
 }
