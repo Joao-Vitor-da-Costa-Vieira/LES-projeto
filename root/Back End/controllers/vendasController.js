@@ -309,7 +309,7 @@ module.exports.postAtualizarStatus = async (req, res) => {
                 break;
         }
 
-        await adicionarNotificacao(usuario.usuarios_usr_id, mensagem);
+        await adicionarNotificacao(usuario.usuarios_usr_id, mensagem, tra_id);
 
         const result = await atualizarTransacaoStatus(novoStatus,tra_id);
         

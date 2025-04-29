@@ -25,11 +25,11 @@ async function apagarNotificacao(ntf_id) {
     }
 }
 
-async function adicionarNotificacao(usr_id, ntf_mensagem) {
+async function adicionarNotificacao(usr_id, ntf_mensagem, tra_id) {
     try {
         await db.query(
-            "INSERT INTO notificacao ( usuarios_usr_id, ntf_mensagem) VALUES (?, ?)",
-            [usr_id, ntf_mensagem]
+            "INSERT INTO notificacao ( usuarios_usr_id, ntf_mensagem, transacoes_tra_id) VALUES (?, ?, ?)",
+            [usr_id, ntf_mensagem, tra_id]
         );        
 
         return { success: true, message: 'Item adicionado às notficações com sucesso' };
