@@ -18,7 +18,7 @@ router.use('/', cartaoRoutes);
 router.use('/', usuarioRoutes);
 router.use('/', carrinhoRoutes);
 router.use('/', vendasRoutes);
-router.use('/', notificacaoRoutesRoutes);
+router.use('/', notificacaoRoutes);
 
 
 module.exports = router;
