@@ -64,8 +64,8 @@
                 <thead>
                     <tr>
                         <th style="width: 50px;">Endereço de Entrega</th>
-                        <th style="width: 200px;">Nº</th>
-                        <th style="width: 75px;">Cidade</th>
+                        <th style="width: 75px;">Nº</th>
+                        <th style="width: 200px;">Cidade</th>
                         <th style="width: 80px;">Estado</th>
                         <th style="width: 150px;">Bairro</th>
                     </tr>
@@ -99,16 +99,16 @@
                         <td>R$ <%= forma.fpg_valor %></td>
                         <td>
                             <% if (forma.cartao) { %>
-                                **** **** **** <%= forma.cartao.crt_numero %>
+                                **** **** **** <%= forma.cartao.numero %>
                             <% } else { %>
                                 N/A
                             <% } %>
                         </td>
                         <td>
                             <% if (forma.cupom) { %>
-                                <%= forma.cupom.cup_nome %>, 
-                                <%= new Date(forma.cupom.cup_data).toLocaleDateString('pt-BR') %>, 
-                                R$ <%= forma.cupom.cup_valor %>
+                                <%= forma.cupom.nome %>, 
+                                <%= new Date(forma.cupom.data).toLocaleDateString('pt-BR') %>, 
+                                R$ <%= forma.cupom.valor %>
                             <% } else { %>
                                 N/A
                             <% } %>
@@ -143,7 +143,7 @@
         <br>
 
         <div class="botoes">
-            <button class="adicionar" type="button" id="atualizar" data-transacao-id="<%= transacao.tra_id %>">
+            <button class="adicionar" type="button" id="atualizar" data-transacao-id="<%= transacao.tra_id %>" data-tra-status="<%= transacao.tra_status %>">
                 Alterar Status
             </button>
         </div>

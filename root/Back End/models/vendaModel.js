@@ -143,7 +143,8 @@ async function buscarFormasPagamento(tra_id) {
             c.crt_numero,
             c.crt_nome,
             cup.cup_nome,
-            cup.cup_valor
+            cup.cup_valor,
+            cup.cup_data
         FROM forma_de_pagamento fp
         LEFT JOIN cartoes c ON fp.cartoes_crt_id = c.crt_id
         LEFT JOIN cupom cup ON fp.cupom_cup_id = cup.cup_id
@@ -161,7 +162,8 @@ async function buscarFormasPagamento(tra_id) {
         } : null,
         cupom: forma.cup_nome ? {
             nome: forma.cup_nome,
-            valor: forma.cup_valor
+            valor: forma.cup_valor,
+            data: forma.cup_data
         } : null
     }));
 }
