@@ -8,6 +8,7 @@ const telaInicialRoutes = require('./telaInicialRoutes');
 const livroRoutes = require('./livroRoutes');
 const carrinhoRoutes = require('./carrinhoRoutes');
 const vendasRoutes = require('./vendasRoutes');
+const notificacaoRoutes = require('./notificacaoRoutes');
 
 router.use('/', telaInicialRoutes);
 router.use('/', livroRoutes);
@@ -17,6 +18,7 @@ router.use('/', cartaoRoutes);
 router.use('/', usuarioRoutes);
 router.use('/', carrinhoRoutes);
 router.use('/', vendasRoutes);
+router.use('/', notificacaoRoutesRoutes);
 
 
 module.exports = router;

@@ -667,11 +667,57 @@ input[type=submit]{
 }
 
 /*Notificação*/
-.notificacao{
+.notificacao-container {
+    position: relative;
+    margin-right: 20px;
+}
+
+.notificacao-icone {
     width: 30px;
     height: 30px;
+    cursor: pointer;
 }
-  
+
+.notificacao-submenu {
+    position: absolute;
+    right: 0;
+    top: 40px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    width: 300px;
+    max-height: 400px;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.notificacao-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.notificacao-excluir {
+    background: #ff4444;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notificacao-excluir:hover {
+    background: #cc0000;
+}
+
 /*Separar o Conteudo Principal da Barra Lateral*/
 .conteudo{
     margin-left: 150px;
