@@ -327,35 +327,11 @@ async function buscarItensTransacao(tra_id) {
     return itens;
 }
 
-async function buscarDadosTroca(tra_id) {
-    const connection = await db.getConnection();
-    try {
-        // Buscar transação original
-        const transacaoOriginal = await buscarTransacaoPorId(tra_id);
-        
-        // Buscar itens da transação original
-        const itensOriginais = await buscarItensVendaPorTransacao(tra_id);
-        
-        // Buscar endereço original
-        const endereco = await buscarEnderecoEntregaPorTransacao(tra_id);
-        
-        return {
-            transacaoOriginal,
-            itensOriginais,
-            endereco
-        };
-    } finally {
-        connection.release();
-    }
-}
-
-async function criarTroca(usuarioId, dadosTroca) {
+async function criarTroca(usuarioId, dadosTroca, itensOriginais) {
     const connection = await db.getConnection();
     try {
         await connection.beginTransaction();
 
-        // Validar quantidades
-        const itensOriginais = await buscarItensVendaPorTransacao(dadosTroca.tra_id_original);
         for (const item of dadosTroca.itens) {
             const itemOriginal = itensOriginais.find(i => i.livros_lvr_id === item.lvr_id);
             if (!itemOriginal || item.quantidade > itemOriginal.itv_qtd_item) {
@@ -420,6 +396,5 @@ module.exports = {
     buscarUsuarioPorTransacao,
     buscarItensTransacao,
     atualizarStatusEReporEstoque,
-    criarTroca,
-    buscarDadosTroca
+    criarTroca
 };

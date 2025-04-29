@@ -7,7 +7,8 @@ const {
     buscarTransacaoPorId,
     buscarItensVendaPorTransacao,
     atualizarTransacaoStatus,
-    buscarUsuarioPorTransacao
+    buscarUsuarioPorTransacao,
+    criarTroca
 } = require("../models/vendaModel");
 
 const {
@@ -181,9 +182,19 @@ module.exports.getTroca = async (req, res) => {
     try {
         const { tra_id } = req.query;
         
-        // Buscar dados da transação original
-        const { transacaoOriginal, itensOriginais, endereco } = await buscarDadosTroca(tra_id);
-        
+        console.log(tra_id);
+
+        // Buscar transação original
+        const transacaoOriginal = await buscarTransacaoPorId(tra_id);
+        console.log(transacaoOriginal);
+
+        // Buscar itens da transação original
+        const itensOriginais = await buscarItensVendaPorTransacao(tra_id);  
+        const endereco = await buscarEnderecoEntregaPorTransacao(tra_id);
+
+        console.log(itensOriginais);
+        console.log(endereco);
+
         // Preparar dados para a view
         const itensParaTroca = itensOriginais.map(item => ({
             livro: {
@@ -461,13 +472,15 @@ module.exports.postTroca = async (req, res) => {
             throw new Error('Dados de itens inválidos');
         }
 
+        const itensOriginais = await buscarItensVendaPorTransacao(tra_id_original);
         // Criar nova troca
         const novaTraId = await criarTroca(usuarioId, {
             tra_id_original,
             itens,
             subtotal,
             end_id
-        });
+        }, 
+        itensOriginais);
 
         // Adicionar notificação
         await adicionarNotificacao(
