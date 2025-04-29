@@ -595,6 +595,26 @@ body {
     border: green;
 }
 
+.botao-troca{
+    background-color: #0003c8;
+    width: 160px;
+    height: 30px;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    border: #0003c8;
+}
+
+.botao-devolucao{
+    background-color: #0003c8;
+    width: 160px;
+    height: 30px;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    border: #0003c8;
+}
+
 .carrinho_botao{
     background-color: #3d3d3d;
     width: 80px;

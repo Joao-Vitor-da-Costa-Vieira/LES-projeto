@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="icon" href="/imagens/livro-16.ico">
+</head>
+<body>
+
+    <header>
+        <nav class="main-nav">
+            <a class="home-link">Home</a>
+            <div class="nav-botao">
+                <button>Histórico</button>
+                <button id="botao-carrinho">Carrinho</button>
+                <button>Trocas</button>
+                <button>Chatbot</button>
+            </div>
+        </nav>
+        
+        <nav class="usuario-nav">
+            <div class="barra-pesquisa">
+                <input type="text" id="navbarInput" placeholder="Pesquisar...">
+                <button id="navbarBotaoPesquisa">🔍</button>
+            </div>
+            
+            <div class="usuario-sessao">
+                <div id="user-data" data-user-id="<%= Array.isArray(usuario) ? usuario[0]?.usr_id : usuario?.usr_id %>" style="display:none;"></div>
+                <span class="usuario-nome"><%= Array.isArray(usuario) ? usuario[0]?.usr_nome : usuario?.usr_nome %></span>
+                <img src="/imagens/graficoLinha.PNG" alt="Imagem do usuário" class="usuario-imagem">
+            </div>
+        </nav>
+    </header>
+
+    <div class="main">
+        <!--Barra lateral de Navegação-->
+        <div class="sidenav">
+            <a href="/">Opção</a>
+        </div>
+
+        <div class="conteudo">
+        <div class="bloco_titulo">
+            <h1 class="titulo">Transação #<%= transacao.tra_id %></h1>
+        </div>
+
+        <div class="table_div">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 200px;">Usuário</th>
+                        <th style="width: 75px;">Data</th>
+                        <th style="width: 80px;">Subtotal</th>
+                        <th style="width: 120px;">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><%= usuario.usr_nome %></td>
+                        <td><%= new Date(transacao.tra_data).toLocaleDateString('pt-BR') %></td>
+                        <td>R$ <%= transacao.tra_subtotal %></td>
+                        <td><%= transacao.tra_status %></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table_div">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 50px;">Endereço de Entrega</th>
+                        <th style="width: 75px;">Nº</th>
+                        <th style="width: 200px;">Cidade</th>
+                        <th style="width: 80px;">Estado</th>
+                        <th style="width: 150px;">Bairro</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><%= endereco.end_endereco %></td>
+                        <td><%= endereco.end_numero %></td>
+                        <td><%= endereco.end_cidade %></td>
+                        <td><%= endereco.end_estado %></td>
+                        <td><%= endereco.end_bairro %></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table_div">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 150px;">Forma de Pagamento</th>
+                        <th style="width: 150px;">Valor</th>
+                        <th style="width: 200px;">Cartão Usado</th>
+                        <th style="width: 200px;">Cupom Usado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% formaPagamentos.forEach(forma => { %>
+                    <tr>
+                        <td><%= forma.fpg_tipo %></td>
+                        <td>R$ <%= forma.fpg_valor %></td>
+                        <td>
+                            <% if (forma.cartao) { %>
+                                **** **** **** <%= forma.cartao.numero %>
+                            <% } else { %>
+                                N/A
+                            <% } %>
+                        </td>
+                        <td>
+                            <% if (forma.cupom) { %>
+                                <%= forma.cupom.nome %>, 
+                                <%= new Date(forma.cupom.data).toLocaleDateString('pt-BR') %>, 
+                                R$ <%= forma.cupom.valor %>
+                            <% } else { %>
+                                N/A
+                            <% } %>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table_div">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 400px;">Itens</th>
+                        <th style="width: 100px;">Valor</th>
+                        <th style="width: 80px;">Qtd.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% itens.forEach(item => { %>
+                    <tr>
+                        <td><%= item.lvr_titulo %></td>
+                        <td>R$ <%= item.lvr_custo %></td>
+                        <td><%= item.itv_qtd_item %></td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+
+        <br>
+
+        <div class="botoes">
+            <button class="botao-troca" type="button" id="troca" data-tra-id="<%= transacao.tra_id %>" data-tra-status="<%= transacao.tra_status %>" data-tra-valor="<%= transacao.tra_subtotal %>">
+                Soliciar Troca
+            </button>
+
+            <button class="botao-devolucao" type="button" id="devolucao" data-tra-id="<%= transacao.tra_id %>" data-tra-status="<%= transacao.tra_status %>" data-tra-valor="<%= transacao.tra_subtotal %>">
+                Soliciar Devolução
+            </button>
+        </div>
+    </div>
+
+    <script type="module" src="/scripts/transacao.js"></script>
+    <script type="module" src="/scripts/navbar.js"></script>
+</body>
+</html>
