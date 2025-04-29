@@ -166,7 +166,8 @@ ALTER TABLE livros ADD CONSTRAINT livros_pk PRIMARY KEY ( lvr_id );
 CREATE TABLE notificacao (
     ntf_id INTEGER NOT NULL AUTO_INCREMENT,
     ntf_mensagem VARCHAR(150) NOT NULL,
-    usuarios_usr_id INTEGER NOT NULL
+    usuarios_usr_id INTEGER NOT NULL,
+    transacoes_tra_id INTEGER NOT NULL
 );
 
 ALTER TABLE notificacao ADD CONSTRAINT notificacao_pk PRIMARY KEY ( ntf_id );
@@ -279,6 +280,10 @@ ALTER TABLE possui4
 ALTER TABLE notificacao
     ADD CONSTRAINT fk_ntf_usr FOREIGN KEY ( usuarios_usr_id )
         REFERENCES usuarios ( usr_id );
+
+    ALTER TABLE notificacao
+ADD CONSTRAINT fk_ntf_tra FOREIGN KEY ( transacoes_tra_id )
+    REFERENCES transacoes ( tra_id );
         
 ALTER TABLE forma_de_pagamento
     ADD CONSTRAINT fk_fpg_crt FOREIGN KEY ( cartoes_crt_id )
