@@ -28,7 +28,7 @@ async function apagarNotificacaoHandler(ntf_id, usuarioId, redirect = false) {
             if (redirect) {
                 const notificacao = notificacoes.find(n => n.ntf_id === ntf_id);
                 if (notificacao) {
-                    window.location.href = `/transacao?tra_id=${notificacao.transacoes_tra_id}`;
+                    window.location.href = `/pagamento/detalhes?tra_id=${notificacao.transacoes_tra_id}`;
                 }
             }
         }
@@ -39,7 +39,12 @@ async function apagarNotificacaoHandler(ntf_id, usuarioId, redirect = false) {
 
 function atualizarSubmenu(notificacoes, usuarioId) {
     const lista = document.querySelector('.notificacoes-lista');
+    const submenu = document.querySelector('.notificacao-submenu');
+    const iconeNotificacao = document.querySelector('.notificacao-icone');
+
     lista.innerHTML = '';
+
+    iconeNotificacao.hidden = notificacoes.length === 0;
 
     notificacoes.forEach(notificacao => {
         const item = document.createElement('div');
@@ -49,8 +54,12 @@ function atualizarSubmenu(notificacoes, usuarioId) {
             <button class="notificacao-excluir">✕</button>
         `;
 
-        item.querySelector('.notificacao-texto').addEventListener('click', () => {
-            apagarNotificacaoHandler(notificacao.ntf_id, usuarioId, true);
+        item.querySelector('.notificacao-texto').addEventListener('click', async () => {
+            window.location.href = `/pagamento/detalhes?tra_id=${notificacao.transacoes_tra_id}`;
+    
+            setTimeout(async () => {
+                await apagarNotificacaoHandler(notificacao.ntf_id, usuarioId);
+            }, 300);
         });
 
         item.querySelector('.notificacao-excluir').addEventListener('click', (e) => {
@@ -61,8 +70,11 @@ function atualizarSubmenu(notificacoes, usuarioId) {
         lista.appendChild(item);
     });
 
-    const submenu = document.querySelector('.notificacao-submenu');
-    submenu.hidden = notificacoes.length === 0;
+    if (notificacoes.length === 0) {
+        submenu.classList.remove('visivel');
+    } else{
+        submenu.classList.add('visivel');
+    }
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -82,18 +94,22 @@ document.addEventListener('DOMContentLoaded', async () => {
     try {
         const notificacoes = await verificarNotificacoes(usuarioId);
         atualizarSubmenu(notificacoes, usuarioId);
+        submenu.classList.remove('visivel'); 
     } catch (error) {
         console.error('Erro ao carregar notificações:', error);
     }
 
     iconeNotificacao.addEventListener('click', (e) => {
         e.stopPropagation();
-        submenu.hidden = !submenu.hidden;
+        
+        if (!iconeNotificacao.hidden) {
+            submenu.classList.toggle('visivel'); 
+        }
     });
 
     document.addEventListener('click', (e) => {
         if (!e.target.closest('.notificacao-container')) {
-            submenu.hidden = true;
+            submenu.classList.remove('visivel');
         }
     });
 
