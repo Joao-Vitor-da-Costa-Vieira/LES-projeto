@@ -14,7 +14,7 @@ async function deletarItensCupom(cup_id) {
     try {
         
         const [result] = await db.query(
-            'DELETE FROM cupom WHERE car_id = ?',
+            'UPDATE cupom SET cup_status = 0 WHERE cup_id = ?',
             [cup_id]
         );
         

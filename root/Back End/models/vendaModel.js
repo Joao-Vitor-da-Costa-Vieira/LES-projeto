@@ -25,7 +25,7 @@ async function processarPagamentoCompleto({
                 enderecos_entrega_end_id,
                 usuarios_usr_id
             ) VALUES (?, ?, ?, ?, ?, ?, ?)`,
-            [data, frete, 'EM PROCESSAMENTO', total, subtotal, enderecoId, usuarioId]
+            [data, frete, 'APROVADO', total, subtotal, enderecoId, usuarioId]
         );
         const tra_id = transacaoResult.insertId;
 
@@ -81,7 +81,7 @@ async function processarPagamentoCompleto({
 
         if (cuponsIds.length > 0) {
             await connection.query(
-                'DELETE FROM cupom WHERE cup_id IN (?)',
+                'UPDATE cupom SET cup_status = 0 WHERE cup_id IN (?)',
                 [cuponsIds]
             );
         }
