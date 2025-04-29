@@ -21,8 +21,13 @@
         </nav>
         
         <nav class="usuario-nav">
-            <img src="/imagens/notificacao.png" class="notificacao">
-            
+            <div class="notificacao-container">
+                <img src="/imagens/notificacao.png" alt="Notificações" class="notificacao-icone" hidden>
+                <div class="notificacao-submenu" hidden>
+                    <div class="notificacoes-lista"></div>
+                </div>
+            </div>
+
             <div class="barra-pesquisa">
                 <input type="text" id="navbarInput" placeholder="Pesquisar...">
                 <button id="navbarBotaoPesquisa">🔍</button>
