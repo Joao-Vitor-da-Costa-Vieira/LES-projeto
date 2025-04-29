@@ -327,6 +327,86 @@ async function buscarItensTransacao(tra_id) {
     return itens;
 }
 
+async function buscarDadosTroca(tra_id) {
+    const connection = await db.getConnection();
+    try {
+        // Buscar transação original
+        const transacaoOriginal = await buscarTransacaoPorId(tra_id);
+        
+        // Buscar itens da transação original
+        const itensOriginais = await buscarItensVendaPorTransacao(tra_id);
+        
+        // Buscar endereço original
+        const endereco = await buscarEnderecoEntregaPorTransacao(tra_id);
+        
+        return {
+            transacaoOriginal,
+            itensOriginais,
+            endereco
+        };
+    } finally {
+        connection.release();
+    }
+}
+
+async function criarTroca(usuarioId, dadosTroca) {
+    const connection = await db.getConnection();
+    try {
+        await connection.beginTransaction();
+
+        // Validar quantidades
+        const itensOriginais = await buscarItensVendaPorTransacao(dadosTroca.tra_id_original);
+        for (const item of dadosTroca.itens) {
+            const itemOriginal = itensOriginais.find(i => i.livros_lvr_id === item.lvr_id);
+            if (!itemOriginal || item.quantidade > itemOriginal.itv_qtd_item) {
+                throw new Error(`Quantidade inválida para o livro ID ${item.lvr_id}`);
+            }
+        }
+
+        // Criar nova transação de troca
+        const [novaTransacao] = await connection.query(
+            `INSERT INTO transacoes SET
+                tra_data = NOW(),
+                tra_status = 'TROCA SOLICITADA',
+                tra_subtotal = ?,
+                tra_valor = ?,
+                tra_valor_frete = 0,
+                enderecos_entrega_end_id = ?,
+                usuarios_usr_id = ?`,
+            [
+                dadosTroca.subtotal,
+                dadosTroca.subtotal,
+                dadosTroca.end_id,
+                usuarioId
+            ]
+        );
+
+        // Inserir itens da troca
+        for (const item of dadosTroca.itens) {
+            await connection.query(
+                `INSERT INTO itens_de_venda SET
+                    itv_qtd_item = ?,
+                    transacoes_tra_id = ?,
+                    livros_lvr_id = ?`,
+                [
+                    item.quantidade,
+                    novaTransacao.insertId,
+                    item.lvr_id
+                ]
+            );
+        }
+
+        await connection.commit();
+        return novaTransacao.insertId;
+
+    } catch (error) {
+        await connection.rollback();
+        throw error;
+    } finally {
+        connection.release();
+    }
+}
+
 module.exports = {
     processarPagamentoCompleto,
     buscarTransacaoId,
@@ -339,5 +419,7 @@ module.exports = {
     atualizarTransacaoStatus,
     buscarUsuarioPorTransacao,
     buscarItensTransacao,
-    atualizarStatusEReporEstoque
+    atualizarStatusEReporEstoque,
+    criarTroca,
+    buscarDadosTroca
 };

@@ -177,6 +177,42 @@ module.exports.getTransacao = async (req, res) => {
     }
 };
 
+module.exports.getTroca = async (req, res) => {
+    try {
+        const { tra_id } = req.query;
+        
+        // Buscar dados da transação original
+        const { transacaoOriginal, itensOriginais, endereco } = await buscarDadosTroca(tra_id);
+        
+        // Preparar dados para a view
+        const itensParaTroca = itensOriginais.map(item => ({
+            livro: {
+                ...item,
+                lvr_desconto: item.lvr_desconto || 0
+            },
+            quantidade_maxima: item.itv_qtd_item,
+            quantidade_selecionada: 0
+        }));
+
+        // Buscar dados do usuário
+        const [usuario] = await buscarUsuarioId(transacaoOriginal.usuarios_usr_id);
+        const notificacoes = await buscarNotificacoes(usuario.usr_id);
+
+        res.render('selecaoTroca', {
+            itensVenda: itensParaTroca,
+            subtotalTotal: 0,
+            usuario,
+            endereco,
+            notificacoes,
+            tra_id_original: tra_id
+        });
+
+    } catch (error) {
+        console.error('Erro ao carregar troca:', error);
+        res.status(500).send('Erro ao carregar página de troca');
+    }
+};
+
 module.exports.getPedidos = async (req, res) => {
     try {
         const transacoes = await buscarTransacoesPrioridade();
@@ -413,5 +449,44 @@ module.exports.filtrarPedidos = async (req, res) => {
     } catch (error) {
         console.error('Erro ao filtrar pedidos:', error);
         res.status(500).json({ error: 'Erro ao filtrar pedidos' });
+    }
+};
+
+module.exports.postTroca = async (req, res) => {
+    try {
+        const { usuarioId, tra_id_original, itens, subtotal, end_id } = req.body;
+
+        // Validar estrutura dos dados
+        if (!itens || !Array.isArray(itens)){
+            throw new Error('Dados de itens inválidos');
+        }
+
+        // Criar nova troca
+        const novaTraId = await criarTroca(usuarioId, {
+            tra_id_original,
+            itens,
+            subtotal,
+            end_id
+        });
+
+        // Adicionar notificação
+        await adicionarNotificacao(
+            usuarioId,
+            `Troca solicitada para o pedido #${tra_id_original}. Status: TROCA SOLICITADA`,
+            novaTraId
+        );
+
+        res.status(200).json({
+            success: true,
+            tra_id: novaTraId,
+            message: 'Troca solicitada com sucesso'
+        });
+
+    } catch (error) {
+        console.error('Erro ao processar troca:', error);
+        res.status(400).json({
+            success: false,
+            message: error.message
+        });
     }
 };

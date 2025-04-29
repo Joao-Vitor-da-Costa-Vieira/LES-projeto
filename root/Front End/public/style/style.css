@@ -734,6 +734,27 @@ input[type=submit]{
     background: #cc0000;
 }
 
+/*Solicitar Troca Tabela*/
+
+.quantidade-troca input {
+    width: 60px;
+    padding: 5px;
+    text-align: center;
+}
+
+#tabela-troca .botoes_resultado {
+    justify-content: center;
+}
+
+#tabela-troca .atualizar {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#tabela-troca .atualizar:hover {
+    background-color: #45a049;
+}
+
 /*Separar o Conteudo Principal da Barra Lateral*/
 .conteudo{
     margin-left: 150px;
