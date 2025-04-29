@@ -34,7 +34,9 @@ const {
 const {buscarItensCupom
 }= require("../models/cupomModel");
 
-const { adicionarNotificacao 
+const { 
+    adicionarNotificacao,
+    buscarNotificacoes 
 } = require("../models/notificacaoModel");
 
 module.exports.getPagamento = async (req, res) => {
@@ -68,13 +70,16 @@ module.exports.getPagamento = async (req, res) => {
             return total + (item.livro.lvr_custo * item.car_qtd_item);
         }, 0);
         
+        const notificacoes = usuario ? await buscarNotificacoes(usuario.usr_id) : [];
+
         res.render('pagamento', { 
             itensCarrinho: livrosComDetalhes,
             subtotalTotal,
             enderecos: enderecos,
             cartoes: cartoes,
             cupons: cupons,
-            usuario: usuario
+            usuario: usuario,
+            notificacoes
         });
     } catch (err) {
         console.error('Erro ao carregar página do carrinho:', err);
@@ -120,10 +125,14 @@ module.exports.getHistorico = async (req, res) => {
             })
         );
 
+        const notificacoes = await buscarNotificacoes(usuario.usr_id);
+        
         res.render('historico', {
-            usuario: usuario,
-            transacoes: transacoesCompletas
+            usuario,
+            transacoes: transacoesCompletas,
+            notificacoes
         });
+
         
     } catch (error) {
         console.error('Erro ao buscar histórico:', error);
@@ -151,12 +160,15 @@ module.exports.getTransacao = async (req, res) => {
         const usuarioTransacao = await buscarUsuarioPorTransacao(tra_id);
         const [usuario] = await buscarUsuarioId(usuarioTransacao.usuarios_usr_id);
 
+        const notificacoes = await buscarNotificacoes(usuario.usr_id);
+
         res.render('transacao', {
             transacao,
             usuario,
             endereco,
             formaPagamentos,
-            itens
+            itens,
+            notificacoes
         });
 
     } catch (error) {

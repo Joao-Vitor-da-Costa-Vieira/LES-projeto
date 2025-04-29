@@ -1,5 +1,6 @@
 const { buscarUsuarioId } = require("../models/usuarioModel");
 const { buscarTransacoesPrioridade } = require("../models/vendaModel");
+const {buscarNotificacoes} = require("../models/notificacaoModel");
 
 //Views
 module.exports.getTela = (req, res) => {
@@ -8,10 +9,11 @@ module.exports.getTela = (req, res) => {
 
 module.exports.getHome = async (req, res) => {
     const usuario = await buscarUsuarioId(req.params.usr_id);
-    console.log("Usuário retornado:", usuario);
-
-    res.render('home',{
-        usuario
+    const notificacoes = usuario ? await buscarNotificacoes(usuario.usr_id) : [];
+    
+    res.render('home', {
+        usuario,
+        notificacoes
     });
 };
 

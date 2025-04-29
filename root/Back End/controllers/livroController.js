@@ -8,6 +8,9 @@ const {
     buscarUsuarioId 
 } = require("../models/usuarioModel");
 
+const {buscarNotificacoes
+} = require("../models/notificacaoModel");
+
 module.exports.pesquisarLivrosTitulo = async (req, res) => {
     try {
         const { titulo, usr_id } = req.query;
@@ -27,10 +30,16 @@ module.exports.pesquisarLivrosTitulo = async (req, res) => {
             usuario = await buscarUsuarioId(usr_id);
         }
         
+        let notificacoes = [];
+        if (usuario) {
+            notificacoes = await buscarNotificacoes(usuario.usr_id);
+        }
+        
         res.render('pesquisarLivro', {
-            livros: livros || [], 
+            livros: livros || [],
             usuario: usuario,
-            tituloPesquisado: titulo
+            tituloPesquisado: titulo,
+            notificacoes
         });
         
     } catch (err) {
@@ -65,9 +74,12 @@ module.exports.livroPagina = async (req, res) => {
 
         livro.emEstoque = livro.lvr_qtd_estoque > 0;
         
+        const notificacoes = usuario ? await buscarNotificacoes(usuario.usr_id) : [];
+        
         res.render('livrosPagina', { 
             livro,
-            usuario: usuario
+            usuario,
+            notificacoes
         });
     } catch (err) {
         console.error('Erro ao carregar página do livro:', err);

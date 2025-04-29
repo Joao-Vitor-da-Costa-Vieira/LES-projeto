@@ -14,6 +14,8 @@ const {
     buscarLivroId
 } = require("../models/livroModel");
 
+const {buscarNotificacoes
+} = require("../models/notificacaoModel");
 
 module.exports.getCarrinho = async (req, res) => {
     try {
@@ -36,11 +38,14 @@ module.exports.getCarrinho = async (req, res) => {
         const subtotalTotal = livrosComDetalhes.reduce((total, item) => {
             return total + (item.livro.lvr_custo * item.car_qtd_item);
         }, 0);
+
+        const notificacoes = usuario ? await buscarNotificacoes(usuario.usr_id) : [];
         
         res.render('carrinho', { 
             itensCarrinho: livrosComDetalhes,
             subtotalTotal,
-            usuario: usuario || null
+            usuario: usuario || null,
+            notificacoes
         });
     } catch (err) {
         console.error('Erro ao carregar página do carrinho:', err);
