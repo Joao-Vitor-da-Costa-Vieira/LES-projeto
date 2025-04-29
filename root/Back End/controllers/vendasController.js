@@ -131,6 +131,40 @@ module.exports.getHistorico = async (req, res) => {
     }
 };
 
+module.exports.getTransacao = async (req, res) => {
+    try {
+        const { tra_id } = req.query;
+
+        // Buscar dados básicos da transação
+        const transacao = await buscarTransacaoPorId(tra_id);
+        
+        // Buscar itens da venda com detalhes dos livros
+        const itens = await buscarItensVendaPorTransacao(tra_id);
+        
+        // Buscar endereço de entrega
+        const endereco = await buscarEnderecoEntregaPorTransacao(tra_id);
+        
+        // Buscar formas de pagamento
+        const formaPagamentos = await buscarFormasPagamento(tra_id);
+        
+        // Buscar dados do usuário
+        const usuarioTransacao = await buscarUsuarioPorTransacao(tra_id);
+        const [usuario] = await buscarUsuarioId(usuarioTransacao.usuarios_usr_id);
+
+        res.render('transacao', {
+            transacao,
+            usuario,
+            endereco,
+            formaPagamentos,
+            itens
+        });
+
+    } catch (error) {
+        console.error('Erro ao buscar detalhes da transação:', error);
+        res.status(500).send('Erro ao carregar detalhes da transação');
+    }
+};
+
 module.exports.getPedidos = async (req, res) => {
     try {
         const transacoes = await buscarTransacoesPrioridade();

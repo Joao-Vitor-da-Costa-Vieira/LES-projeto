@@ -7,6 +7,7 @@ router.get('/pagamento',vendasController.getPagamento);
 router.get('/pagamento/historico',vendasController.getHistorico);
 router.get('/pedidos', vendasController.getPedidos);
 router.get('/pedidos-adm/detalhes',vendasController.getPedidoItem);
+router.get('/pagamento/detalhes', vendasController.getTransacao);
 
 router.post('/pagamento/confirmar',vendasController.postPagamento);
 
