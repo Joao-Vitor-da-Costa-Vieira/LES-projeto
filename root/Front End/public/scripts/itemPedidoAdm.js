@@ -4,10 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnAtualizar = document.getElementById('atualizar');
     const statusSubmenu = document.createElement('div');
     
-    // Extrair dados do HTML existente
-    const tra_id = document.querySelector('.titulo').textContent.match(/#(\d+)/)[1];
-    const statusAtual = document.querySelector('table tr td:nth-child(4)').textContent.trim();
-    const valorCompra = document.querySelector('table tr td:nth-child(3)').textContent.trim();
+    const tra_id = btnAtualizar.dataset.traId; 
+    const statusAtual = btnAtualizar.dataset.traStatus;
+    const valorCompra = btnAtualizar.dataset.traSubtotal;
     
     // Configurar o submenu
     statusSubmenu.className = 'status-modal';
