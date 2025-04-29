@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/style/style.css">
     <link rel="icon" href="/imagens/livro-16.ico">
 </head>
@@ -20,14 +21,16 @@
         </nav>
         
         <nav class="usuario-nav">
+            <img src="/imagens/notificacao.png" class="notificacao">
+            
             <div class="barra-pesquisa">
                 <input type="text" id="navbarInput" placeholder="Pesquisar...">
                 <button id="navbarBotaoPesquisa">🔍</button>
             </div>
             
             <div class="usuario-sessao">
-                <div id="user-data" data-user-id="<%= usuario.usr_id %>" style="display:none;"></div>
-                <span class="usuario-nome"><%= usuario.usr_nome %></span>
+                <div id="user-data" data-user-id="<%= Array.isArray(usuario) ? usuario[0]?.usr_id : usuario?.usr_id %>" style="display:none;"></div>
+                <span class="usuario-nome"><%= Array.isArray(usuario) ? usuario[0]?.usr_nome : usuario?.usr_nome %></span>
                 <img src="/imagens/graficoLinha.PNG" alt="Imagem do usuário" class="usuario-imagem">
             </div>
         </nav>

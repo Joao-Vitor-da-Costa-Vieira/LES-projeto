@@ -665,6 +665,12 @@ input[type=submit]{
     cursor: pointer;
     border: green;
 }
+
+/*Notificação*/
+.notificacao{
+    width: 30px;
+    height: 30px;
+}
   
 /*Separar o Conteudo Principal da Barra Lateral*/
 .conteudo{

@@ -3,35 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/style/style.css">
-    <link rel="icon" href="/imagens/livro-16.ico">
-</head>
-<body>
+    <!DOCTYPE html>
 
-    <header>
-        <nav class="main-nav">
-            <a class="home-link">Home</a>
-            <div class="nav-botao">
-                <button>Histórico</button>
-                <button id="botao-carrinho">Carrinho</button>
-                <button>Trocas</button>
-                <button>Chatbot</button>
-            </div>
-        </nav>
-        
-        <nav class="usuario-nav">
-            <div class="barra-pesquisa">
-                <input type="text" id="navbarInput" placeholder="Pesquisar...">
-                <button id="navbarBotaoPesquisa">🔍</button>
-            </div>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/style/style.css">
+        <link rel="icon" href="/imagens/livro-16.ico">
+    </head>
+    <body>
+    
+        <header>
+            <nav class="main-nav">
+                <a class="home-link">Home</a>
+                <div class="nav-botao">
+                    <button>Histórico</button>
+                    <button id="botao-carrinho">Carrinho</button>
+                    <button>Trocas</button>
+                    <button>Chatbot</button>
+                </div>
+            </nav>
             
-            <div class="usuario-sessao">
-                <div id="user-data" data-user-id="<%= Array.isArray(usuario) ? usuario[0]?.usr_id : usuario?.usr_id %>" style="display:none;"></div>
-                <span class="usuario-nome"><%= Array.isArray(usuario) ? usuario[0]?.usr_nome : usuario?.usr_nome %></span>
-                <img src="/imagens/graficoLinha.PNG" alt="Imagem do usuário" class="usuario-imagem">
-            </div>
-        </nav>
-    </header>
+            <nav class="usuario-nav">
+                <img src="/imagens/notificacao.png" class="notificacao">
+                
+                <div class="barra-pesquisa">
+                    <input type="text" id="navbarInput" placeholder="Pesquisar...">
+                    <button id="navbarBotaoPesquisa">🔍</button>
+                </div>
+                
+                <div class="usuario-sessao">
+                    <div id="user-data" data-user-id="<%= Array.isArray(usuario) ? usuario[0]?.usr_id : usuario?.usr_id %>" style="display:none;"></div>
+                    <span class="usuario-nome"><%= Array.isArray(usuario) ? usuario[0]?.usr_nome : usuario?.usr_nome %></span>
+                    <img src="/imagens/graficoLinha.PNG" alt="Imagem do usuário" class="usuario-imagem">
+                </div>
+            </nav>
+        </header>
 
     <div class="main">
         <!--Barra lateral de Navegação-->
