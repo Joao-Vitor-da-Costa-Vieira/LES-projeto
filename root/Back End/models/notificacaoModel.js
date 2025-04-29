@@ -10,12 +10,12 @@ async function buscarNotificacoes(usr_id) {
     }
 }
 
-async function apagarNotificacao(not_id) {
+async function apagarNotificacao(ntf_id) {
     try {
         
         const [result] = await db.query(
-            'DELETE FROM notificacao WHERE not_id = ?',
-            [not_id]
+            'DELETE FROM notificacao WHERE ntf_id = ?',
+            [ntf_id]
         );
         
         return result;
@@ -25,11 +25,11 @@ async function apagarNotificacao(not_id) {
     }
 }
 
-async function adicionarNotificacao(usr_id, not_mensagem) {
+async function adicionarNotificacao(usr_id, ntf_mensagem) {
     try {
         await db.query(
-            "INSERT INTO notificacao ( usuarios_usr_id, not_mensagem) VALUES (?, ?)",
-            [usr_id, not_mensagem]
+            "INSERT INTO notificacao ( usuarios_usr_id, ntf_mensagem) VALUES (?, ?)",
+            [usr_id, ntf_mensagem]
         );        
 
         return { success: true, message: 'Item adicionado às notficações com sucesso' };

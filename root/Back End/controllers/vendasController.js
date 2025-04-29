@@ -7,7 +7,7 @@ const {
     buscarTransacaoPorId,
     buscarItensVendaPorTransacao,
     atualizarTransacaoStatus,
-    buscarUsusarioPorTransacao
+    buscarUsuarioPorTransacao
 } = require("../models/vendaModel");
 
 const {
@@ -261,7 +261,7 @@ module.exports.postAtualizarStatus = async (req, res) => {
 
         const transacao = await buscarTransacaoPorId(tra_id);
         
-        const usr_id = await buscarUsusarioPorTransacao(tra_id);
+        const usuario = await buscarUsuarioPorTransacao(tra_id);
 
         let mensagem = `A sua transação do dia ${transacao.tra_data_formatada} de valor R$ ${transacao.tra_subtotal} foi `;
 
@@ -306,14 +306,19 @@ module.exports.postAtualizarStatus = async (req, res) => {
                 mensagem += 'DEVOLUÇÃO CONCLUÍDA!';
                 break;
             default:
-                throw new Error('Status inválido');
+                break;
         }
 
-        await adicionarNotificacao(usr_id, mensagem);
+        await adicionarNotificacao(usuario.usuarios_usr_id, mensagem);
 
-        const [result] = await atualizarTransacaoStatus(novoStatus,tra_id);
+        const result = await atualizarTransacaoStatus(novoStatus,tra_id);
         
-        return result;
+        res.status(200).json({
+            success: true,
+            novoStatus: novoStatus,
+            message: mensagem,
+            result
+        });
 
     } catch (error){
         console.error('Erro na atualização de Status:', error);

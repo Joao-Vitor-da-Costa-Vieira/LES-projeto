@@ -3,12 +3,13 @@ import { atualizarStatus } from '/scripts/service/pedidosService.js';
 document.addEventListener('DOMContentLoaded', () => {
     const btnAtualizar = document.getElementById('atualizar');
     const statusSubmenu = document.createElement('div');
+    let confirmationModal = null;
     
     const tra_id = btnAtualizar.dataset.traId; 
     const statusAtual = btnAtualizar.dataset.traStatus;
-    const valorCompra = btnAtualizar.dataset.traValor;
-    
-    // Configurar o submenu
+    const valorCompra = btnAtualizar.dataset.traSubtotal;
+
+    // Configurar submenu de status
     statusSubmenu.className = 'status-modal';
     statusSubmenu.innerHTML = `
         <div class="modal-content">
@@ -24,16 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
     document.body.appendChild(statusSubmenu);
 
-    // Popular itens da venda
-    const itensTable = document.querySelectorAll('.table_div:last-of-type table tbody tr');
-    const itensContainer = statusSubmenu.querySelector('.itens-venda-modal');
-
-    const closeBtn = statusSubmenu.querySelector('.close-modal');
-    closeBtn.addEventListener('click', () => {
-        statusSubmenu.style.display = 'none';
-    });
-    
-    itensTable.forEach(item => {
+    // Popular itens da venda no modal
+    document.querySelectorAll('.table_div:last-of-type table tbody tr').forEach(item => {
         const cols = item.querySelectorAll('td');
         const itemElement = document.createElement('div');
         itemElement.className = 'item-modal';
@@ -41,16 +34,22 @@ document.addEventListener('DOMContentLoaded', () => {
             <p>${cols[0].textContent} - ${cols[2].textContent} unidade(s)</p>
             <p>${cols[1].textContent}</p>
         `;
-        itensContainer.appendChild(itemElement);
+        statusSubmenu.querySelector('.itens-venda-modal').appendChild(itemElement);
     });
 
+    // Fechar modal
+    const closeModal = () => {
+        statusSubmenu.style.display = 'none';
+        if(confirmationModal) confirmationModal.remove();
+    };
+
+    // Evento de abertura do submenu
     btnAtualizar.addEventListener('click', (e) => {
         e.stopPropagation();
         const opcoesContainer = statusSubmenu.querySelector('.opcoes-status');
         opcoesContainer.innerHTML = '';
-    
-        let opcoes = [];
 
+        let opcoes = [];
         if (statusAtual === 'APROVADO') {
             opcoes = [
                 { texto: 'Cancelar Compra', status: 'CANCELADO' },
@@ -69,12 +68,12 @@ document.addEventListener('DOMContentLoaded', () => {
             ];
         } else if (statusAtual === 'TROCA APROVADA') {
             opcoes = [
-                { texto: 'Cancelar', status: 'TROCA CANCELADA' },
+                { texto: 'Cancelar', status: 'CANCELADO' },
                 { texto: 'Confirmar Troca', status: 'TROCA CONCLUIDA' }
             ];
         } else if (statusAtual === 'DEVOLUCAO SOLICITADA') {
             opcoes = [
-                { texto: 'Cancelar', status: 'DEVOLUÇÂO CANCELADA' },
+                { texto: 'Cancelar', status: 'CANCELADO' },
                 { texto: 'Recusar Devolução', status: 'DEVOLUCAO RECUSADA' },
                 { texto: 'Aprovar Devolução', status: 'DEVOLUCAO APROVADA' }
             ];
@@ -84,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 { texto: 'Confirmar Devolução', status: 'DEVOLUCAO CONCLUIDA' }
             ];
         } else {
-            opcoesContainer.innerHTML = '<p>O status não pode ser modificado</p>';
+            opcoesContainer.innerHTML = '<p class="mensagem-status">O status não pode ser modificado</p>';
         }
 
         opcoes.forEach(({ texto, status }) => {
@@ -93,18 +92,49 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.textContent = texto;
             btn.onclick = async () => {
                 const result = await atualizarStatus(tra_id, status);
-                if (result.success) location.reload();
+                if (result.success) {
+                    statusSubmenu.style.display = 'none';
+                    showConfirmationModal(status);
+                } else {
+                    alert(result.error || 'Erro ao atualizar status');
+                }
             };
             opcoesContainer.appendChild(btn);
         });
-    
+
         statusSubmenu.style.display = 'flex';
     });
 
-    // Fechar modal
-    statusSubmenu.addEventListener('click', (e) => {
-        if (e.target === statusSubmenu) {
-            statusSubmenu.style.display = 'none';
+    // Modal de confirmação
+    const showConfirmationModal = (novoStatus) => {
+        confirmationModal = document.createElement('div');
+        confirmationModal.className = 'confirmation-modal';
+        confirmationModal.innerHTML = `
+            <div class="confirmation-content">
+                <h3>Operação realizada com sucesso!</h3>
+                <p>Status atualizado para: ${novoStatus.replace(/_/g, ' ')}</p>
+                <button id="btn-voltar-pedidos">Voltar para Pedidos</button>
+            </div>
+        `;
+        document.body.appendChild(confirmationModal);
+
+        document.getElementById('btn-voltar-pedidos').addEventListener('click', () => {
+            window.location.href = '/pedidos';
+        });
+
+        setTimeout(() => {
+            window.location.href = '/pedidos';
+        }, 5000);
+    };
+
+    // Fechar modais ao clicar fora
+    document.addEventListener('click', (e) => {
+        if (!statusSubmenu.contains(e.target)) closeModal();
+        if (confirmationModal && !confirmationModal.contains(e.target)) {
+            confirmationModal.remove();
         }
     });
+
+    // Botão de fechar
+    statusSubmenu.querySelector('.close-modal').addEventListener('click', closeModal);
 });
