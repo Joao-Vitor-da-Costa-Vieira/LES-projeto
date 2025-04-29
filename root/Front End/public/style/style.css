@@ -232,7 +232,12 @@ body {
     border-radius: 8px;
     width: 90%;
     max-width: 500px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
+
 
 .status-info {
     margin: 1rem 0;
@@ -256,11 +261,18 @@ body {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    transition: background 0.3s;
 }
 
 .btn-opcao:hover {
     background: #0056b3;
+}
+
+.mensagem-status {
+    color: #dc3545;
+    padding: 1rem;
+    text-align: center;
+    font-weight: bold;
+    margin: 1rem 0;
 }
 
 /*Estilização do Label */
