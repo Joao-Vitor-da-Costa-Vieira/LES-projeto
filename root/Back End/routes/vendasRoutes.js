@@ -10,6 +10,7 @@ router.get('/pedidos-adm/detalhes',vendasController.getPedidoItem);
 
 router.post('/pagamento/confirmar',vendasController.postPagamento);
 
-router.get('/api/pedidos/filtrar', vendasController.filterPedidos);
+router.get('/api/pedidos/filtrar', vendasController.filtrarPedidos);
+router.post('/api/pedidos-atualizar/status', vendasController.postAtualizarStatus);
 
 module.exports = router;

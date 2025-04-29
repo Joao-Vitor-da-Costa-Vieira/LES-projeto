@@ -247,7 +247,20 @@ module.exports.postPagamento = async (req, res) => {
     }
 };
 
-module.exports.filterPedidos = async (req, res) => {
+module.exports.postAtualizarStatus = async (req, res) => {
+    try{
+        const { tra_id, novoStatus } = req.body;
+
+        console.log(tra_id);
+        console.log(novoStatus);
+        
+    } catch (error){
+        console.error('Erro na atualização de Status:', error);
+        res.status(500).json({ message: error.message || 'Erro no processamento' });
+    }
+};
+
+module.exports.filtrarPedidos = async (req, res) => {
     try {
         const filters = req.query;
         
