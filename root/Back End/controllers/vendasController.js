@@ -5,7 +5,9 @@ const {
     buscarTransacoesPrioridade,
     buscarTransacoesFiltradas,
     buscarTransacaoPorId,
-    buscarItensVendaPorTransacao
+    buscarItensVendaPorTransacao,
+    atualizarTransacaoStatus,
+    buscarUsusarioPorTransacao
 } = require("../models/vendaModel");
 
 const {
@@ -31,6 +33,9 @@ const {
 
 const {buscarItensCupom
 }= require("../models/cupomModel");
+
+const { adicionarNotificacao 
+} = require("../models/notificacaoModel");
 
 module.exports.getPagamento = async (req, res) => {
     try {
@@ -253,7 +258,63 @@ module.exports.postAtualizarStatus = async (req, res) => {
 
         console.log(tra_id);
         console.log(novoStatus);
+
+        const transacao = await buscarTransacaoPorId(tra_id);
         
+        const usr_id = await buscarUsusarioPorTransacao(tra_id);
+
+        let mensagem = `A sua transação do dia ${transacao.tra_data_formatada} de valor R$ ${transacao.tra_subtotal} foi `;
+
+        switch(novoStatus) {
+            case 'APROVADO':
+                mensagem += 'APROVADA!';
+                break;
+            case 'REPROVADO':
+                mensagem += 'REPROVADA!';
+                break;
+            case 'CANCELADO':
+                mensagem += 'CANCELADA!';
+                break;
+            case 'EM TRANSPORTE':
+                mensagem += 'COLOCADA EM TRANSPORTE!';
+                break;
+            case 'ENTREGUE':
+                mensagem += 'ENTREGUE!';
+                break;
+            case 'TROCA RECUSADA':
+                mensagem += 'TROCA RECUSADA!';
+                break;
+            case 'TROCA APROVADA':
+                mensagem += 'TROCA APROVADA!';
+                break;
+            case 'TROCA CANCELADA':
+                mensagem += 'TROCA CANCELADA!';
+                break;
+            case 'TROCA CONCLUIDA':
+                mensagem += 'TROCA CONCLUÍDA!';
+                break;
+            case 'DEVOLUÇÃO CANCELADA':
+                mensagem += 'DEVOLUÇÃO CANCELADA!';
+                break;
+            case 'DEVOLUÇÃO RECUSADA':
+                mensagem += 'DEVOLUÇÃO RECUSADA!';
+                break;
+            case 'DEVOLUÇÃO APROVADA':
+                mensagem += 'DEVOLUÇÃO APROVADA!';
+                break;
+            case 'DEVOLUÇÃO CONCLUÍDA':
+                mensagem += 'DEVOLUÇÃO CONCLUÍDA!';
+                break;
+            default:
+                throw new Error('Status inválido');
+        }
+
+        await adicionarNotificacao(usr_id, mensagem);
+
+        const [result] = await atualizarTransacaoStatus(novoStatus,tra_id);
+        
+        return result;
+
     } catch (error){
         console.error('Erro na atualização de Status:', error);
         res.status(500).json({ message: error.message || 'Erro no processamento' });

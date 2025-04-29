@@ -54,34 +54,34 @@ document.addEventListener('DOMContentLoaded', () => {
         if (statusAtual === 'APROVADO') {
             opcoes = [
                 { texto: 'Cancelar Compra', status: 'CANCELADO' },
-                { texto: 'Confirmar Transporte', status: 'EM_TRANSPORTE' }
+                { texto: 'Confirmar Transporte', status: 'EM TRANSPORTE' }
             ];
-        } else if (statusAtual === 'EM_TRANSPORTE') {
+        } else if (statusAtual === 'EM TRANSPORTE') {
             opcoes = [
                 { texto: 'Cancelar Transporte', status: 'CANCELADO' },
                 { texto: 'Confirmar Entrega', status: 'ENTREGUE' }
             ];
-        } else if (statusAtual === 'TROCA_SOLICITADA') {
+        } else if (statusAtual === 'TROCA SOLICITADA') {
             opcoes = [
                 { texto: 'Cancelar', status: 'CANCELADO' },
-                { texto: 'Recusar Troca', status: 'TROCA_RECUSADA' },
-                { texto: 'Aprovar Troca', status: 'TROCA_APROVADA' }
+                { texto: 'Recusar Troca', status: 'TROCA RECUSADA' },
+                { texto: 'Aprovar Troca', status: 'TROCA APROVADA' }
             ];
-        } else if (statusAtual === 'TROCA_APROVADA') {
+        } else if (statusAtual === 'TROCA APROVADA') {
             opcoes = [
-                { texto: 'Cancelar', status: 'CANCELADO' },
-                { texto: 'Confirmar Troca', status: 'TROCA_CONCLUIDA' }
+                { texto: 'Cancelar', status: 'TROCA CANCELADA' },
+                { texto: 'Confirmar Troca', status: 'TROCA CONCLUIDA' }
             ];
-        } else if (statusAtual === 'DEVOLUCAO_SOLICITADA') {
+        } else if (statusAtual === 'DEVOLUCAO SOLICITADA') {
             opcoes = [
-                { texto: 'Cancelar', status: 'CANCELADO' },
-                { texto: 'Recusar Devolução', status: 'DEVOLUCAO_RECUSADA' },
-                { texto: 'Aprovar Devolução', status: 'DEVOLUCAO_APROVADA' }
+                { texto: 'Cancelar', status: 'DEVOLUÇÂO CANCELADA' },
+                { texto: 'Recusar Devolução', status: 'DEVOLUCAO RECUSADA' },
+                { texto: 'Aprovar Devolução', status: 'DEVOLUCAO APROVADA' }
             ];
-        } else if (statusAtual === 'DEVOLUCAO_APROVADA') {
+        } else if (statusAtual === 'DEVOLUCAO APROVADA') {
             opcoes = [
                 { texto: 'Cancelar', status: 'CANCELADO' },
-                { texto: 'Confirmar Devolução', status: 'DEVOLUCAO_CONCLUIDA' }
+                { texto: 'Confirmar Devolução', status: 'DEVOLUCAO CONCLUIDA' }
             ];
         } else {
             opcoesContainer.innerHTML = '<p>O status não pode ser modificado</p>';
