@@ -267,7 +267,7 @@ async function atualizarTransacaoStatus(tra_status, tra_id) {
 
         return result;
     } catch (err) {
-        console.error("Erro no atualizarTransacaoStatus- modelVendas: ${err}");
+        console.error(`Erro no atualizarTransacaoStatus- modelVendas: ${err}`);
         throw err;
     }
 }
