@@ -236,6 +236,8 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    position: relative;
+    padding-top: 40px;
 }
 
 
@@ -273,6 +275,24 @@ body {
     text-align: center;
     font-weight: bold;
     margin: 1rem 0;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+    padding: 5px 10px;
+    line-height: 1;
+    transition: color 0.3s;
+}
+
+.close-modal:hover {
+    color: #333;
 }
 
 /*Estilização do Label */

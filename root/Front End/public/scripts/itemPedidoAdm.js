@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     statusSubmenu.className = 'status-modal';
     statusSubmenu.innerHTML = `
         <div class="modal-content">
+            <button class="close-modal">&times;</button>
             <h3>O que deseja fazer?</h3>
             <div class="status-info">
                 <p>Status Atual: ${statusAtual}</p>
@@ -26,6 +27,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Popular itens da venda
     const itensTable = document.querySelectorAll('.table_div:last-of-type table tbody tr');
     const itensContainer = statusSubmenu.querySelector('.itens-venda-modal');
+
+    const closeBtn = statusSubmenu.querySelector('.close-modal');
+    closeBtn.addEventListener('click', () => {
+        statusSubmenu.style.display = 'none';
+    });
     
     itensTable.forEach(item => {
         const cols = item.querySelectorAll('td');
@@ -44,49 +50,56 @@ document.addEventListener('DOMContentLoaded', () => {
         opcoesContainer.innerHTML = '';
     
         let opcoes = [];
-        let mensagemStatus = '';
-        
+
         if (statusAtual === 'APROVADO') {
-            opcoes = ['Cancelar Compra', 'Confirmar Transporte'];
-        } else if (statusAtual === 'EM TRANSPORTE') {
-            opcoes = ['Cancelar Transporte', 'Confirmar Entrega'];
-        } else if (statusAtual === 'TROCA SOLICITADA') {
-            opcoes = ['Cancelar', 'Recusar Troca', 'Aprovar Troca'];
-        } else if (statusAtual === 'TROCA APROVADA') {
-            opcoes = ['Cancelar', 'Confirmar Troca'];
-        } else if (statusAtual === 'DEVOLUÇÃO SOLICITADA') {
-            opcoes = ['Cancelar', 'Recusar Devolução', 'Aprovar Devolução'];
-        } else if (statusAtual === 'DEVOLUÇÃO APROVADA') {
-            opcoes = ['Cancelar', 'Confirmar Devolução'];
+            opcoes = [
+                { texto: 'Cancelar Compra', status: 'CANCELADO' },
+                { texto: 'Confirmar Transporte', status: 'EM_TRANSPORTE' }
+            ];
+        } else if (statusAtual === 'EM_TRANSPORTE') {
+            opcoes = [
+                { texto: 'Cancelar Transporte', status: 'CANCELADO' },
+                { texto: 'Confirmar Entrega', status: 'ENTREGUE' }
+            ];
+        } else if (statusAtual === 'TROCA_SOLICITADA') {
+            opcoes = [
+                { texto: 'Cancelar', status: 'CANCELADO' },
+                { texto: 'Recusar Troca', status: 'TROCA_RECUSADA' },
+                { texto: 'Aprovar Troca', status: 'TROCA_APROVADA' }
+            ];
+        } else if (statusAtual === 'TROCA_APROVADA') {
+            opcoes = [
+                { texto: 'Cancelar', status: 'CANCELADO' },
+                { texto: 'Confirmar Troca', status: 'TROCA_CONCLUIDA' }
+            ];
+        } else if (statusAtual === 'DEVOLUCAO_SOLICITADA') {
+            opcoes = [
+                { texto: 'Cancelar', status: 'CANCELADO' },
+                { texto: 'Recusar Devolução', status: 'DEVOLUCAO_RECUSADA' },
+                { texto: 'Aprovar Devolução', status: 'DEVOLUCAO_APROVADA' }
+            ];
+        } else if (statusAtual === 'DEVOLUCAO_APROVADA') {
+            opcoes = [
+                { texto: 'Cancelar', status: 'CANCELADO' },
+                { texto: 'Confirmar Devolução', status: 'DEVOLUCAO_CONCLUIDA' }
+            ];
         } else {
-            mensagemStatus = 'O status dessa operação não pode ser modificado';
+            opcoesContainer.innerHTML = '<p>O status não pode ser modificado</p>';
         }
-    
-        if (mensagemStatus) {
-            const mensagemElement = document.createElement('p');
-            mensagemElement.className = 'mensagem-status';
-            mensagemElement.textContent = mensagemStatus;
-            opcoesContainer.appendChild(mensagemElement);
-        } else {
-            opcoes.forEach(opcao => {
-                const btn = document.createElement('button');
-                btn.className = 'btn-opcao';
-                btn.textContent = opcao;
-                btn.onclick = async () => {
-                    const novoStatus = converterTextoParaStatus(opcao);
-                    const result = await atualizarStatus(tra_id, novoStatus);
-                    if (result.success) location.reload();
-                };
-                opcoesContainer.appendChild(btn);
-            });
-        }
+
+        opcoes.forEach(({ texto, status }) => {
+            const btn = document.createElement('button');
+            btn.className = 'btn-opcao';
+            btn.textContent = texto;
+            btn.onclick = async () => {
+                const result = await atualizarStatus(tra_id, status);
+                if (result.success) location.reload();
+            };
+            opcoesContainer.appendChild(btn);
+        });
     
         statusSubmenu.style.display = 'flex';
     });
-    
-    const converterTextoParaStatus = (texto) => {
-        return texto.toUpperCase().replace(/ /g, '_');
-    };
 
     // Fechar modal
     statusSubmenu.addEventListener('click', (e) => {
