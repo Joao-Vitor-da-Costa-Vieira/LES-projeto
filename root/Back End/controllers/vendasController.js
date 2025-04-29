@@ -289,6 +289,15 @@ module.exports.postPagamento = async (req, res) => {
 module.exports.postAtualizarStatus = async (req, res) => {
     try{
         const { tra_id, novoStatus } = req.body;
+        const statusRequerEstoque = ['CANCELADO', 'REPROVADO', 'TROCA CONCLUIDA', 'DEVOLUÇÃO CONCLUÍDA'];
+
+        let result;
+
+        if (statusRequerEstoque.includes(novoStatus)) {
+           result = await atualizarStatusEReporEstoque(tra_id, novoStatus);
+        } else {
+           result = await atualizarTransacaoStatus(novoStatus, tra_id);
+        }
 
         console.log(tra_id);
         console.log(novoStatus);
@@ -296,6 +305,22 @@ module.exports.postAtualizarStatus = async (req, res) => {
         const transacao = await buscarTransacaoPorId(tra_id);
         
         const usuario = await buscarUsuarioPorTransacao(tra_id);
+
+        if (novoStatus === 'TROCA CONCLUIDA') {
+            const cupomData = {
+                usr_id: usuario.usuarios_usr_id,
+                valor: transacao.tra_subtotal,
+                nome: 'Cupom de Troca',
+                data: new Date().toISOString().split('T')[0]
+            };
+
+            await adicionarItemCupom(
+                cupomData.usr_id,
+                cupomData.valor,
+                cupomData.nome,
+                cupomData.data
+            );
+        }
 
         let mensagem = `A sua transação do dia ${transacao.tra_data_formatada} de valor R$ ${transacao.tra_subtotal} foi `;
 
@@ -319,13 +344,13 @@ module.exports.postAtualizarStatus = async (req, res) => {
                 mensagem += 'TROCA RECUSADA!';
                 break;
             case 'TROCA APROVADA':
-                mensagem += 'TROCA APROVADA!';
+                mensagem += 'TROCA APROVADA! Um cupom será gera após o recebimento dos livros.';
                 break;
             case 'TROCA CANCELADA':
                 mensagem += 'TROCA CANCELADA!';
                 break;
             case 'TROCA CONCLUIDA':
-                mensagem += 'TROCA CONCLUÍDA!';
+                mensagem += `TROCA CONCLUÍDA! Um Cupom de Troca de R$ ${transacao.tra_subtotal} foi gerado.`;
                 break;
             case 'DEVOLUÇÃO CANCELADA':
                 mensagem += 'DEVOLUÇÃO CANCELADA!';
@@ -344,14 +369,12 @@ module.exports.postAtualizarStatus = async (req, res) => {
         }
 
         await adicionarNotificacao(usuario.usuarios_usr_id, mensagem, tra_id);
-
-        const result = await atualizarTransacaoStatus(novoStatus,tra_id);
         
         res.status(200).json({
             success: true,
             novoStatus: novoStatus,
             message: mensagem,
-            result
+            result: result
         });
 
     } catch (error){

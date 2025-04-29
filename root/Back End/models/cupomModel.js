@@ -25,11 +25,11 @@ async function deletarItensCupom(cup_id) {
     }
 }
 
-async function adicionarItemCupom(usr_id, cup_valor, cup_nome) {
+async function adicionarItemCupom(usr_id, cup_valor, cup_nome, cup_data) {
     try {
         await db.query(
-            "INSERT INTO cupom (cup_valor, usuarios_usr_id, cup_nome) VALUES (?, ?, ?)",
-            [cup_valor, usr_id, cup_nome]
+            "INSERT INTO cupom (cup_valor, usuarios_usr_id, cup_nome, cup_data) VALUES (?, ?, ?, ?)",
+            [cup_valor, usr_id, cup_nome, cup_data]
         );        
 
         return { success: true, message: 'Item adicionado ao cupom com sucesso' };

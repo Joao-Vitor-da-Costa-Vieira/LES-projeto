@@ -283,6 +283,50 @@ async function buscarUsuarioPorTransacao(tra_id) {
     }
 }
 
+async function atualizarStatusEReporEstoque(tra_id, novoStatus) {
+    const connection = await db.getConnection();
+    try {
+        await connection.beginTransaction();
+
+        // 1. Atualizar status da transação
+        const [result] = await connection.query(
+            'UPDATE transacoes SET tra_status = ? WHERE tra_id = ?',
+            [novoStatus, tra_id]
+        );
+
+        // 2. Buscar itens da transação
+        const [itens] = await connection.query(
+            'SELECT livros_lvr_id, itv_qtd_item FROM itens_de_venda WHERE transacoes_tra_id = ?',
+            [tra_id]
+        );
+
+        // 3. Atualizar estoque dos livros
+        for (const item of itens) {
+            await connection.query(
+                'UPDATE livros SET lvr_qtd_estoque = lvr_qtd_estoque + ? WHERE lvr_id = ?',
+                [item.itv_qtd_item, item.livros_lvr_id]
+            );
+        }
+
+        await connection.commit();
+        return result;;
+
+    } catch (error) {
+        await connection.rollback();
+        throw error;
+    } finally {
+        connection.release();
+    }
+}
+
+async function buscarItensTransacao(tra_id) {
+    const [itens] = await db.query(
+        'SELECT livros_lvr_id, itv_qtd_item FROM itens_de_venda WHERE transacoes_tra_id = ?',
+        [tra_id]
+    );
+    return itens;
+}
+
 module.exports = {
     processarPagamentoCompleto,
     buscarTransacaoId,
@@ -293,5 +337,7 @@ module.exports = {
     buscarItensVendaPorTransacao,
     buscarTransacaoPorId,
     atualizarTransacaoStatus,
-    buscarUsuarioPorTransacao
+    buscarUsuarioPorTransacao,
+    buscarItensTransacao,
+    atualizarStatusEReporEstoque
 };
