@@ -12,23 +12,13 @@ async function buscarItensCupom(usr_id) {
 
 async function deletarItensCupom(cup_id) {
     try {
+        
         const [result] = await db.query(
-            "SELECT usuarios_usr_id FROM cupom WHERE cup_id = ?", 
+            'DELETE FROM cupom WHERE car_id = ?',
             [cup_id]
         );
         
-        if (result.length === 0) {
-            throw new Error('Item do cupom não encontrado');
-        }
-        
-        const usr_id = result[0].usuarios_usr_id;
-        
-        await db.query(
-            'DELETE FROM cupom WHERE car_id = ?',
-            [car_id]
-        );
-        
-        return usr_id;
+        return result;
     } catch (err) {
         console.error(`Erro no deletarItensCupom - modelCupom: ${err}`);
         throw err;
