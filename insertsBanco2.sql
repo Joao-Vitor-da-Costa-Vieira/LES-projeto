@@ -1,4 +1,4 @@
-use bravo;
+use projetoles;
 
 -- Categorias
 INSERT INTO categoria (cat_id, cat_nome) VALUES (1, 'Ficção Científica');
@@ -129,6 +129,7 @@ INSERT INTO usuarios (
     'A'
 );
 
+-- Endereços de Entrega
 INSERT INTO enderecos_entrega ( 
 end_estado,
 end_cidade,
@@ -169,6 +170,8 @@ usuarios_usr_id
     '1'
 );
 
+-- Cartões
+
 INSERT INTO cartoes ( 
 crt_numero,
 crt_bandeira,
@@ -195,4 +198,256 @@ usuarios_usr_id
     '123154',
     'João da Silva',
     '1'
+);
+
+-- Transações
+INSERT INTO transacoes (
+    tra_data,
+    tra_valor_frete,
+    tra_status,
+    tra_valor,
+    tra_desconto,
+    tra_subtotal,
+    enderecos_entrega_end_id,
+    usuarios_usr_id
+) VALUES (
+    '2023-05-15',
+    15.90,
+    'APROVADO',
+    150.75,
+    10.00,
+    140.75,
+    1,
+    1
+);
+
+INSERT INTO transacoes (
+    tra_data,
+    tra_valor_frete,
+    tra_status,
+    tra_valor,
+    tra_desconto,
+    tra_subtotal,
+    enderecos_entrega_end_id,
+    usuarios_usr_id
+) VALUES (
+    '2023-06-20',
+    12.50,
+    'APROVADO',
+    89.90,
+    5.00,
+    84.90,
+    1,
+    1
+);
+
+INSERT INTO transacoes (
+    tra_data,
+    tra_valor_frete,
+    tra_status,
+    tra_valor,
+    tra_desconto,
+    tra_subtotal,
+    enderecos_entrega_end_id,
+    usuarios_usr_id
+) VALUES (
+    '2023-07-10',
+    0.00,
+    'APROVADO',
+    230.50,
+    20.00,
+    210.50,
+    1,
+    1
+);
+
+INSERT INTO transacoes (
+    tra_data,
+    tra_valor_frete,
+    tra_status,
+    tra_valor,
+    tra_desconto,
+    tra_subtotal,
+    enderecos_entrega_end_id,
+    usuarios_usr_id
+) VALUES (
+    '2023-08-05',
+    8.75,
+    'APROVADO',
+    75.25,
+    0.00,
+    75.25,
+    1,
+    1
+);
+
+INSERT INTO transacoes (
+    tra_data,
+    tra_valor_frete,
+    tra_status,
+    tra_valor,
+    tra_desconto,
+    tra_subtotal,
+    enderecos_entrega_end_id,
+    usuarios_usr_id
+) VALUES (
+    '2023-09-12',
+    18.30,
+    'APROVADO',
+    320.00,
+    30.00,
+    290.00,
+    1,
+    1
+);
+
+INSERT INTO transacoes (
+    tra_data,
+    tra_valor_frete,
+    tra_status,
+    tra_valor,
+    tra_desconto,
+    tra_subtotal,
+    enderecos_entrega_end_id,
+    usuarios_usr_id
+) VALUES (
+    '2023-08-05',
+    8.75,
+    'APROVADO',
+    75.25,
+    0.00,
+    75.25,
+    1,
+    1
+);
+
+INSERT INTO transacoes (
+    tra_data,
+    tra_valor_frete,
+    tra_status,
+    tra_valor,
+    tra_desconto,
+    tra_subtotal,
+    enderecos_entrega_end_id,
+    usuarios_usr_id
+) VALUES (
+    '2023-09-12',
+    18.30,
+    'APROVADO',
+    320.00,
+    30.00,
+    290.00,
+    1,
+    1
+);
+
+-- Formas de Pagamento
+INSERT INTO forma_de_pagamento (
+    fpg_tipo,
+    fpg_valor,
+    transacoes_tra_id,
+    cartoes_crt_id
+) VALUES (
+    'Cartao de Credito',
+    210.5,
+    6,
+    1
+);
+
+INSERT INTO forma_de_pagamento (
+    fpg_tipo,
+    fpg_valor,
+    transacoes_tra_id,
+    cartoes_crt_id
+) VALUES (
+    'Cartao de Credito',
+    50.25,
+    7,
+    1
+);
+
+INSERT INTO forma_de_pagamento (
+    fpg_tipo,
+    fpg_valor,
+    transacoes_tra_id,
+    cupom_cup_id
+) VALUES (
+    'Cupom',
+    25.00,
+    7,
+    3
+);
+
+INSERT INTO forma_de_pagamento (
+    fpg_tipo,
+    fpg_valor,
+    transacoes_tra_id,
+    cartoes_crt_id
+) VALUES (
+    'Cartao de Credito',
+    290.00,
+    8,
+    1
+);
+
+INSERT INTO forma_de_pagamento (
+    fpg_tipo,
+    fpg_valor,
+    transacoes_tra_id,
+    cartoes_crt_id
+) VALUES (
+    'Cartao de Credito',
+    84.90,
+    9,
+    1
+);
+
+INSERT INTO forma_de_pagamento (
+    fpg_tipo,
+    fpg_valor,
+    transacoes_tra_id,
+    cartoes_crt_id
+) VALUES (
+    'Cartao de Credito',
+    140.75,
+    10,
+    1
+);
+
+INSERT INTO cupom (
+    cup_data,
+    cup_nome,
+    cup_valor,
+    usuarios_usr_id
+) VALUES (
+    '2023-08-05',
+    ' Cupom de Troca',
+    75.00,
+    1
+);
+
+INSERT INTO cupom (
+    cup_data,
+    cup_nome,
+    cup_valor,
+    usuarios_usr_id
+) VALUES (
+    '2023-08-06',
+    ' Cupom de Troca',
+    100.00,
+    1
+);
+
+INSERT INTO cupom (
+    cup_data,
+    cup_nome,
+    cup_valor,
+    cup_status,
+    usuarios_usr_id
+) VALUES (
+    '2023-08-06',
+    ' Cupom de Troca',
+    25.00,
+    0,
+    1
 );

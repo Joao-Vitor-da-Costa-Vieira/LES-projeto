@@ -165,7 +165,7 @@ ALTER TABLE livros ADD CONSTRAINT livros_pk PRIMARY KEY ( lvr_id );
 
 CREATE TABLE notificacao (
     ntf_id INTEGER NOT NULL AUTO_INCREMENT,
-    ntf_mensagem VARCHAR(150) NOT NULL,
+    ntf_mensagem VARCHAR(250) NOT NULL,
     usuarios_usr_id INTEGER NOT NULL,
     transacoes_tra_id INTEGER NOT NULL
 );
