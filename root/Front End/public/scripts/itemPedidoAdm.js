@@ -1,106 +1,91 @@
+import { atualizarStatus } from '/scripts/service/pedidosService.js';
+
 document.addEventListener('DOMContentLoaded', () => {
     const btnAtualizar = document.getElementById('atualizar');
     const statusSubmenu = document.createElement('div');
-    const tra_id = btnAtualizar.dataset.traId; 
-    const statusAtual = btnAtualizar.dataset.traStatus;
-    statusSubmenu.className = 'status-submenu';
-    statusSubmenu.style.display = 'none';
+    
+    // Extrair dados do HTML existente
+    const tra_id = document.querySelector('.titulo').textContent.match(/#(\d+)/)[1];
+    const statusAtual = document.querySelector('table tr td:nth-child(4)').textContent.trim();
+    const valorCompra = document.querySelector('table tr td:nth-child(3)').textContent.trim();
+    
+    // Configurar o submenu
+    statusSubmenu.className = 'status-modal';
+    statusSubmenu.innerHTML = `
+        <div class="modal-content">
+            <h3>O que deseja fazer?</h3>
+            <div class="status-info">
+                <p>Status Atual: ${statusAtual}</p>
+                <p>Valor Total: ${valorCompra}</p>
+            </div>
+            <div class="itens-venda-modal"></div>
+            <div class="opcoes-status"></div>
+        </div>
+    `;
     document.body.appendChild(statusSubmenu);
 
-    // Função para criar opções do submenu
-    const criarOpcoes = (opcoes) => {
-        statusSubmenu.innerHTML = '';
-        opcoes.forEach(opcao => {
-            const btn = document.createElement('button');
-            btn.className = 'submenu-option';
-            btn.textContent = opcao.texto;
-            btn.onclick = () => atualizarStatus(opcao.status);
-            statusSubmenu.appendChild(btn);
-        });
-    };
-
-    // Função para atualizar status
-    const atualizarStatus = async (novoStatus) => {
-        try {
-            const response = await fetch(`/pedidos/${tra_id}/status`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ novoStatus })
-            });
-
-            if (response.ok) {
-                alert('Status atualizado com sucesso!');
-                location.reload();
-            } else {
-                alert('Erro ao atualizar status');
-            }
-        } catch (error) {
-            console.error('Erro:', error);
-        }
-    };
-
-    // Mostrar/ocultar submenu
-    btnAtualizar.addEventListener('click', (e) => {
-        e.stopPropagation();
-        let opcoes = [];
-
-        switch (statusAtual) {
-            case 'APROVADO':
-                opcoes = [
-                    { texto: 'Cancelar Compra', status: 'CANCELADO' },
-                    { texto: 'Confirmar Transporte', status: 'EM TRANSPORTE' }
-                ];
-                break;
-            case 'EM TRANSPORTE':
-                opcoes = [
-                    { texto: 'Cancelar Transporte', status: 'CANCELADO' },
-                    { texto: 'Confirmar Entrega', status: 'ENTREGUE' }
-                ];
-                break;
-            case 'TROCA SOLICITADA':
-                opcoes = [
-                    { texto: 'Cancelar', status: 'CANCELADO' },
-                    { texto: 'Recusar Troca', status: 'TROCA RECUSADA' },
-                    { texto: 'Aprovar Troca', status: 'TROCA APROVADA' }
-                ];
-                break;
-            case 'TROCA APROVADA':
-                opcoes = [
-                    { texto: 'Cancelar', status: 'CANCELADO' },
-                    { texto: 'Confirmar Troca', status: 'TROCA CONCLUÍDA' }
-                ];
-                break;
-            case 'DEVOLUÇÃO SOLICITADA':
-                opcoes = [
-                    { texto: 'Cancelar', status: 'CANCELADO' },
-                    { texto: 'Recusar Devolução', status: 'DEVOLUÇÃO RECUSADA' },
-                    { texto: 'Aprovar Devolução', status: 'DEVOLUÇÃO APROVADA' }
-                ];
-                break;
-            case 'DEVOLUÇÃO APROVADA':
-                opcoes = [
-                    { texto: 'Cancelar', status: 'CANCELADO' },
-                    { texto: 'Confirmar Devolução', status: 'DEVOLUÇÃO CONCLUÍDA' }
-                ];
-                break;
-            default:
-                alert('O status dessa operação não pode ser modificado');
-                return;
-        }
-
-        criarOpcoes(opcoes);
-        const rect = btnAtualizar.getBoundingClientRect();
-        statusSubmenu.style.display = 'block';
-        statusSubmenu.style.position = 'absolute';
-        statusSubmenu.style.left = `${rect.left}px`;
-        statusSubmenu.style.top = `${rect.bottom + 5}px`;
+    // Popular itens da venda
+    const itensTable = document.querySelectorAll('.table_div:last-of-type table tbody tr');
+    const itensContainer = statusSubmenu.querySelector('.itens-venda-modal');
+    
+    itensTable.forEach(item => {
+        const cols = item.querySelectorAll('td');
+        const itemElement = document.createElement('div');
+        itemElement.className = 'item-modal';
+        itemElement.innerHTML = `
+            <p>${cols[0].textContent} - ${cols[2].textContent} unidade(s)</p>
+            <p>${cols[1].textContent}</p>
+        `;
+        itensContainer.appendChild(itemElement);
     });
 
-    // Fechar submenu ao clicar fora
-    document.addEventListener('click', (e) => {
-        if (!statusSubmenu.contains(e.target)) {
+    btnAtualizar.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const opcoesContainer = statusSubmenu.querySelector('.opcoes-status');
+        opcoesContainer.innerHTML = '';
+
+        // Determinar opções baseadas no status
+        let opcoes = [];
+        
+        if (statusAtual === 'APROVADO') {
+            opcoes = ['Cancelar Compra', 'Confirmar Transporte'];
+        } else if (statusAtual === 'EM TRANSPORTE') {
+            opcoes = ['Cancelar Transporte', 'Confirmar Entrega'];
+        } else if (statusAtual === 'TROCA SOLICITADA') {
+            opcoes = ['Cancelar', 'Recusar Troca', 'Aprovar Troca'];
+        } else if (statusAtual === 'TROCA APROVADA') {
+            opcoes = ['Cancelar', 'Confirmar Troca'];
+        } else if (statusAtual === 'DEVOLUÇÃO SOLICITADA') {
+            opcoes = ['Cancelar', 'Recusar Devolução', 'Aprovar Devolução'];
+        } else if (statusAtual === 'DEVOLUÇÃO APROVADA') {
+            opcoes = ['Cancelar', 'Confirmar Devolução'];
+        } else {
+            opcoesContainer.innerHTML = '<p>O status não pode ser modificado</p>';
+            return;
+        }
+
+        // Criar botões de opções
+        opcoes.forEach(opcao => {
+            const btn = document.createElement('button');
+            btn.className = 'btn-opcao';
+            btn.textContent = opcao;
+            btn.onclick = async () => {
+                const result = await atualizarStatus(tra_id, opcao.toUpperCase().replace(' ', '_'));
+                if (result.success) {
+                    alert('Status atualizado!');
+                    location.reload();
+                }
+            };
+            opcoesContainer.appendChild(btn);
+        });
+
+        // Mostrar modal centralizado
+        statusSubmenu.style.display = 'flex';
+    });
+
+    // Fechar modal
+    statusSubmenu.addEventListener('click', (e) => {
+        if (e.target === statusSubmenu) {
             statusSubmenu.style.display = 'none';
         }
     });
