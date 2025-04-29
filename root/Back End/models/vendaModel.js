@@ -261,6 +261,17 @@ async function buscarItensVendaPorTransacao(tra_id) {
     return itens;
 }
 
+async function atualizarTransacaoStatus(tra_status, tra_id) {
+    try {        
+        const [result] = await db.query(`UPDATE transacoes SET tra_status = ? WHERE tra_id = ?`, [tra_status, tra_id]);
+
+        return result;
+    } catch (err) {
+        console.error("Erro no atualizarTransacaoStatus- modelVendas: ${err}");
+        throw err;
+    }
+}
+
 module.exports = {
     processarPagamentoCompleto,
     buscarTransacaoId,
@@ -269,5 +280,6 @@ module.exports = {
     buscarFormasPagamento,
     buscarTransacoesFiltradas,
     buscarItensVendaPorTransacao,
-    buscarTransacaoPorId
+    buscarTransacaoPorId,
+    atualizarTransacaoStatus
 };
