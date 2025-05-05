@@ -329,17 +329,31 @@ async function buscarItensTransacao(tra_id) {
 
 async function criarTroca(usuarioId, dadosTroca, itensOriginais) {
     const connection = await db.getConnection();
+    console.log(usuarioId);
+    console.log(dadosTroca);
+    console.log(itensOriginais);
     try {
         await connection.beginTransaction();
 
         for (const item of dadosTroca.itens) {
-            const itemOriginal = itensOriginais.find(i => i.livros_lvr_id === item.lvr_id);
-            if (!itemOriginal || item.quantidade > itemOriginal.itv_qtd_item) {
-                throw new Error(`Quantidade inválida para o livro ID ${item.lvr_id}`);
+            const lvrId = Number(item.lvr_id);
+            
+            const itemOriginal = itensOriginais.find(i => 
+                Number(i.livros_lvr_id) === lvrId
+            );
+
+            if (!itemOriginal) {
+                throw new Error(`Livro ID ${lvrId} não encontrado na transação original`);
+            }
+
+            if (item.quantidade < 0 || item.quantidade > itemOriginal.itv_qtd_item) {
+                throw new Error(
+                    `Quantidade inválida para "${itemOriginal.lvr_titulo}"\n` +
+                    `Máximo permitido: ${itemOriginal.itv_qtd_item}`
+                );
             }
         }
 
-        // Criar nova transação de troca
         const [novaTransacao] = await connection.query(
             `INSERT INTO transacoes SET
                 tra_data = NOW(),

@@ -215,7 +215,7 @@ module.exports.getTroca = async (req, res) => {
             usuario,
             endereco,
             notificacoes,
-            tra_id_original: tra_id
+            tra_id: tra_id
         });
 
     } catch (error) {
@@ -465,17 +465,18 @@ module.exports.filtrarPedidos = async (req, res) => {
 
 module.exports.postTroca = async (req, res) => {
     try {
-        const { usuarioId, tra_id_original, itens, subtotal, end_id } = req.body;
-
+        const { usr_id, tra_id, itens, subtotal, end_id } = req.body;
+        console.log('tra id:',tra_id);
+        
         // Validar estrutura dos dados
         if (!itens || !Array.isArray(itens)){
             throw new Error('Dados de itens inválidos');
         }
 
-        const itensOriginais = await buscarItensVendaPorTransacao(tra_id_original);
+        const itensOriginais = await buscarItensVendaPorTransacao(tra_id);
         // Criar nova troca
-        const novaTraId = await criarTroca(usuarioId, {
-            tra_id_original,
+        const novaTraId = await criarTroca(usr_id, {
+            tra_id_original: tra_id,
             itens,
             subtotal,
             end_id
@@ -484,8 +485,8 @@ module.exports.postTroca = async (req, res) => {
 
         // Adicionar notificação
         await adicionarNotificacao(
-            usuarioId,
-            `Troca solicitada para o pedido #${tra_id_original}. Status: TROCA SOLICITADA`,
+            usr_id,
+            `Troca solicitada para o pedido #${tra_id}. Status: TROCA SOLICITADA`,
             novaTraId
         );
 

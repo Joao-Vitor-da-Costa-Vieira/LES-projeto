@@ -126,12 +126,23 @@ document.getElementById('trocar')?.addEventListener('click', function(e) {
         });
     });
 
+    const traDataElement = document.getElementById('tra-data');
+    const tra_id = traDataElement ? JSON.parse(traDataElement.textContent) : [];
+    
+    const subtotal = parseFloat(document.getElementById('subtotal-valor').textContent);
+
+        const endDataElement = document.getElementById('end-data');
+        const end_id = endDataElement ? JSON.parse(endDataElement.textContent) : [];
+
     fetch('/trocas/confirmar', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
             usr_id: document.getElementById('user-data').dataset.userId,
-            itens: itensTroca
+            itens: itensTroca,
+            subtotal,
+            tra_id: tra_id[0],
+            end_id: end_id[0]
         })
     })
     .then(response => {

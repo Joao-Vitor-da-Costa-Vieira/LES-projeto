@@ -69,14 +69,14 @@
                     <tbody>
                         <% if (itensVenda && itensVenda.length > 0) { %>
                             <% itensVenda.forEach(item => { %>
-                                <tr data-lvr-id="<%= item.livro.lvr_id %>">
+                                <tr data-lvr-id="<%= item.livro.livros_lvr_id %>">
                                     <td><%= item.livro.lvr_titulo %></td>
                                     <td>R$ <%= item.livro.lvr_custo %></td>
                                     <td class="qtd-max"><%= item.quantidade_maxima %></td>
                                     <td class="qtd-atual"><%= item.quantidade_selecionada %></td>
                                     <td>
                                         <div class="botoes_resultado">
-                                            <button class="atualizar" data-lvr-id="<%= item.livro.lvr_id %>">Atualizar</button>
+                                            <button class="atualizar">Atualizar</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -106,6 +106,14 @@
             </div>
         </div>
     </div>
+
+    <script id="tra-data" type="application/json">
+        <%- JSON.stringify([tra_id]) %>
+    </script>
+
+    <script id="end-data" type="application/json">
+        <%- JSON.stringify([endereco.end_id]) %>
+    </script>
     
     <script type="module" src="/scripts/navbar.js"></script>
     <script type="module" src="/scripts/selecaoTroca.js"></script>
