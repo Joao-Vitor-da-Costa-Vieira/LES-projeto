@@ -8,7 +8,8 @@ const {
     buscarItensVendaPorTransacao,
     atualizarTransacaoStatus,
     buscarUsuarioPorTransacao,
-    criarTroca
+    criarTroca,
+    criarDevolucao
 } = require("../models/vendaModel");
 
 const {

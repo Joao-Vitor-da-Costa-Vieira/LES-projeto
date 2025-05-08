@@ -397,6 +397,76 @@ async function criarTroca(usuarioId, dadosTroca, itensOriginais) {
     }
 }
 
+async function criarDevolucao(usuarioId, dadosDevolucao, itensOriginais) {
+    const connection = await db.getConnection();
+    console.log(usuarioId);
+    console.log(dadosDevolucao);
+    console.log(itensOriginais);
+    try {
+        await connection.beginTransaction();
+
+        for (const item of dadosDevolucao.itens) {
+            const lvrId = Number(item.lvr_id);
+            
+            const itemOriginal = itensOriginais.find(i => 
+                Number(i.livros_lvr_id) === lvrId
+            );
+
+            if (!itemOriginal) {
+                throw new Error(`Livro ID ${lvrId} não encontrado na transação original`);
+            }
+
+            if (item.quantidade < 0 || item.quantidade > itemOriginal.itv_qtd_item) {
+                throw new Error(
+                    `Quantidade inválida para "${itemOriginal.lvr_titulo}"\n` +
+                    `Máximo permitido: ${itemOriginal.itv_qtd_item}`
+                );
+            }
+        }
+
+        const [novaTransacao] = await connection.query(
+            `INSERT INTO transacoes SET
+                tra_data = NOW(),
+                tra_status = 'DEVOLUÇÃO SOLICITADA',
+                tra_subtotal = ?,
+                tra_valor = ?,
+                tra_valor_frete = 0,
+                enderecos_entrega_end_id = ?,
+                usuarios_usr_id = ?`,
+            [
+                dadosDevolucao.subtotal,
+                dadosDevolucao.subtotal,
+                dadosDevolucao.end_id,
+                usuarioId
+            ]
+        );
+
+        // Inserir itens da troca
+        for (const item of dadosDevolucao.itens) {
+            await connection.query(
+                `INSERT INTO itens_de_venda SET
+                    itv_qtd_item = ?,
+                    transacoes_tra_id = ?,
+                    livros_lvr_id = ?`,
+                [
+                    item.quantidade,
+                    novaTransacao.insertId,
+                    item.lvr_id
+                ]
+            );
+        }
+
+        await connection.commit();
+        return novaTransacao.insertId;
+
+    } catch (error) {
+        await connection.rollback();
+        throw error;
+    } finally {
+        connection.release();
+    }
+}
+
 module.exports = {
     processarPagamentoCompleto,
     buscarTransacaoId,
@@ -410,5 +480,6 @@ module.exports = {
     buscarUsuarioPorTransacao,
     buscarItensTransacao,
     atualizarStatusEReporEstoque,
-    criarTroca
+    criarTroca,
+    criarDevolucao
 };
