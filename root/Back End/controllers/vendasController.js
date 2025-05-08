@@ -242,7 +242,7 @@ module.exports.getDevolucao = async (req, res) => {
         console.log(endereco);
 
         // Preparar dados para a view
-        const itensParaTroca = itensOriginais.map(item => ({
+        const itensParaDevolucao = itensOriginais.map(item => ({
             livro: {
                 ...item,
                 lvr_desconto: item.lvr_desconto || 0
@@ -256,7 +256,7 @@ module.exports.getDevolucao = async (req, res) => {
         const notificacoes = await buscarNotificacoes(usuario.usr_id);
 
         res.render('selecaoDevolucao', {
-            itensVenda: itensParaTroca,
+            itensVenda: itensParaDevolucao,
             subtotalTotal: 0,
             usuario,
             endereco,
@@ -506,6 +506,48 @@ module.exports.filtrarPedidos = async (req, res) => {
     } catch (error) {
         console.error('Erro ao filtrar pedidos:', error);
         res.status(500).json({ error: 'Erro ao filtrar pedidos' });
+    }
+};
+
+module.exports.postDevolucao = async (req, res) => {
+    try {
+        const { usr_id, tra_id, itens, subtotal, end_id } = req.body;
+        console.log('tra id:',tra_id);
+        
+        // Validar estrutura dos dados
+        if (!itens || !Array.isArray(itens)){
+            throw new Error('Dados de itens inválidos');
+        }
+
+        const itensOriginais = await buscarItensVendaPorTransacao(tra_id);
+        // Criar nova troca
+        const novaTraId = await criarDevolucao(usr_id, {
+            tra_id_original: tra_id,
+            itens,
+            subtotal,
+            end_id
+        }, 
+        itensOriginais);
+
+        // Adicionar notificação
+        await adicionarNotificacao(
+            usr_id,
+            `Devolucao solicitada para o pedido #${tra_id}. Status: Devoulucao SOLICITADA`,
+            novaTraId
+        );
+
+        res.status(200).json({
+            success: true,
+            tra_id: novaTraId,
+            message: 'Devolucao solicitada com sucesso'
+        });
+
+    } catch (error) {
+        console.error('Erro ao processar devolucao:', error);
+        res.status(400).json({
+            success: false,
+            message: error.message
+        });
     }
 };
 
