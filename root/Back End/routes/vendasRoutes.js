@@ -9,9 +9,11 @@ router.get('/pedidos', vendasController.getPedidos);
 router.get('/pedidos-adm/detalhes',vendasController.getPedidoItem);
 router.get('/pagamento/detalhes', vendasController.getTransacao);
 router.get('/trocas',vendasController.getTroca);
+router.get('/devolucoes',vendasController.getDevolucao);
 
 router.post('/pagamento/confirmar',vendasController.postPagamento);
 router.post('/trocas/confirmar',vendasController.postTroca);
+router.post('/devolucoes/confirmar',vendasController.postDevolucao);
 
 router.get('/api/pedidos/filtrar', vendasController.filtrarPedidos);
 router.post('/api/pedidos-atualizar/status', vendasController.postAtualizarStatus);

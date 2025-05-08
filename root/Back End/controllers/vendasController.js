@@ -224,6 +224,52 @@ module.exports.getTroca = async (req, res) => {
     }
 };
 
+module.exports.getDevolucao = async (req, res) => {
+    try {
+        const { tra_id } = req.query;
+        
+        console.log(tra_id);
+
+        // Buscar transação original
+        const transacaoOriginal = await buscarTransacaoPorId(tra_id);
+        console.log(transacaoOriginal);
+
+        // Buscar itens da transação original
+        const itensOriginais = await buscarItensVendaPorTransacao(tra_id);  
+        const endereco = await buscarEnderecoEntregaPorTransacao(tra_id);
+
+        console.log(itensOriginais);
+        console.log(endereco);
+
+        // Preparar dados para a view
+        const itensParaTroca = itensOriginais.map(item => ({
+            livro: {
+                ...item,
+                lvr_desconto: item.lvr_desconto || 0
+            },
+            quantidade_maxima: item.itv_qtd_item,
+            quantidade_selecionada: 0
+        }));
+
+        // Buscar dados do usuário
+        const [usuario] = await buscarUsuarioId(transacaoOriginal.usuarios_usr_id);
+        const notificacoes = await buscarNotificacoes(usuario.usr_id);
+
+        res.render('selecaoDevolucao', {
+            itensVenda: itensParaTroca,
+            subtotalTotal: 0,
+            usuario,
+            endereco,
+            notificacoes,
+            tra_id: tra_id
+        });
+
+    } catch (error) {
+        console.error('Erro ao carregar devolucao:', error);
+        res.status(500).send('Erro ao carregar página de devolucao');
+    }
+};
+
 module.exports.getPedidos = async (req, res) => {
     try {
         const transacoes = await buscarTransacoesPrioridade();
