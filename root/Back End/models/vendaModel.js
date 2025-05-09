@@ -357,17 +357,19 @@ async function criarTroca(usuarioId, dadosTroca, itensOriginais) {
         const [novaTransacao] = await connection.query(
             `INSERT INTO transacoes SET
                 tra_data = NOW(),
-                tra_status = 'TROCA SOLICITADA',
+                tra_status = 'DEVOLUÇÃO SOLICITADA',
                 tra_subtotal = ?,
                 tra_valor = ?,
                 tra_valor_frete = 0,
                 enderecos_entrega_end_id = ?,
-                usuarios_usr_id = ?`,
+                usuarios_usr_id = ?,
+                tra_id_original = ?`,
             [
-                dadosTroca.subtotal,
-                dadosTroca.subtotal,
-                dadosTroca.end_id,
-                usuarioId
+                dadosDevolucao.subtotal,
+                dadosDevolucao.subtotal,
+                dadosDevolucao.end_id,
+                usuarioId,
+                dadosTroca.tra_id_original
             ]
         );
 
@@ -432,12 +434,14 @@ async function criarDevolucao(usuarioId, dadosDevolucao, itensOriginais) {
                 tra_valor = ?,
                 tra_valor_frete = 0,
                 enderecos_entrega_end_id = ?,
-                usuarios_usr_id = ?`,
+                usuarios_usr_id = ?,
+                tra_id_original = ?`,
             [
                 dadosDevolucao.subtotal,
                 dadosDevolucao.subtotal,
                 dadosDevolucao.end_id,
-                usuarioId
+                usuarioId,
+                dadosDevolucao.tra_id_original
             ]
         );
 
