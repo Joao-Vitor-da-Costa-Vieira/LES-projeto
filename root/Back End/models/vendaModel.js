@@ -471,6 +471,23 @@ async function criarDevolucao(usuarioId, dadosDevolucao, itensOriginais) {
     }
 }
 
+async function verificarTransacaoAssociada(tra_id) {
+    
+    const [trocas] = await db.query(`SELECT * from transacoes WHERE tra_id_original = ? AND tra_status = 'TROCA CONCLUIDA'`, [tra_id]);
+    const [devolucoes] = await db.query(`SELECT * from transacoes WHERE tra_id_original = ? AND tra_status = 'DEVOLUÇÃO CONCLUIDA'`, [tra_id]);
+
+    if(!devolucoes){
+        } else {
+            return 1;
+    }
+
+    if(!trocas){
+        return;
+    } else{
+        return 2;
+    }
+}
+
 module.exports = {
     processarPagamentoCompleto,
     buscarTransacaoId,
@@ -485,5 +502,6 @@ module.exports = {
     buscarItensTransacao,
     atualizarStatusEReporEstoque,
     criarTroca,
-    criarDevolucao
+    criarDevolucao,
+    verificarTransacaoAssociada
 };

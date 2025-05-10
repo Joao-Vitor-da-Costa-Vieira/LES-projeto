@@ -9,7 +9,8 @@ const {
     atualizarTransacaoStatus,
     buscarUsuarioPorTransacao,
     criarTroca,
-    criarDevolucao
+    criarDevolucao,
+    verificarTransacaoAssociada
 } = require("../models/vendaModel");
 
 const {
@@ -185,6 +186,14 @@ module.exports.getTroca = async (req, res) => {
         
         console.log(tra_id);
 
+        const result = verificarTransacaoAssociada(tra_id);
+
+        if(result === 2){
+            throw new Error(
+                    `Troca de compra já realizada.`
+                );
+        }
+
         // Buscar transação original
         const transacaoOriginal = await buscarTransacaoPorId(tra_id);
         console.log(transacaoOriginal);
@@ -230,6 +239,14 @@ module.exports.getDevolucao = async (req, res) => {
         const { tra_id } = req.query;
         
         console.log(tra_id);
+
+        const result = verificarTransacaoAssociada(tra_id);
+
+        if(result === 1){
+            throw new Error(
+                    `Devolucao de compra já realizada.`
+                );
+        }
 
         // Buscar transação original
         const transacaoOriginal = await buscarTransacaoPorId(tra_id);
@@ -514,6 +531,14 @@ module.exports.postDevolucao = async (req, res) => {
     try {
         const { usr_id, tra_id, itens, subtotal, end_id } = req.body;
         console.log('tra id:',tra_id);
+
+        const result = verificarTransacaoAssociada(tra_id);
+
+        if(result === 1){
+            throw new Error(
+                    `Devolucao de compra já realizada.`
+                );
+        }
         
         // Validar estrutura dos dados
         if (!itens || !Array.isArray(itens)){
@@ -556,6 +581,14 @@ module.exports.postTroca = async (req, res) => {
     try {
         const { usr_id, tra_id, itens, subtotal, end_id } = req.body;
         console.log('tra id:',tra_id);
+
+        const result = verificarTransacaoAssociada(tra_id);
+
+        if(result === 2){
+            throw new Error(
+                    `Troca de compra já realizada.`
+                );
+        }
         
         // Validar estrutura dos dados
         if (!itens || !Array.isArray(itens)){
