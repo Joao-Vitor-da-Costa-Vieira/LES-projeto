@@ -187,6 +187,7 @@ CREATE TABLE transacoes (
     tra_valor                DECIMAL(6, 2) NOT NULL,
     tra_desconto             DECIMAL(6, 2),
     tra_subtotal             DECIMAL(6, 2) NOT NULL,
+    tra_id_original          INTEGER,
     enderecos_entrega_end_id INTEGER,
     usuarios_usr_id          INTEGER
 );
