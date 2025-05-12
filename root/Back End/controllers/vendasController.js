@@ -10,7 +10,8 @@ const {
     buscarUsuarioPorTransacao,
     criarTroca,
     criarDevolucao,
-    verificarTransacaoAssociada
+    verificarTransacaoAssociada,
+    atualizarStatusEReporEstoque
 } = require("../models/vendaModel");
 
 const {
@@ -34,7 +35,8 @@ const {
     buscarLivroId
 } = require("../models/livroModel");
 
-const {buscarItensCupom
+const {buscarItensCupom,
+    adicionarItemCupom
 }= require("../models/cupomModel");
 
 const { 

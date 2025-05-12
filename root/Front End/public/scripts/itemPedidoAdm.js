@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const tra_id = btnAtualizar.dataset.traId; 
     const statusAtual = btnAtualizar.dataset.traStatus;
-    const valorCompra = btnAtualizar.dataset.traSubtotal;
+    const valorCompra = btnAtualizar.dataset.traValor;
 
     // Configurar submenu de status
     statusSubmenu.className = 'status-modal';
