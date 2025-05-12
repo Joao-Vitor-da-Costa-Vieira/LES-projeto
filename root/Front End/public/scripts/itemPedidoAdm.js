@@ -62,24 +62,24 @@ document.addEventListener('DOMContentLoaded', () => {
             ];
         } else if (statusAtual === 'TROCA SOLICITADA') {
             opcoes = [
-                { texto: 'Cancelar', status: 'CANCELADO' },
+                { texto: 'Cancelar', status: '' },
                 { texto: 'Recusar Troca', status: 'TROCA RECUSADA' },
                 { texto: 'Aprovar Troca', status: 'TROCA APROVADA' }
             ];
         } else if (statusAtual === 'TROCA APROVADA') {
             opcoes = [
-                { texto: 'Cancelar', status: 'CANCELADO' },
+                { texto: 'Cancelar', status: '' },
                 { texto: 'Confirmar Troca', status: 'TROCA CONCLUIDA' }
             ];
         } else if (statusAtual === 'DEVOLUCAO SOLICITADA') {
             opcoes = [
-                { texto: 'Cancelar', status: 'CANCELADO' },
+                { texto: 'Cancelar', status: '' },
                 { texto: 'Recusar Devolução', status: 'DEVOLUCAO RECUSADA' },
                 { texto: 'Aprovar Devolução', status: 'DEVOLUCAO APROVADA' }
             ];
         } else if (statusAtual === 'DEVOLUCAO APROVADA') {
             opcoes = [
-                { texto: 'Cancelar', status: 'CANCELADO' },
+                { texto: 'Cancelar', status: '' },
                 { texto: 'Confirmar Devolução', status: 'DEVOLUCAO CONCLUIDA' }
             ];
         } else {

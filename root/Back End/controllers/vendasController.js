@@ -427,9 +427,15 @@ module.exports.postAtualizarStatus = async (req, res) => {
         console.log(tra_id);
         console.log(novoStatus);
 
+        if(novoStatus === ''){
+            throw new Error('Alteração Cancelada');
+        }
+
         const transacao = await buscarTransacaoPorId(tra_id);
         
         const usuario = await buscarUsuarioPorTransacao(tra_id);
+
+        
 
         if (novoStatus === 'TROCA CONCLUIDA') {
             const cupomData = {
