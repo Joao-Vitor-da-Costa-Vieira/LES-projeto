@@ -365,9 +365,9 @@ async function criarTroca(usuarioId, dadosTroca, itensOriginais) {
                 usuarios_usr_id = ?,
                 tra_id_original = ?`,
             [
-                dadosDevolucao.subtotal,
-                dadosDevolucao.subtotal,
-                dadosDevolucao.end_id,
+                dadosTroca.subtotal,
+                dadosTroca.subtotal,
+                dadosTroca.end_id,
                 usuarioId,
                 dadosTroca.tra_id_original
             ]
@@ -445,7 +445,7 @@ async function criarDevolucao(usuarioId, dadosDevolucao, itensOriginais) {
             ]
         );
 
-        // Inserir itens da troca
+        // Inserir itens da devolução
         for (const item of dadosDevolucao.itens) {
             await connection.query(
                 `INSERT INTO itens_de_venda SET
