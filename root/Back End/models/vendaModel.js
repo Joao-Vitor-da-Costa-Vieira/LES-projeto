@@ -490,10 +490,10 @@ async function verificarTransacaoAssociada(tra_id) {
 
 async function cancelarTransacaoAssociada(tra_id) {
     
-    await db.query(`DELETE * from transacoes WHERE tra_id_original = ? AND tra_status = 'TROCA SOLICITADA'`, [tra_id]);
-    await db.query(`DELETE * from transacoes WHERE tra_id_original = ? AND tra_status = 'DEVOLUCAO SOLICITADA'`, [tra_id]);
-    await db.query(`DELETE * from transacoes WHERE tra_id_original = ? AND tra_status = 'TROCA APROVADA'`, [tra_id]);
-    await db.query(`DELETE * from transacoes WHERE tra_id_original = ? AND tra_status = 'DEVOLUCAO APROVADA'`, [tra_id]);
+    await db.query(`DELETE from transacoes WHERE tra_id_original = ? AND tra_status = 'TROCA SOLICITADA'`, [tra_id]);
+    await db.query(`DELETE from transacoes WHERE tra_id_original = ? AND tra_status = 'DEVOLUCAO SOLICITADA'`, [tra_id]);
+    await db.query(`DELETE from transacoes WHERE tra_id_original = ? AND tra_status = 'TROCA APROVADA'`, [tra_id]);
+    await db.query(`DELETE from transacoes WHERE tra_id_original = ? AND tra_status = 'DEVOLUCAO APROVADA'`, [tra_id]);
 
 }
 
