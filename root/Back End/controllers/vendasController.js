@@ -596,7 +596,7 @@ module.exports.postTroca = async (req, res) => {
     try {
         const { usr_id, tra_id, itens, subtotal, end_id } = req.body;
         console.log('tra id:',tra_id);
-
+        console.log('end id:',end_id);
         const result = verificarTransacaoAssociada(tra_id);
 
         if(result === 2){

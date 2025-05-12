@@ -79,7 +79,8 @@ async function buscarEnderecosEntregaUsuarioId(id) {
 
 async function buscarEnderecoEntregaPorTransacao(tra_id) {
     const [endereco] = await db.query(
-        `SELECT 
+        `SELECT
+            e.end_id, 
             e.end_endereco,
             e.end_numero,
             e.end_complemento,

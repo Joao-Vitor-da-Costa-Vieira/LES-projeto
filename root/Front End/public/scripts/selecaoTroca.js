@@ -131,8 +131,10 @@ document.getElementById('trocar')?.addEventListener('click', function(e) {
     
     const subtotal = parseFloat(document.getElementById('subtotal-valor').textContent);
 
-        const endDataElement = document.getElementById('end-data');
-        const end_id = endDataElement ? JSON.parse(endDataElement.textContent) : [];
+    const endDataElement = document.getElementById('end-data');
+    const end_id = endDataElement ? JSON.parse(endDataElement.textContent) : [];
+
+    console.log(end_id);
 
     fetch('/trocas/confirmar', {
         method: 'POST',
@@ -142,7 +144,7 @@ document.getElementById('trocar')?.addEventListener('click', function(e) {
             itens: itensTroca,
             subtotal,
             tra_id: tra_id[0],
-            end_id: end_id[0]
+            end_id: end_id
         })
     })
     .then(response => {
