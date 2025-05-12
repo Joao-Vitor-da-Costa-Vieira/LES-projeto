@@ -357,7 +357,7 @@ async function criarTroca(usuarioId, dadosTroca, itensOriginais) {
         const [novaTransacao] = await connection.query(
             `INSERT INTO transacoes SET
                 tra_data = NOW(),
-                tra_status = 'DEVOLUÇÃO SOLICITADA',
+                tra_status = 'TROCA SOLICITADA',
                 tra_subtotal = ?,
                 tra_valor = ?,
                 tra_valor_frete = 0,
@@ -429,7 +429,7 @@ async function criarDevolucao(usuarioId, dadosDevolucao, itensOriginais) {
         const [novaTransacao] = await connection.query(
             `INSERT INTO transacoes SET
                 tra_data = NOW(),
-                tra_status = 'DEVOLUÇÃO SOLICITADA',
+                tra_status = 'DEVOLUCAO SOLICITADA',
                 tra_subtotal = ?,
                 tra_valor = ?,
                 tra_valor_frete = 0,
@@ -474,7 +474,7 @@ async function criarDevolucao(usuarioId, dadosDevolucao, itensOriginais) {
 async function verificarTransacaoAssociada(tra_id) {
     
     const [trocas] = await db.query(`SELECT * from transacoes WHERE tra_id_original = ? AND tra_status = 'TROCA CONCLUIDA'`, [tra_id]);
-    const [devolucoes] = await db.query(`SELECT * from transacoes WHERE tra_id_original = ? AND tra_status = 'DEVOLUÇÃO CONCLUIDA'`, [tra_id]);
+    const [devolucoes] = await db.query(`SELECT * from transacoes WHERE tra_id_original = ? AND tra_status = 'DEVOLUCAO CONCLUIDA'`, [tra_id]);
 
     if(!devolucoes){
         } else {
@@ -486,6 +486,15 @@ async function verificarTransacaoAssociada(tra_id) {
     } else{
         return 2;
     }
+}
+
+async function cancelarTransacaoAssociada(tra_id) {
+    
+    await db.query(`DELETE * from transacoes WHERE tra_id_original = ? AND tra_status = 'TROCA SOLICITADA'`, [tra_id]);
+    await db.query(`DELETE * from transacoes WHERE tra_id_original = ? AND tra_status = 'DEVOLUCAO SOLICITADA'`, [tra_id]);
+    await db.query(`DELETE * from transacoes WHERE tra_id_original = ? AND tra_status = 'TROCA APROVADA'`, [tra_id]);
+    await db.query(`DELETE * from transacoes WHERE tra_id_original = ? AND tra_status = 'DEVOLUCAO APROVADA'`, [tra_id]);
+
 }
 
 module.exports = {
@@ -503,5 +512,6 @@ module.exports = {
     atualizarStatusEReporEstoque,
     criarTroca,
     criarDevolucao,
-    verificarTransacaoAssociada
+    verificarTransacaoAssociada,
+    cancelarTransacaoAssociada
 };

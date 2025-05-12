@@ -11,7 +11,8 @@ const {
     criarTroca,
     criarDevolucao,
     verificarTransacaoAssociada,
-    atualizarStatusEReporEstoque
+    atualizarStatusEReporEstoque,
+    cancelarTransacaoAssociada
 } = require("../models/vendaModel");
 
 const {
@@ -414,7 +415,7 @@ module.exports.postPagamento = async (req, res) => {
 module.exports.postAtualizarStatus = async (req, res) => {
     try{
         const { tra_id, novoStatus } = req.body;
-        const statusRequerEstoque = ['CANCELADO', 'REPROVADO', 'TROCA CONCLUIDA', 'DEVOLUÇÃO CONCLUÍDA'];
+        const statusRequerEstoque = ['CANCELADO', 'REPROVADO', 'TROCA CONCLUIDA', 'DEVOLUCAO CONCLUIDA'];
 
         let result;
 
@@ -451,6 +452,12 @@ module.exports.postAtualizarStatus = async (req, res) => {
                 cupomData.nome,
                 cupomData.data
             );
+
+            cancelarTransacaoAssociada(tra_id);
+        }
+
+        if (novoStatus === 'DEVOLUCAO CONCLUIDA') {
+            cancelarTransacaoAssociada(tra_id);
         }
 
         let mensagem = `A sua transação do dia ${transacao.tra_data_formatada} de valor R$ ${transacao.tra_subtotal} foi `;
@@ -483,16 +490,16 @@ module.exports.postAtualizarStatus = async (req, res) => {
             case 'TROCA CONCLUIDA':
                 mensagem += `TROCA CONCLUÍDA! Um Cupom de Troca de R$ ${transacao.tra_subtotal} foi gerado.`;
                 break;
-            case 'DEVOLUÇÃO CANCELADA':
+            case 'DEVOLUCAO CANCELADA':
                 mensagem += 'DEVOLUÇÃO CANCELADA!';
                 break;
-            case 'DEVOLUÇÃO RECUSADA':
+            case 'DEVOLUCAO RECUSADA':
                 mensagem += 'DEVOLUÇÃO RECUSADA!';
                 break;
-            case 'DEVOLUÇÃO APROVADA':
+            case 'DEVOLUCAO APROVADA':
                 mensagem += 'DEVOLUÇÃO APROVADA!';
                 break;
-            case 'DEVOLUÇÃO CONCLUÍDA':
+            case 'DEVOLUCAO CONCLUIDA':
                 mensagem += 'DEVOLUÇÃO CONCLUÍDA!';
                 break;
             default:
