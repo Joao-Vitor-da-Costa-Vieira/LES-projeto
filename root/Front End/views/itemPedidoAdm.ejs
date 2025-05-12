@@ -59,7 +59,8 @@
             </table>
         </div>
 
-        <div class="table_div">
+        <% if (endereco) { %>
+            <div class="table_div">
             <table>
                 <thead>
                     <tr>
@@ -81,8 +82,11 @@
                 </tbody>
             </table>
         </div>
-
-        <div class="table_div">
+        <% } else { %>
+        <% } %>
+        
+        <% if (endereco) { %>
+            <div class="table_div">
             <table>
                 <thead>
                     <tr>
@@ -118,6 +122,9 @@
                 </tbody>
             </table>
         </div>
+        <% } else { %>
+        <% } %>
+        
 
         <div class="table_div">
             <table>
