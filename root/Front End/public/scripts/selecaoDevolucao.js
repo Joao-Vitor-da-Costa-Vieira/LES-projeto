@@ -142,7 +142,7 @@ document.getElementById('devolver')?.addEventListener('click', function(e) {
             itens: itensTroca,
             subtotal,
             tra_id: tra_id[0],
-            end_id: end_id[0]
+            end_id: end_id
         })
     })
     .then(response => {
