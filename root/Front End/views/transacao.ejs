@@ -134,7 +134,7 @@
                         <td>R$ <%= forma.fpg_valor %></td>
                         <td>
                             <% if (forma.cartao) { %>
-                                **** **** **** <%= forma.cartao.numero %>
+                                <%= forma.cartao.numero %>
                             <% } else { %>
                                 N/A
                             <% } %>
