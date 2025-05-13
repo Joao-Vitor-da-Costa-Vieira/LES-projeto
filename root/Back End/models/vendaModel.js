@@ -476,16 +476,15 @@ async function verificarTransacaoAssociada(tra_id) {
     const [trocas] = await db.query(`SELECT * from transacoes WHERE tra_id_original = ? AND tra_status = 'TROCA CONCLUIDA'`, [tra_id]);
     const [devolucoes] = await db.query(`SELECT * from transacoes WHERE tra_id_original = ? AND tra_status = 'DEVOLUCAO CONCLUIDA'`, [tra_id]);
 
-    if(!devolucoes){
-        } else {
-            return 1;
+    if (devolucoes.length > 0) {
+        return 1;
     }
 
-    if(!trocas){
-        return;
-    } else{
+    if (trocas.length > 0) {
         return 2;
     }
+
+    return 0;
 }
 
 async function cancelarTransacaoAssociada(tra_id) {

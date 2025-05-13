@@ -9,6 +9,19 @@
 </head>
 <body>
 
+    <style>
+    .error-message {
+        padding: 15px;
+        background-color: #ffebee;
+        color: #b71c1c;
+        border: 1px solid #ffcdd2;
+        border-radius: 4px;
+        margin: 20px 0;
+        position: relative;
+        z-index: 1; 
+    }
+    </style>
+
     <header>
         <nav class="main-nav">
             <a class="home-link">Home</a>
@@ -48,6 +61,14 @@
         </div>
 
         <div class="conteudo">
+            
+            <div class="conteudo">
+            <% if (errorMessage) { %>
+                <div class="error-message">
+                    <p><%= errorMessage %></p>
+                </div>
+            <% } %>
+
         <div class="bloco_titulo">
             <h1 class="titulo">Transação #<%= transacao.tra_id %></h1>
         </div>

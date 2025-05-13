@@ -149,6 +149,7 @@ module.exports.getHistorico = async (req, res) => {
 module.exports.getTransacao = async (req, res) => {
     try {
         const { tra_id } = req.query;
+        const errorMessage = req.query.error;
 
         // Buscar dados básicos da transação
         const transacao = await buscarTransacaoPorId(tra_id);
@@ -174,7 +175,8 @@ module.exports.getTransacao = async (req, res) => {
             endereco,
             formaPagamentos,
             itens,
-            notificacoes
+            notificacoes,
+            errorMessage
         });
 
     } catch (error) {
@@ -189,12 +191,14 @@ module.exports.getTroca = async (req, res) => {
         
         console.log(tra_id);
 
-        const result = verificarTransacaoAssociada(tra_id);
+        const result = await verificarTransacaoAssociada(tra_id);
 
-        if(result === 2){
-            throw new Error(
-                    `Troca de compra já realizada.`
-                );
+        console.log('result:', result);
+
+        if (result === 1) {
+            return res.redirect(`/pagamento/detalhes?tra_id=${tra_id}&error=Devolução já realizada para esta transação`);
+        } else if (result === 2) {
+            return res.redirect(`/pagamento/detalhes?tra_id=${tra_id}&error=Troca já realizada para esta transação`);
         }
 
         // Buscar transação original
@@ -243,12 +247,12 @@ module.exports.getDevolucao = async (req, res) => {
         
         console.log(tra_id);
 
-        const result = verificarTransacaoAssociada(tra_id);
+        const result = await verificarTransacaoAssociada(tra_id);
 
-        if(result === 1){
-            throw new Error(
-                    `Devolucao de compra já realizada.`
-                );
+        if (result === 1) {
+            return res.redirect(`/pagamento/detalhes?tra_id=${tra_id}&error=Devolução já realizada para esta transação`);
+        } else if (result === 2) {
+            return res.redirect(`/pagamento/detalhes?tra_id=${tra_id}&error=Troca já realizada para esta transação`);
         }
 
         // Buscar transação original
