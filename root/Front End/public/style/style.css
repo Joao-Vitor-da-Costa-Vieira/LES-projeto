@@ -709,11 +709,12 @@ input[type=submit]{
 }
 
 .notificacao-item {
-    display: flex;
+    display: grid;
     justify-content: space-between;
     align-items: center;
     padding: 10px;
     border-bottom: 2px solid #0003c8;
+    border-right: 1px solid #0003c8;
     cursor: pointer;
 }
 
@@ -722,7 +723,7 @@ input[type=submit]{
     color: white;
     border: none;
     border-radius: 25%;
-    width: 34px;
+    width: 30px;
     height: 24px;
     cursor: pointer;
     display: flex;
@@ -731,7 +732,7 @@ input[type=submit]{
 }
 
 .notificacao-excluir:hover {
-    background: #cc0000;
+    background: #fd6969;
 }
 
 /*Solicitar Troca Tabela*/
