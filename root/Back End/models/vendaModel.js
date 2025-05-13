@@ -170,7 +170,7 @@ async function buscarFormasPagamento(tra_id) {
 
 async function buscarTransacoesPrioridade() {
     return buscarTransacoesFiltradas({
-        status: ['APROVADO', 'TROCA SOLICITADA', 'DEVOLUÇÃO SOLICITADA']
+        status: ['APROVADO', 'EM TRANSPORTE', 'TROCA SOLICITADA', 'DEVOLUCAO SOLICITADA', 'TROCA APROVADA', 'DEVOLUCAO APROVADA']
     });
 }
 
