@@ -74,6 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const result = await response.json();
     
             if (response.ok) {
+                alert("Pagamento Concluído!");
                 window.location.href = `/pagamento/historico?usr_id=${usr_id}`;
             } else {
                 throw new Error(result.message || 'Erro ao processar pagamento');
