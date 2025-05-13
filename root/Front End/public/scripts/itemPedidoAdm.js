@@ -124,9 +124,11 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = '/pedidos';
         });
 
+        alert("Operação Concluída!");
+
         setTimeout(() => {
-            window.location.href = '/pedidos';
-        }, 5000);
+            window.location.href = `/pedidos-adm/detalhes?tra_id=${tra_id}`;
+        }, 1500);
     };
 
     // Fechar modais ao clicar fora
