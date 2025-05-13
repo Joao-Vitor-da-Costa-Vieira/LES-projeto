@@ -3,7 +3,7 @@ import { deletarCarrinho } from "/scripts/service/carrinhoService.js";
 
 const tabelaBody = document.querySelector('#tabela-carrinho tbody'); 
 
-function atualizarTabela(itensCarrinho) {
+function atualizarTabela(itensCarrinho, novoSubtotal) {
     tabelaBody.innerHTML = '';
 
     if (itensCarrinho.length === 0) {
@@ -27,6 +27,11 @@ function atualizarTabela(itensCarrinho) {
         `;
         tabelaBody.appendChild(row);
     });
+
+    const subtotalElement = document.querySelector('.subtotal');
+    if (subtotalElement) {
+        subtotalElement.textContent = `R$ ${novoSubtotal}`;
+    }
 }
 
 // Delegando eventos para os botões dinâmicos
@@ -112,7 +117,7 @@ tabelaBody.addEventListener('click', function(event) {
                     throw new Error(resultado.message);
                 }
                 
-                atualizarTabela(resultado.itensCarrinho);
+                atualizarTabela(resultado.itensCarrinho, resultado.subtotalTotal);
                 submenu.remove();
                 
                 const mensagemConfirmacao = document.createElement('div');
@@ -211,7 +216,7 @@ tabelaBody.addEventListener('click', function(event) {
                     throw new Error(resultado.message);
                 }
                 
-                atualizarTabela(resultado.itensCarrinho);
+                atualizarTabela(resultado.itensCarrinho, resultado.subtotalTotal);
                 submenu.remove();
                 
                 const mensagemConfirmacao = document.createElement('div');

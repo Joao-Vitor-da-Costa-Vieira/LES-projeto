@@ -91,9 +91,14 @@ module.exports.alterarCarrinho = async (req, res) => {
             })
         );
         
+        const novoSubtotal = livrosComDetalhes.reduce((total, item) => {
+            return total + (item.livro.lvr_custo * item.car_qtd_item);
+        }, 0);
+
         res.json({
             success: true,
             itensCarrinho: livrosComDetalhes,
+            subtotalTotal: novoSubtotal,
             message: 'Quantidade atualizada com sucesso'
         });
 
@@ -123,9 +128,14 @@ module.exports.deletarCarrinho = async (req, res) => {
             })
         );
         
+        const novoSubtotal = livrosComDetalhes.reduce((total, item) => {
+            return total + (item.livro.lvr_custo * item.car_qtd_item);
+        }, 0);
+
         res.json({
             success: true,
             itensCarrinho: livrosComDetalhes,
+            subtotalTotal: novoSubtotal,
             message: 'Item removido do carrinho com sucesso'
         });
     } catch (err) {
