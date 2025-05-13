@@ -151,9 +151,13 @@ document.getElementById('devolver')?.addEventListener('click', function(e) {
     })
     .then(data => {
         if (data.success) {
-            alert('Troca solicita!')
+            const usr_id = document.getElementById('user-data').dataset.userId;
+
+            alert('Devolução solicita!')
+            window.location.href = `/pagamento/historico?usr_id=${usr_id}`;
+            
         } else {
-            alert(data.message || 'Erro ao processar troca');
+            alert(data.message || 'Erro ao processar devolucao');
         }
     })
     .catch(error => {
