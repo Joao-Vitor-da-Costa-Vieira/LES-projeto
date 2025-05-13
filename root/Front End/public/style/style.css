@@ -229,7 +229,7 @@ body {
 .modal-content {
     background: white;
     padding: 2rem;
-    border-radius: 8px;
+    border: 5px solid #0003c8;
     width: 90%;
     max-width: 500px;
     min-height: 200px;
@@ -311,7 +311,7 @@ body {
 .confirmation-content {
     background: white;
     padding: 2rem;
-    border-radius: 10px;
+    border: 10px solid #0003c8;
     text-align: center;
     max-width: 400px;
 }

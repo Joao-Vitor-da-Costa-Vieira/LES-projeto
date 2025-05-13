@@ -52,19 +52,16 @@ document.addEventListener('DOMContentLoaded', () => {
         let opcoes = [];
         if (statusAtual === 'APROVADO') {
             opcoes = [
-                { texto: 'Cancelar', status: ''},
                 { texto: 'Cancelar Compra', status: 'CANCELADO' },
                 { texto: 'Confirmar Transporte', status: 'EM TRANSPORTE' }
             ];
         } else if (statusAtual === 'EM TRANSPORTE') {
             opcoes = [
-                { texto: 'Cancelar', status: '' },
                 { texto: 'Cancelar Transporte', status: 'CANCELADO' },
                 { texto: 'Confirmar Entrega', status: 'ENTREGUE' }
             ];
         } else if (statusAtual === 'TROCA SOLICITADA') {
             opcoes = [
-                { texto: 'Cancelar', status: '' },
                 { texto: 'Recusar Troca', status: 'TROCA RECUSADA' },
                 { texto: 'Aprovar Troca', status: 'TROCA APROVADA' }
             ];
@@ -75,7 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
             ];
         } else if (statusAtual === 'DEVOLUCAO SOLICITADA') {
             opcoes = [
-                { texto: 'Cancelar', status: '' },
                 { texto: 'Recusar Devolução', status: 'DEVOLUCAO RECUSADA' },
                 { texto: 'Aprovar Devolução', status: 'DEVOLUCAO APROVADA' }
             ];
