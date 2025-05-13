@@ -487,13 +487,48 @@ async function verificarTransacaoAssociada(tra_id) {
     return 0;
 }
 
-async function cancelarTransacaoAssociada(tra_id) {
-    
-    await db.query(`DELETE from transacoes WHERE tra_id_original = ? AND tra_status = 'TROCA SOLICITADA'`, [tra_id]);
-    await db.query(`DELETE from transacoes WHERE tra_id_original = ? AND tra_status = 'DEVOLUCAO SOLICITADA'`, [tra_id]);
-    await db.query(`DELETE from transacoes WHERE tra_id_original = ? AND tra_status = 'TROCA APROVADA'`, [tra_id]);
-    await db.query(`DELETE from transacoes WHERE tra_id_original = ? AND tra_status = 'DEVOLUCAO APROVADA'`, [tra_id]);
+async function cancelarTransacaoAssociada(tra_id_original) {
+    const connection = await db.getConnection();
+    try {
+        await connection.beginTransaction();
 
+        // 1. Buscar IDs das transações filhas
+        const [transacoes] = await connection.query(`
+            SELECT tra_id 
+            FROM transacoes 
+            WHERE tra_id_original = ? 
+            AND tra_status IN (
+                'TROCA SOLICITADA', 
+                'DEVOLUCAO SOLICITADA', 
+                'TROCA APROVADA', 
+                'DEVOLUCAO APROVADA'
+            )
+        `, [tra_id_original]);
+
+        const idsTransacoes = transacoes.map(t => t.tra_id);
+
+        if (idsTransacoes.length > 0) {
+            // 2. Excluir itens_de_venda relacionados
+            await connection.query(`
+                DELETE FROM itens_de_venda 
+                WHERE transacoes_tra_id IN (?)
+            `, [idsTransacoes]);
+
+            // 3. Excluir transações
+            await connection.query(`
+                DELETE FROM transacoes 
+                WHERE tra_id IN (?)
+            `, [idsTransacoes]);
+        }
+
+        await connection.commit();
+        
+    } catch (error) {
+        await connection.rollback();
+        throw error;
+    } finally {
+        connection.release();
+    }
 }
 
 module.exports = {

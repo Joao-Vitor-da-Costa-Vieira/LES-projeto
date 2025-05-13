@@ -457,11 +457,11 @@ module.exports.postAtualizarStatus = async (req, res) => {
                 cupomData.data
             );
 
-            cancelarTransacaoAssociada(transacao.tra_id_original);
+            await cancelarTransacaoAssociada(transacao.tra_id_original);
         }
 
         if (novoStatus === 'DEVOLUCAO CONCLUIDA') {
-            cancelarTransacaoAssociada(transacao.tra_id_original);
+            await cancelarTransacaoAssociada(transacao.tra_id_original);
         }
 
         let mensagem = `A sua transação do dia ${transacao.tra_data_formatada} de valor R$ ${transacao.tra_subtotal} foi `;
