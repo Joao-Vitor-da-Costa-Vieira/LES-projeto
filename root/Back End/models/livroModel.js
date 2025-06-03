@@ -32,10 +32,22 @@ async function consultaFiltroLivro(query, params){
         console.log('Executando query:', query);
         console.log('Com parâmetros:', params);
         
-        const [livros] = await db.query(query, params);
+        const [livros] = await db.query(`
+                SELECT * FROM livros
+            `);
         return livros;
     } catch (err) {
         console.error(`Erro no consultaFiltroLivro - modelLivros: ${err}`);
+        throw err;
+    }
+}
+
+async function buscarTodosLivros(query, params){
+    try {   
+        const [livros] = await db.query(query, params);
+        return livros;
+    } catch (err) {
+        console.error(`Erro no buscarTodosLivros - modelLivros: ${err}`);
         throw err;
     }
 }
@@ -86,5 +98,6 @@ module.exports = {
     consultaFiltroLivro,
     buscarLivroId,
     atualizarEstoqueLivro,
-    buscarEstoqueLivro 
+    buscarEstoqueLivro,
+    buscarTodosLivros 
 };

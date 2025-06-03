@@ -1,7 +1,8 @@
 const {
     buscarLivrosTitulo,
     consultaFiltroLivro,
-    buscarLivroId
+    buscarLivroId,
+    buscarTodosLivros
 } = require("../models/livroModel");
 
 const { 
@@ -84,6 +85,12 @@ module.exports.livroPagina = async (req, res) => {
     } catch (err) {
         console.error('Erro ao carregar página do livro:', err);
     }
+};
+
+module.exports.getApiTodosLivros = async (req, res) => {
+    const livros = buscarTodosLivros();
+
+    return res.json(livros);
 };
 
 module.exports.getApiFiltrarLivros = async (req, res) => {
