@@ -1,9 +1,9 @@
 from apis.transacoes import pedidos_contexto
 from apis.livros import livros_contexto
+from apis.usuario import buscar_usuario_por_id
 
 def formatar_usuario_contexto(usuario):
-
-    print("DEBUG - Conteúdo do usuário:", usuario)
+    
 
     if not usuario:
         return ""
@@ -27,8 +27,11 @@ def build_base_context():
     
 
 def build_chat_context(msg, usuario):
+    base_context = build_base_context()
     
     return f'''
+
+{base_context}
     
 [MENSAGEM DO USUARIO]
 {msg}

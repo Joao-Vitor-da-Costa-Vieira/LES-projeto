@@ -69,10 +69,9 @@ async function enviarMsg(userDataElement) {
         const estilo_usuario = `
             margin: 0 0 30px 20px; 
             border-radius: 20px 0px 0px 20px;
-            background-color: #F4F440;
+            background-color: white;
             color: black;
-            border: 1px dashed black;
-            border-right: none;
+            border: 1px solid black;
         `;
         p_usuario.style.cssText = estilo_usuario;
         p_usuario.innerHTML = msg;
@@ -84,15 +83,15 @@ async function enviarMsg(userDataElement) {
         //Bot
         const resposta = await obterRespostaIa(msg, usr_id);
         const p_bot = document.createElement('p');
-        const estilo_bot = 'margin: 0px 20px 30px 0;';
+        const estilo_bot = `
+            margin: 0px 20px 30px 0
+            border: #0003c8;
+            background-color: #0003c8;
+            color: white;
+        `;
         p_bot.style.cssText = estilo_bot;
         p_bot.innerHTML = resposta;
         screen.appendChild(p_bot);
-
-        historico.push({ texto: resposta, estilo: estilo_bot });
-
-        //Salva histórico no localStorage com chave do cliente
-        localStorage.setItem(chaveHistorico, JSON.stringify(historico));
 
         screen.scrollTop = screen.scrollHeight;
     });
