@@ -536,7 +536,18 @@ async function getPedidosUsuario(id) {
         const [pedidos] = await db.query(`
             SELECT * FROM transacoes WHERE usuarios_usr_id = ?
             `, [id]);
-        return pedidos;
+
+            const pedidosComItens = await Promise.all(
+            pedidos.map(async (pedido) => {
+                const itens = await buscarItensVendaPorTransacao(pedido.tra_id);
+                return {
+                    ...pedido,
+                    itens: itens
+                };
+            })
+            );
+
+          return pedidosComItens;
     } catch(error){
         console.error(`Erro no getPedidosUsuario - modelVendas: ${err}`);
         throw err
