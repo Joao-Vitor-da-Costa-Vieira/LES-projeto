@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function(){
     const chat = document.querySelector('.chat');
     const closeButton = document.querySelector('.close-chat');
     const screen = document.querySelector('.screen');
+    const userDataElement = document.getElementById('user-data');
     
     chat.style.display = 'none';
 
@@ -40,40 +41,17 @@ document.addEventListener('DOMContentLoaded', function(){
         }
     });
 
-    //Chamando Todas as funções do documento
-    enviarMsg();
-    resetarLocalStorage();
+    enviarMsg(userDataElement);
 
 });
 
 //Enviando um texto para a IA
-async function enviarMsg() {
+async function enviarMsg(userDataElement) {
     let screen = document.querySelector('.screen');
     let button = document.querySelector('#ai-button');
     let input = document.querySelector('.chat .input input');
-    const usuario = window.usuarioLogado;
 
-    //Obtendo o ID atual e todos os outros IDs com chats
-    let usr_id = JSON.parse(localStorage.getItem('usr_id')) || [];
-    let idAtual = String(usuario[0].usr_id);
-    let chaveHistorico = `chatHistorico_${idAtual}`;
-
-    //Verificando se o cliente logado foi alterado
-    if (!usr_id.includes(idAtual)) {
-        usr_id.push(idAtual);
-        localStorage.setItem('usr_id', JSON.stringify(usr_id));
-    }
-
-    //Carregando histórico salvo se existir
-    let historico = JSON.parse(localStorage.getItem(chaveHistorico)) || [];
-
-    //Renderizando todas as mensagens salvas
-    historico.forEach(msg => {
-        const p = document.createElement('p');
-        p.innerHTML = msg.texto;
-        p.style.cssText = msg.estilo;
-        screen.appendChild(p);
-    });
+    const usr_id = userDataElement ? userDataElement.dataset.userId : null;
 
     //Enviando nova mensagem
     button.addEventListener('click', async (event) => {
@@ -106,7 +84,7 @@ async function enviarMsg() {
         screen.scrollTop = screen.scrollHeight;
 
         //Bot
-        const resposta = await obterRespostaIa(msg, usuario);
+        const resposta = await obterRespostaIa(msg, usr_id);
         const p_bot = document.createElement('p');
         const estilo_bot = 'margin: 0px 20px 30px 0;';
         p_bot.style.cssText = estilo_bot;
@@ -122,26 +100,8 @@ async function enviarMsg() {
     });
 }
 
-async function resetarLocalStorage(){
-    const res = await fetch('/api/version');
-    const versaoServidor = await res.text(); 
-    const versaoAnterior = localStorage.getItem('server_version');
-
-    if (versaoAnterior && versaoAnterior !== versaoServidor) {
-
-        //Limpando histórico se o servidor reiniciou
-        const usr_id = JSON.parse(localStorage.getItem('usr_id')) || [];
-        usr_id.forEach(id => {
-            localStorage.removeItem(`chatHistorico_${id}`);
-        });
-        localStorage.setItem('usr_id', '[]');
-    }
-
-    localStorage.setItem('server_version', versaoServidor);
-}
-
 //Função que busca a resposta da IA com base em um texto
-async function obterRespostaIa(msg){
+async function obterRespostaIa(msg, usr_id){
 
     try{
         const res = await fetch('http://localhost:8000/ai/',{
@@ -149,7 +109,7 @@ async function obterRespostaIa(msg){
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({
                 msg: msg,
-                usuario: usuario  
+                usr_id: usr_id  
             })
         });
 
