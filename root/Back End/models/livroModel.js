@@ -44,7 +44,7 @@ async function consultaFiltroLivro(query, params){
 
 async function buscarTodosLivros(query, params){
     try {   
-        const [livros] = await db.query(query, params);
+        const [livros] = await db.query('SELECT * FROM livros');
         return livros;
     } catch (err) {
         console.error(`Erro no buscarTodosLivros - modelLivros: ${err}`);

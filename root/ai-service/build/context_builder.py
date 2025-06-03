@@ -2,14 +2,18 @@ from apis.transacoes import pedidos_contexto
 from apis.livros import livros_contexto
 
 def formatar_usuario_contexto(usuario):
+
+    print("DEBUG - Conteúdo do usuário:", usuario)
+
     if not usuario:
         return ""
     return (
-        f'Nome: {usuario["usr_nome"]}\n'
-        f'Genero: {usuario["usr_genero"]}\n'
-        f'Data de Nascimento: {usuario["usr_data_de_nascimento"]}\n'
-        f'Telefone: {usuario["usr_telefone"]}\n'
-        f'E-mail: {usuario["usr_email"]}\n'
+        f'Nome: {usuario.get("usr_nome", "Desconhecido")}\n'
+        f'Genero: {usuario.get("usr_genero", "Não informado")}\n'
+        f'Data de Nascimento: {usuario.get("usr_data_de_nascimento", "Não informada")}\n'
+        f'Telefone 1: {usuario.get("usr_telefone_1", "Não informado")}\n'
+        f'Telefone 2: {usuario.get("usr_telefone_2", "Não informado")}\n'
+        f'E-mail: {usuario.get("usr_email", "Não informado")}\n'
     )
 
 def build_base_context():

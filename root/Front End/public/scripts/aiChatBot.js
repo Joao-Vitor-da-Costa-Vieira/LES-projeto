@@ -74,11 +74,9 @@ async function enviarMsg(userDataElement) {
             border: 1px dashed black;
             border-right: none;
         `;
-        p_cliente.style.cssText = estilo_usuario;
-        p_cliente.innerHTML = msg;
+        p_usuario.style.cssText = estilo_usuario;
+        p_usuario.innerHTML = msg;
         screen.appendChild(p_usuario);
-
-        historico.push({ texto: msg, estilo: estilo_usuario });
 
         input.value = '';
         screen.scrollTop = screen.scrollHeight;
