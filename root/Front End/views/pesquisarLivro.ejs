@@ -196,9 +196,14 @@
     </div>
 
     <% console.log('Dados recebidos na view:', { livros, usuario }); %>
+
+    <script>
+    window.usuarioLogado = JSON.stringify(Array.isArray(usuario) ? usuario[0] : usuario);
+    </script>
     
     <!--Script do Submit-->
     <script type="module" src="/scripts/pesquisarLivro.js"></script>
     <script type="module" src="/scripts/navbar.js"></script>
+    <script type="module" src="/scripts/aiChatBot.js"></script>
 </body>
 </html>

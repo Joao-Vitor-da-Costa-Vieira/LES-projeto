@@ -127,8 +127,13 @@
         <%- JSON.stringify([endereco.end_id]) %>
         <% console.log(endereco.end_id); %>
     </script>
+
+    <script>
+    window.usuarioLogado = JSON.stringify(Array.isArray(usuario) ? usuario[0] : usuario);
+    </script>
     
     <script type="module" src="/scripts/navbar.js"></script>
     <script type="module" src="/scripts/selecaoTroca.js"></script>
+    <script type="module" src="/scripts/aiChatBot.js"></script>
 </body>
 </html>
