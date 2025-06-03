@@ -1,11 +1,9 @@
 import requests as req
-from apis.clientes import usuario_id_logado
 
 #Função que busca os pedidos do usuario
-def buscar_pedidos_usuario():
+def buscar_pedidos_usuario(usr_id):
     
     #Obtendo o id do usuario
-    usr_id = usuario_id_logado()
     url=f'http://localhost:3000/api/pedidos/usuario/{usr_id}'
     
     #Obtendo os pedidos do usuario
@@ -20,7 +18,7 @@ def buscar_pedidos_usuario():
     
 
 #Função que retorna os pedidos organizados para a IA
-def pedidos_contexto():
+def pedidos_contexto(usr_id):
     
     context = ''
     pedidos = buscar_pedidos_usuario()

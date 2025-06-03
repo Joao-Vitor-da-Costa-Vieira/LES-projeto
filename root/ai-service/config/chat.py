@@ -3,7 +3,7 @@ from google import genai
 from google.genai import types
 from dotenv import load_dotenv
 from config.system_instruction import ai_instruction
-from build.context_builder import buil_base_context
+from build.context_builder import build_base_context
 from utils.genai_retry import retry_api_call
 
 #Configurando a IA
@@ -28,7 +28,7 @@ def create_ai_chat():
     chat = client.chats.create(model=model, config=chat_config)
     
     #Configurando os dados para a IA
-    retry_api_call(lambda: chat.send_message(buil_base_context()))
+    retry_api_call(lambda: chat.send_message(build_base_context()))
     
     #Retornando o chat configurado
     return chat
