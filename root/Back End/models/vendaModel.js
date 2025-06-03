@@ -531,6 +531,18 @@ async function cancelarTransacaoAssociada(tra_id_original) {
     }
 }
 
+async function getPedidosUsuario(id) {
+    try{
+        const [pedidos] = await db.query(`
+            SELECT * FROM transacoes WHERE usuarios_usr_id = ?
+            `, [id]);
+        return pedidos;
+    } catch(error){
+        console.error(`Erro no getPedidosUsuario - modelVendas: ${err}`);
+        throw err
+    }
+}
+
 module.exports = {
     processarPagamentoCompleto,
     buscarTransacaoId,
@@ -547,5 +559,6 @@ module.exports = {
     criarTroca,
     criarDevolucao,
     verificarTransacaoAssociada,
-    cancelarTransacaoAssociada
+    cancelarTransacaoAssociada,
+    getPedidosUsuario
 };

@@ -15,6 +15,7 @@ router.post('/pagamento/confirmar',vendasController.postPagamento);
 router.post('/trocas/confirmar',vendasController.postTroca);
 router.post('/devolucoes/confirmar',vendasController.postDevolucao);
 
+router.get('/api/pedidos/usuario/:usr_id', vendasController.getApiPedidosUsuario);
 router.get('/api/pedidos/filtrar', vendasController.filtrarPedidos);
 router.post('/api/pedidos-atualizar/status', vendasController.postAtualizarStatus);
 

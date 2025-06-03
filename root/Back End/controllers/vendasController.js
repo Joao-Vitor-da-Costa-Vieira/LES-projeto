@@ -12,7 +12,8 @@ const {
     criarDevolucao,
     verificarTransacaoAssociada,
     atualizarStatusEReporEstoque,
-    cancelarTransacaoAssociada
+    cancelarTransacaoAssociada,
+    getPedidosUsuario
 } = require("../models/vendaModel");
 
 const {
@@ -317,6 +318,14 @@ module.exports.getPedidos = async (req, res) => {
         console.error('Erro ao carregar pedidos:', error);
         res.status(500).send('Erro ao carregar pedidos');
     }
+};
+
+module.exports.getApiPedidosUsuario = async (req, res) => {
+    const { usr_id } = req.params.usr_id;
+
+    const pedidos = getPedidosUsuario(usr_id);
+
+    return res.json(pedidos);
 };
 
 module.exports.getPedidoItem = async (req, res) => {
