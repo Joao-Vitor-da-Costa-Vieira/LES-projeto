@@ -4,6 +4,7 @@ from pydantic import BaseModel
 from config.chat import create_ai_chat
 from build.context_builder import build_chat_context
 from utils.genai_retry import retry_api_call
+from apis.usuario import buscar_usuario_por_id
 
 #Criando o app do FastAPI
 app = FastAPI()
@@ -18,20 +19,21 @@ app.add_middleware(
 )
 
 #Guardando os chats dos clientes
-chats_por_cliente = {}
+chats_por_usuario = {}
 
 #Criando um modelo para receber a msg do Cliente
 class PerguntaComUsuario(BaseModel):
     msg: str
-    usuario: dict 
+    usr_id: int 
 
 #Criando um endpoint
 @app.post('/ai')
 def chatbot(pergunta: PerguntaComUsuario):
     global chats_por_usuario
 
-    usuario = pergunta.usuario
-    usr_id_logado = usuario['usr_id']
+    usr_id_logado = pergunta.usr_id
+
+    usuario = buscar_usuario_por_id(usr_id_logado)
     
     #Gerando msg para enviar para a IA
     mensagem_chatbot = build_chat_context(pergunta.msg, usuario)

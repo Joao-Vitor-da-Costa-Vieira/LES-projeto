@@ -4,6 +4,8 @@ node_modules/
 
 .env
 
+.__pycache__/
+
 Dockerfile
 
 venv/
