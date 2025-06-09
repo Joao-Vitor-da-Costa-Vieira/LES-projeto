@@ -7,7 +7,8 @@ def buscar_pedidos_usuario(usr_id):
     url = f'http://localhost:3000/api/pedidos/usuario/{usr_id}'
     
     # Obtendo os pedidos do usuario
-    res = req.get(url)
+    res = req.get(url, timeout=5)
+
     
     if not res.status_code == 200:
         print(f'Não foi possível obter os pedidos do usuario: {res.status_code}')
@@ -32,8 +33,11 @@ def pedidos_contexto(usr_id):
     pedidos = buscar_pedidos_usuario(usr_id)
 
     # Verificando se há pedidos para o usuario
-    if not pedidos:
-        return 'O usuário ainda não fez nenhum pedido'
+    if pedidos is None:
+        return 'Não foi possível acessar os pedidos no momento.'
+    if len(pedidos) == 0:
+        return 'O usuário ainda não fez nenhum pedido.'
+
     
     for pedido in pedidos:
         # Formata a data

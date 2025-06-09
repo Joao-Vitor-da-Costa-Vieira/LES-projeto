@@ -29,12 +29,15 @@ def livros_contexto():
     for livro in livros:
     
         context  += (
-             f"Título: {livro['lvr_titulo']}\n"
+            f"Título: {livro['lvr_titulo']}\n"
             f"Autor: {livro['atr_nome']}\n"
             f"Editora: {livro['edi_nome']}\n"
             f"Preço: R$ {livro['lvr_custo']:.2f}\n"
             f"Quantidade em estoque: {livro['lvr_qtd_estoque']}\n"
             f"Sinopse: {livro['lvr_sinopse']}\n\n"
         )
+
+    if not livros:
+         return 'Não foi possível obter a lista de livros no momento.\n\n'
         
     return str(context)
