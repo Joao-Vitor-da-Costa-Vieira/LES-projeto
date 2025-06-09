@@ -28,13 +28,13 @@ def livros_contexto():
     livros = buscar_todos_livros()
     for livro in livros:
     
-        context  += (
-            f"Título: {livro['lvr_titulo']}\n"
-            f"Autor: {livro['atr_nome']}\n"
-            f"Editora: {livro['edi_nome']}\n"
-            f"Preço: R$ {livro['lvr_custo']:.2f}\n"
-            f"Quantidade em estoque: {livro['lvr_qtd_estoque']}\n"
-            f"Sinopse: {livro['lvr_sinopse']}\n\n"
+        context += (
+            f"Título: {livro.get('lvr_titulo', 'Desconhecido')}\n"
+            f"Autor: {livro.get('autores', 'Desconhecido')}\n"
+            f"Editora: {livro.get('editoras', 'Desconhecido')}\n"
+            f"Preço: R$ {livro.get('lvr_custo', '0')}\n"
+            f"Quantidade em estoque: {livro.get('lvr_qtd_estoque', 0)}\n"
+            f"Sinopse: {livro.get('lvr_sinopse', 'Sem sinopse')}\n\n"
         )
 
     if not livros:

@@ -323,7 +323,9 @@ module.exports.getPedidos = async (req, res) => {
 module.exports.getApiPedidosUsuario = async (req, res) => {
     const { usr_id } = req.params;
 
-    const pedidos = getPedidosUsuario(usr_id);
+    const pedidos =  await getPedidosUsuario(usr_id);
+
+    console.log(pedidos);
 
     return res.json(pedidos);
 };

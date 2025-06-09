@@ -88,7 +88,9 @@ module.exports.livroPagina = async (req, res) => {
 };
 
 module.exports.getApiTodosLivros = async (req, res) => {
-    const livros = buscarTodosLivros();
+    const livros = await buscarTodosLivros();
+
+    console.log(livros);
 
     return res.json(livros);
 };

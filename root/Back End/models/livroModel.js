@@ -42,15 +42,47 @@ async function consultaFiltroLivro(query, params){
     }
 }
 
-async function buscarTodosLivros(query, params){
-    try {   
-        const [livros] = await db.query('SELECT * FROM livros');
-        return livros;
-    } catch (err) {
-        console.error(`Erro no buscarTodosLivros - modelLivros: ${err}`);
-        throw err;
-    }
+async function buscarTodosLivros() {
+  try {
+    const sql = `
+      SELECT 
+        l.lvr_id,
+        l.lvr_ano,
+        l.lvr_titulo,
+        l.lvr_edicao,
+        l.lvr_isbn,
+        l.lvr_numero_de_paginas,
+        l.lvr_sinopse,
+        l.lvr_altura,
+        l.lvr_largura,
+        l.lvr_peso,
+        l.lvr_profundidade,
+        l.lvr_codigo_de_barras,
+        l.lvr_ponteiro_imagem,
+        l.lvr_status,
+        l.lvr_qtd_estoque,
+        l.lvr_custo,
+        l.lvr_desconto,
+        l.lvr_justificativa,
+        l.grupo_de_precificacao_grp_id,
+        GROUP_CONCAT(DISTINCT a.atr_nome SEPARATOR ', ') AS autores,
+        GROUP_CONCAT(DISTINCT e.edi_nome SEPARATOR ', ') AS editoras
+      FROM livros l
+      LEFT JOIN escreveu es ON l.lvr_id = es.livros_lvr_id
+      LEFT JOIN autor a ON es.autor_atr_id = a.atr_id
+      LEFT JOIN editou ed ON l.lvr_id = ed.livros_lvr_id
+      LEFT JOIN editora e ON ed.editora_edi_id = e.edi_id
+      GROUP BY l.lvr_id
+    `;
+
+    const [livros] = await db.query(sql);
+    return livros;
+  } catch (err) {
+    console.error(`Erro no buscarTodosLivros - modelLivros: ${err}`);
+    throw err;
+  }
 }
+
 
 async function buscarLivroId(lvr_id) {
     try {

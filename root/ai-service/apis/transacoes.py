@@ -50,8 +50,8 @@ def pedidos_contexto(usr_id):
             f'Número do Pedido: {pedido["tra_id"]}\n'
             f'Data do Pedido: {data_formatada}\n'
             f'Status do Pedido: {pedido["tra_status"]}\n'
-            f'Valor Total: R$ {pedido["tra_valor"]:.2f}\n'
-            f'Valor do Frete: R$ {pedido["tra_valor_frete"]:.2f}\n'
+            f'Valor Total: R$ {pedido["tra_valor"]}\n'
+            f'Valor do Frete: R$ {pedido["tra_valor_frete"]}\n'
             f'Quantidade Total de Itens: {quantidade_total}\n'
         )
         
@@ -62,7 +62,7 @@ def pedidos_contexto(usr_id):
                 context += (
                     f'  - Livro: {item["lvr_titulo"]}\n'
                     f'    Quantidade: {item["itv_qtd_item"]}\n'
-                    f'    Preço Unitário: R$ {item["lvr_custo"]:.2f}\n'
+                    f'    Preço Unitário: R$ {item["lvr_custo"]}\n'
                 )
         
         context += "\n"  # Espaço entre pedidos

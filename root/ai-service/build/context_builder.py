@@ -17,6 +17,7 @@ def build_chat_context(msg, usuario):
     base_context = build_base_context()
     usr_id = usuario.get('usr_id') if usuario else None
     pedidos = pedidos_contexto(usr_id) if usr_id else 'Usuário não encontrado ou sem pedidos.'
+    usuario_info = usuario_contexto(usuario) if usuario else 'Usuário não encontrado.'
     return f'''
 
 {base_context}
@@ -25,9 +26,9 @@ def build_chat_context(msg, usuario):
 {msg}
 
 [DADOS DO USUARIO]
-{usuario_contexto(usuario)}
+{usuario_info}
 
 [PEDIDOS DO USUARIO]
-{pedidos_contexto(pedidos)}
+{pedidos}
 
 '''
