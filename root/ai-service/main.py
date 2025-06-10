@@ -4,7 +4,7 @@ from pydantic import BaseModel
 from config.chat import create_ai_chat
 from build.context_builder import build_chat_context
 from utils.genai_retry import retry_api_call
-from apis.usuario import buscar_usuario_por_id
+from usuario import buscar_usuario_por_id
 
 #Criando o app do FastAPI
 app = FastAPI()

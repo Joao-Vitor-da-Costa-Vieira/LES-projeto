@@ -1,6 +1,6 @@
-from apis.transacoes import pedidos_contexto
-from apis.livros import livros_contexto
-from apis.usuario import usuario_contexto
+from transacoes import pedidos_contexto
+from livros import livros_contexto
+from usuario import usuario_contexto
 
 
 def build_base_context():
