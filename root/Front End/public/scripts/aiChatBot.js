@@ -67,7 +67,7 @@ async function enviarMsg(userDataElement) {
         //Usuario
         const p_usuario = document.createElement('p');
         const estilo_usuario = `
-            margin: 0 0 30px 20px; 
+            margin: 0 0 30px 10px; 
             border-radius: 20px 0px 0px 20px;
             background-color: white;
             color: black;
@@ -84,7 +84,7 @@ async function enviarMsg(userDataElement) {
         const resposta = await obterRespostaIa(msg, usr_id);
         const p_bot = document.createElement('p');
         const estilo_bot = `
-            margin: 0px 20px 30px 0
+            margin: 0px 0px 30px 10px
             border: #0003c8;
             background-color: #0003c8;
             color: white;
