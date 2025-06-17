@@ -5,7 +5,7 @@ const {buscarCategorias,
 const { buscarLivrosVendidos 
 } = require('../models/livroModel');
 
-module.exports.getHistoricoVendas = async (req, res) => {
+module.exports.getAnalise = async (req, res) => {
     
     //Obtendo as categorias
     const categorias = await buscarCategorias();
