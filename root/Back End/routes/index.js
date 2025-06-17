@@ -9,6 +9,7 @@ const livroRoutes = require('./livroRoutes');
 const carrinhoRoutes = require('./carrinhoRoutes');
 const transacaoRoutes = require('./transacaoRoutes');
 const notificacaoRoutes = require('./notificacaoRoutes');
+const analiseRoutes = require('./analiseRoutes');
 
 router.use('/', telaInicialRoutes);
 router.use('/', livroRoutes);
@@ -19,6 +20,7 @@ router.use('/', usuarioRoutes);
 router.use('/', carrinhoRoutes);
 router.use('/', transacaoRoutes);
 router.use('/', notificacaoRoutes);
+router.use('/',analiseRoutes);
 
 
 module.exports = router;
