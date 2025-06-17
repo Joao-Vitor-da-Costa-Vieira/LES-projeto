@@ -449,3 +449,93 @@ INSERT INTO cupom (
     0,
     1
 );
+
+-- Transação 21 (2025-05-02)
+INSERT INTO transacoes (tra_data, tra_valor_frete, tra_status, tra_valor, tra_desconto, tra_subtotal, enderecos_entrega_end_id, usuarios_usr_id) 
+VALUES ('2025-05-02 14:30:00', 12.50, 'APROVADO', 187.40, 15.00, 172.40, 1, 1);
+
+INSERT INTO itens_de_venda (itv_qtd_item, transacoes_tra_id, livros_lvr_id) VALUES
+(1, 57, 1),  -- Harry Potter e a Pedra Filosofal
+(1, 57, 5),  -- A Guerra dos Tronos
+(1, 57, 9);  -- Memórias Póstumas de Brás Cubas
+
+-- Transação 22 (2025-05-07)
+INSERT INTO transacoes (tra_data, tra_valor_frete, tra_status, tra_valor, tra_desconto, tra_subtotal, enderecos_entrega_end_id, usuarios_usr_id) 
+VALUES ('2025-05-07 10:15:00', 14.75, 'APROVADO', 221.25, 0.00, 221.25, 1, 1);
+
+INSERT INTO itens_de_venda (itv_qtd_item, transacoes_tra_id, livros_lvr_id) VALUES
+(1, 22, 3),  -- O Iluminado
+(1, 22, 7),  -- Assassinato no Expresso do Oriente
+(1, 22, 11); -- A Hora da Estrela
+
+-- Transação 23 (2025-05-12)
+INSERT INTO transacoes (tra_data, tra_valor_frete, tra_status, tra_valor, tra_desconto, tra_subtotal, enderecos_entrega_end_id, usuarios_usr_id) 
+VALUES ('2025-05-12 16:45:00', 11.20, 'APROVADO', 203.60, 20.00, 183.60, 1, 1);
+
+INSERT INTO itens_de_venda (itv_qtd_item, transacoes_tra_id, livros_lvr_id) VALUES
+(1, 23, 2),  -- Harry Potter e a Câmara Secreta
+(1, 23, 6),  -- A Fúria dos Reis
+(1, 23, 10); -- Dom Casmurro
+
+-- Transação 24 (2025-05-18)
+INSERT INTO transacoes (tra_data, tra_valor_frete, tra_status, tra_valor, tra_desconto, tra_subtotal, enderecos_entrega_end_id, usuarios_usr_id) 
+VALUES ('2025-05-18 09:30:00', 16.30, 'APROVADO', 254.80, 0.00, 254.80, 1, 1);
+
+INSERT INTO itens_de_venda (itv_qtd_item, transacoes_tra_id, livros_lvr_id) VALUES
+(1, 24, 4),  -- It - A Coisa
+(1, 24, 8),  -- E Não Sobrou Nenhum
+(1, 24, 12); -- A Paixão Segundo G.H.
+
+-- Transação 25 (2025-05-22)
+INSERT INTO transacoes (tra_data, tra_valor_frete, tra_status, tra_valor, tra_desconto, tra_subtotal, enderecos_entrega_end_id, usuarios_usr_id) 
+VALUES ('2025-05-22 13:20:00', 13.90, 'APROVADO', 178.30, 10.00, 168.30, 1, 1);
+
+INSERT INTO itens_de_venda (itv_qtd_item, transacoes_tra_id, livros_lvr_id) VALUES
+(1, 25, 1),  -- Harry Potter e a Pedra Filosofal
+(1, 25, 8),  -- E Não Sobrou Nenhum
+(1, 25, 11); -- A Hora da Estrela
+
+-- Transação 26 (2025-05-27)
+INSERT INTO transacoes (tra_data, tra_valor_frete, tra_status, tra_valor, tra_desconto, tra_subtotal, enderecos_entrega_end_id, usuarios_usr_id) 
+VALUES ('2025-05-27 15:10:00', 15.25, 'APROVADO', 232.75, 25.00, 207.75, 1, 1);
+
+INSERT INTO itens_de_venda (itv_qtd_item, transacoes_tra_id, livros_lvr_id) VALUES
+(1, 26, 3),  -- O Iluminado
+(1, 26, 5),  -- A Guerra dos Tronos
+(1, 26, 9);  -- Memórias Póstumas de Brás Cubas
+
+-- Transação 27 (2025-06-03)
+INSERT INTO transacoes (tra_data, tra_valor_frete, tra_status, tra_valor, tra_desconto, tra_subtotal, enderecos_entrega_end_id, usuarios_usr_id) 
+VALUES ('2025-06-03 11:40:00', 10.50, 'APROVADO', 195.50, 0.00, 195.50, 1, 1);
+
+INSERT INTO itens_de_venda (itv_qtd_item, transacoes_tra_id, livros_lvr_id) VALUES
+(1, 27, 2),  -- Harry Potter e a Câmara Secreta
+(1, 27, 7),  -- Assassinato no Expresso do Oriente
+(1, 27, 12); -- A Paixão Segundo G.H.
+
+-- Transação 28 (2025-06-08)
+INSERT INTO transacoes (tra_data, tra_valor_frete, tra_status, tra_valor, tra_desconto, tra_subtotal, enderecos_entrega_end_id, usuarios_usr_id) 
+VALUES ('2025-06-08 14:00:00', 18.40, 'APROVADO', 273.90, 30.00, 243.90, 1, 1);
+
+INSERT INTO itens_de_venda (itv_qtd_item, transacoes_tra_id, livros_lvr_id) VALUES
+(1, 28, 4),  -- It - A Coisa
+(1, 28, 6),  -- A Fúria dos Reis
+(1, 28, 10); -- Dom Casmurro
+
+-- Transação 29 (2025-06-14)
+INSERT INTO transacoes (tra_data, tra_valor_frete, tra_status, tra_valor, tra_desconto, tra_subtotal, enderecos_entrega_end_id, usuarios_usr_id) 
+VALUES ('2025-06-14 10:25:00', 12.80, 'APROVADO', 206.70, 15.00, 191.70, 1, 1);
+
+INSERT INTO itens_de_venda (itv_qtd_item, transacoes_tra_id, livros_lvr_id) VALUES
+(1, 29, 1),  -- Harry Potter e a Pedra Filosofal
+(1, 29, 3),  -- O Iluminado
+(1, 29, 12); -- A Paixão Segundo G.H.
+
+-- Transação 30 (2025-06-20)
+INSERT INTO transacoes (tra_data, tra_valor_frete, tra_status, tra_valor, tra_desconto, tra_subtotal, enderecos_entrega_end_id, usuarios_usr_id) 
+VALUES ('2025-06-20 16:30:00', 14.20, 'APROVADO', 224.20, 0.00, 224.20, 1, 1);
+
+INSERT INTO itens_de_venda (itv_qtd_item, transacoes_tra_id, livros_lvr_id) VALUES
+(1, 30, 5),  -- A Guerra dos Tronos
+(1, 30, 8),  -- E Não Sobrou Nenhum
+(1, 30, 11); -- A Hora da Estrela
