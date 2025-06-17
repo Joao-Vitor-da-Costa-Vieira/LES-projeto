@@ -557,11 +557,28 @@ async function getPedidosUsuario(id) {
 async function buscarCategorias(){
     
     try{
-        const [categorias] = await db.query(`SELECT * from categoria`);
+        const [categorias] = await db.query(`SELECT * FROM categoria`);
 
         return categorias;
     } catch(error){
         console.error(`Erro no buscarCategorias - modelVendas: ${err}`);
+        throw err
+    }
+}
+
+async function buscarDatasVendas(){
+    try{
+        const [datas] = await db.query(`
+        SELECT distinct
+        tra_data data_venda
+        FROM 
+        transacoes
+        ORDER BY
+	    vnd_data;`);
+
+        return datas;
+    } catch(error){
+        console.error(`Erro no buscarDatasVendas - modelVendas: ${err}`);
         throw err
     }
 }
@@ -584,5 +601,6 @@ module.exports = {
     verificarTransacaoAssociada,
     cancelarTransacaoAssociada,
     getPedidosUsuario,
-    buscarCategorias
+    buscarCategorias,
+    buscarDatasVendas
 };
