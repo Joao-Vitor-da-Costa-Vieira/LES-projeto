@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="icon" href="/imagens/livro-16.ico">
+</head>
+<body>
+
+    <header>
+        <nav class="main-nav">
+            <a href="/home-adm" class="home-link">Home</a>
+            <div class="nav-botao">
+                <button>Clientes</button>
+                <button>Livros</button>
+            </div>
+        </nav>
+        
+        <nav class="usuario-nav">
+            <div class="usuario-sessao">
+                <span class="usuario-nome">Adm</span>
+                <img src="/imagens/graficoLinha.PNG" alt="Imagem do usuário" class="usuario-imagem">
+            </div>
+        </nav>
+    </header>
+
+    <div class="main">
+        <!--Barra lateral de Navegação-->
+        <div class="sidenav">
+            <a href="/pedidos">Pedidos</a>
+            <a href="/">Estoque</a>
+            <a href="/analise">Análise</a>
+        </div>
+
+        <!--Div usada para centralizar o conteudo para da página além da barra lateral-->
+        <div class="conteudo">
+            <div class="bloco_titulo">
+                <h1 class="titulo">Analise</h1>
+            </div>
+
+            <br>
+
+            <!--Input de Categoria-->
+            <div class="categoria">
+                <label class="label2" for="categoria">Categoria 1</label>
+                <input class="categoria_input" type="text" id="categoria" name="categoria" required>
+            </div>
+            
+            <!--Input de Título-->
+            <div class="livro">
+                <label class="label2" for="livro">Título 1</label>
+                <input class="livro_input" type="text" id="livro" name="livro" required>
+            </div>
+
+            <br>
+
+            <!--Input de Categoria-->
+            <div class="categoria">
+                <label class="label2" for="categoria">Categoria 2</label>
+                <input class="categoria_input" type="text" id="categoria" name="categoria" required>
+            </div>
+            
+            <!--Input de Título-->
+            <div class="livro">
+                <label class="label2" for="livro">Título 2</label>
+                <input class="livro_input" type="text" id="livro" name="livro" required>
+            </div>
+
+            <br>
+
+            <!--Input de data-->
+            <div class="linha_centralizada">
+                <div class="data_div">
+                    <label class="label_pequena" for="data_nascimento">Data Inicio</label>
+                    <input type="date" id="data_inicio" name="data_inicio" required>
+                </div>
+
+                <div class="data_div">
+                    <label class="label_pequena" for="data_nascimento">Data Final</label>
+                    <input type="date" id="data_final" name="data_final" required>
+                </div>
+            </div>
+
+            <div class="botoes">
+                <button class="atualizar" type="button" id="atualizar">Gerar Analise de Vendas</button>
+            </div>
+
+            <br>
+            
+            <div class="table_div">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 400px;"></th>
+                            <th style="width: 300px;">Auto-Ajuda</th>
+                            <th style="width: 300px;">Fantasia</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Total de Vendas</td>
+                            <td>152</td>
+                            <td>146</td>
+                        </tr>
+                        <tr>
+                            <td>Aumento de Vendas Mensal no Período (%)</td>
+                            <td>67%</td>
+                            <td>25%</td>
+                        </tr>
+                        <tr>
+                            <td>Média de Vendas Mensal no Período</td>
+                            <td>30,4</td>
+                            <td>29,2</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <br>
+
+            <div class="linha_centralizada">
+                <img src="graficoLinha.PNG" alt="Imagem centralizada">
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>
