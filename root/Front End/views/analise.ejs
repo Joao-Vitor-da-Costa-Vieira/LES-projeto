@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/style/style.css">
     <link rel="icon" href="/imagens/livro-16.ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 <body>
 
@@ -36,94 +38,58 @@
         <!--Div usada para centralizar o conteudo para da página além da barra lateral-->
         <div class="conteudo">
             <div class="bloco_titulo">
-                <h1 class="titulo">Analise</h1>
+                <h1 class="titulo">Analise de Histórico de Vendas</h1>
             </div>
 
-            <br>
-
-            <!--Input de Categoria-->
-            <div class="categoria">
-                <label class="label2" for="categoria">Categoria 1</label>
-                <input class="categoria_input" type="text" id="categoria" name="categoria" required>
-            </div>
-            
-            <!--Input de Título-->
-            <div class="livro">
-                <label class="label2" for="livro">Título 1</label>
-                <input class="livro_input" type="text" id="livro" name="livro" required>
-            </div>
-
-            <br>
-
-            <!--Input de Categoria-->
-            <div class="categoria">
-                <label class="label2" for="categoria">Categoria 2</label>
-                <input class="categoria_input" type="text" id="categoria" name="categoria" required>
-            </div>
-            
-            <!--Input de Título-->
-            <div class="livro">
-                <label class="label2" for="livro">Título 2</label>
-                <input class="livro_input" type="text" id="livro" name="livro" required>
-            </div>
-
-            <br>
-
-            <!--Input de data-->
-            <div class="linha_centralizada">
-                <div class="data_div">
-                    <label class="label_pequena" for="data_nascimento">Data Inicio</label>
-                    <input type="date" id="data_inicio" name="data_inicio" required>
-                </div>
-
-                <div class="data_div">
-                    <label class="label_pequena" for="data_nascimento">Data Final</label>
-                    <input type="date" id="data_final" name="data_final" required>
+             <div class="box data">
+                <h2 class="title-periodo">Período</h2>
+                <label for="data-range">Selecione um Período</label>
+                <input id="data-range" type="text" placeholder="Clique aqui..." class="form-control">
+                <div class="btns">
+                    <div class="btn-flt-data">
+                        <a href="">Filtrar</a>
+                    </div>
+                    <div class="btn-clean-periodo">
+                        <a href="">Limpar</a>
+                    </div>
                 </div>
             </div>
 
-            <div class="botoes">
-                <button class="atualizar" type="button" id="atualizar">Gerar Analise de Vendas</button>
+            <div class="box categorias">
+                <h2 class="title-categorias">Categorias</h2>
+                <label for="categorias-filtro">Selecione as Categorias</label>
+                <select name="categorias-filtro" id="categorias-filtro" multiple>
+
+                    <% categorias.forEach(cat => { %>
+                        <option value="<%=cat.cat_id%>"><%=cat.cat_nome%></option>
+                    <% }); %>
+
+                </select>
+
+                <div class="btns">
+                    <div class="btn-flt-cat">
+                        <a href="">Filtrar</a>
+                    </div>
+                    <div class="btn-clean-cat">
+                        <a href="">Limpar</a>
+                    </div>
+                </div>
             </div>
-
-            <br>
-            
-            <div class="table_div">
-                <table>
-                    <thead>
-                        <tr>
-                            <th style="width: 400px;"></th>
-                            <th style="width: 300px;">Auto-Ajuda</th>
-                            <th style="width: 300px;">Fantasia</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Total de Vendas</td>
-                            <td>152</td>
-                            <td>146</td>
-                        </tr>
-                        <tr>
-                            <td>Aumento de Vendas Mensal no Período (%)</td>
-                            <td>67%</td>
-                            <td>25%</td>
-                        </tr>
-                        <tr>
-                            <td>Média de Vendas Mensal no Período</td>
-                            <td>30,4</td>
-                            <td>29,2</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <br>
-
-            <div class="linha_centralizada">
-                <img src="graficoLinha.PNG" alt="Imagem centralizada">
+          
+            <h2 class="title">Análise do Histórico de Vendas</h2>
+            <div class="grafico">
+                <div id="historico-vendas"></div>
             </div>
             
         </div>
     </div>
+
+    <!-- CDNs -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
+
+    <script type="module" src="/javaScript/pages/analise/historicoVendas.js"></script>
 </body>
 </html>
