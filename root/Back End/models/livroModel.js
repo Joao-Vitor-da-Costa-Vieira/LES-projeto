@@ -112,12 +112,14 @@ async function atualizarEstoqueLivro(livroId, novaQuantidade) {
     );
 }
 
-async function buscarLivrosVendidos (dados) {
-    const cat_ids = dados.cat_ids;
+async function buscarLivrosVendidos(dados) {
+    // Garante que cat_ids seja um array (mesmo se vier como número, string única ou undefined)
+    const cat_ids = Array.isArray(dados.cat_ids) 
+        ? dados.cat_ids 
+        : (dados.cat_ids ? [dados.cat_ids] : []);
+
     const inicio = dados.inicio;
     const fim = dados.fim;
-
-    const db = await getDb();
 
     let sql = `
         SELECT
@@ -137,23 +139,23 @@ async function buscarLivrosVendidos (dados) {
     const condicoes = [];
     const valores = [];
 
-    // Filtrar por categorias
-    if (cat_ids && cat_ids.length > 0) {
+    // Filtro por categorias (só aplica se houver IDs)
+    if (cat_ids.length > 0) {
         const placeholders = cat_ids.map(() => '?').join(',');
         condicoes.push(`cat.cat_id IN (${placeholders})`);
         valores.push(...cat_ids);
     }
 
-    // Filtrar por data
+    // Filtro por data (ajuste para datas únicas)
     if (inicio && fim) {
         condicoes.push(`t.tra_data BETWEEN ? AND ?`);
         valores.push(`${inicio} 00:00:00`, `${fim} 23:59:59`);
     } else if (inicio) {
-        condicoes.push(`t.tra_data BETWEEN ? AND ?`);
+        condicoes.push(`t.tra_data >= ? AND t.tra_data <= ?`);
         valores.push(`${inicio} 00:00:00`, `${inicio} 23:59:59`);
     }
 
-    // Aplicar condições
+    // Combina condições
     if (condicoes.length > 0) {
         sql += ' WHERE ' + condicoes.join(' AND ');
     }
@@ -172,7 +174,7 @@ async function buscarLivrosVendidos (dados) {
         const [livros] = await db.query(sql, valores);
         return livros;
     } catch (err) {
-        console.error(`Erro no buscarLivrosVendidos - modelHistoricoVendas: ${err}`);
+        console.error(`Erro no buscarLivrosVendidos - livroModel: ${err}`);
         throw err;
     }
 }
