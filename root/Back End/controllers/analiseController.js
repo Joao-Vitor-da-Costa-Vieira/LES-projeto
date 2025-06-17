@@ -2,6 +2,9 @@ const {buscarCategorias,
     buscarDatasVendas
 } = require('../models/vendaModel');
 
+const { buscarLivrosVendidos 
+} = require('../models/livroModel');
+
 module.exports.getHistoricoVendas = async (req, res) => {
     
     //Obtendo as categorias
@@ -28,4 +31,20 @@ module.exports.getApiDatasVendas = async (req, res) => {
 
     //Retornando os dados
     return res.json(datas);
+};
+
+module.exports.getApiLivrosVendas = async (req, res) => {
+    
+    //Preparando os dados dos filtros
+    const dados = {
+        cat_ids: req.query.cat_id,
+        inicio: req.query.inicio,
+        fim: req.query.fim
+    }
+    
+    //Buscando todos os dados dos livros para análise
+    let livros = await buscarLivrosVendidos(dados);
+
+    //Retornando dados json
+    return res.json(livros);
 };
