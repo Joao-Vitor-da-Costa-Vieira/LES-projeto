@@ -554,6 +554,18 @@ async function getPedidosUsuario(id) {
     }
 }
 
+async function buscarCategorias(){
+    
+    try{
+        const [categorias] = await db.query(`SELECT * from categoria`);
+
+        return categorias;
+    } catch(error){
+        console.error(`Erro no buscarCategorias - modelVendas: ${err}`);
+        throw err
+    }
+}
+
 module.exports = {
     processarPagamentoCompleto,
     buscarTransacaoId,
@@ -571,5 +583,6 @@ module.exports = {
     criarDevolucao,
     verificarTransacaoAssociada,
     cancelarTransacaoAssociada,
-    getPedidosUsuario
+    getPedidosUsuario,
+    buscarCategorias
 };
