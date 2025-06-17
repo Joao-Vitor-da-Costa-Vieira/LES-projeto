@@ -112,11 +112,77 @@ async function atualizarEstoqueLivro(livroId, novaQuantidade) {
     );
 }
 
+async function buscarLivrosVendidos (dados) {
+    const cat_ids = dados.cat_ids;
+    const inicio = dados.inicio;
+    const fim = dados.fim;
+
+    const db = await getDb();
+
+    let sql = `
+        SELECT
+            l.lvr_id,
+            l.lvr_titulo,
+            cat.cat_id,
+            SUM(itv.itv_qtd_item) AS total_vendido,
+            DATE(t.tra_data) AS data_venda
+        FROM 
+            itens_de_venda itv
+        INNER JOIN transacoes t ON itv.transacoes_tra_id = t.tra_id
+        INNER JOIN livros l ON itv.livros_lvr_id = l.lvr_id
+        INNER JOIN possui4 p ON l.lvr_id = p.livros_lvr_id
+        INNER JOIN categoria cat ON p.categoria_cat_id = cat.cat_id
+    `;
+
+    const condicoes = [];
+    const valores = [];
+
+    // Filtrar por categorias
+    if (cat_ids && cat_ids.length > 0) {
+        const placeholders = cat_ids.map(() => '?').join(',');
+        condicoes.push(`cat.cat_id IN (${placeholders})`);
+        valores.push(...cat_ids);
+    }
+
+    // Filtrar por data
+    if (inicio && fim) {
+        condicoes.push(`t.tra_data BETWEEN ? AND ?`);
+        valores.push(`${inicio} 00:00:00`, `${fim} 23:59:59`);
+    } else if (inicio) {
+        condicoes.push(`t.tra_data BETWEEN ? AND ?`);
+        valores.push(`${inicio} 00:00:00`, `${inicio} 23:59:59`);
+    }
+
+    // Aplicar condições
+    if (condicoes.length > 0) {
+        sql += ' WHERE ' + condicoes.join(' AND ');
+    }
+
+    sql += `
+        GROUP BY
+            l.lvr_id,
+            l.lvr_titulo,
+            cat.cat_id,
+            DATE(t.tra_data)
+        ORDER BY
+            data_venda;
+    `;
+
+    try {
+        const [livros] = await db.query(sql, valores);
+        return livros;
+    } catch (err) {
+        console.error(`Erro no buscarLivrosVendidos - modelHistoricoVendas: ${err}`);
+        throw err;
+    }
+}
+
 module.exports = {
     buscarLivrosTitulo,
     consultaFiltroLivro,
     buscarLivroId,
     atualizarEstoqueLivro,
     buscarEstoqueLivro,
-    buscarTodosLivros 
+    buscarTodosLivros,
+    buscarLivrosVendidos 
 };

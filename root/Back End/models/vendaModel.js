@@ -574,7 +574,7 @@ async function buscarDatasVendas(){
         FROM 
         transacoes
         ORDER BY
-	    vnd_data;`);
+	    tra_data;`);
 
         return datas;
     } catch(error){
