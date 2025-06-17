@@ -5,7 +5,7 @@ const analiseController = require('../controllers/analiseController');
 //Views
 router.get('/analise', analiseController.getAnalise);
 
-router.get('/api/vendas/historico', analiseController.getApiLivrosVendidos);
-router.get('/api/vendas/historico/datas', analiseController.getApiDatasComVendas);
+router.get('/api/vendas/historico', analiseController.getApiLivrosVendas);
+router.get('/api/vendas/historico/datas', analiseController.getApiDatasVendas);
 
 module.exports = router;
