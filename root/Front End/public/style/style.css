@@ -1010,13 +1010,13 @@ input[type=submit]{
     padding: 2px 5px;
 }
 
-.categorias:hover{
+/*.categorias:hover{
     border: 2px solid #1d21ff;
     border-radius: 8px;
     background-color: #1d21ff;
     color: #ffffff;
     padding: 2px 5px;
-}
+}*/
 
 .categorias-botao{
     border: 2px solid #0003c8;
@@ -2190,6 +2190,7 @@ a{
     grid-template-columns: 1fr;
     justify-items: center;
     align-items: center;
+    justify-self: center;
     width: 300px;
     padding: 20px;
     box-shadow: 0px 0px 20px #0000005b;
@@ -2197,10 +2198,11 @@ a{
     min-height: 270px;
 }
 
-.btns{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+.btns {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
 }
 
 .categorias-livros{
@@ -2249,26 +2251,48 @@ a{
     border-radius: 20px;
 }
 
-.choices__list--multiple .choices__item .choices__button:hover{
-    background-color: rgba(0, 0, 0, 0.295);
-    border-radius: 0px 20px 20px 0;
-    color: black;
-    transition: background-color 0.5s;
-}
-
-/*--------*/
-
 .box .flex-prod{
     display: flex;
 }
 
-.btn-filtro{
-    margin: 50px 0;
+.btn-filtro {
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
     text-align: center;
+    transition: all 0.2s ease;
+    margin: 5px;
+    width: 100px;
 }
 
+.btn-filtrar {
+    background-color: #4CAF50;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.btn-limpar {
+    background-color: #f1f1f1;
+    color: #333;
+    border: 1px solid #ddd;
+}
+
+.btn-filtrar:hover {
+    background-color: #45a049;
+    transform: translateY(-1px);
+}
+
+.btn-limpar:hover {
+    background-color: #e0e0e0;
+}
+
+
 .grafico #historico-vendas{
-    width: 100%;
+    width: 90%;
     justify-self: center;
     align-self: center;
     background-color: white;
