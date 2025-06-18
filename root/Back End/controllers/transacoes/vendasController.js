@@ -14,37 +14,37 @@ const {
     atualizarStatusEReporEstoque,
     cancelarTransacaoAssociada,
     getPedidosUsuario
-} = require("../models/vendaModel");
+} = require("../../models/transacoes/vendaModel");
 
 const {
     buscarItensCarrinho
-} = require("../models/carrinhoModel");
+} = require("../../models/transacoes/carrinhoModel");
 
 const {
     buscarEnderecosEntregaUsuarioId,
     buscarEnderecoEntregaPorTransacao
-} = require("../models/endEntregaModel");
+} = require("../../models/usuario/endEntregaModel");
 
 const {
     buscarCartoesUsuarioId
-} = require("../models/cartaoModel");
+} = require("../../models/usuario/cartaoModel");
 
 const { 
     buscarUsuarioId
-} = require("../models/usuarioModel");
+} = require("../../models/usuario/usuarioModel");
 
 const {
     buscarLivroId
-} = require("../models/livroModel");
+} = require("../../models/livroModel");
 
 const {buscarItensCupom,
     adicionarItemCupom
-}= require("../models/cupomModel");
+}= require("../../models/usuario/cupomModel");
 
 const { 
     adicionarNotificacao,
     buscarNotificacoes 
-} = require("../models/notificacaoModel");
+} = require("../../models/usuario/notificacaoModel");
 
 module.exports.getPagamento = async (req, res) => {
     try {

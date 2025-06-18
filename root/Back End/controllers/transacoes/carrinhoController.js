@@ -4,18 +4,18 @@ const {
     buscarItemCarrinho,
     alterarItemCarrinho,
     adicionarItemCarrinho
-} = require("../models/carrinhoModel");
+} = require("../../models/transacoes/carrinhoModelcarrinhoModel");
 
 const { 
     buscarUsuarioId
-} = require("../models/usuarioModel");
+} = require("../../models/usuario/usuarioModel");
 
 const {
     buscarLivroId
-} = require("../models/livroModel");
+} = require("../../models/livroModel");
 
 const {buscarNotificacoes
-} = require("../models/notificacaoModel");
+} = require("../../models/usuario/notificacaoModel");
 
 module.exports.getCarrinho = async (req, res) => {
     try {

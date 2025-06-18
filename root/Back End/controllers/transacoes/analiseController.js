@@ -1,9 +1,9 @@
 const {buscarCategorias,
     buscarDatasVendas
-} = require('../models/vendaModel');
+} = require('../../models/transacoes/vendaModel');
 
 const { buscarLivrosVendidos 
-} = require('../models/livroModel');
+} = require('../../models/livroModel');
 
 module.exports.getAnalise = async (req, res) => {
     
