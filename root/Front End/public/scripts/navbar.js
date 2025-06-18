@@ -1,6 +1,6 @@
 import { getHome } from "/scripts/service/telaInicialService.js";
 import { pesquisarLivroService } from "/scripts/service/livroService.js";
-import { getCarrinho } from "/scripts/service/carrinhoService.js"
+import { getCarrinho } from "/scripts/service/transacoes/carrinhoService.js"
 
 async function verificarNotificacoes(usuarioId) {
     try {
