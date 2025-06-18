@@ -1,4 +1,4 @@
-import { cadastroService } from "/scripts/service/cadastroService.js";
+import { cadastroService } from "/../scripts/service/usuario/cadastroService.js";
 
 document.getElementById('formCadastro').addEventListener('submit', async function (event) {
   event.preventDefault();

@@ -1,6 +1,6 @@
-import { buscarUsuariosAtivosService } from "/scripts/service/usuarioService.js";
-import { buscarUsuariosInativosService } from "/scripts/service/usuarioService.js";
-import { inativarUsuarioService } from "/scripts/service/usuarioService.js";
+import { buscarUsuariosAtivosService } from "/../scripts/service/usuario/usuarioService.js";
+import { buscarUsuariosInativosService } from "/../scripts/service/usuario/usuarioService.js";
+import { inativarUsuarioService } from "/../scripts/service/usuario/usuarioService.js";
 
 
 document.querySelectorAll('.atualizar').forEach(botao => {

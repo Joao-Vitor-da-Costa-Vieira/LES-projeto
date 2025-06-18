@@ -1,5 +1,5 @@
-import { buscarUsuarioIdService } from "/scripts/service/usuarioService.js";
-import { atualizarSenhaUsuarioService } from "/scripts/service/usuarioService.js";
+import { buscarUsuarioIdService } from "/../scripts/service/usuario/usuarioService.js";
+import { atualizarSenhaUsuarioService } from "/../scripts/service/usuario/usuarioService.js";
 
 
 document.querySelector('form').addEventListener('submit', async function (event) {

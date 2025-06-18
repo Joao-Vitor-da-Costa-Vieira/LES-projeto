@@ -1,4 +1,4 @@
-import { cadastrarEnderecoCobrancaService } from "/scripts/service/enderecoCobrancaService.js";
+import { cadastrarEnderecoCobrancaService } from "/../scripts/service/usuario/enderecoCobrancaService.js";
 
 // Enviando os dados para o backend
 document.querySelector('form').addEventListener('submit', async function(event) {
