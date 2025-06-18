@@ -2242,11 +2242,11 @@ a{
     border-radius: 20px;
     min-height: 40px;
     align-items: center;
-    border: 1px solid var(--preto);
+    border: 1px solid #0003c8;
 }
 
 .choices__list--multiple .choices__item{
-    background-color: var(--preto);
+    background-color: #0003c8;
     color: white;
     border-radius: 20px;
 }
