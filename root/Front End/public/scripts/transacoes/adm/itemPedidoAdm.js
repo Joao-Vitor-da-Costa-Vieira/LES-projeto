@@ -1,4 +1,4 @@
-import { atualizarStatus } from '/scripts/service/pedidosService.js';
+import { atualizarStatus } from '/../scripts/service/transacoes/pedidosService.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const btnAtualizar = document.getElementById('atualizar');

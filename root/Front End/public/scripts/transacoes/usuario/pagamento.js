@@ -1,4 +1,4 @@
-import { cadastrarEnderecoEntregaService } from "/scripts/service/enderecoEntregaService.js";
+import { cadastrarEnderecoEntregaService } from "/../scripts/service/usuario/enderecoEntregaService.js";
 
 document.addEventListener('DOMContentLoaded', function() {
     const userDataElement = document.getElementById('user-data');

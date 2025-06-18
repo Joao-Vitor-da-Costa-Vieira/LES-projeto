@@ -1,5 +1,5 @@
-import { buscarLivrosVendidoService } from "/scripts/service/livroService.js";
-import { buscarDatasVendaService } from "/scripts/service/pedidosService.js";
+import { buscarLivrosVendidoService } from "/../scripts/service/livroService.js";
+import { buscarDatasVendaService } from "/../scripts/service/transacoes/pedidosService.js";
 
 document.addEventListener('DOMContentLoaded', function(){
 

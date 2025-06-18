@@ -1,5 +1,5 @@
-import { alterarCarrinho } from "/scripts/service/carrinhoService.js";
-import { deletarCarrinho } from "/scripts/service/carrinhoService.js";
+import { alterarCarrinho } from "/../scripts/service/transacoes/carrinhoService.js";
+import { deletarCarrinho } from "/../scripts/service/transacoes/carrinhoService.js";
 
 const tabelaBody = document.querySelector('#tabela-carrinho tbody'); 
 
