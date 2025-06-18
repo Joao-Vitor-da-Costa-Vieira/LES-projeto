@@ -1,4 +1,4 @@
-const db = require('../config/db');
+const db = require('../../config/db');
 
 // Função que insere um novo usuário no banco
 async function cadastrarUsuario(dados) {

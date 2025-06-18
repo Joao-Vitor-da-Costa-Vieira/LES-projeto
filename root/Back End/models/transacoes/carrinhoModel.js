@@ -1,4 +1,4 @@
-const db = require('../config/db');
+const db = require('../../config/db');
 
 async function buscarItensCarrinho(usr_id) {
     try {

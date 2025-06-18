@@ -1,4 +1,4 @@
-const db = require('../config/db');
+const db = require('../../config/db');
 
 async function cadastrarEnderecoEntrega(dados, usr_id) {
     const sql = `INSERT INTO enderecos_entrega (

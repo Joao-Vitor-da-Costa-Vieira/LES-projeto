@@ -1,4 +1,4 @@
-const db = require('../config/db');
+const db = require('../../config/db');
 
 // Inserindo um novo cartão no banco de dados
 async function cadastrarCartao(dados) {
