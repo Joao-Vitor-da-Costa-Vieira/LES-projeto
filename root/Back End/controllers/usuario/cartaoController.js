@@ -3,7 +3,7 @@ const {
     buscarCartaoId,
     buscarCartoesUsuarioId,
     cadastrarCartao
-} = require("../models/cartaoModel");
+} = require("../../models/usuario/cartaoModel");
 
 // Views
 module.exports.getCartao = async (req, res) => {

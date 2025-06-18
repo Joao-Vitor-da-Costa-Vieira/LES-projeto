@@ -7,10 +7,10 @@ const {
 
 const { 
     buscarUsuarioId 
-} = require("../models/usuarioModel");
+} = require("../models/usuario/usuarioModel");
 
 const {buscarNotificacoes
-} = require("../models/notificacaoModel");
+} = require("../models/usuario/notificacaoModel");
 
 module.exports.pesquisarLivrosTitulo = async (req, res) => {
     try {

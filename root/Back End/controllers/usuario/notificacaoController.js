@@ -1,6 +1,6 @@
 const {buscarNotificacoes,
     apagarNotificacao
-} = require("../models/notificacaoModel");
+} = require("../../models/usuario/notificacaoModel");
 
 module.exports.getNotificacoes = async (req, res) => {
     try {

@@ -1,17 +1,17 @@
 const { cadastrarEnderecoEntrega, 
         buscarEnderecosEntregaUsuarioId, 
         atualizarEnderecoEntrega 
-} = require("../models/endEntregaModel");
+} = require("../../models/usuario/endEntregaModel");
 
 const { cadastrarEnderecoCobranca, 
         buscarEnderecosCobrancaUsuarioId, 
         atualizarEnderecoCobranca 
-} = require("../models/endCobrancaModel");
+} = require("../../models/usuario/endCobrancaModel");
 
 const { cadastrarCartao, 
         buscarCartoesUsuarioId, 
         atualizarCartao 
-}= require("../models/cartaoModel");
+}= require("../../models/usuario/cartaoModel");
 
 const { cadastrarUsuario, 
         buscarUsuarioId, 
@@ -21,7 +21,7 @@ const { cadastrarUsuario,
         buscarUsuariosInativos, 
         inativarUsuario,
         ativarUsuario 
-} = require("../models/usuarioModel");
+} = require("../../models/usuario/usuarioModel");
 
 //Views
 module.exports.getCadastro = (req, res) => {

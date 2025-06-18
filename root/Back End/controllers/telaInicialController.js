@@ -1,6 +1,6 @@
-const { buscarUsuarioId } = require("../models/usuarioModel");
-const { buscarTransacoesPrioridade } = require("../models/vendaModel");
-const {buscarNotificacoes} = require("../models/notificacaoModel");
+const { buscarUsuarioId } = require("../models/usuario/usuarioModel");
+const { buscarTransacoesPrioridade } = require("../models/transacoes/vendaModel");
+const {buscarNotificacoes} = require("../models/usuario/notificacaoModel");
 
 //Views
 module.exports.getTela = (req, res) => {

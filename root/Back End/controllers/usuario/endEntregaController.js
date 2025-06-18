@@ -3,7 +3,7 @@ const {
     buscarEnderecoEntregaId,
     buscarEnderecosEntregaUsuarioId,
     cadastrarEnderecoEntrega
-} = require("../models/endEntregaModel");
+} = require("../../models/usuario/endEntregaModel");
 
 // Views
 module.exports.getEnderecoEntrega = async (req, res) => {

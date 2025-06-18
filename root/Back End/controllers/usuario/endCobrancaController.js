@@ -3,7 +3,7 @@ const {
     buscarEnderecoCobrancaId,
     buscarEnderecosCobrancaUsuarioId,
     cadastrarEnderecoCobranca
-} = require("../models/endCobrancaModel");
+} = require("../../models/usuario/endCobrancaModel");
 
 // Views
 module.exports.getEnderecoCobranca = async (req, res) => {
