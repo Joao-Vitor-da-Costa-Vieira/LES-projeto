@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const controllerEnderecoEntrega = require('../controllers/endEntregaController');
+const controllerEnderecoEntrega = require('../../controllers/usuario/endEntregaController');
 
 // Views
 router.get('/endereco-entrega/:usr_id', controllerEnderecoEntrega.getEnderecoEntrega);

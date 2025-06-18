@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const UsuarioController = require('../controllers/usuarioController');
+const UsuarioController = require('../../controllers/usuario/usuarioController');
 
 //Views
 router.get('/cadastro', UsuarioController.getCadastro);

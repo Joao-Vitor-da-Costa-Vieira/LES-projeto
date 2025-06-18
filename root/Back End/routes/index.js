@@ -1,15 +1,15 @@
 const express = require('express');
 const router = express.Router()
-const usuarioRoutes = require('./usuarioRoutes');
-const enderecoCobrancaRoutes = require('./enderecoCobrancaRoutes');
-const enderecoEntregaRoutes = require('./enderecoEntregaRoutes');
-const cartaoRoutes = require('./cartaoRoutes');
+const usuarioRoutes = require('./usuario/usuarioRoutes');
+const enderecoCobrancaRoutes = require('./usuario/enderecoCobrancaRoutes');
+const enderecoEntregaRoutes = require('./usuario/enderecoEntregaRoutes');
+const cartaoRoutes = require('./usuario/cartaoRoutes');
 const telaInicialRoutes = require('./telaInicialRoutes');
 const livroRoutes = require('./livroRoutes');
-const carrinhoRoutes = require('./carrinhoRoutes');
-const transacaoRoutes = require('./transacaoRoutes');
-const notificacaoRoutes = require('./notificacaoRoutes');
-const analiseRoutes = require('./analiseRoutes');
+const carrinhoRoutes = require('./transacoes/carrinhoRoutes');
+const transacaoRoutes = require('./transacoes/transacaoRoutes');
+const notificacaoRoutes = require('./usuario/notificacaoRoutes');
+const analiseRoutes = require('./transacoes/analiseRoutes');
 
 router.use('/', telaInicialRoutes);
 router.use('/', livroRoutes);

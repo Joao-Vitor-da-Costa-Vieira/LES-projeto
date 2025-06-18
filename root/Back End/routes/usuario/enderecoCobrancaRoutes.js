@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const controllerEnderecoCobranca = require('../controllers/endCobrancaController');
+const controllerEnderecoCobranca = require('../../controllers/usuario/endCobrancaController');
 
 //Views
 router.get('/endereco-cobranca/:usr_id', controllerEnderecoCobranca.getEnderecoCobranca);

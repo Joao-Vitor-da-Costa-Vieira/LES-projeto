@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const controllerCartao = require('../controllers/cartaoController');
+const controllerCartao = require('../../controllers/usuario/cartaoController');
 
 // Views
 router.get('/cartao/:usr_id', controllerCartao.getCartao);

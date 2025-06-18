@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const analiseController = require('../controllers/analiseController');
+const analiseController = require('../../controllers/transacoes/analiseController');
 
 //Views
 router.get('/analise', analiseController.getAnalise);

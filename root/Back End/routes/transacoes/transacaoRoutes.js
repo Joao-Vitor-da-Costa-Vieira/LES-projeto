@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const vendasController = require('../controllers/vendasController');
+const vendasController = require('../../controllers/transacoes/vendasController');
 
 //Views
 router.get('/pagamento',vendasController.getPagamento);
