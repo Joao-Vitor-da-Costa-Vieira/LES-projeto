@@ -17,7 +17,7 @@ module.exports.pesquisarLivrosTitulo = async (req, res) => {
         const { titulo, usr_id } = req.query;
         
         if (!titulo) {
-            return res.status(400).render('pesquisarLivro', {
+            return res.status(400).render('transacoes/usuario/pesquisarLivro', {
                 livros: [],
                 usuario: null,
                 error: 'O parâmetro "titulo" é obrigatório'
@@ -36,7 +36,7 @@ module.exports.pesquisarLivrosTitulo = async (req, res) => {
             notificacoes = await buscarNotificacoes(usuario.usr_id);
         }
         
-        res.render('pesquisarLivro', {
+        res.render('transacoes/usuario/pesquisarLivro', {
             livros: livros || [],
             usuario: usuario,
             tituloPesquisado: titulo,
@@ -46,7 +46,7 @@ module.exports.pesquisarLivrosTitulo = async (req, res) => {
     } catch (err) {
         console.error('Erro ao pesquisar livros:', err);
 
-        res.status(500).render('pesquisarLivro', {
+        res.status(500).render('transacoes/usuario/pesquisarLivro', {
             livros: [],
             usuario: null,
             error: 'Erro ao carregar os livros'

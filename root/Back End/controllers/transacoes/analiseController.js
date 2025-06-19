@@ -11,7 +11,7 @@ module.exports.getAnalise = async (req, res) => {
     const categorias = await buscarCategorias();
 
     //Renderizando a página
-    return res.render('analise', {
+    return res.render('transacoes/adm/analise', {
         categorias: categorias
     });
 };

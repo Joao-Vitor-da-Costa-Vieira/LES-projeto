@@ -79,7 +79,7 @@ module.exports.getPagamento = async (req, res) => {
         
         const notificacoes = usuario ? await buscarNotificacoes(usuario.usr_id) : [];
 
-        res.render('pagamento', { 
+        res.render('transacoes/usuario/pagamento', { 
             itensCarrinho: livrosComDetalhes,
             subtotalTotal,
             enderecos: enderecos,
@@ -134,7 +134,7 @@ module.exports.getHistorico = async (req, res) => {
 
         const notificacoes = await buscarNotificacoes(usuario.usr_id);
         
-        res.render('historico', {
+        res.render('transacoes/usuario/historico', {
             usuario,
             transacoes: transacoesCompletas,
             notificacoes
@@ -170,7 +170,7 @@ module.exports.getTransacao = async (req, res) => {
 
         const notificacoes = await buscarNotificacoes(usuario.usr_id);
 
-        res.render('transacao', {
+        res.render('transacoes/usuario/transacao', {
             transacao,
             usuario,
             endereco,
@@ -227,7 +227,7 @@ module.exports.getTroca = async (req, res) => {
         const [usuario] = await buscarUsuarioId(transacaoOriginal.usuarios_usr_id);
         const notificacoes = await buscarNotificacoes(usuario.usr_id);
 
-        res.render('selecaoTroca', {
+        res.render('transacoes/adm/selecaoTroca', {
             itensVenda: itensParaTroca,
             subtotalTotal: 0,
             usuario,
@@ -281,7 +281,7 @@ module.exports.getDevolucao = async (req, res) => {
         const [usuario] = await buscarUsuarioId(transacaoOriginal.usuarios_usr_id);
         const notificacoes = await buscarNotificacoes(usuario.usr_id);
 
-        res.render('selecaoDevolucao', {
+        res.render('transacoes/adm/selecaoDevolucao', {
             itensVenda: itensParaDevolucao,
             subtotalTotal: 0,
             usuario,
@@ -310,7 +310,7 @@ module.exports.getPedidos = async (req, res) => {
             })
         );
 
-        res.render('pedidos', {
+        res.render('transacoes/adm/pedidos', {
             transacoes: transacoesComUsuarios
         });
 
@@ -352,7 +352,7 @@ module.exports.getPedidoItem = async (req, res) => {
         const [usuario] = await buscarUsuarioId(transacao.usuarios_usr_id);
         console.log('Usuário encontrado:', usuario);
 
-        res.render('itemPedidoAdm', {
+        res.render('transacoes/adm/itemPedidoAdm', {
             transacao,
             usuario,
             endereco,

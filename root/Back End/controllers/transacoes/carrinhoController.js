@@ -4,7 +4,7 @@ const {
     buscarItemCarrinho,
     alterarItemCarrinho,
     adicionarItemCarrinho
-} = require("../../models/transacoes/carrinhoModelcarrinhoModel");
+} = require("../../models/transacoes/carrinhoModel");
 
 const { 
     buscarUsuarioId
@@ -41,7 +41,7 @@ module.exports.getCarrinho = async (req, res) => {
 
         const notificacoes = usuario ? await buscarNotificacoes(usuario.usr_id) : [];
         
-        res.render('carrinho', { 
+        res.render('transacoes/usuario/carrinho', { 
             itensCarrinho: livrosComDetalhes,
             subtotalTotal,
             usuario: usuario || null,

@@ -25,7 +25,7 @@ const { cadastrarUsuario,
 
 //Views
 module.exports.getCadastro = (req, res) => {
-    res.render('cadastrarUsuario');
+    res.render('contas/usuario/cadastrarUsuario');
 };
 
 module.exports.getCadastroAtualizar = async (req, res) => {
@@ -34,7 +34,7 @@ module.exports.getCadastroAtualizar = async (req, res) => {
     const enderecosEntrega = await buscarEnderecosEntregaUsuarioId(req.params.usr_id);
     const cartoes = await buscarCartoesUsuarioId(req.params.usr_id);
 
-    res.render('atualizarUsuario', {
+    res.render('contas/usuario/atualizarUsuario', {
         usuario: usuario,
         enderecosCobranca: enderecosCobranca,
         enderecosEntrega: enderecosEntrega,
@@ -43,17 +43,17 @@ module.exports.getCadastroAtualizar = async (req, res) => {
 };
 
 module.exports.getSenha = (req, res) => {
-    res.render('senha');
+    res.render('contas/usuario/senha');
 };
 
 module.exports.getUsuariosInativos = async (req, res) => {
     const inativos = await buscarUsuariosInativos();
-    res.render('usuarioInativo', { inativos: inativos });
+    res.render('contas/adm/usuarioInativo', { inativos: inativos });
 };
 
 module.exports.getUsuariosAtivos = async (req, res) => {
     const usuarios = await buscarUsuariosAtivos();
-    res.render('consultarUsuario', { usuarios: usuarios });
+    res.render('contas/adm/consultarUsuario', { usuarios: usuarios });
 };
 
 module.exports.patchSenha = async (req, res) => {
