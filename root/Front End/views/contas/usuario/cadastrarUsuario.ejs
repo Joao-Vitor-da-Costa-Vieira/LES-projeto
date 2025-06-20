@@ -5,25 +5,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/style/style.css">
+    <link rel="icon" href="/imagens/livro-16.ico">
 </head>
 <body>
-    <!--Barra lateral de Navegação-->
-    <div class="sidenav">
-        <a href="">Menu</a>
-        <a href="cadastrarUsuario.ejs">Cadastrar</a>
-        <a href="consultarUsuario.ejs">Consultar</a>
-        <a href="atualizarUsuario.ejs">Atualizar</a>
-    </div>
 
-    <!--Div usada para centralizar o conteudo para da página além da barra lateral-->
-    <div class="conteudo">
-        <div class="bloco_titulo">
-            <h1 class="titulo">Cadastrar Usuário</h1>
+    <header>
+        <nav class="main-nav">
+            <a class="home-link">Home</a>
+            <div class="nav-botao">
+                <button>Histórico</button>
+                <button id="botao-carrinho">Carrinho</button>
+                <button>Trocas</button>
+                <button id="botao-chatbot-navbar">Chatbot</button>
+            </div>
+        </nav>
+        
+        <nav class="usuario-nav">
+            <div class="notificacao-container">
+                <img src="/imagens/notificacao.png" alt="Notificações" class="notificacao-icone" hidden>
+                <div class="notificacao-submenu">
+                    <div class="notificacoes-lista"></div>
+                </div>
+            </div>
+
+            <div class="barra-pesquisa">
+                <input type="text" id="navbarInput" placeholder="Pesquisar...">
+                <button id="navbarBotaoPesquisa">🔍</button>
+            </div>
+            
+            <div class="usuario-sessao">
+                <div id="user-data" data-user-id="<%= Array.isArray(usuario) ? usuario[0]?.usr_id : usuario?.usr_id %>" style="display:none;"></div>
+                <span class="usuario-nome"><%= Array.isArray(usuario) ? usuario[0]?.usr_nome : usuario?.usr_nome %></span>
+                <img src="/imagens/graficoLinha.PNG" alt="Imagem do usuário" class="usuario-imagem">
+            </div>
+        </nav>
+    </header>
+
+    <div class="main">
+        <!--Barra lateral de Navegação-->
+        <div class="sidenav">
+            <a href="/">Opção</a>
         </div>
 
-        <br>
+        <div class="conteudo">
+            <div class="bloco_titulo">
+                <h1 class="titulo">Cadastrar Usuário</h1>
+            </div>
 
-        <div class="main">
+            <br>
+
+
             <form id="formCadastro" method="POST">
                 <!--Input de Nome-->
                 <div class="nome">
@@ -36,7 +67,7 @@
                     <label class="label" for="email">E-mail</label>
                     <input class="email_input" type="text" id="email" name="email" required>
                 </div>
-                
+                    
                 <!--Input de CPF-->
                 <div class="cpf">
                     <label class="label" for="cpf">CPF</label>
@@ -58,7 +89,7 @@
                         <span id="erroSenha" class="erro" style="color: red; display: none;">*</span>
                     </div>
                 </div>
-                
+                    
                 <!--Input de confirmação de senha-->
                 <div class="senha">
                     <label class="label" for="conf_senha">Confirmar Senha</label>
@@ -79,7 +110,7 @@
                         <label class="label_pequena" for="telefone1">Telefone 1</label>
                         <input class="telefone_input" type="text" id="telefone1" name="telefone1" required>
                     </div>
-                
+                    
                     <div class="telefone">
                         <label class="label_pequena" for="telefone2">Telefone 2</label>
                         <input class="telefone_input" type="text" id="telefone2" name="telefone2">
@@ -103,9 +134,9 @@
                 <div class="bloco_titulo">
                     <h1 class="titulo">Cadastrar End. Entrega</h1>
                 </div>
-                
+                    
                 <br>
-                
+                    
                 <!--Primeira Linha-->
                 <div class="linha_centralizada">
                     <div class="cidade">
@@ -178,7 +209,7 @@
                         <input class="cidade_input" type="text" id="cep_e" name="cep_e" required>
                     </div>
                 </div>
-                
+                    
                 <br>
 
                 <!--Cadastrar End. Cobrança-->
@@ -187,19 +218,19 @@
                 </div>
 
                 <br>
-    
+        
                 <!--Primeira Linha-->
                 <div class="linha_centralizada">
                     <div class="cidade">
                         <label for="cidade_c">Cidade</label>
                         <input class="cidade_input" type="text" id="cidade_c" name="cidade_c" required>
                     </div>
-    
+
                     <div class="bairro">
                         <label for="bairro_c">Bairro</label>
                         <input class="cidade_input" type="text" id="bairro_c" name="bairro_c" required>
                     </div>
-    
+
                     <div class="select">
                         <label class="label_genero">Estado</label>
                         <select class="selecao" id="estado_c" name="estado_c" required>
@@ -234,33 +265,33 @@
                         </select>
                     </div>
                 </div>
-    
+        
                 <!--Segunda Linha-->
                 <div class="linha_centralizada">
                     <div class="endereco">
                         <label class="label_pequena" for="endereco_c">Endereço</label>
                         <input class="endereco_input" type="text" id="endereco_c" name="endereco_c" required>
                     </div>
-    
+
                     <div class="numero">
                         <label for="numero_c">Nº.</label>
                         <input class="numero_input" type="number" id="numero_c" name="numero_c" required>
                     </div>
                 </div>
-    
+        
                 <!--Terceira Linha-->
                 <div class="linha_centralizada">
                     <div class="cidade">
                         <label class="label_pequena" for="complemento_c">Complemento</label>
                         <input class="cidade_input" type="text" id="complemento_c" name="complemento_c">
                     </div>
-    
+
                     <div class="bairro">
                         <label class="label_pequena" for="cep_c">CEP</label>
                         <input class="cidade_input" type="text" id="cep_c" name="cep_c" required>
                     </div>
                 </div>
-                
+                    
                 <br>
 
                 <div class="bloco_titulo">
@@ -320,7 +351,9 @@
         });
     </script>
 
-    <!--Script do Submit-->
+    <!--Script da Página-->
     <script type="module" src="/scripts/cadastrarUsuario.js"></script>
+    <script type="module" src="/scripts/navbar.js"></script>
+    <script type="module" src="/scripts/aiChatBot.js"></script>
 </body>
 </html>
