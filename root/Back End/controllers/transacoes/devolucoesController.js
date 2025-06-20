@@ -60,7 +60,7 @@ module.exports.getDevolucao = async (req, res) => {
         const [usuario] = await buscarUsuarioId(transacaoOriginal.usuarios_usr_id);
         const notificacoes = await buscarNotificacoes(usuario.usr_id);
 
-        res.render('transacoes/adm/selecaoDevolucao', {
+        res.render('transacoes/usuario/selecaoDevolucao', {
             itensVenda: itensParaDevolucao,
             subtotalTotal: 0,
             usuario,

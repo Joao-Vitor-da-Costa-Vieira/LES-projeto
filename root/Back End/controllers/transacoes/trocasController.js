@@ -62,7 +62,7 @@ module.exports.getTroca = async (req, res) => {
         const [usuario] = await buscarUsuarioId(transacaoOriginal.usuarios_usr_id);
         const notificacoes = await buscarNotificacoes(usuario.usr_id);
 
-        res.render('transacoes/adm/selecaoTroca', {
+        res.render('transacoes/usuario/selecaoTroca', {
             itensVenda: itensParaTroca,
             subtotalTotal: 0,
             usuario,
