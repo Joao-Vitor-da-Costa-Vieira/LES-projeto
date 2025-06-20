@@ -1,99 +1,143 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/style/style.css">
-    <title>Adição Endereço</title>
+    <link rel="icon" href="/imagens/livro-16.ico">
 </head>
 <body>
 
-    <div class="container-endereco">
-        <div class="bloco_titulo">
-            <h1 class="titulo">Adição de End. Cobranca</h1>
-        </div>
+    <header>
+        <nav class="main-nav">
+            <a class="home-link">Home</a>
+            <div class="nav-botao">
+                <button>Histórico</button>
+                <button id="botao-carrinho">Carrinho</button>
+                <button>Trocas</button>
+                <button id="botao-chatbot-navbar">Chatbot</button>
+            </div>
+        </nav>
         
-        <br>
-
-        <form class="container-forms-endereco">
-
-            <!--Primeira Linha-->
-            <div class="linha_centralizada">
-                <div class="cidade">
-                    <label class="label_pequena" for="cidade">Cidade</label>
-                    <input class="cidade_input" type="text" id="cidade" name="cidade" required>
-                </div>
-
-                <div class="bairro">
-                    <label class="label_pequena" for="bairro">Bairro</label>
-                    <input class="cidade_input" type="text" id="bairro" name="bairro" required>
-                </div>
-
-                <div class="estado">
-                    <label class="label_genero">Estado</label>
-                    <select class="selecao" id="estado" name="estado" required>
-                        <option value="">Selecione</option>
-                        <option value="AC">AC</option>
-                        <option value="AL">AL</option>
-                        <option value="AP">AP</option>
-                        <option value="AM">AM</option>
-                        <option value="BA">BA</option>
-                        <option value="CE">CE</option>
-                        <option value="DF">DF</option>
-                        <option value="ES">ES</option>
-                        <option value="GO">GO</option>
-                        <option value="MA">MA</option>
-                        <option value="MT">MT</option>
-                        <option value="MS">MS</option>
-                        <option value="MG">MG</option>
-                        <option value="PA">PA</option>
-                        <option value="PB">PB</option>
-                        <option value="PR">PR</option>
-                        <option value="PE">PE</option>
-                        <option value="PI">PI</option>
-                        <option value="RJ">RJ</option>
-                        <option value="RN">RN</option>
-                        <option value="RS">RS</option>
-                        <option value="RO">RO</option>
-                        <option value="RR">RR</option>
-                        <option value="SC">SC</option>
-                        <option value="SP">SP</option>
-                        <option value="SE">SE</option>
-                        <option value="TO">TO</option>
-                    </select>
+        <nav class="usuario-nav">
+            <div class="notificacao-container">
+                <img src="/imagens/notificacao.png" alt="Notificações" class="notificacao-icone" hidden>
+                <div class="notificacao-submenu">
+                    <div class="notificacoes-lista"></div>
                 </div>
             </div>
 
-            <!--Segunda Linha-->
-            <div class="linha_centralizada">
-                <div class="endereco">
-                    <label class="label_pequena" for="endereco">Endereço</label>
-                    <input class="endereco_input" type="text" id="endereco" name="endereco" required>
-                </div>
-
-                <div class="numero">
-                    <label class="label_pequena" for="numero">Nº.</label>
-                    <input class="numero_input" type="number" id="numero" name="numero" required>
-                </div>
-            </div>
-
-            <!--Terceira Linha-->
-            <div class="linha_centralizada">
-                <div class="cidade">
-                    <label class="label_pequena" for="complemento">Complemento</label>
-                    <input class="cidade_input" type="text" id="complemento" name="complemento_e">
-                </div>
-
-                <div class="bairro">
-                    <label class="label_pequena" for="cep">CEP</label>
-                    <input class="cidade_input" type="text" id="cep" name="cep" required>
-                </div>
+            <div class="barra-pesquisa">
+                <input type="text" id="navbarInput" placeholder="Pesquisar...">
+                <button id="navbarBotaoPesquisa">🔍</button>
             </div>
             
-            <button>Adicionar</button>
-        </form>
-    </div>
+            <div class="usuario-sessao">
+                <div id="user-data" data-user-id="<%= Array.isArray(usuario) ? usuario[0]?.usr_id : usuario?.usr_id %>" style="display:none;"></div>
+                <span class="usuario-nome"><%= Array.isArray(usuario) ? usuario[0]?.usr_nome : usuario?.usr_nome %></span>
+                <img src="/imagens/graficoLinha.PNG" alt="Imagem do usuário" class="usuario-imagem">
+            </div>
+        </nav>
+    </header>
 
+    <div class="main">
+        <!--Barra lateral de Navegação-->
+        <div class="sidenav">
+            <a href="/">Opção</a>
+        </div>
+
+        <div class="conteudo">
+            <div class="container-endereco">
+                <div class="bloco_titulo">
+                    <h1 class="titulo">Adição de End. Cobranca</h1>
+                </div>
+                
+                <br>
+
+                <form class="container-forms-endereco">
+
+                    <!--Primeira Linha-->
+                    <div class="linha_centralizada">
+                        <div class="cidade">
+                            <label class="label_pequena" for="cidade">Cidade</label>
+                            <input class="cidade_input" type="text" id="cidade" name="cidade" required>
+                        </div>
+
+                        <div class="bairro">
+                            <label class="label_pequena" for="bairro">Bairro</label>
+                            <input class="cidade_input" type="text" id="bairro" name="bairro" required>
+                        </div>
+
+                        <div class="estado">
+                            <label class="label_genero">Estado</label>
+                            <select class="selecao" id="estado" name="estado" required>
+                                <option value="">Selecione</option>
+                                <option value="AC">AC</option>
+                                <option value="AL">AL</option>
+                                <option value="AP">AP</option>
+                                <option value="AM">AM</option>
+                                <option value="BA">BA</option>
+                                <option value="CE">CE</option>
+                                <option value="DF">DF</option>
+                                <option value="ES">ES</option>
+                                <option value="GO">GO</option>
+                                <option value="MA">MA</option>
+                                <option value="MT">MT</option>
+                                <option value="MS">MS</option>
+                                <option value="MG">MG</option>
+                                <option value="PA">PA</option>
+                                <option value="PB">PB</option>
+                                <option value="PR">PR</option>
+                                <option value="PE">PE</option>
+                                <option value="PI">PI</option>
+                                <option value="RJ">RJ</option>
+                                <option value="RN">RN</option>
+                                <option value="RS">RS</option>
+                                <option value="RO">RO</option>
+                                <option value="RR">RR</option>
+                                <option value="SC">SC</option>
+                                <option value="SP">SP</option>
+                                <option value="SE">SE</option>
+                                <option value="TO">TO</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!--Segunda Linha-->
+                    <div class="linha_centralizada">
+                        <div class="endereco">
+                            <label class="label_pequena" for="endereco">Endereço</label>
+                            <input class="endereco_input" type="text" id="endereco" name="endereco" required>
+                        </div>
+
+                        <div class="numero">
+                            <label class="label_pequena" for="numero">Nº.</label>
+                            <input class="numero_input" type="number" id="numero" name="numero" required>
+                        </div>
+                    </div>
+
+                    <!--Terceira Linha-->
+                    <div class="linha_centralizada">
+                        <div class="cidade">
+                            <label class="label_pequena" for="complemento">Complemento</label>
+                            <input class="cidade_input" type="text" id="complemento" name="complemento_e">
+                        </div>
+
+                        <div class="bairro">
+                            <label class="label_pequena" for="cep">CEP</label>
+                            <input class="cidade_input" type="text" id="cep" name="cep" required>
+                        </div>
+                    </div>
+                    
+                    <button>Adicionar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
     <script type="module" src="/scripts/enderecoCobrancaAdicionar.js"></script>
+    <script type="module" src="/scripts/navbar.js"></script>
+    <script type="module" src="/scripts/aiChatBot.js"></script>
 </body>
 </html>

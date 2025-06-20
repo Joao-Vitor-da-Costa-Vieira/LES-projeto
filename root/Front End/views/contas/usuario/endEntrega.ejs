@@ -1,65 +1,108 @@
 <!DOCTYPE html>
 
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/style/style.css">
-    <title>Endereço de Entrega</title>
+    <link rel="icon" href="/imagens/livro-16.ico">
 </head>
 <body>
-    <div class="voltar"><a href="/">Voltar</a></div>
 
-    <div class="main">
-        <div class="container-endereco">
-            <div class="bloco_titulo">
-                <h1 class="titulo">Endereço de Entrega</h1>
+    <header>
+        <nav class="main-nav">
+            <a class="home-link">Home</a>
+            <div class="nav-botao">
+                <button>Histórico</button>
+                <button id="botao-carrinho">Carrinho</button>
+                <button>Trocas</button>
+                <button id="botao-chatbot-navbar">Chatbot</button>
+            </div>
+        </nav>
+        
+        <nav class="usuario-nav">
+            <div class="notificacao-container">
+                <img src="/imagens/notificacao.png" alt="Notificações" class="notificacao-icone" hidden>
+                <div class="notificacao-submenu">
+                    <div class="notificacoes-lista"></div>
+                </div>
+            </div>
+
+            <div class="barra-pesquisa">
+                <input type="text" id="navbarInput" placeholder="Pesquisar...">
+                <button id="navbarBotaoPesquisa">🔍</button>
             </div>
             
-            <br>
-
-            <div class="genero">            
-                <label class="label_genero" for="cbr">Endereços</label>
-                <select class="selecao" name="entrega" id="etr">
-                    <% enderecos.forEach(endereco => { %>
-                        <option value="<%=endereco.end_endereco%>"><%=endereco.end_endereco%></option>
-                    <% }); %>
-                </select>  
+            <div class="usuario-sessao">
+                <div id="user-data" data-user-id="<%= Array.isArray(usuario) ? usuario[0]?.usr_id : usuario?.usr_id %>" style="display:none;"></div>
+                <span class="usuario-nome"><%= Array.isArray(usuario) ? usuario[0]?.usr_nome : usuario?.usr_nome %></span>
+                <img src="/imagens/graficoLinha.PNG" alt="Imagem do usuário" class="usuario-imagem">
             </div>
+        </nav>
+    </header>
 
-            <div class="table_div">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Endereço</th>
-                            <th>Bairro</th>
-                            <th>Estado</th>
-                            <th>CEP</th>
-                            <th>Número</th>
-                            <th>Opções</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+    <div class="main">
+        <!--Barra lateral de Navegação-->
+        <div class="sidenav">
+            <a href="/">Opção</a>
+        </div>
+
+        <div class="conteudo">
+        
+            <div class="voltar"><a href="/">Voltar</a></div>
+            <div class="container-endereco">
+                <div class="bloco_titulo">
+                    <h1 class="titulo">Endereço de Entrega</h1>
+                </div>
+                
+                <br>
+
+                <div class="genero">            
+                    <label class="label_genero" for="cbr">Endereços</label>
+                    <select class="selecao" name="entrega" id="etr">
                         <% enderecos.forEach(endereco => { %>
-                            <tr class="endereco-mostrado">
-                                <td class="endereco-id"><%= endereco.end_id %></td>
-                                <td><%= endereco.end_endereco %></td>
-                                <td><%= endereco.end_bairro %></td>
-                                <td><%= endereco.end_estado %></td>
-                                <td><%= endereco.end_cep %></td>
-                                <td><%= endereco.end_numero %></td>
-                                <td>
-                                    <div class="botoes_resultado">
-                                        <a class="atualizar" href="#">Atualizar</a>
-                                    </div>
-                                </td>
-                            </tr>
+                            <option value="<%=endereco.end_endereco%>"><%=endereco.end_endereco%></option>
                         <% }); %>
-                    </tbody>
-                </table>
+                    </select>  
+                </div>
+
+                <div class="table_div">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Endereço</th>
+                                <th>Bairro</th>
+                                <th>Estado</th>
+                                <th>CEP</th>
+                                <th>Número</th>
+                                <th>Opções</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% enderecos.forEach(endereco => { %>
+                                <tr class="endereco-mostrado">
+                                    <td class="endereco-id"><%= endereco.end_id %></td>
+                                    <td><%= endereco.end_endereco %></td>
+                                    <td><%= endereco.end_bairro %></td>
+                                    <td><%= endereco.end_estado %></td>
+                                    <td><%= endereco.end_cep %></td>
+                                    <td><%= endereco.end_numero %></td>
+                                    <td>
+                                        <div class="botoes_resultado">
+                                            <a class="atualizar" href="#">Atualizar</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 
     <script type="module" src="/scripts/endEntrega.js"></script>
+    <script type="module" src="/scripts/navbar.js"></script>
+    <script type="module" src="/scripts/aiChatBot.js"></script>
 </body>
 </html>
