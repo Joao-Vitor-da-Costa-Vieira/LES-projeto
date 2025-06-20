@@ -295,16 +295,175 @@ th {
     }
 }
 
-@media screen and (max-width: 768px) {
+/* Estilos para o sistema de notificações */
+.notificacao-container {
+    position: relative;
+    margin-right: 20px;
+}
+
+.notificacao-icone {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.notificacao-icone:hover {
+    transform: scale(1.1);
+}
+
+.notificacao-submenu {
+    position: absolute;
+    right: 0;
+    top: 40px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    width: 350px;
+    max-height: 400px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+    padding: 10px;
+}
+
+.notificacao-submenu.visivel {
+    display: block;
+    border: 2px solid #0003c8;
+}
+
+.notificacao-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border-bottom: 2px solid #0003c8;
+    border-right: 1px solid #0003c8;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.notificacao-item:hover {
+    background-color: #f5f5f5;
+}
+
+.notificacao-texto {
+    flex: 1;
+    font-size: 14px;
+    color: #333;
+    padding-right: 10px;
+}
+
+.notificacao-excluir {
+    background: #ff4444;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.notificacao-excluir:hover {
+    background: #fd6969;
+}
+
+/* Estilos para a barra de pesquisa */
+.barra-pesquisa {
+    display: flex;
+    width: 400px;
+    margin-right: 20px;
+}
+
+.barra-pesquisa input {
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px 0 0 4px;
+    width: 100%;
+    outline: none;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+.barra-pesquisa input:focus {
+    border-color: #0003c8;
+}
+
+.barra-pesquisa button {
+    padding: 10px 15px;
+    background-color: #0004ff;
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.barra-pesquisa button:hover {
+    background-color: #0003c8;
+}
+
+/* Estilos para os botões de navegação */
+.nav-botao button {
+    padding: 8px 15px;
+    background-color: #0003c8;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.nav-botao button:hover {
+    background-color: #1d21ff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Responsividade para a barra de navegação */
+@media (max-width: 1200px) {
+    .barra-pesquisa {
+        width: 300px;
+    }
+}
+
+@media (max-width: 992px) {
+    .barra-pesquisa {
+        width: 250px;
+    }
+    
+    .nav-botao {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+@media (max-width: 768px) {
     .barra-pesquisa {
         width: 200px;
     }
     
-    .sidenav {
-        width: 100px;
+    .usuario-nav {
+        flex-direction: column;
+        align-items: flex-end;
     }
     
-    .conteudo {
-        margin-left: 100px;
+    .notificacao-container {
+        position: static;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    
+    .notificacao-submenu {
+        right: 10px;
+        left: 10px;
+        width: auto;
     }
 }
