@@ -1,23 +1,53 @@
 <!DOCTYPE html>
 
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/style/style.css">
-    <title>Cadastro de Usuários</title>
+    <link rel="icon" href="/imagens/livro-16.ico">
 </head>
-
 <body>
-    <!--Barra lateral de Navegação-->
-    <div class="sidenav">
-        <a href="">Menu</a>
-        <a href="cadastrarUsuario.ejs">Cadastrar</a>
-        <a href="consultarUsuario.ejs">Consultar</a>
-        <a href="atualizarUsuario.ejs">Atualizar</a>
-    </div>
-    
-    <div class="conteudo">
-        <div class="main">
+
+    <header>
+        <nav class="main-nav">
+            <a class="home-link">Home</a>
+            <div class="nav-botao">
+                <button>Histórico</button>
+                <button id="botao-carrinho">Carrinho</button>
+                <button>Trocas</button>
+                <button id="botao-chatbot-navbar">Chatbot</button>
+            </div>
+        </nav>
+        
+        <nav class="usuario-nav">
+            <div class="notificacao-container">
+                <img src="/imagens/notificacao.png" alt="Notificações" class="notificacao-icone" hidden>
+                <div class="notificacao-submenu">
+                    <div class="notificacoes-lista"></div>
+                </div>
+            </div>
+
+            <div class="barra-pesquisa">
+                <input type="text" id="navbarInput" placeholder="Pesquisar...">
+                <button id="navbarBotaoPesquisa">🔍</button>
+            </div>
+            
+            <div class="usuario-sessao">
+                <div id="user-data" data-user-id="<%= Array.isArray(usuario) ? usuario[0]?.usr_id : usuario?.usr_id %>" style="display:none;"></div>
+                <span class="usuario-nome"><%= Array.isArray(usuario) ? usuario[0]?.usr_nome : usuario?.usr_nome %></span>
+                <img src="/imagens/graficoLinha.PNG" alt="Imagem do usuário" class="usuario-imagem">
+            </div>
+        </nav>
+    </header>
+
+    <div class="main">
+        <!--Barra lateral de Navegação-->
+        <div class="sidenav">
+            <a href="/">Opção</a>
+        </div>
+
+        <div class="conteudo">
             <!-- Título Principal -->
             <div class="bloco_titulo">
                 <h1 class="titulo">Atualizando Usuario</h1>
@@ -322,5 +352,7 @@
     </div>
 
     <script type="module" src="/scripts/atualizarUsuario.js"></script>
+    <script type="module" src="/scripts/navbar.js"></script>
+    <script type="module" src="/scripts/aiChatBot.js"></script>
 </body>
 </html>
