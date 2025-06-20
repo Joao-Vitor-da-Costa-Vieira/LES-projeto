@@ -1,58 +1,103 @@
 <!DOCTYPE html>
 
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/style/style.css">
-    <title>Atualização de Cartão</title>
+    <link rel="icon" href="/imagens/livro-16.ico">
 </head>
 <body>
-    <div class="container-cartoes">
-        <div class="cartoes">
 
-            <div class="bloco_titulo">
-                <h1 class="titulo">Atualização de Cartão</h1>
+    <header>
+        <nav class="main-nav">
+            <a class="home-link">Home</a>
+            <div class="nav-botao">
+                <button>Histórico</button>
+                <button id="botao-carrinho">Carrinho</button>
+                <button>Trocas</button>
+                <button id="botao-chatbot-navbar">Chatbot</button>
+            </div>
+        </nav>
+        
+        <nav class="usuario-nav">
+            <div class="notificacao-container">
+                <img src="/imagens/notificacao.png" alt="Notificações" class="notificacao-icone" hidden>
+                <div class="notificacao-submenu">
+                    <div class="notificacoes-lista"></div>
+                </div>
+            </div>
+
+            <div class="barra-pesquisa">
+                <input type="text" id="navbarInput" placeholder="Pesquisar...">
+                <button id="navbarBotaoPesquisa">🔍</button>
             </div>
             
-            <form class="container-forms-cartoes">
-                <!--Primeira Linha-->
-                <div class="linha_centralizada">
-                    <div class="num_cartao">
-                        <label for="num_cartao">Número</label>
-                        <input class="num_cartao_input" type="number" id="num_cartao" name="num_cartao" value="<%=cartoes.numero%>" required>
-                    </div>
+            <div class="usuario-sessao">
+                <div id="user-data" data-user-id="<%= Array.isArray(usuario) ? usuario[0]?.usr_id : usuario?.usr_id %>" style="display:none;"></div>
+                <span class="usuario-nome"><%= Array.isArray(usuario) ? usuario[0]?.usr_nome : usuario?.usr_nome %></span>
+                <img src="/imagens/graficoLinha.PNG" alt="Imagem do usuário" class="usuario-imagem">
+            </div>
+        </nav>
+    </header>
 
-                    <div class="cod_sec">
-                        <label for="cod_sec">Código de Segurança</label>
-                        <input class="cod_sec_input" type="password" id="cod_sec" name="cod_sec" value="<%=cartoes.cod_sec%>" required>
-                    </div>
+    <div class="main">
+        <!--Barra lateral de Navegação-->
+        <div class="sidenav">
+            <a href="/">Opção</a>
+        </div>
 
-                    <div class="select">
-                        <label class="label_genero">Bandeira</label>
-                        <select class="selecao" id="bandeira" name="bandeira" required>
-                            <option value="">Selecione</option>
-                            <option value="Visa">Visa</option>
-                            <option value="Mastercard">Mastercard</option>
-                            <option value="Hipercard">Hipercard</option>
-                            <option value="American Express">American Express</option>
-                            <option value="Elo">Elo</option>
-                            <option value="Diners Club">Diners Club</option>
-                            <option value="Discover">Discover</option>
-                        </select>
+        <div class="conteudo">
+            <div class="container-cartoes">
+                <div class="cartoes">
+
+                    <div class="bloco_titulo">
+                        <h1 class="titulo">Atualização de Cartão</h1>
                     </div>
+                    
+                    <form class="container-forms-cartoes">
+                        <!--Primeira Linha-->
+                        <div class="linha_centralizada">
+                            <div class="num_cartao">
+                                <label for="num_cartao">Número</label>
+                                <input class="num_cartao_input" type="number" id="num_cartao" name="num_cartao" value="<%=cartoes.numero%>" required>
+                            </div>
+
+                            <div class="cod_sec">
+                                <label for="cod_sec">Código de Segurança</label>
+                                <input class="cod_sec_input" type="password" id="cod_sec" name="cod_sec" value="<%=cartoes.cod_sec%>" required>
+                            </div>
+
+                            <div class="select">
+                                <label class="label_genero">Bandeira</label>
+                                <select class="selecao" id="bandeira" name="bandeira" required>
+                                    <option value="">Selecione</option>
+                                    <option value="Visa">Visa</option>
+                                    <option value="Mastercard">Mastercard</option>
+                                    <option value="Hipercard">Hipercard</option>
+                                    <option value="American Express">American Express</option>
+                                    <option value="Elo">Elo</option>
+                                    <option value="Diners Club">Diners Club</option>
+                                    <option value="Discover">Discover</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!--Segunda Linha-->
+                        <div class="nome">
+                            <label class="label" for="nome_c">Nome do Titular</label>
+                            <input class="nome_input" type="text" id="nome_c" name="nome_c" value="<%=cartoes.nome_c%>" required>
+                        </div>
+                        
+                        <button>Alterar</button>
+                    </form>
                 </div>
-
-                <!--Segunda Linha-->
-                <div class="nome">
-                    <label class="label" for="nome_c">Nome do Titular</label>
-                    <input class="nome_input" type="text" id="nome_c" name="nome_c" value="<%=cartoes.nome_c%>" required>
-                </div>
-                
-                <button>Alterar</button>
-            </form>
+            </div>
         </div>
     </div>
-
+    
     <script type="module" src="/scripts/cartaoAtualizar.js"></script>
+    <script type="module" src="/scripts/navbar.js"></script>
+    <script type="module" src="/scripts/aiChatBot.js"></script>
 </body>
 </html>
