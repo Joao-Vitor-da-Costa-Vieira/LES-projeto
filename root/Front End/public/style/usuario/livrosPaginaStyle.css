@@ -1,0 +1,224 @@
+/* Estilos específicos para página de livros */
+.capa-livro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.linha_centralizada {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+
+.coluna {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+
+.titulo-livro {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.titulo-livro h1 {
+    font-size: 28px;
+    color: #333;
+    margin: 0;
+}
+
+.imagem-capa {
+    width: 300px;
+    height: 420px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    object-fit: cover;
+}
+
+.bloco_texto2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 425px;
+    height: 350px;
+    background-color: #f9f9f9;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.bloco_texto2 p {
+    color: #333;
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.linha-categoria {
+    justify-content: flex-start;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.categorias {
+    border: 2px solid #0003c8;
+    border-radius: 8px;
+    background-color: #0003c8;
+    color: #ffffff;
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+.categorias-botao {
+    border: 2px solid #0003c8;
+    border-radius: 8px;
+    background-color: #0003c8;
+    color: #ffffff;
+    padding: 5px 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.categorias-botao:hover {
+    background-color: #1d21ff;
+}
+
+.estoque-div {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    padding: 0 20px;
+    margin: 15px 0;
+}
+
+.estoque {
+    color: green;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 5px 10px;
+    border-radius: 4px;
+    background-color: #f0fff0;
+}
+
+.estoque.hidden {
+    display: none;
+}
+
+.preco-desconto-carrinho-container {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to right, #0003c8, #ffffff4f);
+    padding: 10px 20px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.texto-adicionar {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.desconto-adicionar {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.desconto-do-produto {
+    background-color: #28a745;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 8px 12px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.valor-produto {
+    background-color: #343a40;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 8px 12px;
+}
+
+.adicionar-produto {
+    background-color: #28a745;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 8px 12px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.adicionar-produto:hover {
+    background-color: #218838;
+}
+
+.bloco_texto3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    background-color: #f9f9f9;
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.bloco_texto3 p {
+    color: #333;
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+/* Estilos responsivos */
+@media (max-width: 900px) {
+    .linha_centralizada {
+        flex-direction: column;
+    }
+    
+    .imagem-capa {
+        width: 250px;
+        height: 350px;
+    }
+    
+    .bloco_texto2 {
+        width: 100%;
+        height: auto;
+    }
+    
+    .preco-desconto-carrinho-container {
+        flex-direction: column;
+        height: auto;
+        padding: 15px;
+    }
+    
+    .texto-adicionar {
+        margin-bottom: 10px;
+    }
+}
