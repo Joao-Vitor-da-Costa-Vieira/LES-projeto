@@ -68,7 +68,6 @@
     border-radius: 5px;
     background: #ddd;
     outline: none;
-    -webkit-appearance: none;
 }
 
 .range-input::-webkit-slider-thumb {
