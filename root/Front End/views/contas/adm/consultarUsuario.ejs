@@ -1,22 +1,39 @@
 <!DOCTYPE html>
-
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/style/style.css">
+    <link rel="icon" href="/imagens/livro-16.ico">
 </head>
 <body>
-    <!--Barra lateral de Navegação-->
-    <div class="sidenav">
-        <a href="">Menu</a>
-        <a href="cadastrarUsuario.ejs">Cadastrar</a>
-        <a href="consultarUsuario.ejs">Consultar</a>
-        <a href="atualizarUsuario.ejs">Atualizar</a>
-    </div>
-    
 
-    <div class="conteudo">
-        <div class="main">
+    <header>
+        <nav class="main-nav">
+            <a href="/home-adm" class="home-link">Home</a>
+            <div class="nav-botao">
+                <button>Clientes</button>
+                <button>Livros</button>
+            </div>
+        </nav>
+        
+        <nav class="usuario-nav">
+            <div class="usuario-sessao">
+                <span class="usuario-nome">Adm</span>
+                <img src="/imagens/graficoLinha.PNG" alt="Imagem do usuário" class="usuario-imagem">
+            </div>
+        </nav>
+    </header>
+
+    <div class="main">
+        <!--Barra lateral de Navegação-->
+        <div class="sidenav">
+            <a href="/pedidos">Pedidos</a>
+            <a href="/">Estoque</a>
+            <a href="/analise">Análise</a>
+        </div>
+
+        <div class="conteudo">
 
             <div class="bloco_titulo">
                 <h1 class="titulo">Mostrar Usuarios</h1>
