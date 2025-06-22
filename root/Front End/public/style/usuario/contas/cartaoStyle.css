@@ -1,0 +1,108 @@
+/* Estilos específicos para cartao.ejs */
+.cartoes-id {
+    display: none;
+}
+
+/* Estilos específicos para cartaoAdicionar.ejs */
+.num_cartao_input {
+    width: 300px;
+    box-sizing: border-box;
+    font-size: 20px;
+    border: 2px solid black;
+}
+
+.cod_sec_input {
+    width: 300px;
+    box-sizing: border-box;
+    font-size: 20px;
+    border: 2px solid black;
+}
+
+.nome_input {
+    width: 695px;
+    font-size: 20px;
+    border: 2px solid black;
+}
+
+.selecao {
+    background-color: #0003c8;
+    width: 85px;
+    height: 30px;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    border: #0003c8;
+}
+
+.linha_centralizada {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+
+.container-forms-cartoes button {
+    background-color: green;
+    width: 120px;
+    height: 40px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+/* Estilos específicos para cartaoAtualizar.ejs */
+.num_cartao_input {
+    width: 300px;
+    box-sizing: border-box;
+    font-size: 20px;
+    border: 2px solid black;
+}
+
+.cod_sec_input {
+    width: 300px;
+    box-sizing: border-box;
+    font-size: 20px;
+    border: 2px solid black;
+}
+
+.nome_input {
+    width: 695px;
+    font-size: 20px;
+    border: 2px solid black;
+}
+
+.selecao {
+    background-color: #0003c8;
+    width: 85px;
+    height: 30px;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    border: #0003c8;
+}
+
+.linha_centralizada {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+
+.container-forms-cartoes button {
+    background-color: green;
+    width: 120px;
+    height: 40px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 20px;
+}
