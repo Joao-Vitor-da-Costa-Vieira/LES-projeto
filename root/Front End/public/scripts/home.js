@@ -1,5 +1,4 @@
-import { adicionarCarrinho } from "/scripts/service/transacoes/carrinhoService.js";
-import { getCarrinho } from "/scripts/service/transacoes/carrinhoService.js";
+import { adicionarCarrinho, getCarrinho } from "./service/transacoes/carrinhoService.js";
 
 document.addEventListener('DOMContentLoaded', function() {
     const slide = document.querySelector('.carrosel-slide');
@@ -159,7 +158,6 @@ document.querySelectorAll('.adicionar-produto').forEach(botao => {
                 btnVerCarrinho.addEventListener('click', async (e) => {
                     e.stopPropagation();
                     await getCarrinho(usr_id);
-                    window.location.href = `/carrinho?usr_id=${usr_id}`;
                 });
                 
                 const btnContinuar = mensagemConfirmacao.querySelector('.continuar-comprando');
@@ -295,7 +293,6 @@ document.querySelectorAll('.adicionar-produto-2').forEach(botao => {
                 btnVerCarrinho.addEventListener('click', async (e) => {
                     e.stopPropagation();
                     await getCarrinho(usr_id);
-                    window.location.href = `/carrinho?usr_id=${usr_id}`;
                 });
                 
                 const btnContinuar = mensagemConfirmacao.querySelector('.continuar-comprando');
@@ -431,7 +428,6 @@ document.querySelectorAll('.adicionar-produto-3').forEach(botao => {
                 btnVerCarrinho.addEventListener('click', async (e) => {
                     e.stopPropagation();
                     await getCarrinho(usr_id);
-                    window.location.href = `/carrinho?usr_id=${usr_id}`;
                 });
                 
                 const btnContinuar = mensagemConfirmacao.querySelector('.continuar-comprando');
