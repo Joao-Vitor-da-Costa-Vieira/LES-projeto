@@ -1,10 +1,12 @@
-import { getHome } from "/scripts/service/telaInicialService.js";
-import { pesquisarLivroService } from "/scripts/service/livroService.js";
-import { getCarrinho } from "/scripts/service/transacoes/carrinhoService.js"
+import { getHome } from "./service/telaInicialService.js";
+import { pesquisarLivroService } from "./service/livroService.js";
+import { getCarrinho } from "./service/transacoes/carrinhoService.js";
+import { buscarHistorico, buscarTransacao } from "./service/transacoes/pedidosService";
+import { buscarNotificacoes, deletarNotificacao } from "./service/transacoes/notificacoesService.js";
 
 async function verificarNotificacoes(usuarioId) {
     try {
-        const response = await fetch(`/notificacoes?usr_id=${usuarioId}`);
+        const response = await buscarNotificacoes(usuarioId);
         const notificacoes = await response.json();
         
         const iconeNotificacao = document.querySelector('.notificacao-icone');
@@ -19,7 +21,7 @@ async function verificarNotificacoes(usuarioId) {
 
 async function apagarNotificacaoHandler(ntf_id, usuarioId, redirect = false) {
     try {
-        const response = await fetch(`/notificacoes/${ntf_id}`, { method: 'DELETE' });
+        const response = await deletarNotificacao(ntf_id);
         
         if (response.ok) {
             const notificacoes = await verificarNotificacoes(usuarioId);
@@ -28,7 +30,7 @@ async function apagarNotificacaoHandler(ntf_id, usuarioId, redirect = false) {
             if (redirect) {
                 const notificacao = notificacoes.find(n => n.ntf_id === ntf_id);
                 if (notificacao) {
-                    window.location.href = `/pagamento/detalhes?tra_id=${notificacao.transacoes_tra_id}`;
+                    buscarTransacao(notificacao.transacoes_tra_id);
                 }
             }
         }
@@ -55,7 +57,7 @@ function atualizarSubmenu(notificacoes, usuarioId) {
         `;
 
         item.querySelector('.notificacao-texto').addEventListener('click', async () => {
-            window.location.href = `/pagamento/detalhes?tra_id=${notificacao.transacoes_tra_id}`;
+            buscarTransacao(notificacao.transacoes_tra_id);
     
             setTimeout(async () => {
                 await apagarNotificacaoHandler(notificacao.ntf_id, usuarioId);
@@ -125,7 +127,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (btn.textContent.trim() === 'Histórico') {
             btn.addEventListener('click', (event) => {
                 event.stopPropagation();
-                window.location.href = `/pagamento/historico?usr_id=${usuarioId}`;
+                buscarHistorico(usuarioId);
             });
         }
     });

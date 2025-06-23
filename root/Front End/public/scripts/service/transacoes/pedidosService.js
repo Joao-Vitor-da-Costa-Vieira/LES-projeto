@@ -26,3 +26,22 @@ export async function buscarDatasVendaService() {
         throw err;
     }
 }
+
+export async function buscarHistorico(usuarioId){
+    try{
+        window.location.href = `/pagamento/historico?usr_id=${usuarioId}`;
+    }catch(err){
+        console.error(`Erro no buscarHistorico - servicePedidos: ${err}`);
+        throw err;
+    }
+}
+
+export async function buscarTransacao(id) {
+    try{
+        window.location.href = `/pagamento/detalhes?tra_id=${id}`;
+    }catch(err){
+        console.error(`Erro no buscarTransacao - servicePedidos: ${err}`);
+        throw err;
+    }
+    
+}
