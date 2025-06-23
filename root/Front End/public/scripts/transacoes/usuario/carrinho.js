@@ -1,5 +1,5 @@
-import { alterarCarrinho } from "/../scripts/service/transacoes/carrinhoService.js";
-import { deletarCarrinho } from "/../scripts/service/transacoes/carrinhoService.js";
+import { getHome } from "../../service/telaInicialService";
+import { alterarCarrinho,deletarCarrinho } from "../../service/transacoes/carrinhoService.js";
 
 const tabelaBody = document.querySelector('#tabela-carrinho tbody'); 
 
@@ -287,7 +287,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (btnCancelar) {
         btnCancelar.addEventListener('click', function() {
             if (usr_id) {
-                window.location.href = `/home/${usr_id}`;
+                getHome(usr_id);
             } else {
                 console.error('ID do usuário não encontrado');
             }
