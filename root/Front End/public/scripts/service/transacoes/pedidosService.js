@@ -112,3 +112,28 @@ export async function buscarPedido(id) {
         throw err;
     }
 }
+
+export async function atualizarUrlFiltros(filtros){
+
+    //Url base
+    let url = '/api/vendas/historico?';
+    const params = []
+
+    //Adicionando os filtros por data
+    if(filtros.inicio){
+        params.push(`inicio=${encodeURIComponent(filtros.inicio)}`);
+        if(filtros.fim){
+            params.push(`fim=${encodeURIComponent(filtros.fim)}`);
+        }
+    }
+
+    //Adicionando os filtros por categorias
+    if(filtros.categorias.length > 0){
+        filtros.categorias.forEach(cat => {
+            params.push(`cat_id=${encodeURIComponent(cat)}`);
+        });
+    }
+
+    //Retornando a url atualizada
+    return url + params.join('&');
+}

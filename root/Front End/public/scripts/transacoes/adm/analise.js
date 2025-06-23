@@ -1,5 +1,5 @@
-import { buscarLivrosVendidoService } from "/../scripts/service/livroService.js";
-import { buscarDatasVendaService } from "/../scripts/service/transacoes/pedidosService.js";
+import { buscarLivrosVendidoService } from "../../service/livroService.js";
+import { buscarDatasVendaService, atualizarUrlFiltros } from "../../service/transacoes/pedidosService.js";
 
 document.addEventListener('DOMContentLoaded', function(){
 
@@ -79,36 +79,11 @@ const filtros = {
     categorias: []
 }
 
-//Atualizando a URL dos filtros
-function atualizarUrlFiltros(){
-
-    //Url base
-    let url = '/api/vendas/historico?';
-    const params = []
-
-    //Adicionando os filtros por data
-    if(filtros.inicio){
-        params.push(`inicio=${encodeURIComponent(filtros.inicio)}`);
-        if(filtros.fim){
-            params.push(`fim=${encodeURIComponent(filtros.fim)}`);
-        }
-    }
-
-    //Adicionando os filtros por categorias
-    if(filtros.categorias.length > 0){
-        filtros.categorias.forEach(cat => {
-            params.push(`cat_id=${encodeURIComponent(cat)}`);
-        });
-    }
-
-    //Retornando a url atualizada
-    return url + params.join('&');
-}
 
 //Filtrando os dados por período
 function filtroPorPeriodo(){
 
-    document.querySelector('.btn-flt-data').addEventListener('click', (event) => {
+    document.querySelector('.btn-flt-data').addEventListener('click', async (event) => {
         event.preventDefault();
         
         //Obtendo o período desejado
@@ -125,7 +100,7 @@ function filtroPorPeriodo(){
         }
         
         //Atualizando a URL
-        let url = atualizarUrlFiltros();
+        let url = await atualizarUrlFiltros(filtros);
 
         //Filtrando os dados
         fetch(url)
@@ -139,14 +114,14 @@ function filtroPorPeriodo(){
 
 //Função que pega as categorias selecionadas para filtro
 function filtrarPorCategora(){
-    document.querySelector('.btn-flt-cat').addEventListener('click', (event) => {
+    document.querySelector('.btn-flt-cat').addEventListener('click', async (event) => {
         event.preventDefault();
         
         //Obetendo as categorias selecionadas
         filtros.categorias = choicesInstance.getValue(true) || [];
 
         //Atualizando a url
-        const url = atualizarUrlFiltros();
+        const url = await atualizarUrlFiltros(filtros);
     
         //Filtrando os dados
         fetch(url)
