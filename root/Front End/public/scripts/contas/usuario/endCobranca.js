@@ -1,4 +1,4 @@
-import { atualizarEndCobranca } from "../../service/usuario/enderecoCobrancaService";
+import { atualizarEndCobranca } from "../../service/usuario/enderecoCobrancaService.js";
 
 document.querySelectorAll('.atualizar').forEach(button => {
     

@@ -1,8 +1,8 @@
-import { getHome } from "./service/telaInicialService.js";
-import { pesquisarLivroService } from "./service/livroService.js";
-import { getCarrinho } from "./service/transacoes/carrinhoService.js";
-import { buscarHistorico, buscarTransacao } from "./service/transacoes/pedidosService";
-import { buscarNotificacoes, deletarNotificacao } from "./service/transacoes/notificacoesService.js";
+import { getHome } from "/scripts/service/telaInicialService.js";
+import { pesquisarLivroService } from "/scripts/service/livroService.js";
+import { getCarrinho } from "/scripts/service/transacoes/carrinhoService.js";
+import { buscarHistorico, buscarTransacao } from "/scripts/service/transacoes/pedidosService.js";
+import { buscarNotificacoes, deletarNotificacao } from "/scripts/service/transacoes/notificacoesService.js";
 
 async function verificarNotificacoes(usuarioId) {
     try {

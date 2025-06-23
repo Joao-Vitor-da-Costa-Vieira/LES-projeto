@@ -1,4 +1,4 @@
-export const atualizarStatus = async (tra_id, novoStatus) => {
+export async function atualizarStatus (tra_id, novoStatus){
     try {
         const response = await fetch(`/api/pedidos-atualizar/status`, {
             method: 'POST',

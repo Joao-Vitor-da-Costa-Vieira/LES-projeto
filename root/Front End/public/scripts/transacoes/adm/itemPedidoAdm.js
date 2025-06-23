@@ -1,7 +1,7 @@
 import { buscarPedidos,
     atualizarStatus,
     buscarPedido
-} from '../../service/transacoes/pedidosService';
+} from '../../service/transacoes/pedidosService.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const btnAtualizar = document.getElementById('atualizar');

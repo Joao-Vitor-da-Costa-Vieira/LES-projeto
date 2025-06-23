@@ -1,5 +1,5 @@
-import { getHome } from "../../service/telaInicialService";
-import { confirmarPagamento, buscarHistorico } from "../../service/transacoes/pedidosService";
+import { getHome } from "../../service/telaInicialService.js";
+import { confirmarPagamento, buscarHistorico } from "../../service/transacoes/pedidosService.js";
 import { cadastrarEnderecoEntregaService } from "../../service/usuario/enderecoEntregaService.js";
 
 document.addEventListener('DOMContentLoaded', function() {

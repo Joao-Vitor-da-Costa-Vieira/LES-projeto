@@ -1,4 +1,4 @@
-import { confirmarTroca } from "../../service/transacoes/trocasService";
+import { confirmarTroca } from "../../service/transacoes/trocasService.js";
 
 const tabelaBody = document.querySelector('#tabela-carrinho tbody');
 let subtotalValor = document.getElementById('subtotal-valor');

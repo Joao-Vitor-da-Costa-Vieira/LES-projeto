@@ -1,4 +1,4 @@
-import { confirmarDevolucao } from "../../service/transacoes/devolucoesService";
+import { confirmarDevolucao } from "../../service/transacoes/devolucoesService.js";
 
 const tabelaBody = document.querySelector('#tabela-carrinho tbody');
 let subtotalValor = document.getElementById('subtotal-valor');
