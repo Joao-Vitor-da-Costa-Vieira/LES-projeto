@@ -29,3 +29,12 @@ export async function atualizarCartaoService(dados, usr_id, crt_id) {
         throw err;
     }
 }
+
+export async function atualizarCartao(path) {
+    try {
+        window.location.href = path;
+    } catch (error) {
+        console.error(`Erro no atualizarCartao - serviceCartao: ${err}`);
+        throw err;
+    }
+}

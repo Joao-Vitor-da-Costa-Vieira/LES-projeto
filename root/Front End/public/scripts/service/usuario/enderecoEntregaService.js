@@ -44,3 +44,12 @@ export async function buscarEnderecoEntregaIdService(id) {
         throw err;
     }
 }
+
+export async function atualizarEndEntrega(path) {
+    try {
+        window.location.href = path;
+    } catch (error) {
+        console.error(`Erro no atualizarEndEntrega - serviceEndEntrega: ${err}`);
+        throw err;
+    }
+}

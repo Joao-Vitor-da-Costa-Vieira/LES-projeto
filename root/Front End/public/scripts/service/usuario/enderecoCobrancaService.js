@@ -44,3 +44,12 @@ export async function buscarEnderecoCobrancaIdService(id) {
         throw err;
     }
 }
+
+export async function atualizarEndCobranca(path) {
+    try {
+        window.location.href = path;
+    } catch (error) {
+        console.error(`Erro no atualizarEndCobranca - serviceEndCobranca: ${err}`);
+        throw err;
+    }
+}
