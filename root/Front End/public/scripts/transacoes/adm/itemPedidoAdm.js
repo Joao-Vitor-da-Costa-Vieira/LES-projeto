@@ -1,4 +1,7 @@
-import { atualizarStatus } from '/../scripts/service/transacoes/pedidosService.js';
+import { buscarPedidos,
+    atualizarStatus,
+    buscarPedido
+} from '../../service/transacoes/pedidosService';
 
 document.addEventListener('DOMContentLoaded', () => {
     const btnAtualizar = document.getElementById('atualizar');
@@ -117,13 +120,13 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.appendChild(confirmationModal);
 
         document.getElementById('btn-voltar-pedidos').addEventListener('click', () => {
-            window.location.href = '/pedidos';
+            buscarPedidos();
         });
 
         alert("Operação Concluída!");
 
         setTimeout(() => {
-            window.location.href = `/pedidos-adm/detalhes?tra_id=${tra_id}`;
+            buscarPedido(tra_id);
         }, 1500);
     };
 

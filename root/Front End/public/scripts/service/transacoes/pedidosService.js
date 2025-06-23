@@ -90,7 +90,25 @@ export async function filterPedido(filtros) {
         if (!response.ok) throw new Error('Erro na requisição');
         return await response.json();
     } catch (err) {
-        console.error('Erro no filterPedidoService:', err);
+        console.error(`Erro no filterPedido - servicePedidos:, ${err}`);
+        throw err;
+    }
+}
+
+export async function buscarPedidos() {
+    try {
+        window.location.href = '/pedidos';
+    } catch (error) {
+        console.error(`Erro no buscarPedidos - servicePedidos:, ${err}`);
+        throw err;
+    }
+}
+
+export async function buscarPedido(id) {
+    try {
+        window.location.href = `/pedidos-adm/detalhes?tra_id=${id}`;
+    } catch (error) {
+        console.error(`Erro no buscarPedidos - servicePedidos:, ${err}`);
         throw err;
     }
 }
