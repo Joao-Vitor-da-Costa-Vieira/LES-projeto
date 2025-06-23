@@ -1,4 +1,4 @@
-import { cadastroAtualizarService } from "/../scripts/service/usuario/cadastroService.js";
+import { cadastroAtualizarService } from "../../service/usuario/cadastroService.js";
 
 // PASSANDO OS DADOS PARA ATUALIZAÇÃO
 document.querySelector('form').addEventListener('submit', async function (event) {

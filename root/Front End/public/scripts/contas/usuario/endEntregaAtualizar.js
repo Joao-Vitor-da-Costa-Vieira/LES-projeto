@@ -1,4 +1,4 @@
-import { atualizarEnderecoEntregaService } from "/../scripts/service/usuario/enderecoEntregaService.js";
+import { atualizarEnderecoEntregaService } from "../../service/usuario/enderecoEntregaService.js";
 
 // Enviando os dados para o backend
 document.querySelector('form').addEventListener('submit', async function(event) {

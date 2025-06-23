@@ -1,4 +1,4 @@
-import { cadastrarCartaoService } from "/../scripts/service/usuario/cartaoService.js";
+import { cadastrarCartaoService } from "../../service/usuario/cartaoService.js";
 
 // Enviando os dados para o backend
 document.querySelector('form').addEventListener('submit', async function(event){

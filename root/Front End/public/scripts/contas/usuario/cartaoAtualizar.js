@@ -1,4 +1,4 @@
-import { atualizarCartaoService } from "/../scripts/service/usuario/cartaoService.js";
+import { atualizarCartaoService } from "../../service/usuario/cartaoService.js";
 
 // Enviando os dados para o backend
 document.querySelector('form').addEventListener('submit', async function(event){
