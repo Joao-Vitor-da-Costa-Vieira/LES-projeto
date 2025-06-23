@@ -1,3 +1,6 @@
+import { solicitarDevolucao } from "../../service/transacoes/devolucoesService";
+import { solicitarTroca } from "../../service/transacoes/trocasService";
+
 document.addEventListener('DOMContentLoaded', () => {
     const botaoTroca = document.getElementById('troca');
     const botaoDevolucao = document.getElementById('devolucao');
@@ -10,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const status = botaoTroca.dataset.traStatus;
 
             if (status === 'ENTREGUE') {
-                window.location.href = `/trocas?tra_id=${traId}`;
+                solicitarTroca(traId);
             } else {
                 alert('Troca só pode ser solicitada para pedidos com status "ENTREGUE"');
             }
@@ -25,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const status = botaoDevolucao.dataset.traStatus;
 
             if (status === 'ENTREGUE') {
-                window.location.href = `/devolucoes?tra_id=${traId}`;
+                solicitarDevolucao(traId);
             } else {
                 alert('Devolução só pode ser solicitada para pedidos com status "ENTREGUE"');
             }
