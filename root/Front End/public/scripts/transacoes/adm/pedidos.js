@@ -1,3 +1,5 @@
+import { filterPedido } from "../../service/transacoes/pedidosService";
+
 document.addEventListener('DOMContentLoaded', () => {
     const filtroContainer = document.querySelector('.filtros-container');
     const toggleButton = document.querySelector('.botao-mais-filtro');
@@ -33,37 +35,12 @@ document.addEventListener('DOMContentLoaded', () => {
     aplicarFiltroBtn.addEventListener('click', async () => {
         try {
             const filtros = coletarFiltros();
-            const response = await filterPedidoService(filtros);
+            const response = await filterPedido(filtros);
             atualizarTabelaPedidos(response);
         } catch (error) {
             console.error('Erro ao filtrar pedidos:', error);
         }
     });
-
-
-    // Service para filtrar pedidos
-    async function filterPedidoService(filtros) {
-        try {
-            const queryParams = new URLSearchParams();
-            
-            Object.entries(filtros).forEach(([key, value]) => {
-                if (value !== '' && value !== null && value !== undefined) {
-                    queryParams.append(key, value);
-                }
-            });
-
-            const response = await fetch(`/api/pedidos/filtrar?${queryParams.toString()}`, {
-                method: 'GET',
-                headers: { 'Content-Type': 'application/json' }
-            });
-
-            if (!response.ok) throw new Error('Erro na requisição');
-            return await response.json();
-        } catch (err) {
-            console.error('Erro no filterPedidoService:', err);
-            throw err;
-        }
-    }
 
     // Atualizar tabela
     function atualizarTabelaPedidos(pedidos) {

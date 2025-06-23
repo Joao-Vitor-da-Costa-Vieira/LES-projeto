@@ -117,7 +117,7 @@ document.addEventListener('click', (e) => {
 });
 
 // Evento de envio do formulário
-document.getElementById('trocar')?.addEventListener('click', function(e) {
+document.getElementById('trocar')?.addEventListener('click', async () => {
     e.preventDefault();
     
     const itensTroca = [];
@@ -139,7 +139,7 @@ document.getElementById('trocar')?.addEventListener('click', function(e) {
 
     console.log(end_id);
 
-    const res = confirmarTroca(usr_id, itensTroca, subtotal, tra_id, end_id);
+    const res = await confirmarTroca(usr_id, itensTroca, subtotal, tra_id, end_id);
     return res.json();
 });
 

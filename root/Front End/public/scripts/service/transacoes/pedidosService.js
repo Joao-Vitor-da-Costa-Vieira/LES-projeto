@@ -71,3 +71,26 @@ export async function confirmarPagamento(usr_id, enderecoId, dataAtual, subtotal
         throw err;
     }
 }
+
+export async function filterPedido(filtros) {
+    try {
+        const queryParams = new URLSearchParams();
+            
+        Object.entries(filtros).forEach(([key, value]) => {
+            if (value !== '' && value !== null && value !== undefined) {
+                queryParams.append(key, value);
+            }
+        });
+
+        const response = await fetch(`/api/pedidos/filtrar?${queryParams.toString()}`, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' }
+        });
+
+        if (!response.ok) throw new Error('Erro na requisição');
+        return await response.json();
+    } catch (err) {
+        console.error('Erro no filterPedidoService:', err);
+        throw err;
+    }
+}

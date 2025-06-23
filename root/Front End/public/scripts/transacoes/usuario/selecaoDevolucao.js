@@ -117,7 +117,7 @@ document.addEventListener('click', (e) => {
 });
 
 // Evento de envio do formulário
-document.getElementById('devolver')?.addEventListener('click', function(e) {
+document.getElementById('devolver')?.addEventListener('click', async() => {
     e.preventDefault();
     
     const itensTroca = [];
@@ -137,7 +137,7 @@ document.getElementById('devolver')?.addEventListener('click', function(e) {
     const end_id = endDataElement ? JSON.parse(endDataElement.textContent) : [];
     const usr_id = document.getElementById('user-data').dataset.userId;
 
-    const res = confirmarDevolucao(usr_id, itensTroca, subtotal, tra_id, end_id);
+    const res = await confirmarDevolucao(usr_id, itensTroca, subtotal, tra_id, end_id);
     return res.json();
 });
 
