@@ -1,3 +1,5 @@
+import { confirmarDevolucao } from "../../service/transacoes/devolucoesService";
+
 const tabelaBody = document.querySelector('#tabela-carrinho tbody');
 let subtotalValor = document.getElementById('subtotal-valor');
 
@@ -131,39 +133,12 @@ document.getElementById('devolver')?.addEventListener('click', function(e) {
     
     const subtotal = parseFloat(document.getElementById('subtotal-valor').textContent);
 
-        const endDataElement = document.getElementById('end-data');
-        const end_id = endDataElement ? JSON.parse(endDataElement.textContent) : [];
+    const endDataElement = document.getElementById('end-data');
+    const end_id = endDataElement ? JSON.parse(endDataElement.textContent) : [];
+    const usr_id = document.getElementById('user-data').dataset.userId;
 
-    fetch('/devolucoes/confirmar', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-            usr_id: document.getElementById('user-data').dataset.userId,
-            itens: itensTroca,
-            subtotal,
-            tra_id: tra_id[0],
-            end_id: end_id
-        })
-    })
-    .then(response => {
-        if (!response.ok) throw new Error('Erro na solicitação');
-        return response.json();
-    })
-    .then(data => {
-        if (data.success) {
-            const usr_id = document.getElementById('user-data').dataset.userId;
-
-            alert('Devolução solicita!')
-            window.location.href = `/pagamento/historico?usr_id=${usr_id}`;
-            
-        } else {
-            alert(data.message || 'Erro ao processar devolucao');
-        }
-    })
-    .catch(error => {
-        console.error('Erro:', error);
-        alert('Erro ao processar solicitação');
-    });
+    const res = confirmarDevolucao(usr_id, itensTroca, subtotal, tra_id, end_id);
+    return res.json();
 });
 
 // Inicialização
