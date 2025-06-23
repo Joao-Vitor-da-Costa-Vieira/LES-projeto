@@ -1,4 +1,4 @@
-import {getHome, getHomeAdm} from "./service/telaInicialService.js";
+import {getHome, getHomeAdm} from "/scripts/service/telaInicialService.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.botao-usuario').forEach(botao => {

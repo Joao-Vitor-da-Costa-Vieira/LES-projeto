@@ -1,6 +1,6 @@
-import { getHome } from "../../service/telaInicialService.js";
-import { confirmarPagamento, buscarHistorico } from "../../service/transacoes/pedidosService.js";
-import { cadastrarEnderecoEntregaService } from "../../service/usuario/enderecoEntregaService.js";
+import { getHome } from "/scripts/service/telaInicialService.js";
+import { confirmarPagamento, buscarHistorico } from "/scripts/service/transacoes/pedidosService.js";
+import { cadastrarEnderecoEntregaService } from "/scripts/service/usuario/enderecoEntregaService.js";
 
 document.addEventListener('DOMContentLoaded', function() {
     const userDataElement = document.getElementById('user-data');

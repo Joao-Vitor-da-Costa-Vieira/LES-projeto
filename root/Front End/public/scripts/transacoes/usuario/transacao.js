@@ -1,5 +1,5 @@
-import { solicitarDevolucao } from "../../service/transacoes/devolucoesService.js";
-import { solicitarTroca } from "../../service/transacoes/trocasService.js";
+import { solicitarDevolucao } from "/scripts/service/transacoes/devolucoesService.js";
+import { solicitarTroca } from "/scripts/service/transacoes/trocasService.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     const botaoTroca = document.getElementById('troca');

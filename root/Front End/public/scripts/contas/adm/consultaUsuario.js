@@ -2,7 +2,7 @@ import {
     inativarUsuarioService,
     buscarUsuariosInativosService,
     buscarUsuariosAtivosService    
-} from "../../service/usuario/usuarioService.js";
+} from "/scripts/service/usuario/usuarioService.js";
 
 
 document.querySelectorAll('.atualizar').forEach(botao => {

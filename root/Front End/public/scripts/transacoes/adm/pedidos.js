@@ -1,4 +1,4 @@
-import { filterPedido } from "../../service/transacoes/pedidosService.js";
+import { filterPedido } from "/scripts/service/transacoes/pedidosService.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     const filtroContainer = document.querySelector('.filtros-container');

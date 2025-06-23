@@ -1,4 +1,4 @@
-import { atualizarCartao } from "../../service/usuario/cartaoService.js";
+import { atualizarCartao } from "/scripts/service/usuario/cartaoService.js";
 
 document.querySelectorAll('.atualizar').forEach(button => {
     

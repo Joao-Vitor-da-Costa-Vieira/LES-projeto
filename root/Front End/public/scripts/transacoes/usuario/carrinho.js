@@ -1,5 +1,5 @@
-import { getHome } from "../../service/telaInicialService";
-import { alterarCarrinho,deletarCarrinho } from "../../service/transacoes/carrinhoService.js";
+import { getHome } from "/scripts/service/telaInicialService";
+import { alterarCarrinho, deletarCarrinho } from "/scripts/service/transacoes/carrinhoService.js";
 
 const tabelaBody = document.querySelector('#tabela-carrinho tbody'); 
 
