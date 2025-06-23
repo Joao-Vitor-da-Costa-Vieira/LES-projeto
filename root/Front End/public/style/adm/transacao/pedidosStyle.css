@@ -1,0 +1,199 @@
+/* Botão principal: Mostrar/Ocultar filtros */
+.botao-mais-filtro {
+    background-color: #0003c8;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.botao-mais-filtro:hover {
+    background-color: #0004ff;
+}
+
+/* Container de filtros */
+.filtros-container {
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Elementos alinhados */
+.linha_centralizada {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+/* Labels e inputs */
+.label_genero,
+.label_pequena {
+    font-weight: bold;
+    color: #333;
+    min-width: 100px;
+    text-align: right;
+}
+
+.filtro-data-inicio,
+.filtro-data-fim,
+.filtro-pesquisa-input-autor,
+.selecao_media {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    min-width: 200px;
+}
+
+.filtro-pesquisa-input-autor::placeholder {
+    color: #999;
+}
+
+/* Range de valor */
+.range-input {
+    width: 200px;
+}
+
+#valorExibido {
+    font-weight: bold;
+    color: #0003c8;
+}
+
+/* Botão de confirmar filtros */
+.confirmar {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.confirmar:hover {
+    background-color: #45a049;
+}
+
+/* Status com cores específicas (caso não estejam no CSS base) */
+.status-aprovado,
+.status-APROVADO {
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.status-cancelado,
+.status-CANCELADO {
+    color: #f44336;
+    font-weight: bold;
+}
+
+.status-em-transporte,
+.status-EM-TRANSPORTE {
+    color: #2196F3;
+    font-weight: bold;
+}
+
+.status-entregue,
+.status-ENTREGUE {
+    color: #795548;
+    font-weight: bold;
+}
+
+.status-reprovado,
+.status-REPROVADO {
+    color: #e91e63;
+    font-weight: bold;
+}
+
+.status-em-processamento,
+.status-EM-PROCESSAMENTO {
+    color: #ff9800;
+    font-weight: bold;
+}
+
+.status-troca-solicitada,
+.status-TROCA-SOLICITADA {
+    color: #673ab7;
+    font-weight: bold;
+}
+
+.status-troca-aprovada,
+.status-TROCA-APROVADA {
+    color: #009688;
+    font-weight: bold;
+}
+
+.status-troca-concluida,
+.status-TROCA-CONCLUÍDA {
+    color: #3f51b5;
+    font-weight: bold;
+}
+
+.status-troca-recusada,
+.status-TROCA-RECUSADA {
+    color: #ff5722;
+    font-weight: bold;
+}
+
+.status-devolucao-solicitada,
+.status-DEVOLUÇÃO-SOLICITADA {
+    color: #00bcd4;
+    font-weight: bold;
+}
+
+.status-devolucao-aprovada,
+.status-DEVOLUÇÃO-APROVADA {
+    color: #8bc34a;
+    font-weight: bold;
+}
+
+.status-devolucao-recusada,
+.status-DEVOLUÇÃO-RECUSADA {
+    color: #ff1744;
+    font-weight: bold;
+}
+
+.status-devolucao-concluida,
+.status-DEVOLUÇÃO-CONCLUÍDA {
+    color: #9e9e9e;
+    font-weight: bold;
+}
+
+/* Responsividade */
+@media screen and (max-width: 768px) {
+    .label_genero,
+    .label_pequena {
+        min-width: 100%;
+        text-align: center;
+    }
+
+    .range-input {
+        width: 100%;
+    }
+
+    .linha_centralizada {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filtro-data-inicio,
+    .filtro-data-fim,
+    .filtro-pesquisa-input-autor,
+    .selecao_media {
+        width: 100%;
+    }
+}
