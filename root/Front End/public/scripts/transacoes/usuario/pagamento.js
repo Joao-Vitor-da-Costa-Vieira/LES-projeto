@@ -1,4 +1,6 @@
-import { cadastrarEnderecoEntregaService } from "/../scripts/service/usuario/enderecoEntregaService.js";
+import { getHome } from "../../service/telaInicialService";
+import { confirmarPagamento, buscarHistorico } from "../../service/transacoes/pedidosService";
+import { cadastrarEnderecoEntregaService } from "../../service/usuario/enderecoEntregaService.js";
 
 document.addEventListener('DOMContentLoaded', function() {
     const userDataElement = document.getElementById('user-data');
@@ -6,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById('Cancelar')?.addEventListener('click', function() {
         if (usr_id) {
-            window.location.href = `/home/${usr_id}`;
+            getHome(usr_id);
         }
     });
 
@@ -55,27 +57,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     
         try {
-            const response = await fetch('/pagamento/confirmar', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    usuarioId: parseInt(usr_id),
-                    enderecoId: parseInt(enderecoId),
-                    data: dataAtual,
-                    subtotal: subtotal,
-                    frete: frete,
-                    total: total,
-                    pagamentos: pagamentos
-                })
-            });
+            const response = await confirmarPagamento(usr_id, enderecoId, dataAtual, subtotal, frete, total, pagamentos);
     
             const result = await response.json();
     
             if (response.ok) {
                 alert("Pagamento Concluído!");
-                window.location.href = `/pagamento/historico?usr_id=${usr_id}`;
+                buscarHistorico(usr_id);
             } else {
                 throw new Error(result.message || 'Erro ao processar pagamento');
             }

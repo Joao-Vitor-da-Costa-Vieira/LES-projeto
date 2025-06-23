@@ -45,3 +45,29 @@ export async function buscarTransacao(id) {
     }
     
 }
+
+export async function confirmarPagamento(usr_id, enderecoId, dataAtual, subtotal, frete, total, pagamentos) {
+    try {
+        const response = await fetch('/pagamento/confirmar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    usuarioId: parseInt(usr_id),
+                    enderecoId: parseInt(enderecoId),
+                    data: dataAtual,
+                    subtotal: subtotal,
+                    frete: frete,
+                    total: total,
+                    pagamentos: pagamentos
+                })
+            });
+        
+        return response;
+
+    } catch (error) {
+        console.error(`Erro no confirmarPagamento - servicePedidos: ${err}`);
+        throw err;
+    }
+}
