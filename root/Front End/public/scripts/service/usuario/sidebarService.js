@@ -17,13 +17,28 @@ export async function getAtualizarCadastro(id) {
 }
 
 export async function getCartoes(id) {
-    
+    try {
+        window.location.href = `/cartao?usr_id=${encodeURIComponent(id)}`;
+    } catch (err) {
+        console.error("Falha no fetch:", err);
+        throw err;
+    }
 }
 
 export async function getEndEntrega(id) {
-    
+    try {
+        window.location.href = `/endereco-entrega?usr_id=${encodeURIComponent(id)}`;
+    } catch (err) {
+        console.error("Falha no fetch:", err);
+        throw err;
+    }
 }
 
 export async function getEndCobranca(id) {
-    
+    try {
+        window.location.href = `/endereco-cobranca?usr_id=${encodeURIComponent(id)}`;
+    } catch (err) {
+        console.error("Falha no fetch:", err);
+        throw err;
+    }
 }

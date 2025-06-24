@@ -3,7 +3,7 @@ const router = express.Router();
 const controllerCartao = require('../../controllers/usuario/cartaoController');
 
 // Views
-router.get('/cartao/:usr_id', controllerCartao.getCartao);
+router.get('/cartao', controllerCartao.getCartao);
 router.get('/cartao/:usr_id/adicionar', controllerCartao.getCartaoAdicionar);
 router.get('/cartao/:usr_id/atualizar/:crt_id', controllerCartao.getCartaoAtualizar);
 

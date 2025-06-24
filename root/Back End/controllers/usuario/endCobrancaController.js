@@ -5,10 +5,20 @@ const {
     cadastrarEnderecoCobranca
 } = require("../../models/usuario/endCobrancaModel");
 
+const { buscarNotificacoes } = require("../../models/usuario/notificacaoModel");
+
 // Views
 module.exports.getEnderecoCobranca = async (req, res) => {
-    const enderecos = await buscarEnderecosCobrancaUsuarioId(req.params.usr_id);
-    res.render('contas/usuario/endCobranca', { enderecos: enderecos });
+    const { usr_id } = req.query;
+
+    const enderecos = await buscarEnderecosCobrancaUsuarioId(usr_id);
+    const usuario = await buscarUsuarioId(usr_id);
+    const notificacoes = usuario ? await buscarNotificacoes(usr_id) : [];
+
+    res.render('contas/usuario/endCobranca', { 
+        enderecos: enderecos,
+        usuario: usuario,
+        notificacoes });
 };
 
 module.exports.getEnderecoCobrancaAdicionar = async (req, res) => {

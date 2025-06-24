@@ -5,10 +5,20 @@ const {
     cadastrarCartao
 } = require("../../models/usuario/cartaoModel");
 
+const { buscarNotificacoes } = require("../../models/usuario/notificacaoModel");
+
 // Views
 module.exports.getCartao = async (req, res) => {
-    const cartoes = await buscarCartoesUsuarioId(req.params.usr_id);
-    res.render('contas/usuario/cartao', { cartoes: cartoes });
+    const { usr_id } = req.query;
+
+    const cartoes = await buscarCartoesUsuarioId(usr_id);
+    const usuario = await buscarUsuarioId(usr_id);
+    const notificacoes = usuario ? await buscarNotificacoes(usr_id) : [];
+
+    res.render('contas/usuario/cartao', { 
+        cartoes: cartoes,
+        usuario: usuario,
+        notificacoes });
 };
 
 module.exports.getCartaoAdicionar = async (req, res) => {

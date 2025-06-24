@@ -3,7 +3,7 @@ const router = express.Router();
 const controllerEnderecoCobranca = require('../../controllers/usuario/endCobrancaController');
 
 //Views
-router.get('/endereco-cobranca/:usr_id', controllerEnderecoCobranca.getEnderecoCobranca);
+router.get('/endereco-cobranca', controllerEnderecoCobranca.getEnderecoCobranca);
 router.get('/endereco-cobranca/:usr_id/adicionar', controllerEnderecoCobranca.getEnderecoCobrancaAdicionar);
 router.get('/endereco-cobranca/:usr_id/atualizar/:end_id', controllerEnderecoCobranca.getEnderecoCobrancaAtualizar);
 

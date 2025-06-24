@@ -31,14 +31,14 @@ module.exports.getCadastro = (req, res) => {
 };
 
 module.exports.getCadastroAtualizar = async (req, res) => {
-    const { id } = req.query;
+    const { usr_id } = req.query;
 
-    const usuario = await buscarUsuarioId(id);
-    const enderecosCobranca = await buscarEnderecosCobrancaUsuarioId(id);
-    const enderecosEntrega = await buscarEnderecosEntregaUsuarioId(id);
-    const cartoes = await buscarCartoesUsuarioId(id);
+    const usuario = await buscarUsuarioId(usr_id);
+    const enderecosCobranca = await buscarEnderecosCobrancaUsuarioId(usr_id);
+    const enderecosEntrega = await buscarEnderecosEntregaUsuarioId(usr_id);
+    const cartoes = await buscarCartoesUsuarioId(usr_id);
 
-    const notificacoes = usuario ? await buscarNotificacoes(id) : [];
+    const notificacoes = usuario ? await buscarNotificacoes(usr_id) : [];
 
     res.render('contas/usuario/atualizarUsuario', {
         usuario: usuario,
@@ -50,10 +50,10 @@ module.exports.getCadastroAtualizar = async (req, res) => {
 };
 
 module.exports.getSenha = async (req, res) => {
-    const { id } = req.query;
+    const { usr_id } = req.query;
 
-    const usuario = await buscarUsuarioId(id);
-    const notificacoes = usuario ? await buscarNotificacoes(id) : [];
+    const usuario = await buscarUsuarioId(usr_id);
+    const notificacoes = usuario ? await buscarNotificacoes(usr_id) : [];
 
     res.render('contas/usuario/senha', {
         usuario: usuario,

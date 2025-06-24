@@ -5,10 +5,21 @@ const {
     cadastrarEnderecoEntrega
 } = require("../../models/usuario/endEntregaModel");
 
+const { buscarNotificacoes } = require("../../models/usuario/notificacaoModel");
+
 // Views
 module.exports.getEnderecoEntrega = async (req, res) => {
-    const enderecos = await buscarEnderecosEntregaUsuarioId(req.params.usr_id);
-    res.render('contas/usuario/endEntrega', { enderecos: enderecos });
+    const { usr_id } = req.query;
+
+    const enderecos = await buscarEnderecosEntregaUsuarioId(usr_id);
+    const usuario = await buscarUsuarioId(usr_id);
+    const notificacoes = usuario ? await buscarNotificacoes(usr_id) : [];
+
+    res.render('contas/usuario/endEntrega', { 
+        enderecos: enderecos,
+        usuario: usuario,
+        notificacoes
+     });
 };
 
 module.exports.getEnderecoEntregaAdicionar = async (req, res) => {
