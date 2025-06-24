@@ -1,0 +1,123 @@
+/* Estilos para o conteúdo dentro da div conteudo - Página de Pedidos Administrativos */
+
+.conteudo {
+    margin-left: 150px;
+    padding: 20px;
+    flex: 1;
+}
+
+.table_div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    width: 100%;
+}
+
+table {
+    border-collapse: collapse;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1200px;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #0003c8;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+/* Estilos para os status */
+.status-APROVADO {
+    background-color: #28a745;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.status-CANCELADO {
+    background-color: #dc3545;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.status-EM_TRANSPORTE {
+    background-color: #17a2b8;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.status-ENTREGUE {
+    background-color: #6c757d;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.status-TROCA_SOLICITADA {
+    background-color: #ffc107;
+    color: black;
+    padding: 5px 10px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.status-TROCA_APROVADA {
+    background-color: #fd7e14;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.status-DEVOLUCAO_SOLICITADA {
+    background-color: #6f42c1;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+/* Estilos dos botões de ação */
+.botoes_resultado {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.botoes_resultado a {
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+.botoes_resultado .alterar {
+    background-color: #0003c8;
+}
+
+.botoes_resultado .alterar:hover {
+    background-color: #0004ff;
+}
+
+/* Estilo para mensagem de nenhum pedido */
+table tbody tr td[colspan="7"] {
+    text-align: center;
+    padding: 20px;
+    color: #6c757d;
+    font-style: italic;
+}
