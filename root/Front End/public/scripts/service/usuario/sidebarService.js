@@ -1,3 +1,21 @@
+export async function getCadastro(id) {
+    try {
+        window.location.href = `/cadastro?usr_id=${encodeURIComponent(id)}`;
+    } catch (err) {
+        console.error("Falha no fetch:", err);
+        throw err;
+    }
+}
+
+export async function getCadastroPrimeiro() {
+    try {
+        window.location.href = `/cadastro-primeiro`;
+    } catch (err) {
+        console.error("Falha no fetch:", err);
+        throw err;
+    }
+}
+
 export async function getSenha(id) {
     try {
         window.location.href = `/senha?usr_id=${encodeURIComponent(id)}`;

@@ -26,8 +26,20 @@ const { cadastrarUsuario,
 const { buscarNotificacoes } = require("../../models/usuario/notificacaoModel");
 
 //Views
-module.exports.getCadastro = (req, res) => {
+module.exports.getCadastroPrimeiro = (req, res) => {
     res.render('contas/usuario/cadastrarUsuario');
+};
+
+module.exports.getCadastro = async (req, res) => {
+    const { usr_id } = req.query;
+
+    const usuario = await buscarUsuarioId(usr_id);
+    const notificacoes = usuario ? await buscarNotificacoes(usr_id) : [];
+
+    res.render('contas/usuario/cadastrarUsuario',{
+        usuario: usuario,
+        notificacoes
+    });
 };
 
 module.exports.getCadastroAtualizar = async (req, res) => {

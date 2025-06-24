@@ -3,13 +3,30 @@ import {
     getAtualizarCadastro,
     getCartoes,
     getEndEntrega,
-    getEndCobranca
+    getEndCobranca,
+    getCadastro,
+    getCadastroPrimeiro
 } from ('/scripts/service/usuario/sidebarService.js');
 
 document.addEventListener('DOMContentLoaded', async () => {
 
     const userDataElement = document.getElementById('user-data');
     const usuarioId = userDataElement.getAttribute('data-user-id');
+
+    document.querySelectorAll('#cadastro-side-botao').forEach(botao => {
+        botao.addEventListener('click', (event) => {
+            event.stopPropagation();
+            try {
+                if(usuarioId){
+                    getCadastro(usuarioId);
+                } else {
+                    getCadastroPrimeiro();
+                }
+            } catch (error) {
+                console.error('Erro ao carregar página:', error);
+            }
+        });
+    });
 
     document.querySelectorAll('#senha-side-botao').forEach(botao => {
         botao.addEventListener('click', (event) => {
@@ -22,7 +39,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     });
 
-    document.querySelectorAll('#cadastro-side-botao').forEach(botao => {
+    document.querySelectorAll('#atualizar-side-botao').forEach(botao => {
         botao.addEventListener('click', (event) => {
             event.stopPropagation();
             try {
