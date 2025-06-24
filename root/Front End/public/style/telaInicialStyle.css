@@ -1,0 +1,114 @@
+/* Estilos para a página de tela inicial */
+
+/* Reset e estilos base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Lato", sans-serif;
+}
+
+/* Estilização da Tela Inicial */
+.main-tela-inicial {
+    background-color: #0003c8;
+    width: 100%;
+    height: 100vh;
+}
+
+.centralizacao-tela-inicial {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.menssagem-tela-inicial {
+    display: flex;
+    border: 3px solid white;
+    background-color: #0003c8;
+    color: #ffffff;
+    font-size: large;
+    font-weight: bold;
+    justify-self: center;
+    padding: 10px;
+    margin-bottom: 30px;
+}
+
+/* Estilos dos botões */
+.botao-usuario {
+    background-color: #0003c8;
+    color: #ffffff;
+    border: 5px solid white;
+    cursor: pointer;
+    padding: 3px;
+    border-radius: 10px;
+    margin: 0 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 200px;
+}
+
+.botao-usuario:hover {
+    background-color: #1d21ff;
+    color: #ffffff;
+    border: 5px solid white;
+    cursor: pointer;
+    padding: 3px;
+    border-radius: 10px;
+}
+
+.botao-adm {
+    background-color: #0003c8;
+    color: #ffffff;
+    border: 5px solid white;
+    cursor: pointer;
+    padding: 3px;
+    border-radius: 10px;
+    margin: 0 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 200px;
+}
+
+.botao-adm:hover {
+    background-color: #1d21ff;
+    color: #ffffff;
+    border: 5px solid white;
+    cursor: pointer;
+    padding: 3px;
+    border-radius: 10px;
+}
+
+/* Estilos da imagem */
+.imagem-inicial-tela {
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+/* Estilos de layout */
+.linha_centralizada {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.coluna {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}

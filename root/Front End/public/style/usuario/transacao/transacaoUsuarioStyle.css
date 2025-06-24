@@ -1,0 +1,389 @@
+/* Estilos gerais da div conteudo */
+.conteudo {
+    margin-left: 150px;
+    padding: 20px;
+    flex: 1;
+}
+
+/* Estilos para blocos de título */
+.bloco_titulo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    height: 55px;
+    background-color: #0003c8;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.titulo {
+    color: #ffffff;
+    font-size: 25px;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* Estilos para tabelas */
+.table_div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+table {
+    border-collapse: collapse;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    min-width: 50px;
+}
+
+th {
+    background-color: #0003c8;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.footable {
+    background-color: #0003c8;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.subtotal {
+    text-align: right;
+}
+
+/* Estilos para botões */
+.botoes {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 10px;
+}
+
+.botoes_resultado {
+    display: flex;
+    gap: 10px;
+}
+
+.cancelar {
+    background-color: red;
+    width: 80px;
+    height: 30px;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    border: red;
+}
+
+.comprar {
+    background-color: green;
+    width: 80px;
+    height: 30px;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    border: green;
+}
+
+.adicionar {
+    background-color: green;
+    width: 80px;
+    height: 30px;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    border: green;
+}
+
+.botao-troca {
+    background-color: #0003c8;
+    width: 160px;
+    height: 30px;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    border: #0003c8;
+}
+
+.botao-devolucao {
+    background-color: #0003c8;
+    width: 160px;
+    height: 30px;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    border: #0003c8;
+}
+
+/* Estilos para formulários e inputs */
+.linha-input-pesquisa {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+
+.linha-input-pesquisa-hidden {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+    display: none;
+}
+
+.filtro-pesquisa-input {
+    padding: 8px 15px;
+    border: 2px solid black;
+    border-radius: 4px 0 0 4px;
+    width: 400px;
+    margin-left: 5px;
+    outline: none;
+}
+
+.filtro-pesquisa-input-autor {
+    padding: 8px 15px;
+    border: 2px solid black;
+    border-radius: 4px 0 0 4px;
+    width: 400px;
+    margin-left: 5px;
+    outline: none;
+}
+
+.filtro-pesquisa-input-editora {
+    padding: 8px 15px;
+    border: 2px solid black;
+    border-radius: 4px 0 0 4px;
+    width: 400px;
+    margin-left: 5px;
+    outline: none;
+}
+
+.filtro-pesquisa-input-categoria {
+    padding: 8px 15px;
+    border: 2px solid black;
+    border-radius: 4px 0 0 4px;
+    width: 400px;
+    margin-left: 5px;
+    outline: none;
+}
+
+.botao-mais-filtro {
+    padding: 5px 10px;
+    background-color: #0004ff;
+    color: white;
+    border: none;
+    border-radius: 0;
+    justify-self: center;
+    cursor: pointer;
+}
+
+.linha-input-pesquisa button {
+    padding: 8px 15px;
+    background-color: #0004ff;
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+}
+
+.label-pesquisa-filtro-data {
+    font-size: 15px;
+    display: flex;
+    align-items: flex-start;
+    align-self: flex-start;
+}
+
+.range-input {
+    width: 350px;
+}
+
+.label-pesquisa-filtro-tamanho {
+    font-size: 15px;
+    align-items: center;
+    align-self: center;
+}
+
+.filtro-pesquisa-numero {
+    padding: 8px 15px;
+    border: 2px solid black;
+    border-radius: 4px 0 0 4px;
+    width: 100px;
+    margin-left: 15px;
+    outline: none;
+}
+
+.filtro-pesquisa-numero-isbn {
+    padding: 8px 15px;
+    border: 2px solid black;
+    border-radius: 4px 0 0 4px;
+    width: 200px;
+    margin-left: 15px;
+    outline: none;
+}
+
+.filtro-pesquisa-numero-codigo {
+    padding: 8px 15px;
+    border: 2px solid black;
+    border-radius: 4px 0 0 4px;
+    width: 200px;
+    margin-left: 15px;
+    outline: none;
+}
+
+/* Estilos para selects */
+.selecao {
+    background-color: #0003c8;
+    width: 85px;
+    height: 30px;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    border: #0003c8;
+}
+
+.selecao_media {
+    background-color: #0003c8;
+    width: 220px;
+    height: 30px;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    border: #0003c8;
+}
+
+.selecao_grande {
+    background-color: #0003c8;
+    width: 400px;
+    height: 30px;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    border: #0003c8;
+}
+
+/* Estilos para labels */
+.label_pequena {
+    font-size: 22px;
+    display: flex;
+    align-items: flex-start;
+    align-self: flex-start;
+}
+
+.label_genero {
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    align-self: center;
+}
+
+/* Estilos para submenus */
+.atualizar_submenu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    z-index: 1000;
+}
+
+.submenu-botao-adicao {
+    background-color: #0003c8;
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: left;
+    transition: background-color 0.3s ease;
+}
+
+.submenu-botao-adicao:hover {
+    background-color: #1d21ff;
+}
+
+.submenu-adicionar-produto {
+    background-color: green;
+    color: #ffffff;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
+    font-size: small;
+    padding: 5px;
+}
+
+/* Estilos para mensagens de erro */
+.error-message {
+    padding: 15px;
+    background-color: #ffebee;
+    color: #b71c1c;
+    border: 1px solid #ffcdd2;
+    border-radius: 4px;
+    margin: 20px 0;
+    position: relative;
+    z-index: 1;
+}
+
+/* Estilos para elementos ocultos */
+.hidden {
+    display: none;
+}
+
+/* Estilos para linhas centralizadas */
+.linha_centralizada {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+
+/* Estilos para container de pagamento */
+.container-pagamento {
+    position: relative;
+    width: 100%;
+}
+
+.formas-pagamento-adicionadas {
+    margin-bottom: 20px;
+}
+
+.adicionar-endereco {
+    background-color: #0003c8;
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.adicionar-forma-pagamento {
+    background-color: #0003c8;
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Estilos para tooltips */
+.qtd-max {
+    cursor: help;
+    text-decoration: underline dotted;
+}

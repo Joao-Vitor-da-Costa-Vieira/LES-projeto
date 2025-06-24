@@ -1,0 +1,266 @@
+/* Estilos gerais da div conteudo */
+.conteudo {
+    margin-left: 150px;
+    padding: 20px;
+    flex: 1;
+}
+
+/* Estilos para blocos de título */
+.bloco_titulo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    height: 55px;
+    background-color: #0003c8;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.titulo {
+    color: #ffffff;
+    font-size: 25px;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* Estilos para tabelas */
+.table_div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+table {
+    border-collapse: collapse;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #0003c8;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+/* Estilos para botões */
+.botoes {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.botoes_resultado {
+    display: flex;
+    gap: 10px;
+}
+
+.adicionar {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.alterar {
+    background-color: #0003c8;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.confirmar {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Estilos para filtros */
+.filtros-container {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Estilos para elementos de formulário */
+.linha_centralizada {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.label_genero {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.label_pequena {
+    font-size: 16px;
+    min-width: 120px;
+}
+
+.selecao_media {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    min-width: 220px;
+}
+
+.range-input {
+    width: 200px;
+}
+
+.filtro-pesquisa-input-autor {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 200px;
+}
+
+.filtro-data-inicio,
+.filtro-data-fim {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Estilos para a página de análise */
+.box {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    align-items: center;
+    width: 300px;
+    padding: 20px;
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.1);
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+.box .title-periodo,
+.box .title-categorias {
+    margin: 0 0 10px 0;
+    text-align: center;
+}
+
+.btns {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.btn-filtro {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+}
+
+.btn-filtrar {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.btn-limpar {
+    background-color: #f1f1f1;
+    color: #333;
+    border: 1px solid #ddd;
+}
+
+.grafico {
+    width: 100%;
+    margin-top: 30px;
+}
+
+#historico-vendas {
+    width: 90%;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.1);
+}
+
+/* Estilos para status */
+.status-EM PROCESSAMENTO {
+    color: #FFA500;
+    font-weight: bold;
+}
+
+.status-REPROVADO {
+    color: #FF0000;
+    font-weight: bold;
+}
+
+.status-APROVADO {
+    color: #008000;
+    font-weight: bold;
+}
+
+.status-CANCELADO {
+    color: #FF0000;
+    font-weight: bold;
+}
+
+.status-EM TRANSPORTE {
+    color: #0000FF;
+    font-weight: bold;
+}
+
+.status-ENTREGUE {
+    color: #008000;
+    font-weight: bold;
+}
+
+.status-TROCA SOLICITADA,
+.status-DEVOLUÇÃO SOLICITADA {
+    color: #FFA500;
+    font-weight: bold;
+}
+
+.status-TROCA APROVADA,
+.status-DEVOLUÇÃO APROVADA {
+    color: #0000FF;
+    font-weight: bold;
+}
+
+.status-TROCA CONCLUÍDA,
+.status-DEVOLUÇÃO CONCLUIDA {
+    color: #008000;
+    font-weight: bold;
+}
+
+.status-TROCA RECUSADA,
+.status-DEVOLUÇÃO RECUSADA {
+    color: #FF0000;
+    font-weight: bold;
+}
