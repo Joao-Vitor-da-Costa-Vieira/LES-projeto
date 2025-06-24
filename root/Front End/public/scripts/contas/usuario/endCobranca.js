@@ -1,4 +1,7 @@
-import { atualizarEndCobranca } from "/scripts/service/usuario/enderecoCobrancaService.js";
+import { getAtualizarEndCobranca } from "/scripts/service/usuario/enderecoCobrancaService.js";
+
+const userDataElement = document.getElementById('user-data');
+const usr_id = userDataElement ? userDataElement.dataset.userId : null;
 
 document.querySelectorAll('.atualizar').forEach(button => {
     
@@ -6,8 +9,6 @@ document.querySelectorAll('.atualizar').forEach(button => {
         const enderecoMostrado = this.closest('.endereco-mostrado');
         const id = enderecoMostrado.querySelector('.endereco-id').textContent;
 
-        const path = window.location.pathname + `/atualizar/${id}`;
-
-        atualizarEndCobranca(path);
+        getAtualizarEndCobranca(id, usr_id);
     });
 });

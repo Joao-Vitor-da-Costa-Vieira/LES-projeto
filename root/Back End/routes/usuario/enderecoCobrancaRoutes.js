@@ -4,8 +4,8 @@ const controllerEnderecoCobranca = require('../../controllers/usuario/endCobranc
 
 //Views
 router.get('/endereco-cobranca', controllerEnderecoCobranca.getEnderecoCobranca);
-router.get('/endereco-cobranca/:usr_id/adicionar', controllerEnderecoCobranca.getEnderecoCobrancaAdicionar);
-router.get('/endereco-cobranca/:usr_id/atualizar/:end_id', controllerEnderecoCobranca.getEnderecoCobrancaAtualizar);
+router.get('/endereco-cobranca/adicionar', controllerEnderecoCobranca.getEnderecoCobrancaAdicionar);
+router.get('/endereco-cobranca/atualizar', controllerEnderecoCobranca.getEnderecoCobrancaAtualizar);
 
 router.put('/endereco-cobranca/:usr_id/atualizar/:end_id', controllerEnderecoCobranca.putEnderecoCobrancaAtualizar);
 

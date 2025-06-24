@@ -45,9 +45,9 @@ export async function buscarEnderecoCobrancaIdService(id) {
     }
 }
 
-export async function atualizarEndCobranca(path) {
+export async function getAtualizarEndCobranca(id,usr_id) {
     try {
-        window.location.href = path;
+        window.location.href = `/endereco-cobranca/atualizar?usr_id=${encodeURIComponent(usr_id)}&end_id=${encodeURIComponent(id)}`;
     } catch (error) {
         console.error(`Erro no atualizarEndCobranca - serviceEndCobranca: ${err}`);
         throw err;

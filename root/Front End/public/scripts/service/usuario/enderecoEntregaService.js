@@ -45,9 +45,9 @@ export async function buscarEnderecoEntregaIdService(id) {
     }
 }
 
-export async function atualizarEndEntrega(path) {
+export async function getAtualizarEndEntrega(id,usr_id) {
     try {
-        window.location.href = path;
+        window.location.href = `/endereco-entrega/atualizar?usr_id=${encodeURIComponent(usr_id)}&end_id=${encodeURIComponent(id)}`;
     } catch (error) {
         console.error(`Erro no atualizarEndEntrega - serviceEndEntrega: ${err}`);
         throw err;

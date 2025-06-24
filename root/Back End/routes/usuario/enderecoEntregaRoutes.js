@@ -4,8 +4,8 @@ const controllerEnderecoEntrega = require('../../controllers/usuario/endEntregaC
 
 // Views
 router.get('/endereco-entrega', controllerEnderecoEntrega.getEnderecoEntrega);
-router.get('/endereco-entrega/:usr_id/adicionar', controllerEnderecoEntrega.getEnderecoEntregaAdicionar);
-router.get('/endereco-entrega/:usr_id/atualizar/:end_id', controllerEnderecoEntrega.getEnderecoEntregaAtualizar);
+router.get('/endereco-entrega/adicionar', controllerEnderecoEntrega.getEnderecoEntregaAdicionar);
+router.get('/endereco-entrega/atualizar', controllerEnderecoEntrega.getEnderecoEntregaAtualizar);
 
 router.put('/endereco-entrega/:usr_id/atualizar/:end_id', controllerEnderecoEntrega.putEnderecoEntregaAtualizar);
 

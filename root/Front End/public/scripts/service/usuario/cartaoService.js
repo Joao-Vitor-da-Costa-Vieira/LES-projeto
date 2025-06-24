@@ -30,9 +30,9 @@ export async function atualizarCartaoService(dados, usr_id, crt_id) {
     }
 }
 
-export async function atualizarCartao(path) {
+export async function getAtualizarCartao(id,usr_id) {
     try {
-        window.location.href = path;
+        window.location.href = `/cartao/atualizar?usr_id=${encodeURIComponent(usr_id)}&crt_id=${encodeURIComponent(id)}`;
     } catch (error) {
         console.error(`Erro no atualizarCartao - serviceCartao: ${err}`);
         throw err;

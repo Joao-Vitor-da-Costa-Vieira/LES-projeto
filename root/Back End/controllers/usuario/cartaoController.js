@@ -29,8 +29,17 @@ module.exports.getCartaoAdicionar = async (req, res) => {
 };
 
 module.exports.getCartaoAtualizar = async (req, res) => {
-    const cartoes = await buscarCartaoId(req.params.crt_id);
-    res.render('contas/usuario/cartaoAtualizar', { cartoes: cartoes });
+
+    const {crt_id, usr_id} = decodeURIComponent(req.query);
+
+    const usuario = await buscarUsuarioId(usr_id);
+    const cartoes = await buscarCartaoId(crt_id);
+    const notificacoes = usuario ? await buscarNotificacoes(usr_id) : [];
+
+    res.render('contas/usuario/cartaoAtualizar', { 
+        cartoes: cartoes,
+        usuario: usuario,
+        notificacoes });
 };
 
 // Inserção de dados

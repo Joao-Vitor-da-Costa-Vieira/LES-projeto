@@ -1,4 +1,7 @@
-import { atualizarCartao } from "/scripts/service/usuario/cartaoService.js";
+import { getAtualizarCartao } from "/scripts/service/usuario/cartaoService.js";
+
+const userDataElement = document.getElementById('user-data');
+const usr_id = userDataElement ? userDataElement.dataset.userId : null;
 
 document.querySelectorAll('.atualizar').forEach(button => {
     
@@ -6,8 +9,6 @@ document.querySelectorAll('.atualizar').forEach(button => {
         const enderecoMostrado = this.closest('.cartoes-mostrado');
         const id = enderecoMostrado.querySelector('.cartoes-id').textContent;
 
-        const path = window.location.pathname + `/atualizar/${id}`;
-
-        atualizarCartao(path);
+        getAtualizarCartao(id,usr_id);
     });
 });

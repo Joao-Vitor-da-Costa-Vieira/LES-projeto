@@ -4,8 +4,8 @@ const controllerCartao = require('../../controllers/usuario/cartaoController');
 
 // Views
 router.get('/cartao', controllerCartao.getCartao);
-router.get('/cartao/:usr_id/adicionar', controllerCartao.getCartaoAdicionar);
-router.get('/cartao/:usr_id/atualizar/:crt_id', controllerCartao.getCartaoAtualizar);
+router.get('/cartao/adicionar', controllerCartao.getCartaoAdicionar);
+router.get('/cartao/atualizar', controllerCartao.getCartaoAtualizar);
 
 router.put('/cartao/:usr_id/atualizar/:crt_id', controllerCartao.putCartaoAtualizar);
 
