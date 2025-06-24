@@ -25,8 +25,15 @@ module.exports.getEnderecoEntrega = async (req, res) => {
 };
 
 module.exports.getEnderecoEntregaAdicionar = async (req, res) => {
-    const enderecos = await buscarEnderecosEntregaUsuarioId(req.params.usr_id);
-    res.render('contas/usuario/endEntregaAdicionar', { enderecos: enderecos });
+    const { usr_id } = req.query;
+
+    const usuario = await buscarUsuarioId(usr_id);
+    const notificacoes = usuario ? await buscarNotificacoes(usr_id) : [];
+
+    res.render('contas/usuario/endEntregaAdicionar', { 
+        usuario: usuario,
+        notificacoes
+     });
 };
 
 module.exports.getEnderecoEntregaAtualizar = async (req, res) => {

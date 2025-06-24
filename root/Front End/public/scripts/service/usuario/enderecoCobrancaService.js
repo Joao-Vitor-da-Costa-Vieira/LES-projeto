@@ -53,3 +53,12 @@ export async function getAtualizarEndCobranca(id,usr_id) {
         throw err;
     }
 }
+
+export async function getAdicionarEndCobranca(usr_id) {
+    try {
+        window.location.href = `/endereco-cobranca/adicionar?usr_id=${encodeURIComponent(usr_id)}`;
+    } catch (error) {
+        console.error(`Erro no adicionarEndCobranca - serviceEndCobranca: ${err}`);
+        throw err;
+    }
+}

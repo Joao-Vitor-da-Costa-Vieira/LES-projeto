@@ -53,3 +53,12 @@ export async function getAtualizarEndEntrega(id,usr_id) {
         throw err;
     }
 }
+
+export async function getAdicionarEndEntrega(usr_id) {
+    try {
+        window.location.href = `/endereco-entrega/adicionar?usr_id=${encodeURIComponent(usr_id)}`;
+    } catch (error) {
+        console.error(`Erro no adicionarEndEntrega - serviceEndEntrega: ${err}`);
+        throw err;
+    }
+}

@@ -38,3 +38,12 @@ export async function getAtualizarCartao(id,usr_id) {
         throw err;
     }
 }
+
+export async function getAdicionarCartao(usr_id) {
+    try {
+        window.location.href = `/cartao/adicionar?usr_id=${encodeURIComponent(usr_id)}`;
+    } catch (error) {
+        console.error(`Erro no adicionarCartao - serviceCartao: ${err}`);
+        throw err;
+    }
+}

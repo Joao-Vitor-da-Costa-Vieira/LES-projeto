@@ -24,8 +24,15 @@ module.exports.getEnderecoCobranca = async (req, res) => {
 };
 
 module.exports.getEnderecoCobrancaAdicionar = async (req, res) => {
-    const enderecos = await buscarEnderecosCobrancaUsuarioId(req.params.usr_id);
-    res.render('contas/usuario/endCobrancaAdicionar', { enderecos: enderecos });
+    const { usr_id } = req.query;
+
+    const usuario = await buscarUsuarioId(usr_id);
+    const notificacoes = usuario ? await buscarNotificacoes(usr_id) : [];
+
+    res.render('contas/usuario/endCobrancaAdicionar', { 
+        usuario: usuario,
+        notificacoes
+     });
 };
 
 module.exports.getEnderecoCobrancaAtualizar = async (req, res) => {
