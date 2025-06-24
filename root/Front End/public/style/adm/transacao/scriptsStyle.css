@@ -1,0 +1,220 @@
+/* Styles for analytics/pedidos scripts */
+
+/* Status Modal Styles */
+.status-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border: 5px solid #0003c8;
+    width: 90%;
+    max-width: 500px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    padding-top: 40px;
+}
+
+.status-info {
+    margin: 1rem 0;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 4px;
+}
+
+.item-modal {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.btn-opcao {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-opcao:hover {
+    background: #0056b3;
+}
+
+.mensagem-status {
+    color: #dc3545;
+    padding: 1rem;
+    text-align: center;
+    font-weight: bold;
+    margin: 1rem 0;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+    padding: 5px 10px;
+    line-height: 1;
+    transition: color 0.3s;
+}
+
+.close-modal:hover {
+    color: #333;
+}
+
+/* Confirmation Modal Styles */
+.confirmation-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.confirmation-content {
+    background: white;
+    padding: 2rem;
+    border: 10px solid #0003c8;
+    text-align: center;
+    max-width: 400px;
+}
+
+#btn-voltar-pedidos {
+    background: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+#btn-voltar-pedidos:hover {
+    background: #218838;
+}
+
+/* Filter Container Styles */
+.filtros-container {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.filtros-container.hidden {
+    display: none;
+}
+
+/* Status Badge Styles */
+.status-aprovado {
+    background-color: #28a745;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 4px;
+}
+
+.status-cancelado {
+    background-color: #dc3545;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 4px;
+}
+
+.status-em-transporte {
+    background-color: #17a2b8;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 4px;
+}
+
+.status-entregue {
+    background-color: #6c757d;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 4px;
+}
+
+.status-troca-solicitada {
+    background-color: #ffc107;
+    color: black;
+    padding: 3px 8px;
+    border-radius: 4px;
+}
+
+/* Chart Container Styles */
+#historico-vendas {
+    width: 100%;
+    height: 400px;
+    margin-top: 20px;
+}
+
+/* Filter Button Styles */
+.botao-mais-filtro {
+    padding: 5px 10px;
+    background-color: #0004ff;
+    color: white;
+    border: none;
+    border-radius: 0;
+    justify-self: center;
+    cursor: pointer;
+}
+
+.confirmar {
+    background-color: #0003c8;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.confirmar:hover {
+    background-color: #0004ff;
+}
+
+/* Range Input Styles */
+.range-input {
+    width: 350px;
+    margin: 10px 0;
+}
+
+/* Choices.js Overrides */
+.choices__list--multiple .choices__item {
+    background-color: #0003c8;
+    color: white;
+    border-radius: 20px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.choices__input {
+    border: none !important;
+    background: transparent !important;
+}
