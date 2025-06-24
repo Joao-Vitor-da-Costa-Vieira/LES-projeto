@@ -27,12 +27,98 @@ async function buscarLivrosTitulo(titulo) {
     }
 }
 
-async function consultaFiltroLivro(query, params){
+async function consultaFiltroLivro(filtros){
     try {
-        console.log('Executando query:', query);
-        console.log('Com parâmetros:', params);
+
+        // Query modificada para MySQL
+        let queryBase = `
+            SELECT 
+                l.*,
+                GROUP_CONCAT(DISTINCT a.atr_nome SEPARATOR ', ') AS atr_nome,
+                GROUP_CONCAT(DISTINCT et.edi_nome SEPARATOR ', ') AS edi_nome,
+                GROUP_CONCAT(DISTINCT c.cat_nome SEPARATOR ', ') AS cat_nome
+            FROM livros l
+            LEFT JOIN escreveu e ON l.lvr_id = e.livros_lvr_id
+            LEFT JOIN autor a ON e.autor_atr_id = a.atr_id
+            LEFT JOIN editou ed ON l.lvr_id = ed.livros_lvr_id
+            LEFT JOIN editora et ON ed.editora_edi_id = et.edi_id
+            LEFT JOIN possui4 p ON l.lvr_id = p.livros_lvr_id
+            LEFT JOIN categoria c ON p.categoria_cat_id = c.cat_id
+        `;
+
+        const conditions = [];
+        const params = [];
+
+        // [Restante das condições permanece igual...]
+        if (filtros.titulo) {
+            conditions.push(`l.lvr_titulo LIKE ?`);
+            params.push(`%${filtros.titulo}%`);
+        }
+
+        if (filtros.precoMax && !isNaN(filtros.precoMax)) {
+            conditions.push(`l.lvr_custo <= ?`);
+            params.push(parseFloat(filtros.precoMax));
+        }
+
+        if (filtros.autor) {
+            conditions.push(`a.atr_nome LIKE ?`);
+            params.push(`%${filtros.autor}%`);
+        }
+
+        if (filtros.editora) {
+            conditions.push(`et.edi_nome LIKE ?`);
+            params.push(`%${filtros.editora}%`);
+        }
+
+        if (filtros.categoria) {
+            conditions.push(`c.cat_nome LIKE ?`);
+            params.push(`%${filtros.categoria}%`);
+        }
+
+        if (filtros.dataInicio) {
+            conditions.push(`l.lvr_ano >= ?`);
+            params.push(filtros.dataInicio);
+        }
+
+        if (filtros.dataFinal) {
+            conditions.push(`l.lvr_ano <= ?`);
+            params.push(filtros.dataFinal);
+        }
+
+        if (filtros.tamanho) {
+            let sizeCondition;
+            switch (filtros.tamanho) {
+                case '1': sizeCondition = 'l.lvr_profundidade < 1'; break;
+                case '2': sizeCondition = 'l.lvr_profundidade >= 1 AND l.lvr_profundidade < 2'; break;
+                case '3': sizeCondition = 'l.lvr_profundidade >= 2'; break;
+            }
+            if (sizeCondition) conditions.push(sizeCondition);
+        }
+
+        if (filtros.paginasMax && !isNaN(filtros.paginasMax)) {
+            conditions.push(`l.lvr_numero_de_paginas <= ?`);
+            params.push(parseInt(filtros.paginasMax));
+        }
+
+        if (filtros.isbn) {
+            conditions.push(`l.lvr_isbn = ?`);
+            params.push(filtros.isbn);
+        }
+
+        if (filtros.codigoBarras) {
+            conditions.push(`l.lvr_codigo_de_barras = ?`);
+            params.push(filtros.codigoBarras);
+        }
+
+        // Combinar condições
+        if (conditions.length > 0) {
+            queryBase += ` WHERE ` + conditions.join(' AND ');
+        }
+
+        // Agrupar apenas por ID do livro
+        queryBase += ` GROUP BY l.lvr_id`;
         
-        const [livros] = await db.query(query, params);
+        const [livros] = await db.query(queryBase, params);
         return livros;
     } catch (err) {
         console.error(`Erro no consultaFiltroLivro - modelLivros: ${err}`);
