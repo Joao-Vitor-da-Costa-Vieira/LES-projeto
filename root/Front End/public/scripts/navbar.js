@@ -80,18 +80,18 @@ function atualizarSubmenu(notificacoes, usuarioId) {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-    document.querySelectorAll('.home-link').forEach(botao => {
-        botao.addEventListener('click', (event) => {
-            event.stopPropagation();
-            console.log("Botão clicado!");
-            getHome('1');
-        });
-    });
-
     const userDataElement = document.getElementById('user-data');
     const usuarioId = userDataElement.getAttribute('data-user-id');
     const iconeNotificacao = document.querySelector('.notificacao-icone');
     const submenu = document.querySelector('.notificacao-submenu');
+    
+    document.querySelectorAll('.home-link').forEach(botao => {
+        botao.addEventListener('click', (event) => {
+            event.stopPropagation();
+            console.log("Botão clicado!");
+            getHome(usuarioId);
+        });
+    });
 
     try {
         const notificacoes = await verificarNotificacoes(usuarioId);
