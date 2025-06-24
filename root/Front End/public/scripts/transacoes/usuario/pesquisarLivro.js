@@ -1,4 +1,4 @@
-import { filtroLivroService } from "/scripts/scripts/service/livroService.js";
+import { filtroLivroService } from "/scripts/service/livroService.js";
 import { adicionarCarrinho } from "/scripts/service/transacoes/carrinhoService.js";
 import { getCarrinho } from "/scripts/service/transacoes/carrinhoService.js";
 

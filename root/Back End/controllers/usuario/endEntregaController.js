@@ -5,6 +5,8 @@ const {
     cadastrarEnderecoEntrega
 } = require("../../models/usuario/endEntregaModel");
 
+const {buscarUsuarioId} = require("../../models/usuario/usuarioModel");
+
 const { buscarNotificacoes } = require("../../models/usuario/notificacaoModel");
 
 // Views

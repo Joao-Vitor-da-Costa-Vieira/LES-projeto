@@ -98,7 +98,9 @@ module.exports.getApiTodosLivros = async (req, res) => {
 module.exports.getApiFiltrarLivros = async (req, res) => {
     try {
         // Obter todos os parâmetros de query da requisição
-        const { titulo, precoMax, autor, editora, categoria, dataInicio, dataFinal, tamanho, paginasMax, isbn, codigoBarras } = req.query;
+        const filtros = JSON.parse(decodeURIComponent(req.query.filtros));
+
+        console.log("filtros:", filtros);
 
         // Query modificada para MySQL
         let queryBase = `
@@ -120,44 +122,44 @@ module.exports.getApiFiltrarLivros = async (req, res) => {
         const params = [];
 
         // [Restante das condições permanece igual...]
-        if (titulo) {
+        if (filtros.titulo) {
             conditions.push(`l.lvr_titulo LIKE ?`);
-            params.push(`%${titulo}%`);
+            params.push(`%${filtros.titulo}%`);
         }
 
-        if (precoMax && !isNaN(precoMax)) {
+        if (filtros.precoMax && !isNaN(filtros.precoMax)) {
             conditions.push(`l.lvr_custo <= ?`);
-            params.push(parseFloat(precoMax));
+            params.push(parseFloat(filtros.precoMax));
         }
 
-        if (autor) {
+        if (filtros.autor) {
             conditions.push(`a.atr_nome LIKE ?`);
-            params.push(`%${autor}%`);
+            params.push(`%${filtros.autor}%`);
         }
 
-        if (editora) {
+        if (filtros.editora) {
             conditions.push(`et.edi_nome LIKE ?`);
-            params.push(`%${editora}%`);
+            params.push(`%${filtros.editora}%`);
         }
 
-        if (categoria) {
+        if (filtros.categoria) {
             conditions.push(`c.cat_nome LIKE ?`);
-            params.push(`%${categoria}%`);
+            params.push(`%${filtros.categoria}%`);
         }
 
-        if (dataInicio) {
+        if (filtros.dataInicio) {
             conditions.push(`l.lvr_ano >= ?`);
-            params.push(dataInicio);
+            params.push(filtros.dataInicio);
         }
 
-        if (dataFinal) {
+        if (filtros.dataFinal) {
             conditions.push(`l.lvr_ano <= ?`);
-            params.push(dataFinal);
+            params.push(filtros.dataFinal);
         }
 
-        if (tamanho) {
+        if (filtros.tamanho) {
             let sizeCondition;
-            switch (tamanho) {
+            switch (filtros.tamanho) {
                 case '1': sizeCondition = 'l.lvr_profundidade < 1'; break;
                 case '2': sizeCondition = 'l.lvr_profundidade >= 1 AND l.lvr_profundidade < 2'; break;
                 case '3': sizeCondition = 'l.lvr_profundidade >= 2'; break;
@@ -165,19 +167,19 @@ module.exports.getApiFiltrarLivros = async (req, res) => {
             if (sizeCondition) conditions.push(sizeCondition);
         }
 
-        if (paginasMax && !isNaN(paginasMax)) {
+        if (filtros.paginasMax && !isNaN(filtros.paginasMax)) {
             conditions.push(`l.lvr_numero_de_paginas <= ?`);
-            params.push(parseInt(paginasMax));
+            params.push(parseInt(filtros.paginasMax));
         }
 
-        if (isbn) {
+        if (filtros.isbn) {
             conditions.push(`l.lvr_isbn = ?`);
-            params.push(isbn);
+            params.push(filtros.isbn);
         }
 
-        if (codigoBarras) {
+        if (filtros.codigoBarras) {
             conditions.push(`l.lvr_codigo_de_barras = ?`);
-            params.push(codigoBarras);
+            params.push(filtros.codigoBarras);
         }
 
         // Combinar condições

@@ -6,14 +6,14 @@ import {
     getEndCobranca,
     getCadastro,
     getCadastroPrimeiro
-} from ('/scripts/service/usuario/sidebarService.js');
+} from "/scripts/service/usuario/sidebarService.js";
 
 document.addEventListener('DOMContentLoaded', async () => {
 
     const userDataElement = document.getElementById('user-data');
     const usuarioId = userDataElement.getAttribute('data-user-id');
 
-    document.querySelectorAll('#cadastro-side-botao').forEach(botao => {
+    document.querySelectorAll('#cadastro-side-btn').forEach(botao => {
         botao.addEventListener('click', (event) => {
             event.stopPropagation();
             try {
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     });
 
-    document.querySelectorAll('#senha-side-botao').forEach(botao => {
+    document.querySelectorAll('#senha-side-btn').forEach(botao => {
         botao.addEventListener('click', (event) => {
             event.stopPropagation();
             try {
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     });
 
-    document.querySelectorAll('#atualizar-side-botao').forEach(botao => {
+    document.querySelectorAll('#atualizar-side-btn').forEach(botao => {
         botao.addEventListener('click', (event) => {
             event.stopPropagation();
             try {
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     });
 
-    document.querySelectorAll('#cartao-side-botao').forEach(botao => {
+    document.querySelectorAll('#cartao-side-btn').forEach(botao => {
         botao.addEventListener('click', (event) => {
             event.stopPropagation();
             try {
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     });
 
-    document.querySelectorAll('#end-entrega-side-botao').forEach(botao => {
+    document.querySelectorAll('#end-entrega-side-btn').forEach(botao => {
         botao.addEventListener('click', (event) => {
             event.stopPropagation();
             try {
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     });
 
-    document.querySelectorAll('#end-cobranca-side-botao').forEach(botao => {
+    document.querySelectorAll('#end-cobranca-side-btn').forEach(botao => {
         botao.addEventListener('click', (event) => {
             event.stopPropagation();
             try {

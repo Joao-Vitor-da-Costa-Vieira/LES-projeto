@@ -10,7 +10,7 @@ export async function solicitarDevolucao(id) {
 export async function confirmarDevolucao(usr_id, itensTroca, subtotal, tra_id, end_id) {
     
     try {
-        fetch('/devolucoes/confirmar', {
+        const response = await fetch('/devolucoes/confirmar', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
@@ -19,30 +19,21 @@ export async function confirmarDevolucao(usr_id, itensTroca, subtotal, tra_id, e
             subtotal,
             tra_id: tra_id[0],
             end_id: end_id
+            })
         })
-    })
-    .then(response => {
-        if (!response.ok) throw new Error('Erro na solicitação');
-        return response;
-    })
-    .then(data => {
-        if (data.success) {
-            const usr_id = usr_id;
 
-            alert('Devolução solicitada!')
-            window.location.href = `/pagamento/historico?usr_id=${usr_id}`;
-            
-        } else {
-            alert(data.message || 'Erro ao processar devolucao');
+        const result = await response.json();
+
+        if (!response.ok || !result.success) {
+            throw new Error(result.message || 'Erro ao processar troca');
         }
-    })
-    .catch(error => {
-        console.error('Erro:', error);
-        alert('Erro ao processar solicitação');
-    });
+
+        alert(result.message || 'Troca solicitada com sucesso!');
+        window.location.href = `/pagamento/historico?usr_id=${usr_id}`;
+        
     } catch (error) {
-        console.error(`Erro no confirmarDevolucao - serviceDevolucoes: ${err}`);
-        throw err;
+        console.error(`Erro no confirmarDevolucao - serviceDevolucoes: ${error}`);
+        throw error;
     }
     
 }

@@ -5,6 +5,8 @@ const {
     cadastrarCartao
 } = require("../../models/usuario/cartaoModel");
 
+const {buscarUsuarioId} = require("../../models/usuario/usuarioModel");
+
 const { buscarNotificacoes } = require("../../models/usuario/notificacaoModel");
 
 // Views

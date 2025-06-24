@@ -9,17 +9,10 @@ export async function pesquisarLivroService(titulo, usr_id) {
 
 export async function filtroLivroService(filtros) {
     try {
-        // Constrói a query string a partir do objeto de filtros
-        const queryParams = new URLSearchParams();
-        
-        // Adiciona apenas os filtros que têm valores
-        for (const key in filtros) {
-            if (filtros[key] !== null && filtros[key] !== undefined && filtros[key] !== '') {
-                queryParams.append(key, filtros[key]);
-            }
-        }
 
-        const response = await fetch(`/api/livros-filtro?${queryParams.toString()}`, {
+        const filtrosEncoded = encodeURIComponent(JSON.stringify(filtros));
+
+        const response = await fetch(`/api/livros-filtro?filtros=${filtrosEncoded}`, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' }
         });

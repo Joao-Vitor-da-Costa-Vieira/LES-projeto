@@ -32,9 +32,7 @@ async function consultaFiltroLivro(query, params){
         console.log('Executando query:', query);
         console.log('Com parâmetros:', params);
         
-        const [livros] = await db.query(`
-                SELECT * FROM livros
-            `);
+        const [livros] = await db.query(query, params);
         return livros;
     } catch (err) {
         console.error(`Erro no consultaFiltroLivro - modelLivros: ${err}`);
