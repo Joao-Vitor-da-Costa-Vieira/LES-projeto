@@ -32,6 +32,7 @@ module.exports.getCadastro = (req, res) => {
 
 module.exports.getCadastroAtualizar = async (req, res) => {
     const { id } = req.query;
+
     const usuario = await buscarUsuarioId(id);
     const enderecosCobranca = await buscarEnderecosCobrancaUsuarioId(id);
     const enderecosEntrega = await buscarEnderecosEntregaUsuarioId(id);
@@ -48,8 +49,16 @@ module.exports.getCadastroAtualizar = async (req, res) => {
     });
 };
 
-module.exports.getSenha = (req, res) => {
-    res.render('contas/usuario/senha');
+module.exports.getSenha = async (req, res) => {
+    const { id } = req.query;
+
+    const usuario = await buscarUsuarioId(id);
+    const notificacoes = usuario ? await buscarNotificacoes(id) : [];
+
+    res.render('contas/usuario/senha', {
+        usuario: usuario,
+        notificacoes
+    });
 };
 
 module.exports.getUsuariosInativos = async (req, res) => {
