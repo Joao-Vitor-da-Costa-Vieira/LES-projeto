@@ -23,22 +23,28 @@ const { cadastrarUsuario,
         ativarUsuario 
 } = require("../../models/usuario/usuarioModel");
 
+const { buscarNotificacoes } = require("../../models/usuario/notificacaoModel");
+
 //Views
 module.exports.getCadastro = (req, res) => {
     res.render('contas/usuario/cadastrarUsuario');
 };
 
 module.exports.getCadastroAtualizar = async (req, res) => {
-    const usuario = await buscarUsuarioId(req.params.usr_id);
-    const enderecosCobranca = await buscarEnderecosCobrancaUsuarioId(req.params.usr_id);
-    const enderecosEntrega = await buscarEnderecosEntregaUsuarioId(req.params.usr_id);
-    const cartoes = await buscarCartoesUsuarioId(req.params.usr_id);
+    const { id } = req.query;
+    const usuario = await buscarUsuarioId(id);
+    const enderecosCobranca = await buscarEnderecosCobrancaUsuarioId(id);
+    const enderecosEntrega = await buscarEnderecosEntregaUsuarioId(id);
+    const cartoes = await buscarCartoesUsuarioId(id);
+
+    const notificacoes = usuario ? await buscarNotificacoes(id) : [];
 
     res.render('contas/usuario/atualizarUsuario', {
         usuario: usuario,
         enderecosCobranca: enderecosCobranca,
         enderecosEntrega: enderecosEntrega,
-        cartoes: cartoes
+        cartoes: cartoes,
+        notificacoes
     });
 };
 

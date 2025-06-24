@@ -4,7 +4,7 @@ const UsuarioController = require('../../controllers/usuario/usuarioController')
 
 //Views
 router.get('/cadastro', UsuarioController.getCadastro);
-router.get('/cadastro/:usr_id', UsuarioController.getCadastroAtualizar);
+router.get('/atualizar', UsuarioController.getCadastroAtualizar);
 router.get('/senha/:usr_id', UsuarioController.getSenha);
 router.get('/inativos', UsuarioController.getUsuariosInativos);
 router.get('/usuario/:usr_id', UsuarioController.getUsuariosAtivos);
