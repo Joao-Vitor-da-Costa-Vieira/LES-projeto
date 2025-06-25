@@ -8,7 +8,9 @@ document.querySelector('form').addEventListener('submit', async function(event){
     let dados = Object.fromEntries(formDados.entries());
 
     // Pegando o id do cliente e do cartão
-    const usr_id = window.location.pathname.split('/')[2];
+    const userDataElement = document.getElementById('user-data');
+    const usr_id = userDataElement ? userDataElement.dataset.userId : null;
+    
     const crt_id = window.location.pathname.split('/').splice(-1)[0];
 
     const cartao = {
