@@ -95,10 +95,11 @@ module.exports.patchSenha = async (req, res) => {
 
 module.exports.putCadastroAtualizar = async (req, res) => {
     try {
-        await atualizarEnderecoCobranca(req.body.endereco_c, req.body.endereco_c.end_id);
-        await atualizarEnderecoEntrega(req.body.endereco_e, req.body.endereco_e.end_id);
-        await atualizarCartao(req.body.cartao, req.body.cartao.crt_id);
-        await atualizarUsuario(req.body.usuario, req.params.usr_id);
+
+        const {usuario} = req.body;
+        const {usr_id} = req.params;
+
+        const res = await atualizarUsuario(usuario,usr_id);
 
         res.sendStatus(200);
     } catch (err) {

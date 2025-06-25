@@ -9,7 +9,8 @@ document.querySelector('form').addEventListener('submit', async function (event)
     let dados = Object.fromEntries(formDados.entries());
 
     // Pegando o ID do usuário
-    const usr_id = window.location.pathname.split('/').splice(-1)[0];
+    const userDataElement = document.getElementById('user-data');
+    const usr_id = userDataElement ? userDataElement.dataset.userId : null;;
 
     // Valida se as senhas são iguais
     if (dados.senha !== dados.conf_senha) {
@@ -36,39 +37,7 @@ document.querySelector('form').addEventListener('submit', async function (event)
         usr_senha: dados.senha
     };
 
-    const endereco_e = {
-        end_endereco: dados.endereco_e,
-        end_numero: dados.numero_e,
-        end_bairro: dados.bairro_e, 
-        end_cidade: dados.cidade_e,
-        end_estado: dados.estado_e,
-        end_cep: dados.cep_e,
-        end_complemento: dados.complemento_e
-    };
-
-    const endereco_c = {
-        end_endereco: dados.endereco_c,
-        end_numero: dados.numero_c,
-        end_bairro: dados.bairro_c, 
-        end_cidade: dados.cidade_c,
-        end_estado: dados.estado_c,
-        end_cep: dados.cep_c,
-        end_complemento: dados.complemento_c 
-    };
-
-    const cartao = {
-        crt_nome: dados.nome_c,
-        crt_numero: dados.num_cartao,
-        crt_bandeira: dados.bandeira, 
-        crt_codigo_seguranca: dados.cod_sec
-    };
-
-
-    const cadastroDados = { usuario, endereco_e, endereco_c, cartao };
-
-    console.log(cadastroDados);
-
-    const status = await cadastroAtualizarService(cadastroDados, usr_id);
+    const status = await cadastroAtualizarService(usuario, usr_id);
 
     if (status === 200) {
         alert('Usuário foi atualizado com sucesso!');
