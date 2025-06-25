@@ -66,9 +66,7 @@
                     <label class="label_genero">Cartões</label>
                     <select class="selecao" name="preferencia" id="preferencia">
                         <% cartoes.forEach(cartao => { %>
-
-                            <option value=""><%= cartao.crt_bandeira%></option>
-
+                            <option value="<%= cartao.crt_id%>"><%= cartao.crt_numero%></option>
                         <% }); %>
                     </select>
                 </div>
@@ -103,7 +101,7 @@
             </div>
             
             <br>
-            
+
             <div class="botoes">
                     <button class="adicionar" type="button">Adiconar</button>
             </div>
