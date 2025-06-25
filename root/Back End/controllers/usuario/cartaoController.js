@@ -26,8 +26,10 @@ module.exports.getCartao = async (req, res) => {
 module.exports.getCartaoAdicionar = async (req, res) => {
     const { usr_id } = req.query;
 
-    const usuario = await buscarUsuarioId(usr_id);
-    const notificacoes = usuario ? await buscarNotificacoes(usr_id) : [];
+    const decodedUsrId = decodeURIComponent(usr_id);
+
+    const usuario = await buscarUsuarioId(decodedUsrId);
+    const notificacoes = usuario ? await buscarNotificacoes(decodedUsrId) : [];
 
     res.render('contas/usuario/cartaoAdicionar', { 
         usuario: usuario,
@@ -37,11 +39,14 @@ module.exports.getCartaoAdicionar = async (req, res) => {
 
 module.exports.getCartaoAtualizar = async (req, res) => {
 
-    const {crt_id, usr_id} = decodeURIComponent(req.query);
+    const {crt_id, usr_id} = req.query;
 
-    const usuario = await buscarUsuarioId(usr_id);
-    const cartoes = await buscarCartaoId(crt_id);
-    const notificacoes = usuario ? await buscarNotificacoes(usr_id) : [];
+    const decodedCrtId = decodeURIComponent(crt_id);
+    const decodedUsrId = decodeURIComponent(usr_id);
+
+    const usuario = await buscarUsuarioId(decodedUsrId);
+    const cartoes = await buscarCartaoId(decodedCrtId);
+    const notificacoes = usuario ? await buscarNotificacoes(decodedUsrId) : [];
 
     res.render('contas/usuario/cartaoAtualizar', { 
         cartoes: cartoes,
