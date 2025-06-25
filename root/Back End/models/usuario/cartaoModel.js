@@ -3,8 +3,11 @@ const db = require('../../config/db');
 // Inserindo um novo cartão no banco de dados
 async function cadastrarCartao(dados) {
     // Consulta SQL
+
+    console.log(dados);
+    
     const sql = `INSERT INTO cartoes (
-        usuario_usr_id, 
+        usuarios_usr_id, 
         crt_nome, 
         crt_numero, 
         crt_bandeira, 

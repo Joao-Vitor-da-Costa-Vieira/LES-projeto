@@ -9,14 +9,16 @@ document.querySelector('form').addEventListener('submit', async function(event){
     let dados = Object.fromEntries(formDados.entries());
 
     // Pegando o id do usuário
-    const usr_id = window.location.pathname.split('/')[2];
+    const userDataElement = document.getElementById('user-data');
+    const usr_id = userDataElement ? userDataElement.dataset.userId : null;
+
 
     const cartao = {
         crt_usr_id: usr_id,
         crt_numero: dados.num_cartao,
         crt_nome: dados.nome_c,
         crt_bandeira: dados.bandeira,
-        crt_codigo_seguranca: dados.codigo_seguranca,
+        crt_codigo_seguranca: dados.cod_sec,
     }
 
     // Passando os dados para o back
