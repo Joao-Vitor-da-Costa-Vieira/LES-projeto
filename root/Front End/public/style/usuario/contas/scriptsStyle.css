@@ -17,23 +17,14 @@
   margin-top: 5px;
 }
 
-/* Estilo geral de formulários */
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 20px;
-  background: #fafafa;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+button,
+input[type="submit"] {
+  background-color: #4CAF50;
 }
-
 
 button:hover,
 input[type="submit"]:hover {
-  background-color: #4CAF50;
+  background-color: #4caf4f53;
 }
 
 /* Botões de atualização */

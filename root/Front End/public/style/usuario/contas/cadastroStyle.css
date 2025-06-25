@@ -25,37 +25,153 @@
 }
 
 /* Estilos de formulário */
-.nome {
+.nome{
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: 10px;
 }
 
-.email {
+.livro{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.editora {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.isbn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.grupo_precificacao {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.categoria {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.endereco{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.email{
     align-items: center;
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
 }
 
-.cpf {
+.cpf{
     align-items: center;
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
 }
 
-.senha {
+.senha{
     align-items: center;
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
 }
 
-.telefone {
+
+.telefone{
     width: 180px;
     font-size: 20px;
+}
+
+.edicao {
+    width: 170px;
+    font-size: 20px;
+}
+    
+.numero_paginas {
+    width: 170px;
+    font-size: 20px;
+}
+    
+.valor {
+    width: 170px;
+    justify-self: center;
+    font-size: 20px;
+}
+    
+.codigo_barras {
+    width: 170px;
+    font-size: 20px;
+}
+    
+.altura {
+    width: 170px;
+    font-size: 20px;
+}
+    
+.largura {
+    width: 170px;
+    font-size: 20px;
+}
+    
+.peso {
+    width: 170px;
+    font-size: 20px;
+}
+    
+.profundidade {
+    width: 170px;
+    font-size: 20px;
+}
+
+.numero{
+    width: 35px;
+    font-size: 20px;
+}
+
+.cidade{
+    width: 320px;
+    font-size: 20px;
+}
+
+.bairro{
+    width: 320px;
+    font-size: 20px;
+}
+
+.cod_sec{
+    width: 320px;
+    font-size: 20px;
+}
+
+.num_cartao{
+    width: 320px;
+    font-size: 20px;
+}
+
+.sinopse {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+    width: 100%;
 }
 
 .genero {
@@ -76,7 +192,6 @@
 /* Estilos de labels */
 .label {
     font-size: 22px;
-    padding-left: 35px;
     display: flex;
     align-items: flex-start;
     align-self: flex-start;
