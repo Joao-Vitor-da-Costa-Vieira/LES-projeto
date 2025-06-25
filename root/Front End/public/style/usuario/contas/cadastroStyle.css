@@ -390,6 +390,26 @@ th {
     background-color: #0003c8;
 }
 
+.adicionar {
+    background-color: #0003c8;
+    width: 80px;
+    height: 30px;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    border: #0003c8;
+}
+
+.adicionar:hover{
+    background-color: #1317ff;
+    width: 80px;
+    height: 30px;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    border: #1317ff;
+}
+
 .cancelar {
     background-color: red;
     width: 80px;

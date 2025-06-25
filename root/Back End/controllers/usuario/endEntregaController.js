@@ -13,9 +13,11 @@ const { buscarNotificacoes } = require("../../models/usuario/notificacaoModel");
 module.exports.getEnderecoEntrega = async (req, res) => {
     const { usr_id } = req.query;
 
-    const enderecos = await buscarEnderecosEntregaUsuarioId(usr_id);
-    const usuario = await buscarUsuarioId(usr_id);
-    const notificacoes = usuario ? await buscarNotificacoes(usr_id) : [];
+    const decodedUsrId = decodeURIComponent(usr_id);
+
+    const enderecos = await buscarEnderecosEntregaUsuarioId(decodedUsrId);
+    const usuario = await buscarUsuarioId(decodedUsrId);
+    const notificacoes = usuario ? await buscarNotificacoes(decodedUsrId) : [];
 
     res.render('contas/usuario/endEntrega', { 
         enderecos: enderecos,
