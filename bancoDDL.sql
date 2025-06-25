@@ -33,7 +33,7 @@ ALTER TABLE carrinho ADD CONSTRAINT carrinho_pk PRIMARY KEY ( car_id );
 
 CREATE TABLE cartoes (
     crt_id               INTEGER NOT NULL AUTO_INCREMENT,
-    crt_numero           INTEGER NOT NULL,
+    crt_numero           BIGINT NOT NULL,
     crt_bandeira         VARCHAR(20) NOT NULL,
     crt_codigo_seguranca INTEGER NOT NULL,
     crt_nome             VARCHAR(50) NOT NULL,
