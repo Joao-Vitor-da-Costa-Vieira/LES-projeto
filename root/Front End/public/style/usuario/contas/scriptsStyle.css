@@ -30,32 +30,10 @@ form {
   border-radius: 8px;
 }
 
-/* Inputs e selects */
-input,
-select {
-  padding: 10px;
-  font-size: 1em;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 100%;
-}
-
-/* Botões */
-button,
-input[type="submit"] {
-  padding: 10px 20px;
-  background-color: #0003c8;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
 
 button:hover,
 input[type="submit"]:hover {
-  background-color: #0002a0;
+  background-color: #4CAF50;
 }
 
 /* Botões de atualização */
@@ -70,7 +48,7 @@ input[type="submit"]:hover {
 }
 
 .atualizar:hover {
-  background-color: #45a049;
+  background-color: #0002a0;
 }
 
 /* Container dos blocos de visualização */
