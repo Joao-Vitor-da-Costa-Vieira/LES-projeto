@@ -1,3 +1,4 @@
+import { getHome } from "../../service/telaInicialService";
 import { atualizarCartaoService } from "/scripts/service/usuario/cartaoService.js";
 
 // Enviando os dados para o backend
@@ -26,6 +27,7 @@ document.querySelector('form').addEventListener('submit', async function(event){
     
     if(result.status === 200){
         alert('Cartão foi atualizado com sucesso!');
+        getHome(usr_id);
         return;
     }
 

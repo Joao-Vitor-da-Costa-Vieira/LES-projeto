@@ -148,28 +148,7 @@ th {
     background-color: #0003c8;
 }
 
-button {
-    background-color: #0003c8;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 20px;
-}
-
 /* Classes utilitárias */
 .endereco-id {
     display: none;
-}
-
-.voltar {
-    margin-bottom: 20px;
-}
-
-.voltar a {
-    color: #0003c8;
-    text-decoration: none;
-    font-weight: bold;
 }
