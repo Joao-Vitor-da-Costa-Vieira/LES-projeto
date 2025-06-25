@@ -10,14 +10,15 @@ document.querySelector('form').addEventListener('submit', async function(event){
     // Pegando o id do cliente e do cartão
     const userDataElement = document.getElementById('user-data');
     const usr_id = userDataElement ? userDataElement.dataset.userId : null;
-    
-    const crt_id = window.location.pathname.split('/').splice(-1)[0];
+
+    const cartaoElement = document.querySelector('.cartoes-id');
+    const crt_id = cartaoElement ? cartaoElement.dataset.cartaoId : null;
 
     const cartao = {
         crt_numero: dados.num_cartao,
         crt_nome: dados.nome_c,
         crt_bandeira: dados.bandeira,
-        crt_codigo_seguranca: dados.codigo_seguranca,
+        crt_codigo_seguranca: dados.cod_sec,
     }
 
     // Passando os dados para o back
