@@ -64,22 +64,29 @@
 
             <form id="formCadastro" method="POST">
                 <!--Input de Nome-->
+                <div class="linha_centralizada">
                 <div class="nome">
                     <label class="label" for="nome">Nome</label>
                     <input class="nome_input" type="text" id="nome" name="nome" required>
                 </div>
+                </div>                
 
                 <!--Input de Email-->
+                <div class="linha_centralizada">
                 <div class="email">
                     <label class="label" for="email">E-mail</label>
                     <input class="email_input" type="text" id="email" name="email" required>
                 </div>
+                </div>
                     
                 <!--Input de CPF-->
+                <div class="linha_centralizada">
                 <div class="cpf">
                     <label class="label" for="cpf">CPF</label>
                     <input class="cpf_input" type="number" id="cpf" name="cpf" required>
                 </div>
+                </div>
+                
 
                 <!--Bloco de Texto Informando como deve ser a senha-->
                 <div class="bloco_texto">
@@ -89,6 +96,7 @@
                 </div>
 
                 <!--Input de senha-->
+                <div class="linha_centralizada">
                 <div class="senha">
                     <label class="label" for="senha">Senha</label>
                     <div class="erro_div">
@@ -96,8 +104,11 @@
                         <span id="erroSenha" class="erro" style="color: red; display: none;">*</span>
                     </div>
                 </div>
+                </div>
+                
                     
                 <!--Input de confirmação de senha-->
+                <div class="linha_centralizada">
                 <div class="senha">
                     <label class="label" for="conf_senha">Confirmar Senha</label>
                     <div class="erro_div">
@@ -105,6 +116,8 @@
                         <span id="erroConfSenha" class="erro" style="color: red; display: none;">*</span>
                     </div>
                 </div>
+                </div>
+                
 
                 <!--Input de data e Telefone-->
                 <div class="linha_centralizada">
@@ -335,10 +348,13 @@
                 </div>
 
                 <!--Segunda Linha-->
-                <div class="nome">
-                    <label class="label" for="nome_c">Nome do Titular</label>
-                    <input class="nome_input" type="text" id="nome_c" name="nome_c" required>
+                <div class="linha_centralizada">
+                    <div class="nome">
+                        <label class="label" for="nome_c">Nome do Titular</label>
+                        <input class="nome_input" type="text" id="nome_c" name="nome_c" required>
+                    </div>
                 </div>
+
 
                 <br>
 
