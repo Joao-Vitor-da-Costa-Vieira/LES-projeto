@@ -60,7 +60,7 @@ async function buscarTodosEnderecosCobranca() {
 
 async function buscarEnderecoCobrancaId(id) {
     try {
-        const [endereco] = await db.query(`SELECT * FROM enderecos_cobranca WHERE end_id = ?`, id);
+        const [endereco] = await db.query(`SELECT * FROM enderecos_cobranca WHERE end_id = ?`, [id]);
         return endereco;
     } catch (err) {
         console.error(`Erro no buscarEnderecoCobrancaId - modelEndereco: ${err}`);
@@ -70,7 +70,7 @@ async function buscarEnderecoCobrancaId(id) {
 
 async function buscarEnderecosCobrancaUsuarioId(id) {
     try {
-        const [enderecos] = await db.query(`SELECT * FROM enderecos_cobranca WHERE usuario_usr_id = ?`, id);
+        const [enderecos] = await db.query(`SELECT * FROM enderecos_cobranca WHERE usuarios_usr_id = ?`, [id]);
         return enderecos;
     } catch (err) {
         console.error(`Erro no buscarEnderecosCobrancaUsuarioId - modelEndereco: ${err}`);
