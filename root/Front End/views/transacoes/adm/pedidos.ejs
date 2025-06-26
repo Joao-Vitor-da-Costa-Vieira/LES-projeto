@@ -12,9 +12,9 @@
 
     <header>
         <nav class="main-nav">
-            <a href="/home-adm" class="home-link">Home</a>
+            <a class="home-link">Home</a>
             <div class="nav-botao">
-                <button>Clientes</button>
+                <button id="Clientes">Clientes</button>
                 <button>Livros</button>
             </div>
         </nav>
@@ -123,7 +123,7 @@
                                     </td>
                                     <td>
                                         <div class="botoes_resultado">
-                                            <a class="alterar" href="/pedidos-adm/detalhes?tra_id=<%= transacao.tra_id %>">
+                                            <a class="alterar" href="/pedidos-adm/detalhes?tra_id=<%= transacao.tra_id %>&adm_id=<%= adm.adm_id %>">
                                                 Ver Mais
                                             </a>
                                         </div>
@@ -142,5 +142,7 @@
     </div>
 
     <script type="module" src="/scripts/transacoes/adm/pedidos.js"></script>
+    <script type="module" src="/scripts/base/adm/navbarAdm.js"></script>
+    <script type="module" src="/scripts/base/adm/sidebarAdm.js"></script>
 </body>
 </html>

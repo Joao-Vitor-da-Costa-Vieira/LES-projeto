@@ -188,6 +188,10 @@ module.exports.getTransacao = async (req, res) => {
 
 module.exports.getPedidos = async (req, res) => {
     try {
+        const { adm_id } = req.query;
+
+        const adm = await buscarAdmId(adm_id);
+
         const transacoes = await buscarTransacoesPrioridade();
         
         const transacoesComUsuarios = await Promise.all(
@@ -201,6 +205,7 @@ module.exports.getPedidos = async (req, res) => {
         );
 
         res.render('transacoes/adm/pedidos', {
+            adm: adm,
             transacoes: transacoesComUsuarios
         });
 
@@ -222,7 +227,10 @@ module.exports.getApiPedidosUsuario = async (req, res) => {
 
 module.exports.getPedidoItem = async (req, res) => {
     try {
-        const { tra_id } = req.query;
+        const { tra_id, adm_id } = req.query;
+        
+        //Buscar dados do adm
+        const adm = await buscarAdmId(adm_id);
 
         // Buscar dados básicos da transação
         const transacao = await buscarTransacaoPorId(tra_id);
@@ -243,6 +251,7 @@ module.exports.getPedidoItem = async (req, res) => {
         console.log('Usuário encontrado:', usuario);
 
         res.render('transacoes/adm/itemPedidoAdm', {
+            adm: adm,
             transacao,
             usuario,
             endereco,

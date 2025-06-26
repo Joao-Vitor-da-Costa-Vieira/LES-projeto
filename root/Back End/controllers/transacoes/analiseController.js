@@ -4,14 +4,20 @@ const {buscarCategorias,
 
 const { buscarLivrosVendidos 
 } = require('../../models/livroModel');
+const { buscarAdmId } = require('../../models/admModels');
 
 module.exports.getAnalise = async (req, res) => {
+    
+    const { adm_id } = req.query;
+
+    const adm = await buscarAdmId(adm_id);
     
     //Obtendo as categorias
     const categorias = await buscarCategorias();
 
     //Renderizando a página
     return res.render('transacoes/adm/analise', {
+        adm: adm,
         categorias: categorias
     });
 };
