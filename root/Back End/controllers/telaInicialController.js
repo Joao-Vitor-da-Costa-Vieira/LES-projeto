@@ -1,7 +1,7 @@
 const { buscarUsuarioId, buscarUsuariosAtivos } = require("../models/usuario/usuarioModel");
 const { buscarTransacoesPrioridade } = require("../models/transacoes/vendaModel");
 const { buscarNotificacoes } = require("../models/usuario/notificacaoModel");
-const { buscarTodosAdms } = require("../models/admModels");
+const { buscarTodosAdms, buscarAdmId } = require("../models/admModels");
 
 //Views
 module.exports.getTela = async (req, res) => {
@@ -16,8 +16,10 @@ module.exports.getTela = async (req, res) => {
 };
 
 module.exports.getHome = async (req, res) => {
-    const usuario = await buscarUsuarioId(req.params.usr_id);
-    const notificacoes = usuario ? await buscarNotificacoes(usuario.usr_id) : [];
+    const { usr_id } = req.query;
+
+    const usuario = await buscarUsuarioId(usr_id);
+    const notificacoes = usuario ? await buscarNotificacoes(usr_id) : [];
     
     res.render('home', {
         usuario,
@@ -28,7 +30,9 @@ module.exports.getHome = async (req, res) => {
 module.exports.getHomeAdm = async (req, res) => {
     try {
 
-        const adm = req.query;
+        const adm_id = req.query;
+
+        const adm = await buscarAdmId(adm_id);
 
         // Buscar transações prioritárias
         const transacoes = await buscarTransacoesPrioridade();
@@ -45,6 +49,7 @@ module.exports.getHomeAdm = async (req, res) => {
         );
 
         res.render('homeAdm', {
+            adm: adm,
             transacoes: transacoesComUsuarios
         });
 

@@ -4,16 +4,20 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.botao-usuario').forEach(botao => {
         botao.addEventListener('click', (event) => {
             event.stopPropagation();
-            console.log("Botão clicado!");
-            getHome('1');
+            
+            const usuarioId = document.getElementById('usuario').value;
+
+            getHome(usuarioId);
         });
     });
 
     document.querySelectorAll('.botao-adm').forEach(botao => {
         botao.addEventListener('click', (event) => {
             event.stopPropagation();
-            console.log("Botão clicado!");
-            getHomeAdm('1');
+            
+            const admId = document.getElementById('adm').value;
+
+            getHomeAdm(admId);
         });
     });
 });
