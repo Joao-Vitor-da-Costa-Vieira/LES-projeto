@@ -369,6 +369,8 @@ async function buscarDatasVendas(){
         tra_data data_venda
         FROM 
         transacoes
+        WHERE
+        tra_status IN ('APROVADO', 'EM TRANSPORTE', 'ENTREGUE') 
         ORDER BY
 	    tra_data;`);
 

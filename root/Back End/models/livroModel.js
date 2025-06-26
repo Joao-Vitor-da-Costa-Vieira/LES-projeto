@@ -220,7 +220,7 @@ async function buscarLivrosVendidos(dados) {
         INNER JOIN categoria cat ON p.categoria_cat_id = cat.cat_id
     `;
 
-    const condicoes = [];
+    const condicoes = ["t.tra_status IN ('APROVADO', 'EM TRANSPORTE', 'ENTREGUE')"];
     const valores = [];
 
     // Filtro por categorias (só aplica se houver IDs)
