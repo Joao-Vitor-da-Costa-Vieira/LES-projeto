@@ -26,6 +26,9 @@
                         <div class="genero">
                             <label class="label_genero">Selecione o Usuário:</label>
                             <select class="selecao_grande" id="usuario">
+                                <option value="">
+                                    Sem Login.
+                                </option>
                                 <% usuarios.forEach(usuario => { %>
                                     <option value="<%= usuario.usr_id %>">
                                         Nº:<%= usuario.usr_id %>, <%= usuario.usr_nome %>

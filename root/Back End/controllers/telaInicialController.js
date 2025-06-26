@@ -1,9 +1,12 @@
-const { buscarUsuarioId } = require("../models/usuario/usuarioModel");
+const { buscarUsuarioId, buscarUsuariosAtivos } = require("../models/usuario/usuarioModel");
 const { buscarTransacoesPrioridade } = require("../models/transacoes/vendaModel");
 const {buscarNotificacoes} = require("../models/usuario/notificacaoModel");
 
 //Views
-module.exports.getTela = (req, res) => {
+module.exports.getTela = async (req, res) => {
+
+    const usuarios = await buscarUsuariosAtivos(); 
+
     res.render('telaInicial');
 };
 
@@ -21,7 +24,7 @@ module.exports.getHomeAdm = async (req, res) => {
     try {
 
         const adm = req.query;
-        
+
         // Buscar transações prioritárias
         const transacoes = await buscarTransacoesPrioridade();
         
