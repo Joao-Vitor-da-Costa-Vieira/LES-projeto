@@ -71,3 +71,12 @@ export async function buscarUsuariosInativosService() {
         throw err;
     }
 }
+
+export async function getClientes(id) {
+    try {
+        window.location.href = `/usuarios?=${id}`;
+    } catch (error) {
+        console.error(`Erro no getClientes - serviceUsuarios: ${err}`);
+        throw err;
+    }
+}

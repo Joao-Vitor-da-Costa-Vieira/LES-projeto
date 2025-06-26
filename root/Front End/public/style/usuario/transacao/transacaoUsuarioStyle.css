@@ -357,6 +357,13 @@ th {
     margin-bottom: 10px;
 }
 
+.label_genero {
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    align-self: center;
+}
+
 
 /* Estilos para container de pagamento */
 .container-pagamento {

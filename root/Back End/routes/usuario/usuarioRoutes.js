@@ -8,7 +8,7 @@ router.get('/cadastro', UsuarioController.getCadastro);
 router.get('/atualizar', UsuarioController.getCadastroAtualizar);
 router.get('/senha', UsuarioController.getSenha);
 router.get('/inativos', UsuarioController.getUsuariosInativos);
-router.get('/usuario/:usr_id', UsuarioController.getUsuariosAtivos);
+router.get('/usuarios', UsuarioController.getUsuariosAtivos);
 
 router.get('/api/usuarios/id/:usr_id', UsuarioController.getApiUsuarioId);
 router.get('/api/usuarios/ativos', UsuarioController.getApiUsuariosAtivos);

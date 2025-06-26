@@ -110,3 +110,29 @@ body {
     display: flex;
     flex-direction: column;
 }
+
+/*Estilo Select*/
+.selecao_grande {
+    background-color: #0003c8;
+    width: 400px;
+    height: 30px;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    border: #0003c8;
+}
+
+.genero{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.label_genero {
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    align-self: center;
+}

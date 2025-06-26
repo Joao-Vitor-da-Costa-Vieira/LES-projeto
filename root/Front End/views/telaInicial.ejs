@@ -17,15 +17,41 @@
                 <a class="menssagem-tela-inicial">Selecione o tipo de Usuário:</a>
 
                 <div class="linha_centralizada">
+                    <div class="coluna">
                         <button class="botao-usuario">
                             <img src="/imagens/avatar.jpg" class="imagem-inicial-tela">
                             <p>Usuário</p>
                         </button>
 
+                        <div class="genero">
+                            <label class="label_genero">Selecione o Usuário:</label>
+                            <select class="selecao_grande" id="usuario">
+                                <% usuarios.forEach(usuario => { %>
+                                    <option value="<%= usuario.usr_id %>">
+                                        Nº:<%= usuario.usr_id %>, <%= usuario.usr_nome %>
+                                    </option>
+                                <% }); %>
+                            </select>
+                        </div>
+                    </div>
+                        
+                    <div class="coluna">
                         <button class="botao-adm">
                             <img src="/imagens/avatar.jpg" class="imagem-inicial-tela">
                             <p>Adiministrador</p>
                         </button>
+
+                        <div class="genero">
+                            <label class="label_genero">Selecione o Adm:</label>
+                            <select class="selecao_grande" id="adm">
+                                <% adms.forEach(adm => { %>
+                                    <option value="<%= adm.adm_id %>">
+                                        Nº:<%= adm.adm_id %>, <%= adm.adm_nome %>
+                                    </option>
+                                <% }); %>
+                            </select>
+                        </div>    
+                    </div>
                 </div>
 
             </div>
