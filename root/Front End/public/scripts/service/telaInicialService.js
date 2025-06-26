@@ -10,9 +10,9 @@ export async function getHome(usr_id) {
     }
 } 
 
-export async function getHomeAdm() {
+export async function getHomeAdm(id) {
     try {
-        window.location.href = `/home-adm`;
+        window.location.href = `/home-adm?=${id}`;
         const data = await res.json(); 
         return data;
     } catch (err) {

@@ -19,8 +19,9 @@
         
         <nav class="usuario-nav">
             <div class="usuario-sessao">
-                <span class="usuario-nome">Adm</span>
-                <img src="/imagens/graficoLinha.PNG" alt="Imagem do usuário" class="usuario-imagem">
+                <div id="adm-data" data-adm-id="<%= Array.isArray(adm) ? adm[0]?.adm_id : adm?.adm_id %>" style="display:none;"></div>
+                <span class="usuario-nome"><%= Array.isArray(adm) ? adm[0]?.adm_nome : adm?.adm_nome %></span>
+                <img src="/imagens/avatar.jpg" alt="Imagem do usuário" class="usuario-imagem">
             </div>
         </nav>
     </header>
@@ -28,9 +29,9 @@
     <div class="main">
         <!--Barra lateral de Navegação-->
         <div class="sidenav">
-            <a href="/pedidos">Pedidos</a>
-            <a href="/">Estoque</a>
-            <a href="/analise">Análise</a>
+            <a id="pedidos">Pedidos</a>
+            <a id="estoque">Estoque</a>
+            <a id="analise">Análise</a>
         </div>
 
         <div class="conteudo">

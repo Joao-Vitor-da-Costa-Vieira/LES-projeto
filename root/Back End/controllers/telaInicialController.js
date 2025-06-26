@@ -19,6 +19,9 @@ module.exports.getHome = async (req, res) => {
 
 module.exports.getHomeAdm = async (req, res) => {
     try {
+
+        const adm = req.query;
+        
         // Buscar transações prioritárias
         const transacoes = await buscarTransacoesPrioridade();
         
