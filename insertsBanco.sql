@@ -124,7 +124,7 @@ INSERT INTO usuarios (
     1198765432,
     1133334444,
     'Masculino',
-    'A'
+    '1'
 );
 
 -- Endereços de Entrega
@@ -197,6 +197,33 @@ usuarios_usr_id
     'João da Silva',
     '1'
 );
+
+-- Adms
+
+INSERT INTO administradores (
+    adm_id,
+    adm_nome,
+    adm_email,
+    adm_cpf,
+    adm_senha,
+    adm_data_de_nascimento,
+    adm_telefone_1,
+    adm_telefone_2,
+    adm_genero,
+    adm_status_de_atividade
+) VALUES (
+    1,
+    'Adm',
+    'adm@email.com',
+    '12345678901',
+    'senha123',
+    '1990-05-15',
+    1198765432,
+    1133334444,
+    'Masculino',
+    '1'
+);
+
 
 -- Transações
 INSERT INTO transacoes (
