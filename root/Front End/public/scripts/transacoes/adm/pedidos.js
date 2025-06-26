@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </td>
                     <td>
                         <div class="botoes_resultado">
-                            <a href="/pedidos-adm/detalhes?tra_id=${pedido.tra_id}&adm_id=<%= adm.adm_id %>">" class="alterar">
+                            <a href="/pedidos-adm/detalhes?tra_id=${pedido.tra_id}&adm_id=${adm.adm_id}">" class="alterar">
                                 Ver Mais
                             </a>
                         </div>
