@@ -3,13 +3,22 @@ import { buscarDatasVendaService, atualizarUrlFiltros } from "/scripts/service/t
 
 document.addEventListener('DOMContentLoaded', function(){
 
+    const botaoFiltro = document.querySelector('.botao-mais-filtro');
+    const elementosOcultos = document.querySelectorAll('.hidden');
+
+    botaoFiltro.addEventListener('click', function() {
+        elementosOcultos.forEach(function(elemento) {
+            elemento.classList.toggle('hidden');
+        });
+    });
+
     //Carregando todas as funções relacionadas ao histórico de vendas
     montarSelectCategorias();
     montarInputPeriodo(); 
     filtrarPorCategora();
     filtroPorPeriodo();
     montarGrafico();
-
+    
     //Limpando os filtros
     limparFiltroPeriodo();
     limparFiltroCategorias();

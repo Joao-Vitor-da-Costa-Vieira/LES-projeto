@@ -43,9 +43,15 @@
                 <h1 class="titulo">Analise de Histórico de Vendas</h1>
             </div>
 
-        </br>
+            </br>
 
-            <div class="box data">
+            <div class="linha_centralizada">
+                <button class="botao-mais-filtro">Filtros</button>
+            </div>
+
+            </br>
+
+            <div class="box data hidden">
                 <h2 class="title-periodo">Período</h2>
                 <label for="data-range">Selecione um Período</label>
                 <input id="data-range" type="text" placeholder="Clique aqui..." class="form-control">
@@ -58,9 +64,10 @@
                     </div>
                 </div>
             </div>
-        </br>
+        
+            </br class="hidden">
 
-            <div class="box categorias">
+            <div class="box categorias hidden">
                 <h2 class="title-categorias">Categorias</h2>
                 <label for="categorias-filtro">Selecione as Categorias</label>
                 <select name="categorias-filtro" id="categorias-filtro" multiple>

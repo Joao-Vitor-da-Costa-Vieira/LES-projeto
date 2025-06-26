@@ -34,63 +34,6 @@ th {
     font-weight: bold;
 }
 
-/* Estilos para os status */
-.status-APROVADO {
-    background-color: #28a745;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 4px;
-    text-align: center;
-}
-
-.status-CANCELADO {
-    background-color: #dc3545;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 4px;
-    text-align: center;
-}
-
-.status-EM_TRANSPORTE {
-    background-color: #17a2b8;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 4px;
-    text-align: center;
-}
-
-.status-ENTREGUE {
-    background-color: #6c757d;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 4px;
-    text-align: center;
-}
-
-.status-TROCA_SOLICITADA {
-    background-color: #ffc107;
-    color: black;
-    padding: 5px 10px;
-    border-radius: 4px;
-    text-align: center;
-}
-
-.status-TROCA_APROVADA {
-    background-color: #fd7e14;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 4px;
-    text-align: center;
-}
-
-.status-DEVOLUCAO_SOLICITADA {
-    background-color: #6f42c1;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 4px;
-    text-align: center;
-}
-
 /* Estilos dos botões de ação */
 .botoes_resultado {
     display: flex;

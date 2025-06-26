@@ -196,6 +196,20 @@ th {
     border: 1px solid #ddd;
 }
 
+.botao-mais-filtro {
+    padding: 5px 10px;
+    background-color: #0004ff;
+    color: white;
+    border: none;
+    border-radius: 0;
+    justify-self: center;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
 .grafico {
     width: 100%;
     margin-top: 30px;
@@ -208,59 +222,4 @@ th {
     padding: 20px;
     border-radius: 20px;
     box-shadow: 0px 0px 20px rgba(0,0,0,0.1);
-}
-
-/* Estilos para status */
-.status-EM PROCESSAMENTO {
-    color: #FFA500;
-    font-weight: bold;
-}
-
-.status-REPROVADO {
-    color: #FF0000;
-    font-weight: bold;
-}
-
-.status-APROVADO {
-    color: #008000;
-    font-weight: bold;
-}
-
-.status-CANCELADO {
-    color: #FF0000;
-    font-weight: bold;
-}
-
-.status-EM TRANSPORTE {
-    color: #0000FF;
-    font-weight: bold;
-}
-
-.status-ENTREGUE {
-    color: #008000;
-    font-weight: bold;
-}
-
-.status-TROCA SOLICITADA,
-.status-DEVOLUÇÃO SOLICITADA {
-    color: #FFA500;
-    font-weight: bold;
-}
-
-.status-TROCA APROVADA,
-.status-DEVOLUÇÃO APROVADA {
-    color: #0000FF;
-    font-weight: bold;
-}
-
-.status-TROCA CONCLUÍDA,
-.status-DEVOLUÇÃO CONCLUIDA {
-    color: #008000;
-    font-weight: bold;
-}
-
-.status-TROCA RECUSADA,
-.status-DEVOLUÇÃO RECUSADA {
-    color: #FF0000;
-    font-weight: bold;
 }
