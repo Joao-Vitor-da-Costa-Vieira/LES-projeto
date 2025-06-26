@@ -1,13 +1,18 @@
 const { buscarUsuarioId, buscarUsuariosAtivos } = require("../models/usuario/usuarioModel");
 const { buscarTransacoesPrioridade } = require("../models/transacoes/vendaModel");
-const {buscarNotificacoes} = require("../models/usuario/notificacaoModel");
+const { buscarNotificacoes } = require("../models/usuario/notificacaoModel");
+const { buscarTodosAdms } = require("../models/admModels");
 
 //Views
 module.exports.getTela = async (req, res) => {
 
-    const usuarios = await buscarUsuariosAtivos(); 
+    const usuarios = await buscarUsuariosAtivos();
+    const adms = await buscarTodosAdms(); 
 
-    res.render('telaInicial');
+    res.render('telaInicial', {
+        usuarios: usuarios,
+        adms: adms
+    });
 };
 
 module.exports.getHome = async (req, res) => {
