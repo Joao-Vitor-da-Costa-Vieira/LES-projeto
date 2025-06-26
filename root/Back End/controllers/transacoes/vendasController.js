@@ -46,6 +46,10 @@ const {
     buscarNotificacoes 
 } = require("../../models/usuario/notificacaoModel");
 
+const { 
+    buscarAdmId 
+}= require("../../models/admModels");
+
 module.exports.getPagamento = async (req, res) => {
     try {
         const { usr_id } = req.query;
