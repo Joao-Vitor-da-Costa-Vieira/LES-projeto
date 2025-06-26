@@ -64,7 +64,7 @@
                                     </td>
                                     <td>
                                         <div class="botoes_resultado">
-                                            <a class="alterar" href="/pedidos-adm/detalhes?tra_id=<%= transacao.tra_id %>">
+                                            <a class="alterar" href="/pedidos-adm/detalhes?tra_id=<%= transacao.tra_id %>&adm_id=<%= Array.isArray(adm) ? adm[0]?.adm_id : adm?.adm_id %>">
                                                 Ver Mais
                                             </a>
                                         </div>

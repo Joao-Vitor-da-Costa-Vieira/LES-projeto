@@ -6,6 +6,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const aplicarFiltroBtn = document.querySelector('.confirmar');
     const rangeValor = document.querySelector('#valorMaximo');
     const outputValor = document.querySelector('#valorExibido');
+    const tabelaPedidos = document.querySelector('#tabela-pedidos');
+    const admDataElement = document.getElementById('adm-data');
+    const admId = admDataElement.getAttribute('data-adm-id');
+
+    tabelaPedidos.addEventListener('click', function(event) {
+        const botaoAtualizar = event.target.closest('.alterar');
+        
+        if(botaoAtualizar) {
+        // Encontra a linha da tabela (tr) que contém o botão clicado
+        const linha = botaoAtualizar.closest('tr');
+        if (linha) {
+            // Encontra a célula que contém o data attribute
+            const celula = linha.querySelector('td[data-tra-id]');
+            if (celula) {
+                const traId = celula.getAttribute('data-tra-id');
+                window.location.href = `/pedidos-adm/detalhes?tra_id=${traId}&adm_id=${admId}`;
+            }
+        }
+    }
+    });
 
     // Toggle dos filtros
     toggleButton.addEventListener('click', () => {
@@ -50,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
         pedidos.forEach(pedido => {
             const row = `
                 <tr>
-                    <td></td>
+                    <td id="tra-data" data-tra-id="${pedido.tra_id}></td>
                     <td>${pedido.usuario?.usr_nome || 'N/A'}</td>
                     <td>R$ ${pedido.tra_valor}</td>
                     <td>${new Date(pedido.tra_data).toLocaleDateString()}</td>
@@ -59,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </td>
                     <td>
                         <div class="botoes_resultado">
-                            <a href="/pedidos-adm/detalhes?tra_id=${pedido.tra_id}&adm_id=${adm.adm_id}">" class="alterar">
+                            <a class="alterar">
                                 Ver Mais
                             </a>
                         </div>

@@ -1,16 +1,13 @@
 const { cadastrarEnderecoEntrega, 
-        buscarEnderecosEntregaUsuarioId, 
-        atualizarEnderecoEntrega 
+        buscarEnderecosEntregaUsuarioId
 } = require("../../models/usuario/endEntregaModel");
 
 const { cadastrarEnderecoCobranca, 
-        buscarEnderecosCobrancaUsuarioId, 
-        atualizarEnderecoCobranca 
+        buscarEnderecosCobrancaUsuarioId
 } = require("../../models/usuario/endCobrancaModel");
 
 const { cadastrarCartao, 
-        buscarCartoesUsuarioId, 
-        atualizarCartao 
+        buscarCartoesUsuarioId 
 }= require("../../models/usuario/cartaoModel");
 
 const { cadastrarUsuario, 
@@ -24,6 +21,8 @@ const { cadastrarUsuario,
 } = require("../../models/usuario/usuarioModel");
 
 const { buscarNotificacoes } = require("../../models/usuario/notificacaoModel");
+
+const { buscarAdmId } = require("../../models/admModels"); 
 
 //Views
 module.exports.getCadastroPrimeiro = (req, res) => {
@@ -79,8 +78,15 @@ module.exports.getUsuariosInativos = async (req, res) => {
 };
 
 module.exports.getUsuariosAtivos = async (req, res) => {
+
+    const { adm_id } = req.query;
+
+    const adm = await buscarAdmId(adm_id);
+
     const usuarios = await buscarUsuariosAtivos();
-    res.render('contas/adm/consultarUsuario', { usuarios: usuarios });
+    res.render('contas/adm/consultarUsuario', { 
+        adm: adm,
+        usuarios: usuarios });
 };
 
 module.exports.patchSenha = async (req, res) => {

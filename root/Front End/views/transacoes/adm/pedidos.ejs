@@ -96,7 +96,7 @@
             <br class="hidden">
 
             <div class="table_div">
-                <table>
+                <table id="tabela-pedidos">
                     <thead>
                         <tr>
                             <th colspan="7">Pedidos</th>
@@ -114,7 +114,7 @@
                         <% if (transacoes && transacoes.length > 0) { %>
                             <% transacoes.forEach(transacao => { %>
                                 <tr>
-                                    <td></td>
+                                    <td id="tra-data" data-tra-id="<%= transacao.tra_id%>"></td>
                                     <td><%= transacao.usuario.usr_nome %></td>
                                     <td>R$ <%= transacao.tra_valor %></td>
                                     <td><%= new Date(transacao.tra_data).toLocaleDateString() %></td>
@@ -123,7 +123,7 @@
                                     </td>
                                     <td>
                                         <div class="botoes_resultado">
-                                            <a class="alterar" href="/pedidos-adm/detalhes?tra_id=<%= transacao.tra_id %>&adm_id=<%= adm.adm_id %>">
+                                            <a class="alterar">
                                                 Ver Mais
                                             </a>
                                         </div>

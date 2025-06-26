@@ -74,7 +74,7 @@ export async function buscarUsuariosInativosService() {
 
 export async function getClientes(id) {
     try {
-        window.location.href = `/usuarios?=${id}`;
+        window.location.href = `/usuarios?adm_id=${id}`;
     } catch (error) {
         console.error(`Erro no getClientes - serviceUsuarios: ${err}`);
         throw err;

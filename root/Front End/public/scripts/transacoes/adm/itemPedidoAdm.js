@@ -12,6 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const statusAtual = btnAtualizar.dataset.traStatus;
     const valorCompra = btnAtualizar.dataset.traValor;
 
+    const admDataElement = document.getElementById('adm-data');
+    const admId = admDataElement.getAttribute('data-adm-id');
+
     // Configurar submenu de status
     statusSubmenu.className = 'status-modal';
     statusSubmenu.innerHTML = `

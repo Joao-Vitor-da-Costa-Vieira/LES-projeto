@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     });
 
-    document.querySelectorAll('#clientes').forEach(botao => {
+    document.querySelectorAll('#Clientes').forEach(botao => {
         botao.addEventListener('click', async (event) => {
             event.stopPropagation();
             await getClientes(admId);
