@@ -1,22 +1,22 @@
-import { getClientes } from "/scripts/service/usuario/usuarioService";
-import { getHomeAdm } from "/scripts/service/telaInicialService";
+import { getClientes } from "/scripts/service/usuario/usuarioService.js";
+import { getHomeAdm } from "/scripts/service/telaInicialService.js";
 
 document.addEventListener('DOMContentLoaded', async () => {
     const admDataElement = document.getElementById('adm-data');
     const admId = admDataElement.getAttribute('data-adm-id');
     
     document.querySelectorAll('.home-link').forEach(botao => {
-        botao.addEventListener('click', (event) => {
+        botao.addEventListener('click', async (event) => {
             event.stopPropagation();
             console.log("Botão clicado!");
-            getHomeAdm(admId);
+             await getHomeAdm(admId);
         });
     });
 
     document.querySelectorAll('#clientes').forEach(botao => {
-        botao.addEventListener('click', (event) => {
+        botao.addEventListener('click', async (event) => {
             event.stopPropagation();
-            getClientes(admId);
+            await getClientes(admId);
         });
     });
 });

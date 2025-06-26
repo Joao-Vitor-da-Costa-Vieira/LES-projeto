@@ -2,7 +2,7 @@ import {
     getAnalise,
     getEstoque,
     getPedidos 
-} from "/scripts/service/sidebarAdmService";
+} from "/scripts/service/sidebarAdmService.js";
 
 document.addEventListener('DOMContentLoaded', async () => {
 
@@ -10,10 +10,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     const admId = admDataElement.getAttribute('data-adm-id');
 
     document.querySelectorAll('#pedidos').forEach(botao => {
-        botao.addEventListener('click', (event) => {
+        botao.addEventListener('click', async (event) => {
             event.stopPropagation();
             try {
-                getPedidos(admId);
+                await getPedidos(admId);
             } catch (error) {
                 console.error('Erro ao carregar página:', error);
             }
@@ -21,10 +21,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     document.querySelectorAll('#estoque').forEach(botao => {
-        botao.addEventListener('click', (event) => {
+        botao.addEventListener('click', async (event) => {
             event.stopPropagation();
             try {
-                getEstoque(admId);
+                await getEstoque(admId);
             } catch (error) {
                 console.error('Erro ao carregar página:', error);
             }
@@ -32,10 +32,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     document.querySelectorAll('#analise').forEach(botao => {
-        botao.addEventListener('click', (event) => {
+        botao.addEventListener('click', async (event) => {
             event.stopPropagation();
             try {
-                getAnalise(admId);    
+                await getAnalise(admId);    
             } catch (error) {
                 console.error('Erro ao carregar página:', error);
             }            
