@@ -223,6 +223,10 @@ async function buscarTransacoesFiltradas(filtros = {}) {
                 WHEN t.tra_status = 'APROVADO' THEN 1
                 WHEN t.tra_status = 'TROCA SOLICITADA' THEN 2
                 WHEN t.tra_status = 'DEVOLUÇÃO SOLICITADA' THEN 3
+                WHEN t.tra_status = 'EM TRANSPORTE' THEN 4
+                WHEN t.tra_status = 'ENTREGUE' THEN 5
+                WHEN t.tra_status = 'TROCA APROVADA' THEN 6
+                WHEN t.tra_status = 'DEVOLUCAO APROVADA' THEN 7
                 ELSE 4
             END ASC,
             t.tra_data DESC
