@@ -131,42 +131,6 @@
     display: none;
 }
 
-/* Status Badge Styles */
-.status-aprovado {
-    background-color: #28a745;
-    color: white;
-    padding: 3px 8px;
-    border-radius: 4px;
-}
-
-.status-cancelado {
-    background-color: #dc3545;
-    color: white;
-    padding: 3px 8px;
-    border-radius: 4px;
-}
-
-.status-em-transporte {
-    background-color: #17a2b8;
-    color: white;
-    padding: 3px 8px;
-    border-radius: 4px;
-}
-
-.status-entregue {
-    background-color: #6c757d;
-    color: white;
-    padding: 3px 8px;
-    border-radius: 4px;
-}
-
-.status-troca-solicitada {
-    background-color: #ffc107;
-    color: black;
-    padding: 3px 8px;
-    border-radius: 4px;
-}
-
 /* Chart Container Styles */
 #historico-vendas {
     width: 100%;

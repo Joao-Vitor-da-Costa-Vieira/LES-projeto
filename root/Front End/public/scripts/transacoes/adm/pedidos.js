@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
         pedidos.forEach(pedido => {
             const row = `
                 <tr>
-                    <td id="tra-data" data-tra-id="${pedido.tra_id}></td>
+                    <td id="tra-data" data-tra-id="${pedido.tra_id}"></td>
                     <td>${pedido.usuario?.usr_nome || 'N/A'}</td>
                     <td>R$ ${pedido.tra_valor}</td>
                     <td>${new Date(pedido.tra_data).toLocaleDateString()}</td>
