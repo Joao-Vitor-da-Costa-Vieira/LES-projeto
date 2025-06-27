@@ -3,6 +3,7 @@ import { pesquisarLivroService } from "/scripts/service/livroService.js";
 import { getCarrinho } from "/scripts/service/transacoes/carrinhoService.js";
 import { buscarHistorico, buscarTransacao } from "/scripts/service/transacoes/pedidosService.js";
 import { buscarNotificacoes, deletarNotificacao } from "/scripts/service/transacoes/notificacoesService.js";
+import { userNameDisplay } from "/scripts/service/usuario/usuarioService.js"
 
 async function verificarNotificacoes(usuarioId) {
     try {
@@ -80,10 +81,16 @@ function atualizarSubmenu(notificacoes, usuarioId) {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-    const userDataElement = document.getElementById('user-data');
-    const usuarioId = userDataElement.getAttribute('data-user-id');
+    userNameDisplay();
+    const usuarioId = localStorage.getItem('currentUserId');
     const iconeNotificacao = document.querySelector('.notificacao-icone');
     const submenu = document.querySelector('.notificacao-submenu');
+    
+    if (userName) {
+        userNameDisplay.textContent = userName;
+    } else {
+        userNameDisplay.textContent = 'Visitante';
+    }
     
     document.querySelectorAll('.home-link').forEach(botao => {
         botao.addEventListener('click', (event) => {

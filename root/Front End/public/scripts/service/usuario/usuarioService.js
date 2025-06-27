@@ -80,3 +80,10 @@ export async function getClientes(id) {
         throw err;
     }
 }
+
+export function updateUserDisplay() {
+    const userName = localStorage.getItem('currentUserName');
+    const userNameDisplay = document.querySelector('.usuario-nome');
+    
+    userNameDisplay.textContent = userName || 'Visitante';
+}

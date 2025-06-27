@@ -5,8 +5,13 @@ document.addEventListener('DOMContentLoaded', () => {
         botao.addEventListener('click', (event) => {
             event.stopPropagation();
             
-            const usuarioId = document.getElementById('usuario').value;
+            const selectUser = document.getElementById('usuario');
+            const usuarioId = selectUser.value;
+            const usuarioNome = selectUser.options[selectUser.selectedIndex].text.split(', ')[1];
+
             localStorage.setItem('currentUserId', usuarioId);
+            localStorage.setItem('currentUserName', usuarioNome);
+
             getHome(usuarioId);
         });
     });
@@ -15,8 +20,13 @@ document.addEventListener('DOMContentLoaded', () => {
         botao.addEventListener('click', (event) => {
             event.stopPropagation();
             
-            const admId = document.getElementById('adm').value;
-            localStorage.setItem('currentAdminId', admId);
+            const selectAdm = document.getElementById('adm');
+            const admId = selectAdm.value;
+            const admNome = selectAdm.options[selectAdm.selectedIndex].text.split(', ')[1];
+
+            localStorage.setItem('currentAdmId', admId);
+            localStorage.setItem('currentAdmName', admNome);
+
             getHomeAdm(admId);
         });
     });
