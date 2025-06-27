@@ -87,3 +87,10 @@ export function updateUserDisplay() {
     
     userNameDisplay.textContent = userName || 'Visitante';
 }
+
+export async function getUserId(){
+    
+    const usuarioId = localStorage.getItem('currentUserId');
+
+    return usuarioId;
+}

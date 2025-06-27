@@ -82,7 +82,7 @@ function atualizarSubmenu(notificacoes, usuarioId) {
 
 document.addEventListener('DOMContentLoaded', async () => {
     userNameDisplay();
-    const usuarioId = localStorage.getItem('currentUserId');
+    const usuarioId = await getUserId();
     const iconeNotificacao = document.querySelector('.notificacao-icone');
     const submenu = document.querySelector('.notificacao-submenu');
     
