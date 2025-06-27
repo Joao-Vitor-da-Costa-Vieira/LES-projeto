@@ -81,10 +81,10 @@ export async function getClientes(id) {
     }
 }
 
-export function updateUserDisplay() {
+export function userNameDisplay() {
     const userName = localStorage.getItem('currentUserName');
     const userNameDisplay = document.querySelector('.usuario-nome');
-    
+
     userNameDisplay.textContent = userName || 'Visitante';
 }
 
