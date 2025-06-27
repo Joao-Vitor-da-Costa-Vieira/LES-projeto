@@ -1,6 +1,12 @@
 import {getHome, getHomeAdm} from "/scripts/service/telaInicialService.js";
 
 document.addEventListener('DOMContentLoaded', () => {
+
+    localStorage.removeItem('currentUserId');
+    localStorage.removeItem('currentUserName');
+    localStorage.removeItem('currentAdminId');
+    localStorage.removeItem('currentAdminName');
+    
     document.querySelectorAll('.botao-usuario').forEach(botao => {
         botao.addEventListener('click', (event) => {
             event.stopPropagation();
