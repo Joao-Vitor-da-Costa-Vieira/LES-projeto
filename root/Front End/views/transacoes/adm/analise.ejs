@@ -23,8 +23,7 @@
         
         <nav class="usuario-nav">
             <div class="usuario-sessao">
-                <div id="adm-data" data-adm-id="<%= Array.isArray(adm) ? adm[0]?.adm_id : adm?.adm_id %>" style="display:none;"></div>
-                <span class="usuario-nome"><%= Array.isArray(adm) ? adm[0]?.adm_nome : adm?.adm_nome %></span>
+                <span class="usuario-nome" id="adm-name-display"></span>
                 <img src="/imagens/avatar.jpg" alt="Imagem do usuário" class="usuario-imagem">
             </div>
         </nav>
