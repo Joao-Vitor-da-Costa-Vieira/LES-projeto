@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
             event.stopPropagation();
             
             const usuarioId = document.getElementById('usuario').value;
-
+            localStorage.setItem('currentUserId', usuarioId);
             getHome(usuarioId);
         });
     });
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
             event.stopPropagation();
             
             const admId = document.getElementById('adm').value;
-
+            localStorage.setItem('currentAdminId', admId);
             getHomeAdm(admId);
         });
     });
