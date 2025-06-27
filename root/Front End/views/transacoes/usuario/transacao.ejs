@@ -49,8 +49,7 @@
             </div>
             
             <div class="usuario-sessao">
-                <div id="user-data" data-user-id="<%= Array.isArray(usuario) ? usuario[0]?.usr_id : usuario?.usr_id %>" style="display:none;"></div>
-                <span class="usuario-nome"><%= Array.isArray(usuario) ? usuario[0]?.usr_nome : usuario?.usr_nome %></span>
+                <span class="usuario-nome" id="user-name-display"></span>
                 <img src="/imagens/avatar.jpg" alt="Imagem do usuário" class="usuario-imagem">
             </div>
         </nav>
