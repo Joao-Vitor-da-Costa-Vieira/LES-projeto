@@ -4,10 +4,11 @@ import {
     getPedidos 
 } from "/scripts/service/sidebarAdmService.js";
 
+import { getAdmId } from "/scripts/service/usuario/admService.js";
+
 document.addEventListener('DOMContentLoaded', async () => {
 
-    const admDataElement = document.getElementById('adm-data');
-    const admId = admDataElement.getAttribute('data-adm-id');
+    const admId = await getAdmId();
 
     document.querySelectorAll('#pedidos').forEach(botao => {
         botao.addEventListener('click', async (event) => {

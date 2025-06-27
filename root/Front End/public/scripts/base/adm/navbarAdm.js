@@ -5,7 +5,7 @@ import { getAdmId, admNameDisplay } from "/scripts/service/usuario/admService.js
 document.addEventListener('DOMContentLoaded', async () => {
     admNameDisplay();
 
-    const admId = getAdmId();
+    const admId = await getAdmId();
     
     document.querySelectorAll('.home-link').forEach(botao => {
         botao.addEventListener('click', async (event) => {

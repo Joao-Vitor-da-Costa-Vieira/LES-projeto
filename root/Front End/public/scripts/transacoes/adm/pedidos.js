@@ -1,14 +1,14 @@
 import { filterPedido } from "/scripts/service/transacoes/pedidosService.js";
+import { getAdmId } from "/scripts/service/usuario/admService.js";
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     const filtroContainer = document.querySelector('.filtros-container');
     const toggleButton = document.querySelector('.botao-mais-filtro');
     const aplicarFiltroBtn = document.querySelector('.confirmar');
     const rangeValor = document.querySelector('#valorMaximo');
     const outputValor = document.querySelector('#valorExibido');
     const tabelaPedidos = document.querySelector('#tabela-pedidos');
-    const admDataElement = document.getElementById('adm-data');
-    const admId = admDataElement.getAttribute('data-adm-id');
+    const admId = await getAdmId();
 
     tabelaPedidos.addEventListener('click', function(event) {
         const botaoAtualizar = event.target.closest('.alterar');
