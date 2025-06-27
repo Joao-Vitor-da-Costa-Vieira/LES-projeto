@@ -1,5 +1,6 @@
 import { getHome } from "../../service/telaInicialService";
 import { atualizarCartaoService } from "/scripts/service/usuario/cartaoService.js";
+import { getUserId } from "/scripts/service/usuario/usuarioService.js";
 
 // Enviando os dados para o backend
 document.querySelector('form').addEventListener('submit', async function(event){

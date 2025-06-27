@@ -1,5 +1,8 @@
-import { buscarUsuarioIdService, atualizarSenhaUsuarioService } from "/scripts/service/usuario/usuarioService.js";
-
+import { 
+    buscarUsuarioIdService,
+    atualizarSenhaUsuarioService,
+    getUserId
+} from "/scripts/service/usuario/usuarioService.js";
 
 document.querySelector('form').addEventListener('submit', async function (event) {
     event.preventDefault();

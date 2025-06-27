@@ -1,4 +1,5 @@
 import { getAtualizarCartao, getAdicionarCartao } from "/scripts/service/usuario/cartaoService.js";
+import { getUserId } from "/scripts/service/usuario/usuarioService.js";
 
 const usr_id = await getUserId();
 

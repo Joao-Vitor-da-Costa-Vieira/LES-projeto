@@ -1,4 +1,5 @@
 import { cadastroAtualizarService } from "/scripts/service/usuario/cadastroService.js";
+import { getUserId } from "/scripts/service/usuario/usuarioService.js";
 
 // PASSANDO OS DADOS PARA ATUALIZAÇÃO
 document.querySelector('form').addEventListener('submit', async function (event) {

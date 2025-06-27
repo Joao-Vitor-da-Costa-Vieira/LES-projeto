@@ -8,6 +8,8 @@ import {
     getCadastroPrimeiro
 } from "/scripts/service/usuario/sidebarService.js";
 
+import { getUserId } from "/scripts/service/usuario/usuarioService.js";
+
 document.addEventListener('DOMContentLoaded', async () => {
 
     const usuarioId = await getUserId();

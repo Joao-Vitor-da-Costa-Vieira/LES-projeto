@@ -1,6 +1,7 @@
 import { getHome } from "/scripts/service/telaInicialService.js";
 import { confirmarPagamento, buscarHistorico } from "/scripts/service/transacoes/pedidosService.js";
 import { cadastrarEnderecoEntregaService } from "/scripts/service/usuario/enderecoEntregaService.js";
+import { getUserId } from "/scripts/service/usuario/usuarioService.js";
 
 document.addEventListener('DOMContentLoaded', async function() {
     const usr_id = await getUserId();

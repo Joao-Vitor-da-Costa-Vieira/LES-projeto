@@ -1,4 +1,5 @@
 import { adicionarCarrinho, getCarrinho } from "/scripts/service/transacoes/carrinhoService.js";
+import { getUserId } from "/scripts/service/usuario/usuarioService.js";
 
 document.addEventListener('DOMContentLoaded', function() {
     const slide = document.querySelector('.carrosel-slide');

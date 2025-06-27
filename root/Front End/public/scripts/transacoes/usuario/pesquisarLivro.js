@@ -1,6 +1,7 @@
 import { filtroLivroService } from "/scripts/service/livroService.js";
 import { adicionarCarrinho } from "/scripts/service/transacoes/carrinhoService.js";
 import { getCarrinho } from "/scripts/service/transacoes/carrinhoService.js";
+import { getUserId } from "/scripts/service/usuario/usuarioService.js";
 
 const value = document.querySelector("#valor");
 const slider = document.querySelector("#preco");

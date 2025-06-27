@@ -1,4 +1,5 @@
 import { obterRespostaIa } from "/scripts/service/usuario/aiChatBotService.js";
+import { getUserId } from "/scripts/service/usuario/usuarioService.js";
 
 document.addEventListener('DOMContentLoaded', function(){
     const chatbotNavButton = document.getElementById('botao-chatbot-navbar');

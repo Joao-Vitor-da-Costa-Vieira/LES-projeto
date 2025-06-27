@@ -1,4 +1,5 @@
 import { getCarrinho, adicionarCarrinho } from "/scripts/service/transacoes/carrinhoService.js";
+import { getUserId } from "/scripts/service/usuario/usuarioService.js";
 
 document.querySelectorAll('.adicionar-produto').forEach(botao => {
     botao.addEventListener('click', async function (event) {

@@ -1,4 +1,5 @@
 import { getAtualizarEndEntrega, getAdicionarEndEntrega } from "/scripts/service/usuario/enderecoEntregaService.js";
+import { getUserId } from "/scripts/service/usuario/usuarioService.js";
 
 const usr_id = await getUserId();
 
