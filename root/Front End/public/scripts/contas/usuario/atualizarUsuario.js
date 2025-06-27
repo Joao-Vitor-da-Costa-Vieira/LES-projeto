@@ -9,8 +9,7 @@ document.querySelector('form').addEventListener('submit', async function (event)
     let dados = Object.fromEntries(formDados.entries());
 
     // Pegando o ID do usuário
-    const userDataElement = document.getElementById('user-data');
-    const usr_id = userDataElement ? userDataElement.dataset.userId : null;;
+    const usr_id = await getUserId();
 
     // Valida se as senhas são iguais
     if (dados.senha !== dados.conf_senha) {

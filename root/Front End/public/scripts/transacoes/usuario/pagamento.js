@@ -2,9 +2,8 @@ import { getHome } from "/scripts/service/telaInicialService.js";
 import { confirmarPagamento, buscarHistorico } from "/scripts/service/transacoes/pedidosService.js";
 import { cadastrarEnderecoEntregaService } from "/scripts/service/usuario/enderecoEntregaService.js";
 
-document.addEventListener('DOMContentLoaded', function() {
-    const userDataElement = document.getElementById('user-data');
-    const usr_id = userDataElement ? userDataElement.dataset.userId : null;
+document.addEventListener('DOMContentLoaded', async function() {
+    const usr_id = await getUserId();
 
     document.getElementById('Cancelar')?.addEventListener('click', function() {
         if (usr_id) {

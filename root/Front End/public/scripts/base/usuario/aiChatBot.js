@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function(){
     const chat = document.querySelector('.chat');
     const closeButton = document.querySelector('.close-chat');
     const screen = document.querySelector('.screen');
-    const userDataElement = document.getElementById('user-data');
     
     chat.style.display = 'none';
 
@@ -43,17 +42,17 @@ document.addEventListener('DOMContentLoaded', function(){
         }
     });
 
-    enviarMsg(userDataElement);
+    enviarMsg();
 
 });
 
 //Enviando um texto para a IA
-async function enviarMsg(userDataElement) {
+async function enviarMsg() {
     let screen = document.querySelector('.screen');
     let button = document.querySelector('#ai-button');
     let input = document.querySelector('.chat .input input');
 
-    const usr_id = userDataElement ? userDataElement.dataset.userId : null;
+    const usr_id = await getUserId();
 
     //Enviando nova mensagem
     button.addEventListener('click', async (event) => {

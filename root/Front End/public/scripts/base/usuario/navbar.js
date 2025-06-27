@@ -3,7 +3,7 @@ import { pesquisarLivroService } from "/scripts/service/livroService.js";
 import { getCarrinho } from "/scripts/service/transacoes/carrinhoService.js";
 import { buscarHistorico, buscarTransacao } from "/scripts/service/transacoes/pedidosService.js";
 import { buscarNotificacoes, deletarNotificacao } from "/scripts/service/transacoes/notificacoesService.js";
-import { userNameDisplay } from "/scripts/service/usuario/usuarioService.js"
+import { userNameDisplay, getUserId } from "/scripts/service/usuario/usuarioService.js"
 
 async function verificarNotificacoes(usuarioId) {
     try {

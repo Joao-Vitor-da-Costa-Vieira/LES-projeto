@@ -10,8 +10,7 @@ document.querySelector('form').addEventListener('submit', async function (event)
     const senhaAtual = document.querySelector('.senha_input').value;
 
     // Pegando o ID do usuário
-    const userDataElement = document.getElementById('user-data');
-    const usr_id = userDataElement ? userDataElement.dataset.userId : null;;
+    const usr_id = await getUserId();
 
     console.log(usr_id);
 

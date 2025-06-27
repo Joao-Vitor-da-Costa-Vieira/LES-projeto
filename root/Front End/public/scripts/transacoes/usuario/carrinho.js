@@ -35,7 +35,7 @@ function atualizarTabela(itensCarrinho, novoSubtotal) {
 }
 
 // Delegando eventos para os botões dinâmicos
-tabelaBody.addEventListener('click', function(event) {
+tabelaBody.addEventListener('click', async function(event) {
     const botaoAtualizar = event.target.closest('.atualizar');
     const botaoRemover = event.target.closest('.remover');
     
@@ -43,8 +43,7 @@ tabelaBody.addEventListener('click', function(event) {
         event.preventDefault();
         event.stopPropagation();
 
-        const userDataElement = document.getElementById('user-data');
-        const usr_id = userDataElement ? userDataElement.dataset.userId : null;
+        const usr_id = await getUserId();
 
         let submenuAtual = botaoAtualizar.querySelector('.atualizar_submenu');
 
@@ -279,9 +278,8 @@ document.addEventListener('click', () => {
     document.querySelectorAll('.deletar_submenu').forEach(menu => menu.remove());
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-    const userDataElement = document.getElementById('user-data');
-    const usr_id = userDataElement ? userDataElement.dataset.userId : null;
+document.addEventListener('DOMContentLoaded', async function() {
+    const usr_id = await getUserId();
     
     const btnCancelar = document.getElementById('Cancelar');
     if (btnCancelar) {

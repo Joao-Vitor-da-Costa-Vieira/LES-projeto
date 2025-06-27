@@ -1,7 +1,6 @@
 import { getAtualizarEndEntrega, getAdicionarEndEntrega } from "/scripts/service/usuario/enderecoEntregaService.js";
 
-const userDataElement = document.getElementById('user-data');
-const usr_id = userDataElement ? userDataElement.dataset.userId : null;
+const usr_id = await getUserId();
 
 document.querySelectorAll('.atualizar').forEach(button => {
     

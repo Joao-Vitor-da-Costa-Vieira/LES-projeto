@@ -135,7 +135,7 @@ document.getElementById('trocar')?.addEventListener('click', async (e) => {
 
     const endDataElement = document.getElementById('end-data');
     const end_id = endDataElement ? JSON.parse(endDataElement.textContent) : [];
-    const usr_id = document.getElementById('user-data').dataset.userId;
+    const usr_id = await getUserId();
 
     console.log(end_id);
 

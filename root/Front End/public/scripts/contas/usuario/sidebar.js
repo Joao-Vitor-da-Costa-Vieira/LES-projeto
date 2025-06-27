@@ -10,8 +10,7 @@ import {
 
 document.addEventListener('DOMContentLoaded', async () => {
 
-    const userDataElement = document.getElementById('user-data');
-    const usuarioId = userDataElement.getAttribute('data-user-id');
+    const usuarioId = await getUserId();
 
     document.querySelectorAll('#cadastro-side-btn').forEach(botao => {
         botao.addEventListener('click', (event) => {

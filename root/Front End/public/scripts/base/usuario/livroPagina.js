@@ -1,11 +1,10 @@
 import { getCarrinho, adicionarCarrinho } from "/scripts/service/transacoes/carrinhoService.js";
 
 document.querySelectorAll('.adicionar-produto').forEach(botao => {
-    botao.addEventListener('click', function (event) {
+    botao.addEventListener('click', async function (event) {
         event.stopPropagation();
 
-        const userDataElement = document.getElementById('user-data');
-        const usr_id = userDataElement ? userDataElement.dataset.userId : null;
+        const usr_id = await getUserId();
 
         let submenuAtual = this.querySelector('.atualizar_submenu');
 
