@@ -103,3 +103,24 @@ export async function getUserId(){
 
     return usuarioId;
 }
+
+export async function filtroUsuarioService(filtros) {
+    try {
+
+        const filtrosEncoded = encodeURIComponent(JSON.stringify(filtros));
+
+        const response = await fetch(`/api/usuario-filtro?filtros=${filtrosEncoded}`, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' }
+        });
+
+        if (!response.ok) {
+            throw new Error('Erro na requisição');
+        }
+
+        return await response.json();
+    } catch (err) {
+        console.error(`Erro no filtroUsuarioService: ${err}`);
+        throw err;
+    }
+}
