@@ -26,19 +26,13 @@ module.exports.pesquisarLivrosTitulo = async (req, res) => {
         
         const livros = await buscarLivrosTitulo(titulo);
         
-        let usuario = null;
-        if (usr_id) {
-            usuario = await buscarUsuarioId(usr_id);
-        }
-        
         let notificacoes = [];
         if (usuario) {
-            notificacoes = await buscarNotificacoes(usuario.usr_id);
+            notificacoes = await buscarNotificacoes(usr_id);
         }
         
         res.render('transacoes/usuario/pesquisarLivro', {
             livros: livros || [],
-            usuario: usuario,
             tituloPesquisado: titulo,
             notificacoes
         });
@@ -56,16 +50,13 @@ module.exports.pesquisarLivrosTitulo = async (req, res) => {
 
 module.exports.livroPagina = async (req, res) => {
     try {
-        const lvr_id = req.params.lvr_id;
+        const {lvr_id, usr_id} = req.query;
         
         if (!lvr_id || isNaN(lvr_id)) {
             return res.status(400).send('ID do livro inválido');
         }
 
-        const [livro, usuario] = await Promise.all([
-            buscarLivroId(lvr_id),
-            buscarUsuarioId(1)
-        ]);
+        const [livro] = await buscarLivroId(lvr_id);
         
         if (!livro) {
             return res.status(404).render('paginaErro', {
@@ -75,11 +66,10 @@ module.exports.livroPagina = async (req, res) => {
 
         livro.emEstoque = livro.lvr_qtd_estoque > 0;
         
-        const notificacoes = usuario ? await buscarNotificacoes(usuario.usr_id) : [];
+        const notificacoes = usuario ? await buscarNotificacoes(usr_id) : [];
         
         res.render('livrosPagina', { 
             livro,
-            usuario,
             notificacoes
         });
     } catch (err) {

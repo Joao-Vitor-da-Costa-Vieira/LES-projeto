@@ -36,7 +36,17 @@ export async function buscarLivrosVendidoService() {
         return livros;
 
     }catch(err){
-        console.error(`Erro no buscarLivrosVendidoService - serviceHistoricoVendas: ${err}`);
+        console.error(`Erro no buscarLivrosVendidoService - serviceLivros: ${err}`);
         throw err;
     }
+}
+
+export async function getLivroPagina(livroId, usuarioId) {
+    try {
+        window.location.href = `/livros?lvr_id=${livroId}&usr_id=${usuarioId}`;
+    } catch (error) {
+        console.error(`Erro no getLivroPagina - serviceLivros: ${err}`);
+        throw err;
+    }
+    
 }

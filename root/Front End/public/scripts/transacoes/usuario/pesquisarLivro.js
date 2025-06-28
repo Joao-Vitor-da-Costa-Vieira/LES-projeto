@@ -1,4 +1,4 @@
-import { filtroLivroService } from "/scripts/service/livroService.js";
+import { filtroLivroService, getLivroPagina } from "/scripts/service/livroService.js";
 import { adicionarCarrinho } from "/scripts/service/transacoes/carrinhoService.js";
 import { getCarrinho } from "/scripts/service/transacoes/carrinhoService.js";
 import { getUserId } from "/scripts/service/usuario/usuarioService.js";
@@ -100,11 +100,21 @@ pesquisaBotao.addEventListener('click', async (e) => {
 
 // Event Delegation para os botões de adicionar
 tabelaBody.addEventListener('click', async function(event) {
+    const botaoAtualizar = event.target.closest('.atualizar');
+    const livroDataElement = event.target.closest('td[data-livro-id]'); 
+    const livroId = livroDataElement ? livroDataElement.dataset.livroId : null;
+    const usr_id = await getUserId();
+
+    if (botaoAtualizar) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        getLivroPagina(usr_id, livroId);
+    }
+
     if (event.target.classList.contains('adicionar')) {
         const botao = event.target;
         event.stopPropagation();
-
-        const usr_id = await getUserId();
 
         let submenuAtual = botao.querySelector('.atualizar_submenu');
 

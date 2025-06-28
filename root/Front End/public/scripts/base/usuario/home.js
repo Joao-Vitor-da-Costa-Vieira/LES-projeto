@@ -1,7 +1,7 @@
 import { adicionarCarrinho, getCarrinho } from "/scripts/service/transacoes/carrinhoService.js";
 import { getUserId } from "/scripts/service/usuario/usuarioService.js";
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
     const slide = document.querySelector('.carrosel-slide');
     const slides = document.querySelectorAll('.slide-item');
     const botaoAnterior = document.getElementById('botaoAnterior');
@@ -14,6 +14,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Posiciona o slide
     slide.style.transform = 'translateX(' + (-size * counter) + 'px)';
+
+    document.querySelectorAll('.alterar').forEach(botao => {
+        botao.addEventListener('click', async function(event) {
+            event.preventDefault();
+            
+            const livroId = this.closest('[data-livro-id]')?.dataset.livroId || 
+                            this.getAttribute('onclick')?.match(/\/livros\/(\d+)/)?.[1];
+            
+            if (livroId) {
+                const usr_id = await getUserId();
+                await getLivroPagina(livroId, usr_id);
+            }
+        });
+    });
 
     // Botão próximo
     botaoProximo.addEventListener('click', () => {
