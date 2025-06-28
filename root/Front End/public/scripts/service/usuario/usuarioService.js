@@ -108,7 +108,6 @@ export async function filtroUsuarioService(filtros) {
     try {
 
         const filtrosEncoded = encodeURIComponent(JSON.stringify(filtros));
-
         const response = await fetch(`/api/usuario-filtro?filtros=${filtrosEncoded}`, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' }

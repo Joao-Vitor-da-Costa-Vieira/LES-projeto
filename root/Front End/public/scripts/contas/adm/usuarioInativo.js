@@ -95,13 +95,10 @@ function coletarFiltros() {
 
 pesquisaBotao.addEventListener('click', async (e) => {
     e.preventDefault();
-
-    const userDataElement = this.closest('[data-usuario-id]');
-    const usr_id = userDataElement ? userDataElement.dataset.usuarioId : null;
     
     try {
         const filtros = coletarFiltros();
-        const livros = await filtroUsuarioService(filtros, usr_id);
+        const livros = await filtroUsuarioService(filtros);
         atualizarTabela(livros);
     } catch (error) {
         console.error('Erro ao pesquisar livros:', error);

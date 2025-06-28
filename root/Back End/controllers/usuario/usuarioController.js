@@ -17,7 +17,8 @@ const { cadastrarUsuario,
         buscarUsuariosAtivos, 
         buscarUsuariosInativos, 
         inativarUsuario,
-        ativarUsuario 
+        ativarUsuario,
+        consultaFiltroUsuario 
 } = require("../../models/usuario/usuarioModel");
 
 const { buscarNotificacoes } = require("../../models/usuario/notificacaoModel");
@@ -209,3 +210,19 @@ module.exports.getApiUsuariosInativos = async (req, res) => {
     const usuarios = await buscarUsuariosInativos();
     res.json(usuarios);
 };
+
+module.exports.getApiUsuarioFiltro = async (req, res) => {
+    try {
+        // Obter todos os parâmetros de query da requisição
+        const filtros = JSON.parse(decodeURIComponent(req.query.filtros));
+
+        // Executar a query
+        const usuarios = await consultaFiltroUsuario(filtros);
+        
+        res.json(usuarios);
+    } catch (error) {
+        console.error('Erro ao filtrar usuarios:', error);
+        res.status(500).json({ error: 'Erro interno ao processar a filtragem de usuarios' });
+    }
+};
+

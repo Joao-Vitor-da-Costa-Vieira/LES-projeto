@@ -125,6 +125,68 @@ async function buscarUsuarioId(id) {
     }
 }
 
+async function consultaFiltroUsuario(filtros){
+    try {
+
+        // Query modificada para MySQL
+        let queryBase = `
+            SELECT 
+                *
+            FROM usuarios
+        `;
+
+        const conditions = [];
+        const params = [];
+
+        // [Restante das condições permanece igual...]
+        if (filtros.nome) {
+            conditions.push(`usr_nome LIKE ?`);
+            params.push(`%${filtros.nome}%`);
+        }
+
+        if (filtros.email) {
+            conditions.push(`usr_email LIKE ?`);
+            params.push(parseFloat(filtros.email));
+        }
+
+        if (filtros.cpf) {
+            conditions.push(`usr_cpf LIKE ?`);
+            params.push(`%${filtros.cpf}%`);
+        }
+
+        if (filtros.selecao) {
+            conditions.push(`usr_genero LIKE ?`);
+            params.push(`%${filtros.selecao}%`);
+        }
+
+        if (filtros.dataNascimento) {
+            conditions.push(`usr_data_de_nascimento >= ?`);
+            params.push(filtros.dataNascimento);
+        }
+
+        if (filtros.telefone) {
+            conditions.push(`usr_telefone_1 <= ?`);
+            params.push(filtros.telefone);
+            conditions.push(`usr_telefone_2 <= ?`);
+            params.push(filtros.telefone);
+        }
+
+        // Combinar condições
+        if (conditions.length > 0) {
+            queryBase += ` WHERE ` + conditions.join(' AND ');
+        }
+
+        // Agrupar apenas por ID do usuario
+        queryBase += ` GROUP BY usr_id`;
+        
+        const [usuarios] = await db.query(queryBase, params);
+        return usuarios;
+    } catch (err) {
+        console.error(`Erro no consultaFiltroUsuario - modelUsuarios: ${err}`);
+        throw err;
+    }
+}
+
 // Exportando as funções de busca
 module.exports = {
     buscarTodosUsuarios,
@@ -135,5 +197,6 @@ module.exports = {
     ativarUsuario,
     cadastrarUsuario,
     atualizarUsuario,
-    alterarSenhaUsuario
+    alterarSenhaUsuario,
+    consultaFiltroUsuario
 };
