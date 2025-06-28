@@ -81,6 +81,15 @@ export async function getClientes(id) {
     }
 }
 
+export async function getInativos(id) {
+    try {
+        window.location.href = `/inativos?adm_id=${id}`;
+    } catch (error) {
+        console.error(`Erro no getInativos - serviceUsuarios: ${err}`);
+        throw err;
+    }
+}
+
 export function userNameDisplay() {
     const userName = localStorage.getItem('currentUserName');
     const userNameDisplay = document.querySelector('.usuario-nome');

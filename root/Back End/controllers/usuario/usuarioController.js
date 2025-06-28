@@ -71,8 +71,19 @@ module.exports.getSenha = async (req, res) => {
 };
 
 module.exports.getUsuariosInativos = async (req, res) => {
-    const inativos = await buscarUsuariosInativos();
-    res.render('contas/adm/usuarioInativo', { inativos: inativos });
+
+    try {
+
+        const inativos = await buscarUsuariosInativos();
+
+        res.render('contas/adm/usuarioInativo', { 
+            inativos: inativos
+        });
+    } catch (error) {
+        console.error(`Erro no getUsuariosInativos - controllerUsuario: ${err}`);
+        res.sendStatus(500);
+    }
+
 };
 
 module.exports.getUsuariosAtivos = async (req, res) => {
@@ -83,7 +94,8 @@ module.exports.getUsuariosAtivos = async (req, res) => {
 
     const usuarios = await buscarUsuariosAtivos();
     res.render('contas/adm/consultarUsuario', { 
-        usuarios: usuarios });
+        usuarios: usuarios 
+    });
 };
 
 module.exports.patchSenha = async (req, res) => {

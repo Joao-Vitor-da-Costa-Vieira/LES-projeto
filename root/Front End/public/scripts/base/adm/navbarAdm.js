@@ -1,6 +1,9 @@
-import { getClientes } from "/scripts/service/usuario/usuarioService.js";
+import {
+    getClientes,
+    getInativos,
+    getAdmId,
+    admNameDisplay  } from "/scripts/service/usuario/usuarioService.js";
 import { getHomeAdm } from "/scripts/service/telaInicialService.js";
-import { getAdmId, admNameDisplay } from "/scripts/service/usuario/admService.js";
 
 document.addEventListener('DOMContentLoaded', async () => {
     admNameDisplay();
@@ -19,6 +22,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         botao.addEventListener('click', async (event) => {
             event.stopPropagation();
             await getClientes(admId);
+        });
+    });
+
+    document.querySelectorAll('#inativos').forEach(botao => {
+        botao.addEventListener('click', async (event) => {
+            event.stopPropagation();
+            await getInativos(admId);
         });
     });
 });
