@@ -26,7 +26,7 @@ module.exports.getEnderecoCobrancaAdicionar = async (req, res) => {
 
     const decodedUsrId = decodeURIComponent(usr_id);
 
-    const notificacoes = usuario ? await buscarNotificacoes(decodedUsrId) : [];
+    const notificacoes = usr_id ? await buscarNotificacoes(decodedUsrId) : [];
 
     res.render('contas/usuario/endCobrancaAdicionar', { 
         notificacoes
@@ -40,12 +40,48 @@ module.exports.getEnderecoCobrancaAtualizar = async (req, res) => {
     const decodedUsrId = decodeURIComponent(usr_id);
 
     const enderecos = await buscarEnderecoCobrancaId(decodedEndId);
-    const notificacoes = usuario ? await buscarNotificacoes(decodedUsrId) : [];
+    const notificacoes = usr_id ? await buscarNotificacoes(decodedUsrId) : [];
 
     res.render('contas/usuario/endCobrancaAtualizar', { 
         enderecos: enderecos,
         notificacoes });
 };
+
+module.exports.getEnderecoCobrancaAdm = async (req, res) => {
+    const { usr_id } = req.query;
+
+    const decodedUsrId = decodeURIComponent(usr_id)
+    const enderecos = await buscarEnderecosCobrancaUsuarioId(decodedUsrId);
+
+    res.render('contas/adm/endCobranca', { 
+        enderecos: enderecos,
+        usr_id: decodedUsrId
+    });
+};
+
+module.exports.getEnderecoCobrancaAdicionarAdm = async (req, res) => {
+    const { usr_id } = req.query;
+
+    const decodedUsrId = decodeURIComponent(usr_id);
+
+    res.render('contas/adm/endCobrancaAdicionar', { 
+        usr_id: decodedUsrId
+     });
+};
+
+module.exports.getEnderecoCobrancaAtualizarAdm = async (req, res) => {
+    const {end_id, usr_id} = req.query;
+    
+    const decodedEndId = decodeURIComponent(end_id);
+    const decodedUsrId = decodeURIComponent(usr_id);
+
+    const enderecos = await buscarEnderecoCobrancaId(decodedEndId);
+
+    res.render('contas/adm/endCobrancaAtualizar', { 
+        enderecos: enderecos,
+        usr_id: decodedUsrId });
+};
+
 
 // Inserção de dados
 module.exports.postEnderecoCobrancaAdicionar = async (req, res) => {

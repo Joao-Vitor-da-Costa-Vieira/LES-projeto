@@ -9,6 +9,9 @@ router.get('/atualizar', UsuarioController.getCadastroAtualizar);
 router.get('/senha', UsuarioController.getSenha);
 router.get('/inativos', UsuarioController.getUsuariosInativos);
 router.get('/usuarios', UsuarioController.getUsuariosAtivos);
+router.get('/cadastro-adm', UsuarioController.getCadastroAdm);
+router.get('/atualizar-adm', UsuarioController.getCadastroAtualizarAdm);
+router.get('/senha-adm', UsuarioController.getSenhaAdm);
 
 router.get('/api/usuarios/id/:usr_id', UsuarioController.getApiUsuarioId);
 router.get('/api/usuarios/ativos', UsuarioController.getApiUsuariosAtivos);

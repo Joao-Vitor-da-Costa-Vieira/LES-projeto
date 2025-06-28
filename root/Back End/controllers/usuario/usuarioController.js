@@ -70,6 +70,38 @@ module.exports.getSenha = async (req, res) => {
     });
 };
 
+
+module.exports.getCadastroAdm = async (req, res) => {
+
+    res.render('contas/adm/cadastrarUsuario');
+};
+
+module.exports.getCadastroAtualizarAdm = async (req, res) => {
+    const { usr_id } = req.query;
+
+    const usuario = await buscarUsuarioId(usr_id);
+    const enderecosCobranca = await buscarEnderecosCobrancaUsuarioId(usr_id);
+    const enderecosEntrega = await buscarEnderecosEntregaUsuarioId(usr_id);
+    const cartoes = await buscarCartoesUsuarioId(usr_id);
+
+    res.render('contas/adm/atualizarUsuario', {
+        usuario: usuario,
+        enderecosCobranca: enderecosCobranca,
+        enderecosEntrega: enderecosEntrega,
+        cartoes: cartoes
+    });
+};
+
+module.exports.getSenhaAdm = async (req, res) => {
+    const { usr_id } = req.query;
+
+    const usuario = await buscarUsuarioId(usr_id);
+
+    res.render('contas/adm/senha', {
+        usuario: usuario
+    });
+};
+
 module.exports.getUsuariosInativos = async (req, res) => {
 
     try {
