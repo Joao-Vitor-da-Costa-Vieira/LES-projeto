@@ -49,11 +49,64 @@
             
             </br>
 
+            <!--Input de Nome-->
+            <div class="linha_centralizada">
+                <div class="nome">
+                    <label class="label" for="nome">Nome</label>
+                    <input class="nome_input" type="text" id="nome" name="nome">
+                </div>
+                <button type="button" id="pesquisa-botao">🔍</button>
+            </div>
+                
+            </br>
+
             <div class="linha_centralizada">
                 <button class="botao-mais-filtro">Mais opções de filtragem</button>
             </div>
 
-            </br>
+            </br>              
+
+            <!--Input de Email-->
+            <div class="linha_centralizada">
+            <div class="email hidden">
+                <label class="label" for="email">E-mail</label>
+                <input class="email_input" type="text" id="email" name="email">
+            </div>
+            </div>
+                    
+            <!--Input de CPF-->
+            <div class="linha_centralizada">
+            <div class="cpf hidden">
+                <label class="label" for="cpf">CPF</label>
+                <input class="cpf_input" type="number" id="cpf" name="cpf">
+            </div>
+            </div>
+
+            <!--Input de data e Telefone-->
+            <div class="linha_centralizada">
+                <div class="data_div hidden">
+                    <label class="label_pequena" for="data_nascimento">Data</label>
+                    <input type="date" id="data_nascimento" name="data_nascimento">
+                </div>
+
+                <div class="telefone hidden">
+                    <label class="label_pequena" for="telefone1">Telefone</label>
+                    <input class="telefone_input" type="text" id="telefone1" name="telefone1">
+                </div>
+            </div>
+
+            <!--Input de Gênero-->
+            <div class="genero hidden">
+                <label class="label_genero">Gênero</label>
+                <select class="selecao" id="genero" name="genero">
+                    <option value="">Selecione</option>
+                    <option value="M">Masculino</option>
+                    <option value="F">Feminino</option>
+                    <option value="NB">Não Binário</option>
+                </select>
+            </div>
+
+            </br class="hidden">
 
             <div class="table_div">
                 <table>
