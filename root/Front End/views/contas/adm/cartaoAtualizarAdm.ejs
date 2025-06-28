@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="icon" href="/imagens/livro-16.ico">
+</head>
+<body>
+
+    <header>
+        <nav class="main-nav">
+            <a class="home-link">Home</a>
+            <div class="nav-botao">
+                <button id="Clientes">Clientes</button>
+                <button id="inativos">Inativos</button>
+            </div>
+        </nav>
+        
+        <nav class="usuario-nav">
+            <div class="usuario-sessao">
+                <span class="usuario-nome" id="adm-name-display"></span>
+                <img src="/imagens/avatar.jpg" alt="Imagem do usuário" class="usuario-imagem">
+            </div>
+        </nav>
+    </header>
+
+    <div class="main">
+        <!--Barra lateral de Navegação-->
+        <div class="sidenav">
+            <a id="pedidos">Pedidos</a>
+            <a id="estoque">Estoque</a>
+            <a id="analise">Análise</a>
+        </div>
+
+        <div class="conteudo">
+            <div class="container-cartoes">
+                <div class="cartoes">
+
+                    <div class="bloco_titulo">
+                        <h1 class="titulo">Atualização de Cartão</h1>
+                    </div>
+                    
+                    <form class="container-forms-cartoes">
+                        <div class="cartoes-id" data-cartao-id="<%= Array.isArray(cartoes) ? cartoes[0]?.crt_id : cartoes?.crt_id %>"></div>
+                        <!--Primeira Linha-->
+                        <div class="linha_centralizada">
+                            <div class="num_cartao">
+                                <label for="num_cartao">Número</label>
+                                <input class="num_cartao_input" type="number" id="num_cartao" name="num_cartao" value="<%=cartoes.numero%>" required>
+                            </div>
+
+                            <div class="cod_sec">
+                                <label for="cod_sec">Código de Segurança</label>
+                                <input class="cod_sec_input" type="password" id="cod_sec" name="cod_sec" value="<%=cartoes.cod_sec%>" required>
+                            </div>
+
+                            <div class="select">
+                                <label class="label_genero">Bandeira</label>
+                                <select class="selecao" id="bandeira" name="bandeira" required>
+                                    <option value="">Selecione</option>
+                                    <option value="Visa">Visa</option>
+                                    <option value="Mastercard">Mastercard</option>
+                                    <option value="Hipercard">Hipercard</option>
+                                    <option value="American Express">American Express</option>
+                                    <option value="Elo">Elo</option>
+                                    <option value="Diners Club">Diners Club</option>
+                                    <option value="Discover">Discover</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!--Segunda Linha-->
+                        <div class="linha_centralizada">
+                            <div class="nome">
+                                <label class="label" for="nome_c">Nome do Titular</label>
+                                <input class="nome_input" type="text" id="nome_c" name="nome_c" value="<%=cartoes.nome_c%>" required>
+                            </div>
+                        </div>
+                        
+                        <div class="linha_centralizada">
+                            <button class="atualizar">Alterar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="chat">
+    <div class="header">
+        <h3>Assistente Virtual</h3>
+        <button class="close-chat">X</button>
+    </div>
+    <div class="screen"></div>
+    <div class="input">
+        <input type="text" placeholder="Digite sua mensagem...">
+        <button id="ai-button">Enviar</button>
+    </div>
+    </div>
+    
+    <script type="module" src="/scripts/contas/adm/cartaoAtualizar.js"></script>
+    <script type="module" src="/scripts/base/adm/navbarAdm.js"></script>
+    <script type="module" src="/scripts/base/adm/sidebarAdm.js"></script>
+</body>
+</html>

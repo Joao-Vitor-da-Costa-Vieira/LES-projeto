@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="icon" href="/imagens/livro-16.ico">
+</head>
+<body>
+
+    <header>
+        <nav class="main-nav">
+            <a class="home-link">Home</a>
+            <div class="nav-botao">
+                <button id="Clientes">Clientes</button>
+                <button id="inativos">Inativos</button>
+            </div>
+        </nav>
+        
+        <nav class="usuario-nav">
+            <div class="usuario-sessao">
+                <span class="usuario-nome" id="adm-name-display"></span>
+                <img src="/imagens/avatar.jpg" alt="Imagem do usuário" class="usuario-imagem">
+            </div>
+        </nav>
+    </header>
+
+    <div class="main">
+        <!--Barra lateral de Navegação-->
+        <div class="sidenav">
+            <a id="pedidos">Pedidos</a>
+            <a id="estoque">Estoque</a>
+            <a id="analise">Análise</a>
+        </div>
+
+        <div class="conteudo">
+            <div class="container-endereco">
+                <div class="bloco_titulo">
+                    <h1 class="titulo">Adição de End. Entrega</h1>
+                </div>
+
+                <form class="container-forms-endereco">
+
+                    <!--Primeira Linha-->
+                    <div class="linha_centralizada">
+                        <div class="cidade">
+                            <label class="label_pequena" for="cidade">Cidade</label>
+                            <input class="cidade_input" type="text" id="cidade" name="cidade" required>
+                        </div>
+
+                        <div class="bairro">
+                            <label class="label_pequena" for="bairro">Bairro</label>
+                            <input class="cidade_input" type="text" id="bairro" name="bairro"  required>
+                        </div>
+
+                        <div class="estado">
+                            <label class="label_genero">Estado</label>
+                            <select class="selecao" id="estado" name="estado" required>
+                                <option value="">Selecione</option>
+                                <option value="AC">AC</option>
+                                <option value="AL">AL</option>
+                                <option value="AP">AP</option>
+                                <option value="AM">AM</option>
+                                <option value="BA">BA</option>
+                                <option value="CE">CE</option>
+                                <option value="DF">DF</option>
+                                <option value="ES">ES</option>
+                                <option value="GO">GO</option>
+                                <option value="MA">MA</option>
+                                <option value="MT">MT</option>
+                                <option value="MS">MS</option>
+                                <option value="MG">MG</option>
+                                <option value="PA">PA</option>
+                                <option value="PB">PB</option>
+                                <option value="PR">PR</option>
+                                <option value="PE">PE</option>
+                                <option value="PI">PI</option>
+                                <option value="RJ">RJ</option>
+                                <option value="RN">RN</option>
+                                <option value="RS">RS</option>
+                                <option value="RO">RO</option>
+                                <option value="RR">RR</option>
+                                <option value="SC">SC</option>
+                                <option value="SP">SP</option>
+                                <option value="SE">SE</option>
+                                <option value="TO">TO</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!--Segunda Linha-->
+                    <div class="linha_centralizada">
+                        <div class="endereco">
+                            <label class="label_pequena" for="endereco">Endereço</label>
+                            <input class="endereco_input" type="text" id="endereco" name="endereco" required>
+                        </div>
+
+                        <div class="numero">
+                            <label class="label_pequena" for="numero">Nº.</label>
+                            <input class="numero_input" type="number" id="numero" name="numero" required>
+                        </div>
+                    </div>
+
+                    <!--Terceira Linha-->
+                    <div class="linha_centralizada">
+                        <div class="cidade">
+                            <label class="label_pequena" for="complemento">Complemento</label>
+                            <input class="cidade_input" type="text" id="complemento" name="complemento_e" value="<%=enderecos[0].end_complemento%>">
+                        </div>
+
+                        <div class="bairro">
+                            <label class="label_pequena" for="cep">CEP</label>
+                            <input class="cidade_input" type="text" id="cep" name="cep" value="<%=enderecos[0].end_cep%>" required>
+                        </div>
+                    </div>
+                    
+                    <button>Adicionar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="chat">
+    <div class="header">
+        <h3>Assistente Virtual</h3>
+        <button class="close-chat">X</button>
+    </div>
+    <div class="screen"></div>
+    <div class="input">
+        <input type="text" placeholder="Digite sua mensagem...">
+        <button id="ai-button">Enviar</button>
+    </div>
+    </div>
+
+    <script type="module" src="/scripts/contas/adm/enderecoEntregaAdicionar.js"></script>
+    <script type="module" src="/scripts/base/adm/navbarAdm.js"></script>
+    <script type="module" src="/scripts/base/adm/sidebarAdm.js"></script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="icon" href="/imagens/livro-16.ico">
+</head>
+<body>
+
+    <header>
+        <nav class="main-nav">
+            <a class="home-link">Home</a>
+            <div class="nav-botao">
+                <button id="Clientes">Clientes</button>
+                <button id="inativos">Inativos</button>
+            </div>
+        </nav>
+        
+        <nav class="usuario-nav">
+            <div class="usuario-sessao">
+                <span class="usuario-nome" id="adm-name-display"></span>
+                <img src="/imagens/avatar.jpg" alt="Imagem do usuário" class="usuario-imagem">
+            </div>
+        </nav>
+    </header>
+
+    <div class="main">
+        <!--Barra lateral de Navegação-->
+        <div class="sidenav">
+            <a id="pedidos">Pedidos</a>
+            <a id="estoque">Estoque</a>
+            <a id="analise">Análise</a>
+        </div>
+
+        <div class="conteudo">
+
+            <div class="senha">
+                <div class="bloco_titulo">
+                    <h1 class="titulo">Recuperar Senha</h1>
+                </div>
+                
+                <br>
+
+                <form>
+                    <!--Input de confirmação de senha atual-->
+                    <div class="senha">
+                        <label class="label" for="senha">Senha</label>
+                        <div class="erro_div">
+                            <input class="senha_input" type="password" id="senha" name="senha" required>
+                            <span id="erroSenha" class="erro" style="color: red; display: none;">*</span>
+                        </div>
+                    </div>
+                    
+                    <!--Input de senha nova-->
+                    <div class="senha">
+                        <label class="label" for="senhanova">Senha Nova</label>
+                        <div class="erro_div">
+                            <input class="senha_nova_input" type="password" id="senhanova" name="senhanova" required>
+                            <span id="erroSenhaNova" class="erro" style="color: red; display: none;">*</span>
+                        </div>
+                    </div>
+                    
+                    <!--Input de confirmação de senha nova-->
+                    <div class="senha">
+                        <label class="label" for="conf_senha">Confirmar Senha</label>
+                        <div class="erro_div">
+                            <input class="senha_confirma_input" type="password" id="conf_senha" name="conf_senha" required>
+                            <span id="erroConfSenha" class="erro" style="color: red; display: none;">*</span>
+                        </div>
+                    </div>
+
+                    <button class="botao_menu">Confirmar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="chat">
+    <div class="header">
+        <h3>Assistente Virtual</h3>
+        <button class="close-chat">X</button>
+    </div>
+    <div class="screen"></div>
+    <div class="input">
+        <input type="text" placeholder="Digite sua mensagem...">
+        <button id="ai-button">Enviar</button>
+    </div>
+    </div>
+    
+    <script type="module" src="/scripts/contas/adm/senha.js"></script>
+    <script type="module" src="/scripts/base/adm/navbarAdm.js"></script>
+    <script type="module" src="/scripts/base/adm/sidebarAdm.js"></script>
+</body>
+</html>

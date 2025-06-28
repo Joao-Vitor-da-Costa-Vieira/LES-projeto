@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="icon" href="/imagens/livro-16.ico">
+</head>
+<body>
+
+    <header>
+        <nav class="main-nav">
+            <a class="home-link">Home</a>
+            <div class="nav-botao">
+                <button id="Clientes">Clientes</button>
+                <button id="inativos">Inativos</button>
+            </div>
+        </nav>
+        
+        <nav class="usuario-nav">
+            <div class="usuario-sessao">
+                <span class="usuario-nome" id="adm-name-display"></span>
+                <img src="/imagens/avatar.jpg" alt="Imagem do usuário" class="usuario-imagem">
+            </div>
+        </nav>
+    </header>
+
+    <div class="main">
+        <!--Barra lateral de Navegação-->
+        <div class="sidenav">
+            <a id="pedidos">Pedidos</a>
+            <a id="estoque">Estoque</a>
+            <a id="analise">Análise</a>
+        </div>
+
+        <div class="conteudo">
+            <div class="bloco_titulo">
+                <h1 class="titulo">Cadastrar Usuário</h1>
+            </div>
+
+            <br>
+
+
+            <form id="formCadastro" method="POST">
+                <!--Input de Nome-->
+                <div class="linha_centralizada">
+                <div class="nome">
+                    <label class="label" for="nome">Nome</label>
+                    <input class="nome_input" type="text" id="nome" name="nome" required>
+                </div>
+                </div>                
+
+                <!--Input de Email-->
+                <div class="linha_centralizada">
+                <div class="email">
+                    <label class="label" for="email">E-mail</label>
+                    <input class="email_input" type="text" id="email" name="email" required>
+                </div>
+                </div>
+                    
+                <!--Input de CPF-->
+                <div class="linha_centralizada">
+                <div class="cpf">
+                    <label class="label" for="cpf">CPF</label>
+                    <input class="cpf_input" type="number" id="cpf" name="cpf" required>
+                </div>
+                </div>
+                
+
+                <!--Bloco de Texto Informando como deve ser a senha-->
+                <div class="bloco_texto">
+                    <p>Sua escolha de senha deve conter ao menos:</p>
+                    <p>- 8 caracteres.</p>
+                    <p>- Uma letra Maiúscula, minuscula, número e símbolo.</p>
+                </div>
+
+                <!--Input de senha-->
+                <div class="linha_centralizada">
+                <div class="senha">
+                    <label class="label" for="senha">Senha</label>
+                    <div class="erro_div">
+                        <input class="senha_input" type="password" id="senha" name="senha" required>
+                        <span id="erroSenha" class="erro" style="color: red; display: none;">*</span>
+                    </div>
+                </div>
+                </div>
+                
+                    
+                <!--Input de confirmação de senha-->
+                <div class="linha_centralizada">
+                <div class="senha">
+                    <label class="label" for="conf_senha">Confirmar Senha</label>
+                    <div class="erro_div">
+                        <input class="senha_confirma_input" type="password" id="conf_senha" name="conf_senha" required>
+                        <span id="erroConfSenha" class="erro" style="color: red; display: none;">*</span>
+                    </div>
+                </div>
+                </div>
+                
+
+                <!--Input de data e Telefone-->
+                <div class="linha_centralizada">
+                    <div class="data_div">
+                        <label class="label_pequena" for="data_nascimento">Data</label>
+                        <input type="date" id="data_nascimento" name="data_nascimento" required>
+                    </div>
+
+                    <div class="telefone">
+                        <label class="label_pequena" for="telefone1">Telefone 1</label>
+                        <input class="telefone_input" type="text" id="telefone1" name="telefone1" required>
+                    </div>
+                    
+                    <div class="telefone">
+                        <label class="label_pequena" for="telefone2">Telefone 2</label>
+                        <input class="telefone_input" type="text" id="telefone2" name="telefone2">
+                    </div>
+                </div>
+
+                <!--Input de Gênero-->
+                <div class="genero">
+                    <label class="label_genero">Gênero</label>
+                    <select class="selecao" id="genero" name="genero" required>
+                        <option value="">Selecione</option>
+                        <option value="M">Masculino</option>
+                        <option value="F">Feminino</option>
+                        <option value="NB">Não Binário</option>
+                    </select>
+                </div>
+
+                <br>
+
+                <!--Cadastrar End. Entrega-->
+                <div class="bloco_titulo">
+                    <h1 class="titulo">Cadastrar End. Entrega</h1>
+                </div>
+                    
+                <br>
+                    
+                <!--Primeira Linha-->
+                <div class="linha_centralizada">
+                    <div class="cidade">
+                        <label class="label_pequena" for="cidade_e">Cidade</label>
+                        <input class="cidade_input" type="text" id="cidade_e" name="cidade_e" required>
+                    </div>
+
+                    <div class="bairro">
+                        <label class="label_pequena" for="Bairro_e">Bairro</label>
+                        <input class="cidade_input" type="text" id="bairro_e" name="bairro_e" required>
+                    </div>
+
+                    <div class="estado">
+                        <label class="label_genero">Estado</label>
+                        <select class="selecao" id="estado_e" name="estado_e" required>
+                            <option value="">Selecione</option>
+                            <option value="AC">AC</option>
+                            <option value="AL">AL</option>
+                            <option value="AP">AP</option>
+                            <option value="AM">AM</option>
+                            <option value="BA">BA</option>
+                            <option value="CE">CE</option>
+                            <option value="DF">DF</option>
+                            <option value="ES">ES</option>
+                            <option value="GO">GO</option>
+                            <option value="MA">MA</option>
+                            <option value="MT">MT</option>
+                            <option value="MS">MS</option>
+                            <option value="MG">MG</option>
+                            <option value="PA">PA</option>
+                            <option value="PB">PB</option>
+                            <option value="PR">PR</option>
+                            <option value="PE">PE</option>
+                            <option value="PI">PI</option>
+                            <option value="RJ">RJ</option>
+                            <option value="RN">RN</option>
+                            <option value="RS">RS</option>
+                            <option value="RO">RO</option>
+                            <option value="RR">RR</option>
+                            <option value="SC">SC</option>
+                            <option value="SP">SP</option>
+                            <option value="SE">SE</option>
+                            <option value="TO">TO</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!--Segunda Linha-->
+                <div class="linha_centralizada">
+                    <div class="endereco">
+                        <label class="label_pequena" for="endereco_e">Endereço</label>
+                        <input class="endereco_input" type="text" id="endereco_e" name="endereco_e" required>
+                    </div>
+
+                    <div class="numero">
+                        <label class="label_pequena" for="numero_e">Nº.</label>
+                        <input class="numero_input" type="number" id="numero_e" name="numero_e" required>
+                    </div>
+                </div>
+
+                <!--Terceira Linha-->
+                <div class="linha_centralizada">
+                    <div class="cidade">
+                        <label class="label_pequena" for="complemento_e">Complemento</label>
+                        <input class="cidade_input" type="text" id="complemento_e" name="complemento_e">
+                    </div>
+
+                    <div class="bairro">
+                        <label class="label_pequena" for="cep_e">CEP</label>
+                        <input class="cidade_input" type="text" id="cep_e" name="cep_e" required>
+                    </div>
+                </div>
+                    
+                <br>
+
+                <!--Cadastrar End. Cobrança-->
+                <div class="bloco_titulo">
+                    <h1 class="titulo">Cadastrar End. Cobrança</h1>
+                </div>
+
+                <br>
+        
+                <!--Primeira Linha-->
+                <div class="linha_centralizada">
+                    <div class="cidade">
+                        <label for="cidade_c">Cidade</label>
+                        <input class="cidade_input" type="text" id="cidade_c" name="cidade_c" required>
+                    </div>
+
+                    <div class="bairro">
+                        <label for="bairro_c">Bairro</label>
+                        <input class="cidade_input" type="text" id="bairro_c" name="bairro_c" required>
+                    </div>
+
+                    <div class="select">
+                        <label class="label_genero">Estado</label>
+                        <select class="selecao" id="estado_c" name="estado_c" required>
+                            <option value="">Selecione</option>
+                            <option value="AC">AC</option>
+                            <option value="AL">AL</option>
+                            <option value="AP">AP</option>
+                            <option value="AM">AM</option>
+                            <option value="BA">BA</option>
+                            <option value="CE">CE</option>
+                            <option value="DF">DF</option>
+                            <option value="ES">ES</option>
+                            <option value="GO">GO</option>
+                            <option value="MA">MA</option>
+                            <option value="MT">MT</option>
+                            <option value="MS">MS</option>
+                            <option value="MG">MG</option>
+                            <option value="PA">PA</option>
+                            <option value="PB">PB</option>
+                            <option value="PR">PR</option>
+                            <option value="PE">PE</option>
+                            <option value="PI">PI</option>
+                            <option value="RJ">RJ</option>
+                            <option value="RN">RN</option>
+                            <option value="RS">RS</option>
+                            <option value="RO">RO</option>
+                            <option value="RR">RR</option>
+                            <option value="SC">SC</option>
+                            <option value="SP">SP</option>
+                            <option value="SE">SE</option>
+                            <option value="TO">TO</option>
+                        </select>
+                    </div>
+                </div>
+        
+                <!--Segunda Linha-->
+                <div class="linha_centralizada">
+                    <div class="endereco">
+                        <label class="label_pequena" for="endereco_c">Endereço</label>
+                        <input class="endereco_input" type="text" id="endereco_c" name="endereco_c" required>
+                    </div>
+
+                    <div class="numero">
+                        <label for="numero_c">Nº.</label>
+                        <input class="numero_input" type="number" id="numero_c" name="numero_c" required>
+                    </div>
+                </div>
+        
+                <!--Terceira Linha-->
+                <div class="linha_centralizada">
+                    <div class="cidade">
+                        <label class="label_pequena" for="complemento_c">Complemento</label>
+                        <input class="cidade_input" type="text" id="complemento_c" name="complemento_c">
+                    </div>
+
+                    <div class="bairro">
+                        <label class="label_pequena" for="cep_c">CEP</label>
+                        <input class="cidade_input" type="text" id="cep_c" name="cep_c" required>
+                    </div>
+                </div>
+                    
+                <br>
+
+                <div class="bloco_titulo">
+                    <h1 class="titulo">Cadastrar Cartão</h1>
+                </div>
+
+                <br>
+
+                <!--Primeira Linha-->
+                <div class="linha_centralizada">
+                    <div class="num_cartao">
+                        <label for="num_cartao">Número</label>
+                        <input class="num_cartao_input" type="number" id="num_cartao" name="num_cartao" required>
+                    </div>
+
+                    <div class="cod_sec">
+                        <label for="cod_sec">Código de Segurança</label>
+                        <input class="cod_sec_input" type="password" id="cod_sec" name="cod_sec" required>
+                    </div>
+
+                    <div class="select">
+                        <label class="label_genero">Bandeira</label>
+                        <select class="selecao" id="bandeira" name="bandeira" required>
+                            <option value="">Selecione</option>
+                            <option value="Visa">Visa</option>
+                            <option value="Mastercard">Mastercard</option>
+                            <option value="Hipercard">Hipercard</option>
+                            <option value="American Express">American Express</option>
+                            <option value="Elo">Elo</option>
+                            <option value="Diners Club">Diners Club</option>
+                            <option value="Discover">Discover</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!--Segunda Linha-->
+                <div class="linha_centralizada">
+                    <div class="nome">
+                        <label class="label" for="nome_c">Nome do Titular</label>
+                        <input class="nome_input" type="text" id="nome_c" name="nome_c" required>
+                    </div>
+                </div>
+
+
+                <br>
+
+                <!--Input de Botões-->
+                <div class="botoes">
+                    <button class="cancelar" type="button" id="Cancelar">Cancelar</button>
+                    <input type="submit" id="submit" name="submit" value="Confirmar">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Script do botão cancelar
+        document.getElementById("Cancelar").addEventListener("click", function() {
+            window.location.href = "index.html";
+        });
+    </script>
+
+    <div class="chat">
+    <div class="header">
+        <h3>Assistente Virtual</h3>
+        <button class="close-chat">X</button>
+    </div>
+    <div class="screen"></div>
+    <div class="input">
+        <input type="text" placeholder="Digite sua mensagem...">
+        <button id="ai-button">Enviar</button>
+    </div>
+    </div>
+
+    <!--Script da Página-->
+    <script type="module" src="/scripts/contas/adm/cadastrarUsuario.js"></script>
+    <script type="module" src="/scripts/base/adm/navbarAdm.js"></script>
+    <script type="module" src="/scripts/base/adm/sidebarAdm.js"></script>
+</body>
+</html>

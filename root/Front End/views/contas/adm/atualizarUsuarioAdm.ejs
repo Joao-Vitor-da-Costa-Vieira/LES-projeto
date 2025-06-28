@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="icon" href="/imagens/livro-16.ico">
+</head>
+<body>
+
+    <header>
+        <nav class="main-nav">
+            <a class="home-link">Home</a>
+            <div class="nav-botao">
+                <button id="Clientes">Clientes</button>
+                <button id="inativos">Inativos</button>
+            </div>
+        </nav>
+        
+        <nav class="usuario-nav">
+            <div class="usuario-sessao">
+                <span class="usuario-nome" id="adm-name-display"></span>
+                <img src="/imagens/avatar.jpg" alt="Imagem do usuário" class="usuario-imagem">
+            </div>
+        </nav>
+    </header>
+
+    <div class="main">
+        <!--Barra lateral de Navegação-->
+        <div class="sidenav">
+            <a id="pedidos">Pedidos</a>
+            <a id="estoque">Estoque</a>
+            <a id="analise">Análise</a>
+        </div>
+
+        <div class="conteudo">
+            <!-- Título Principal -->
+            <div class="bloco_titulo">
+                <h1 class="titulo">Atualizando Usuario</h1>
+            </div>
+
+            <form method="POST">
+                <div class="container-forms">
+                    <!-- Informações Pessoais -->
+                    <div class="usuario">
+                        <div class="bloco_titulo">
+                            <h1 class="titulo">Informações Pessoais</h1>
+                        </div>
+
+                        <!-- Nome -->
+                        <div class="nome">
+                            <label class="label" for="nome">Nome Completo</label>
+                            <input class="nome_input" type="text" id="nome" name="nome" value="<%=usuario.usr_nome%>" required>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="email">
+                            <label class="label" for="email">E-mail</label>
+                            <input class="email_input" type="email" id="email" name="email" value="<%=usuario.usr_email%>" required>
+                        </div>
+
+                        <!-- Telefone 1 -->
+                        <div class="telefone">
+                            <label class="label_pequena" for="telefone1">Telefone 1</label>
+                            <input class="telefone_input" type="tel" id="telefone1" name="telefone1" value="<%=usuario.usr_telefone1%>" required>
+                        </div>
+
+                        <!-- Telefone 2 -->
+                        <div class="telefone">
+                            <label class="label_pequena" for="telefone2">Telefone 2</label>
+                            <input class="telefone_input" type="tel" id="telefone2" name="telefone2" value="<%=usuario.usr_telefone2%>">
+                        </div>
+
+                        <!-- CPF -->
+                        <div class="cpf">
+                            <label class="label" for="cpf">CPF</label>
+                            <input class="cpf_input" type="text" id="cpf" name="cpf" value="<%=usuario.usr_cpf%>" required>
+                        </div>
+
+                        <!-- Gênero -->
+                        <!--Input de Gênero-->
+                    <div class="genero">
+                        <label class="label_genero">Gênero</label>
+                        <select class="selecao" id="genero" name="genero" required>
+                            <option value="">Selecione</option>
+                            <option value="M">Masculino</option>
+                            <option value="F">Feminino</option>
+                            <option value="NB">Não Binário</option>
+                        </select>
+                    </div>
+
+                        <!-- Data de Nascimento -->
+                        <div class="data_div">
+                            <label class="label_pequena" for="data">Data de Nascimento</label>
+                            <% let dataFormatada = '';
+                            if (usuario[0].usr_data_de_nascimento) {
+                                let date = new Date(usuario[0].usr_data_de_nascimento);
+                                if (!isNaN(date.getTime())) {
+                                    dataFormatada = date.toISOString().split('T')[0];
+                                }
+                            }
+                            %>
+                            <input type="date" id="data" name="data" value="<%=dataFormatada%>" required>
+                        </div>
+
+                        <!-- Senha -->
+                        <div class="senha">
+                            <label class="label" for="senha">Senha</label>
+                            <div class="erro_div">
+                                <input class="senha_input" type="password" id="senha" name="senha" value="<%=usuario.usr_senha%>" required>
+                                <span id="erroSenha" class="erro" style="color: red; display: none;">*</span>
+                            </div>
+                        </div>
+
+                        <!-- Confirmação de Senha -->
+                        <div class="senha">
+                            <label class="label" for="conf_senha">Confirme a Senha</label>
+                            <div class="erro_div">
+                                <input class="senha_input" type="password" id="conf_senha" name="conf_senha" value="<%=usuario.usr_senha%>" required>
+                                <span id="erroConfSenha" class="erro" style="color: red; display: none;">*</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botão de Confirmação -->
+                    <div class="botoes">
+                        <button type="submit">Confirmar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="chat">
+    <div class="header">
+        <h3>Assistente Virtual</h3>
+        <button class="close-chat">X</button>
+    </div>
+    <div class="screen"></div>
+    <div class="input">
+        <input type="text" placeholder="Digite sua mensagem...">
+        <button id="ai-button">Enviar</button>
+    </div>
+    </div>
+
+    <script type="module" src="/scripts/contas/adm/atualizarUsuario.js"></script>
+    <script type="module" src="/scripts/base/adm/navbarAdm.js"></script>
+    <script type="module" src="/scripts/base/adm/sidebarAdm.js"></script>
+</body>
+</html>
