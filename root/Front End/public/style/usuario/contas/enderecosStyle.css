@@ -131,6 +131,16 @@ th {
 }
 
 /* Estilos de botões */
+
+.botoes {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    margin-bottom: 10px;
+}
+
 .botoes_resultado {
     display: flex;
     gap: 10px;
@@ -146,6 +156,26 @@ th {
 
 .botoes_resultado .atualizar {
     background-color: #0003c8;
+}
+
+.adicionar {
+    background-color: #0003c8;
+    width: 80px;
+    height: 30px;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    border: #0003c8;
+}
+
+.adicionar:hover{
+    background-color: #1317ff;
+    width: 80px;
+    height: 30px;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    border: #1317ff;
 }
 
 /* Classes utilitárias */
