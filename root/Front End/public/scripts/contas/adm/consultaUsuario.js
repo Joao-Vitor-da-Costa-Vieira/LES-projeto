@@ -88,7 +88,6 @@ document.addEventListener('click', () => {
     document.querySelectorAll('.atualizar_submenu').forEach(menu => menu.remove());
 });
 
-// DESATIVANDO USUÁRIOS
 document.querySelectorAll('.inativar').forEach(button => {
     button.addEventListener('click', async function (e) {
         e.preventDefault();
@@ -105,7 +104,6 @@ document.querySelectorAll('.inativar').forEach(button => {
     });
 });
 
-// Função que cria um botão dinâmico para a tela de inativos
 export function criarBotaoInativados() {
     if (!document.getElementById('btn-inativados')) {
         let botao = document.createElement('a');
