@@ -27,7 +27,7 @@ module.exports.pesquisarLivrosTitulo = async (req, res) => {
         const livros = await buscarLivrosTitulo(titulo);
         
         let notificacoes = [];
-        if (usuario) {
+        if (usr_id) {
             notificacoes = await buscarNotificacoes(usr_id);
         }
         
@@ -56,7 +56,7 @@ module.exports.livroPagina = async (req, res) => {
             return res.status(400).send('ID do livro inválido');
         }
 
-        const [livro] = await buscarLivroId(lvr_id);
+        const livro = await buscarLivroId(lvr_id);
         
         if (!livro) {
             return res.status(404).render('paginaErro', {

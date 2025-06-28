@@ -63,7 +63,6 @@ module.exports.getPagamento = async (req, res) => {
             buscarItensCupom(usr_id)
         ]);
 
-        console.log('Usuário recebido Pagamento:', usuario);
         console.log('Cartoes recebidos Pagamento:', cartoes);  
 
         const livrosComDetalhes = await Promise.all(
