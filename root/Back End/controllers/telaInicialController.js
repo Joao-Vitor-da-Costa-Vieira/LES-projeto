@@ -18,7 +18,7 @@ module.exports.getTela = async (req, res) => {
 module.exports.getHome = async (req, res) => {
     const { usr_id } = req.query;
 
-    const notificacoes = usuario ? await buscarNotificacoes(usr_id) : [];
+    const notificacoes = usr_id ? await buscarNotificacoes(usr_id) : [];
     
     res.render('home', {
         notificacoes

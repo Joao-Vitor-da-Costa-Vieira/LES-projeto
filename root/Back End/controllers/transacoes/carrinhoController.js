@@ -17,7 +17,6 @@ module.exports.getCarrinho = async (req, res) => {
     try {
         const { usr_id } = req.query;
         console.log('Usuário recebido Carrinho:', usr_id);
-        console.log('Usuário recebido Carrinho:', usuario);
         const carrinhos = await buscarItensCarrinho(usr_id);
         
         const livrosComDetalhes = await Promise.all(
@@ -34,7 +33,7 @@ module.exports.getCarrinho = async (req, res) => {
             return total + (item.livro.lvr_custo * item.car_qtd_item);
         }, 0);
 
-        const notificacoes = usuario ? await buscarNotificacoes(usr_id) : [];
+        const notificacoes = usr_id ? await buscarNotificacoes(usr_id) : [];
         
         res.render('transacoes/usuario/carrinho', { 
             itensCarrinho: livrosComDetalhes,

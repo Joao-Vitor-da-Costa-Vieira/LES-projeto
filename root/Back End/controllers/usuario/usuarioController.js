@@ -32,7 +32,7 @@ module.exports.getCadastroPrimeiro = (req, res) => {
 module.exports.getCadastro = async (req, res) => {
     const { usr_id } = req.query;
 
-    const notificacoes = usuario ? await buscarNotificacoes(usr_id) : [];
+    const notificacoes = usr_id ? await buscarNotificacoes(usr_id) : [];
 
     res.render('contas/usuario/cadastrarUsuario',{
         notificacoes
@@ -47,7 +47,7 @@ module.exports.getCadastroAtualizar = async (req, res) => {
     const enderecosEntrega = await buscarEnderecosEntregaUsuarioId(usr_id);
     const cartoes = await buscarCartoesUsuarioId(usr_id);
 
-    const notificacoes = usuario ? await buscarNotificacoes(usr_id) : [];
+    const notificacoes = usr_id ? await buscarNotificacoes(usr_id) : [];
 
     res.render('contas/usuario/atualizarUsuario', {
         usuario: usuario,

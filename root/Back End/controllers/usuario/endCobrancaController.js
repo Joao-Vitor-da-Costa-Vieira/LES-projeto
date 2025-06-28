@@ -14,7 +14,7 @@ module.exports.getEnderecoCobranca = async (req, res) => {
     const decodedUsrId = decodeURIComponent(usr_id)
 
     const enderecos = await buscarEnderecosCobrancaUsuarioId(decodedUsrId);
-    const notificacoes = usuario ? await buscarNotificacoes(decodedUsrId) : [];
+    const notificacoes = usr_id ? await buscarNotificacoes(decodedUsrId) : [];
 
     res.render('contas/usuario/endCobranca', { 
         enderecos: enderecos,

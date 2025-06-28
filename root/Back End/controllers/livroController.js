@@ -66,7 +66,7 @@ module.exports.livroPagina = async (req, res) => {
 
         livro.emEstoque = livro.lvr_qtd_estoque > 0;
         
-        const notificacoes = usuario ? await buscarNotificacoes(usr_id) : [];
+        const notificacoes = usr_id ? await buscarNotificacoes(usr_id) : [];
         
         res.render('livrosPagina', { 
             livro,

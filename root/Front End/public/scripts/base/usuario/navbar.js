@@ -81,16 +81,11 @@ function atualizarSubmenu(notificacoes, usuarioId) {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-    userNameDisplay();
+    await userNameDisplay();
     const usuarioId = await getUserId();
     const iconeNotificacao = document.querySelector('.notificacao-icone');
     const submenu = document.querySelector('.notificacao-submenu');
-    
-    if (userName) {
-        userNameDisplay.textContent = userName;
-    } else {
-        userNameDisplay.textContent = 'Visitante';
-    }
+
     
     document.querySelectorAll('.home-link').forEach(botao => {
         botao.addEventListener('click', (event) => {

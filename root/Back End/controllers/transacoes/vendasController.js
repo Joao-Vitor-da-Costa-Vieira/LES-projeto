@@ -80,7 +80,7 @@ module.exports.getPagamento = async (req, res) => {
             return total + (item.livro.lvr_custo * item.car_qtd_item);
         }, 0);
         
-        const notificacoes = usuario ? await buscarNotificacoes(usr_id) : [];
+        const notificacoes = usr_id ? await buscarNotificacoes(usr_id) : [];
 
         res.render('transacoes/usuario/pagamento', { 
             itensCarrinho: livrosComDetalhes,
@@ -249,7 +249,6 @@ module.exports.getPedidoItem = async (req, res) => {
         
         // Buscar dados do usuário
         const [usuario] = await buscarUsuarioId(transacao.usuarios_usr_id);
-        console.log('Usuário encontrado:', usuario);
 
         res.render('transacoes/adm/itemPedidoAdm', {
             transacao,

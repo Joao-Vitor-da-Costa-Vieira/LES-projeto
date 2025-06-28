@@ -12,7 +12,7 @@ module.exports.getCartao = async (req, res) => {
     const { usr_id } = req.query;
 
     const cartoes = await buscarCartoesUsuarioId(usr_id);
-    const notificacoes = usuario ? await buscarNotificacoes(usr_id) : [];
+    const notificacoes = usr_id ? await buscarNotificacoes(usr_id) : [];
 
     res.render('contas/usuario/cartao', { 
         cartoes: cartoes,
