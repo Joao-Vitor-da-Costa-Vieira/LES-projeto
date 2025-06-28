@@ -123,3 +123,12 @@ export async function filtroUsuarioService(filtros) {
         throw err;
     }
 }
+
+export async function getCadastroAdm() {
+    try {
+        window.location.href = `/cadastro-adm`;
+    } catch (err) {
+        console.error("Falha no fetch:", err);
+        throw err;
+    }
+}

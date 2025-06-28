@@ -106,6 +106,19 @@ document.addEventListener('click', () => {
     document.querySelectorAll('.atualizar_submenu').forEach(menu => menu.remove());
 });
 
+document.querySelectorAll('.botao_menu2').forEach(button => {
+    button.addEventListener('click', async function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const status = await inativarUsuarioService(usr_id);
+
+        if (status === 204) {
+            location.reload();
+        }
+    });
+});
+
 document.querySelectorAll('.inativar').forEach(button => {
     button.addEventListener('click', async function (e) {
         e.preventDefault();
@@ -114,7 +127,7 @@ document.querySelectorAll('.inativar').forEach(button => {
         const userDataElement = this.closest('[data-usuario-id]');
         const usr_id = userDataElement ? userDataElement.dataset.usuarioId : null;
 
-        const status = await inativarUsuarioService(id);
+        const status = await inativarUsuarioService(usr_id);
 
         if (status === 204) {
             location.reload();
