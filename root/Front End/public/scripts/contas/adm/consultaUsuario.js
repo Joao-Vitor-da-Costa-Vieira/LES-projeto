@@ -4,7 +4,6 @@ import {
     buscarUsuariosAtivosService    
 } from "/scripts/service/usuario/usuarioService.js";
 
-
 document.querySelectorAll('.atualizar').forEach(botao => {
     botao.addEventListener('click', function (event) {
         event.stopPropagation();
@@ -28,29 +27,73 @@ document.querySelectorAll('.atualizar').forEach(botao => {
         submenu.classList.add('atualizar_submenu');
 
         submenu.innerHTML = `
-             <button class="submenu-botao" onclick="window.location.href='/senha/${id}'">Atualizar senha</button>
-    <button class="submenu-botao" onclick="window.location.href='/endereco-cobranca/${id}'">Atualizar endereço de cobrança</button>
-    <button class="submenu-botao" onclick="window.location.href='/endereco-entrega/${id}'">Atualizar endereço de entrega</button>
-        <button class="submenu-botao" onclick="window.location.href='/endereco-cobranca/${id}/adicionar'">Adicionar endereço de cobrança</button>
-    <button class="submenu-botao" onclick="window.location.href='/endereco-entrega/${id}/adicionar'">Adicionar endereço de entrega</button>
-    <button class="submenu-botao" onclick="window.location.href='/cartao/${id}'">Atualizar cartão</button>
-        <button class="submenu-botao" onclick="window.location.href='/cartao/${id}/adicionar'">Adicionar cartão</button>
-        <button class="submenu-botao" onclick="window.location.href='/cadastro/${id}'">Atualizar tudo</button>
+            <button class="submenu-botao" data-action="senha">Senha</button>
+            <button class="submenu-botao" data-action="endereco-cobranca">Endereços de cobrança</button>
+            <button class="submenu-botao" data-action="endereco-entrega">Endereços de entrega</button>
+            <button class="submenu-botao" data-action="endereco-cobranca/adicionar">Adicionar Endereço de cobrança</button>
+            <button class="submenu-botao" data-action="endereco-entrega/adicionar">Adicionar Endereço de entrega</button>
+            <button class="submenu-botao" data-action="cartao">Cartões</button>
+            <button class="submenu-botao" data-action="cartao/adicionar">Adicionar Cartão</button>
+            <button class="submenu-botao" data-action="atualizar">Atualizar Cadastro</button>
         `;
 
-        // Adicionando submenu ao lado do botão clicado
+        // Adicionando event listeners aos botões do submenu
+        submenu.querySelectorAll('.submenu-botao').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const action = btn.dataset.action;
+                let route;
+                
+                // Mapeando ações para rotas conforme fornecido
+                switch(action) {
+                    case 'senha':
+                        route = `/senha?usr_id=${id}`;
+                        break;
+                    case 'endereco-cobranca':
+                        route = `/endereco-cobranca?usr_id=${id}`;
+                        break;
+                    case 'endereco-entrega':
+                        route = `/endereco-entrega?usr_id=${id}`;
+                        break;
+                    case 'endereco-cobranca/adicionar':
+                        route = `/endereco-cobranca/adicionar?usr_id=${id}`;
+                        break;
+                    case 'endereco-entrega/adicionar':
+                        route = `/endereco-entrega/adicionar?usr_id=${id}`;
+                        break;
+                    case 'cartao':
+                        route = `/cartao?usr_id=${id}`;
+                        break;
+                    case 'cartao/adicionar':
+                        route = `/cartao/adicionar?usr_id=${id}`;
+                        break;
+                    case 'atualizar':
+                        route = `/atualizar?usr_id=${id}`;
+                        break;
+                    default:
+                        return;
+                }
+                
+                window.location.href = route;
+            });
+        });
+
         this.appendChild(submenu);
     });
 });
 
-// Removendo o submenu ao clicar fora da tela
 document.addEventListener('click', () => {
     document.querySelectorAll('.atualizar_submenu').forEach(menu => menu.remove());
 });
 
 // DESATIVANDO USUÁRIOS
 document.querySelectorAll('.inativar').forEach(button => {
-    button.addEventListener('click', async function () {
+    button.addEventListener('click', async function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
         let usuarioMostrado = this.closest('tr');
         let id = usuarioMostrado.querySelector('.usuario-id').textContent;
 
@@ -95,12 +138,11 @@ if (usuariosInativos.length > 0) {
 }
 
 // USUÁRIOS ATIVOS
-
-// Personalizando uma mensagem para quando não houver usuários ativos
 let usuariosAtivos = await buscarUsuariosAtivosService();
 
 if (usuariosAtivos.length === 0) {
     let container = document.querySelector('.msg-usuarios');
-    container.innerHTML = '<h1 style="margin: 0">Nenhum Usuário Ativo</h1>';
-
+    if (container) {
+        container.innerHTML = '<h1 style="margin: 0">Nenhum Usuário Ativo</h1>';
+    }
 }
