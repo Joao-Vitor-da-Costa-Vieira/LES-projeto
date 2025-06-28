@@ -4,6 +4,22 @@ import {
     buscarUsuariosAtivosService    
 } from "/scripts/service/usuario/usuarioService.js";
 
+// Toggle dos filtros avançados
+document.addEventListener('DOMContentLoaded', function() {
+    const botaoFiltro = document.querySelector('.botao-mais-filtro');
+    const elementosOcultos = document.querySelectorAll('.hidden');
+
+    botaoFiltro.addEventListener('click', function() {
+        elementosOcultos.forEach(function(elemento) {
+            elemento.classList.toggle('hidden');
+        });
+
+        botaoFiltro.textContent = botaoFiltro.textContent.includes('Mais') 
+            ? 'Menos opções de filtragem' 
+            : 'Mais opções de filtragem';
+    });
+});
+
 document.querySelectorAll('.atualizar').forEach(botao => {
     botao.addEventListener('click', function (event) {
         event.stopPropagation();
