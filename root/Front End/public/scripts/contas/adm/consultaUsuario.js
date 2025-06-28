@@ -111,8 +111,8 @@ document.querySelectorAll('.inativar').forEach(button => {
         e.preventDefault();
         e.stopPropagation();
         
-        let usuarioMostrado = this.closest('tr');
-        let id = usuarioMostrado.querySelector('.usuario-id').textContent;
+        const userDataElement = this.closest('[data-usuario-id]');
+        const usr_id = userDataElement ? userDataElement.dataset.usuarioId : null;
 
         const status = await inativarUsuarioService(id);
 
@@ -163,6 +163,33 @@ if (usuariosAtivos.length === 0) {
     }
 }
 
+// Função para atualizar a tabela com os resultados
+function atualizarTabela(usuarios) {
+    tabelaBody.innerHTML = '';
+
+    if (livros.length === 0) {
+        tabelaBody.innerHTML = '<tr><td colspan="6">Nenhum usuario encontrado</td></tr>';
+        return;
+    }
+
+    usuarios.forEach(usuario => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td> </td>
+                <td>${usuario.usr_nome}</td>
+                <td>${usuario.usr_email}</td>
+                <td>${usuario.usr_cpf}</td>
+                <td id="usuario-data" data-usuario-id="${usuario.usr_id}">
+                    <div class="botoes_resultado">
+                        <button class="reativar">Reativar</button>
+                        <button class="inativar">Inativar</button>
+                    </div>
+                </td>
+        `;
+        tabelaBody.appendChild(row);
+    });
+}
+
 // Função para coletar os filtros do formulário
 function coletarFiltros() {
     return {
@@ -177,10 +204,13 @@ function coletarFiltros() {
 
 pesquisaBotao.addEventListener('click', async (e) => {
     e.preventDefault();
+
+    const userDataElement = this.closest('[data-usuario-id]');
+    const usr_id = userDataElement ? userDataElement.dataset.usuarioId : null;
     
     try {
         const filtros = coletarFiltros();
-        const livros = await filtroUsuarioService(filtros);
+        const livros = await filtroUsuarioService(filtros, usr_id);
         atualizarTabela(livros);
     } catch (error) {
         console.error('Erro ao pesquisar livros:', error);

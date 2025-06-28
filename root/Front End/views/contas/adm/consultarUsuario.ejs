@@ -122,12 +122,12 @@
                     <tbody>
                         <% usuarios.forEach(usuario => { %>
                             <tr>
-                                <td class="usuario-id"><%= usuario.usr_id %></td>
+                                <td></td>
                                 <td><%= usuario.usr_nome %></td>
                                 <td><%= usuario.usr_email %></td>
                                 <td><%= usuario.usr_cpf %></td>
                                 <td><%= usuario.usr_genero %></td>
-                                <td>
+                                <td id="usuario-data" data-usuario-id="<%= usuario.usr_id %>">
                                     <div class="botoes_resultado">
                                         <a class="atualizar">Atualizar</a>
                                         <a class="inativar">Inativar</a>

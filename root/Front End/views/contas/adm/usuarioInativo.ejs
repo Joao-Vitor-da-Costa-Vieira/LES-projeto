@@ -115,11 +115,11 @@
                         <tbody>
                             <% inativos.forEach(usuario => { %>
                                 <tr class="usuario-mostrado">
-                                    <td class="usuario-inat-id"><%= usuario.usr_id %></td>
+                                    <td></td>
                                     <td><%= usuario.usr_nome %></td>
                                     <td><%= usuario.usr_email %></td>
                                     <td><%= usuario.usr_cpf %></td>
-                                    <td>
+                                    <td id="usuario-data" data-usuario-id="<%= usuario.usr_id %>">
                                         <div class="botoes_resultado">
                                             <button class="reativar">Reativar</button>
                                             <button class="inativar">Inativar</button>
