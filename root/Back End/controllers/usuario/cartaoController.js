@@ -5,8 +5,6 @@ const {
     cadastrarCartao
 } = require("../../models/usuario/cartaoModel");
 
-const {buscarUsuarioId} = require("../../models/usuario/usuarioModel");
-
 const { buscarNotificacoes } = require("../../models/usuario/notificacaoModel");
 
 // Views
@@ -14,12 +12,10 @@ module.exports.getCartao = async (req, res) => {
     const { usr_id } = req.query;
 
     const cartoes = await buscarCartoesUsuarioId(usr_id);
-    const usuario = await buscarUsuarioId(usr_id);
     const notificacoes = usuario ? await buscarNotificacoes(usr_id) : [];
 
     res.render('contas/usuario/cartao', { 
         cartoes: cartoes,
-        usuario: usuario,
         notificacoes });
 };
 
@@ -28,11 +24,9 @@ module.exports.getCartaoAdicionar = async (req, res) => {
 
     const decodedUsrId = decodeURIComponent(usr_id);
 
-    const usuario = await buscarUsuarioId(decodedUsrId);
     const notificacoes = usuario ? await buscarNotificacoes(decodedUsrId) : [];
 
     res.render('contas/usuario/cartaoAdicionar', { 
-        usuario: usuario,
         notificacoes
      });
 };
@@ -44,13 +38,11 @@ module.exports.getCartaoAtualizar = async (req, res) => {
     const decodedCrtId = decodeURIComponent(crt_id);
     const decodedUsrId = decodeURIComponent(usr_id);
 
-    const usuario = await buscarUsuarioId(decodedUsrId);
     const cartoes = await buscarCartaoId(decodedCrtId);
     const notificacoes = usuario ? await buscarNotificacoes(decodedUsrId) : [];
 
     res.render('contas/usuario/cartaoAtualizar', { 
         cartoes: cartoes,
-        usuario: usuario,
         notificacoes });
 };
 

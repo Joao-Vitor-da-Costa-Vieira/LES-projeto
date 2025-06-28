@@ -63,7 +63,6 @@ module.exports.getDevolucao = async (req, res) => {
         res.render('transacoes/usuario/selecaoDevolucao', {
             itensVenda: itensParaDevolucao,
             subtotalTotal: 0,
-            usuario,
             endereco,
             notificacoes,
             tra_id: tra_id

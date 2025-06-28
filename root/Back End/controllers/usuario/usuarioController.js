@@ -32,11 +32,9 @@ module.exports.getCadastroPrimeiro = (req, res) => {
 module.exports.getCadastro = async (req, res) => {
     const { usr_id } = req.query;
 
-    const usuario = await buscarUsuarioId(usr_id);
     const notificacoes = usuario ? await buscarNotificacoes(usr_id) : [];
 
     res.render('contas/usuario/cadastrarUsuario',{
-        usuario: usuario,
         notificacoes
     });
 };
@@ -85,7 +83,6 @@ module.exports.getUsuariosAtivos = async (req, res) => {
 
     const usuarios = await buscarUsuariosAtivos();
     res.render('contas/adm/consultarUsuario', { 
-        adm: adm,
         usuarios: usuarios });
 };
 
@@ -137,7 +134,6 @@ module.exports.patchAtivarUsuario = async (req, res) => {
 // Inserindo dados no banco
 module.exports.postCadastro = async (req, res) => {
     try {
-        console.log("Dados recebidos no servidor:", req.body);
         const usr_id = await cadastrarUsuario(req.body.usuario);
 
         req.body.cartao.crt_usr_id = usr_id;

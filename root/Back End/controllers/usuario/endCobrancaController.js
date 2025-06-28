@@ -5,8 +5,6 @@ const {
     cadastrarEnderecoCobranca
 } = require("../../models/usuario/endCobrancaModel");
 
-const {buscarUsuarioId} = require("../../models/usuario/usuarioModel");
-
 const { buscarNotificacoes } = require("../../models/usuario/notificacaoModel");
 
 // Views
@@ -16,12 +14,10 @@ module.exports.getEnderecoCobranca = async (req, res) => {
     const decodedUsrId = decodeURIComponent(usr_id)
 
     const enderecos = await buscarEnderecosCobrancaUsuarioId(decodedUsrId);
-    const usuario = await buscarUsuarioId(decodedUsrId);
     const notificacoes = usuario ? await buscarNotificacoes(decodedUsrId) : [];
 
     res.render('contas/usuario/endCobranca', { 
         enderecos: enderecos,
-        usuario: usuario,
         notificacoes });
 };
 
@@ -30,11 +26,9 @@ module.exports.getEnderecoCobrancaAdicionar = async (req, res) => {
 
     const decodedUsrId = decodeURIComponent(usr_id);
 
-    const usuario = await buscarUsuarioId(decodedUsrId);
     const notificacoes = usuario ? await buscarNotificacoes(decodedUsrId) : [];
 
     res.render('contas/usuario/endCobrancaAdicionar', { 
-        usuario: usuario,
         notificacoes
      });
 };
@@ -45,13 +39,11 @@ module.exports.getEnderecoCobrancaAtualizar = async (req, res) => {
     const decodedEndId = decodeURIComponent(end_id);
     const decodedUsrId = decodeURIComponent(usr_id);
 
-    const usuario = await buscarUsuarioId(decodedUsrId);
     const enderecos = await buscarEnderecoCobrancaId(decodedEndId);
     const notificacoes = usuario ? await buscarNotificacoes(decodedUsrId) : [];
 
     res.render('contas/usuario/endCobrancaAtualizar', { 
         enderecos: enderecos,
-        usuario: usuario,
         notificacoes });
 };
 

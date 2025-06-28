@@ -65,7 +65,6 @@ module.exports.getTroca = async (req, res) => {
         res.render('transacoes/usuario/selecaoTroca', {
             itensVenda: itensParaTroca,
             subtotalTotal: 0,
-            usuario,
             endereco,
             notificacoes,
             tra_id: tra_id

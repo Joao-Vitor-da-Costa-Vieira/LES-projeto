@@ -1,10 +1,14 @@
-const {buscarCategorias,
+const {
+    buscarCategorias,
     buscarDatasVendas
 } = require('../../models/transacoes/vendaModel');
 
-const { buscarLivrosVendidos 
+const {buscarLivrosVendidos 
 } = require('../../models/livroModel');
-const { buscarAdmId } = require('../../models/admModels');
+
+const { 
+    buscarAdmId 
+} = require('../../models/admModels');
 
 module.exports.getAnalise = async (req, res) => {
     
@@ -17,7 +21,6 @@ module.exports.getAnalise = async (req, res) => {
 
     //Renderizando a página
     return res.render('transacoes/adm/analise', {
-        adm: adm,
         categorias: categorias
     });
 };

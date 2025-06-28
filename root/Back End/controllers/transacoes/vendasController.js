@@ -56,8 +56,7 @@ module.exports.getPagamento = async (req, res) => {
 
         console.log('Usuário recebido Pagamento:', usr_id); 
 
-        const [usuario, carrinhos, enderecos, cartoes, cupons] = await Promise.all([
-            buscarUsuarioId(usr_id),
+        const [carrinhos, enderecos, cartoes, cupons] = await Promise.all([
             buscarItensCarrinho(usr_id),
             buscarEnderecosEntregaUsuarioId(usr_id),
             buscarCartoesUsuarioId(usr_id),
@@ -81,7 +80,7 @@ module.exports.getPagamento = async (req, res) => {
             return total + (item.livro.lvr_custo * item.car_qtd_item);
         }, 0);
         
-        const notificacoes = usuario ? await buscarNotificacoes(usuario.usr_id) : [];
+        const notificacoes = usuario ? await buscarNotificacoes(usr_id) : [];
 
         res.render('transacoes/usuario/pagamento', { 
             itensCarrinho: livrosComDetalhes,
@@ -89,7 +88,6 @@ module.exports.getPagamento = async (req, res) => {
             enderecos: enderecos,
             cartoes: cartoes,
             cupons: cupons,
-            usuario: usuario,
             notificacoes
         });
     } catch (err) {
@@ -103,7 +101,6 @@ module.exports.getHistorico = async (req, res) => {
     const { usr_id } = req.query;
 
     try {
-        const [usuario] = await buscarUsuarioId(usr_id);
         const transacoes = await buscarTransacao(usr_id);
 
         if (!Array.isArray(transacoes)) {
@@ -136,10 +133,9 @@ module.exports.getHistorico = async (req, res) => {
             })
         );
 
-        const notificacoes = await buscarNotificacoes(usuario.usr_id);
+        const notificacoes = await buscarNotificacoes(usr_id);
         
         res.render('transacoes/usuario/historico', {
-            usuario,
             transacoes: transacoesCompletas,
             notificacoes
         });
@@ -192,8 +188,10 @@ module.exports.getTransacao = async (req, res) => {
 
 module.exports.getPedidos = async (req, res) => {
     try {
-        const { adm_id } = req.query;
 
+        const { tra_id, adm_id } = req.query;
+        
+        //Buscar dados do adm
         const adm = await buscarAdmId(adm_id);
 
         const transacoes = await buscarTransacoesPrioridade();
@@ -209,7 +207,6 @@ module.exports.getPedidos = async (req, res) => {
         );
 
         res.render('transacoes/adm/pedidos', {
-            adm: adm,
             transacoes: transacoesComUsuarios
         });
 
@@ -255,7 +252,6 @@ module.exports.getPedidoItem = async (req, res) => {
         console.log('Usuário encontrado:', usuario);
 
         res.render('transacoes/adm/itemPedidoAdm', {
-            adm: adm,
             transacao,
             usuario,
             endereco,
