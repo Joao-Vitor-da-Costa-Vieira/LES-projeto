@@ -49,28 +49,28 @@ document.querySelectorAll('.atualizar').forEach(botao => {
                 // Mapeando ações para rotas conforme fornecido
                 switch(action) {
                     case 'senha':
-                        route = `/senha?usr_id=${id}`;
+                        route = `/senha-adm?usr_id=${id}`;
                         break;
                     case 'endereco-cobranca':
-                        route = `/endereco-cobranca?usr_id=${id}`;
+                        route = `/endereco-cobranca-adm?usr_id=${id}`;
                         break;
                     case 'endereco-entrega':
-                        route = `/endereco-entrega?usr_id=${id}`;
+                        route = `/endereco-entrega-adm?usr_id=${id}`;
                         break;
                     case 'endereco-cobranca/adicionar':
-                        route = `/endereco-cobranca/adicionar?usr_id=${id}`;
+                        route = `/endereco-cobranca-adm/adicionar?usr_id=${id}`;
                         break;
                     case 'endereco-entrega/adicionar':
-                        route = `/endereco-entrega/adicionar?usr_id=${id}`;
+                        route = `/endereco-entrega-adm/adicionar?usr_id=${id}`;
                         break;
                     case 'cartao':
-                        route = `/cartao?usr_id=${id}`;
+                        route = `/cartao-adm?usr_id=${id}`;
                         break;
                     case 'cartao/adicionar':
-                        route = `/cartao/adicionar?usr_id=${id}`;
+                        route = `/cartao-adm/adicionar?usr_id=${id}`;
                         break;
                     case 'atualizar':
-                        route = `/atualizar?usr_id=${id}`;
+                        route = `/atualizar-adm?usr_id=${id}`;
                         break;
                     default:
                         return;
