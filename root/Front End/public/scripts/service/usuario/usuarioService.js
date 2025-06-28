@@ -14,7 +14,7 @@ export async function atualizarSenhaUsuarioService(senha, id) {
     }
 }
 
-// Inativando um usuário específico
+// Inativar um usuário
 export async function inativarUsuarioService(id) {
     try {
         let res = await fetch(`/usuarios/inativar/${id}`, { method: 'PATCH' });
@@ -25,7 +25,7 @@ export async function inativarUsuarioService(id) {
     }
 }
 
-// Ativando um usuário específico
+// Ativar um usuário
 export async function ativarUsuarioService(id) {
     try {
         let res = await fetch(`/usuarios/ativar/${id}`, { method: 'PATCH' });

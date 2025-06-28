@@ -64,7 +64,7 @@ async function alterarSenhaUsuario(senha, id) {
 // Inativando um usuário específico
 async function inativarUsuario(id) {
     try {
-        await db.query(`UPDATE usuarios SET usr_status_de_atividade = 0 WHERE usr_id = ?`, id);
+        await db.query(`UPDATE usuarios SET usr_status_de_atividade = 0 WHERE usr_id = ?`, [id]);
     } catch (err) {
         console.error(`Erro no inativarUsuario - modelUsuarios: ${err}`);
         throw err;
@@ -74,7 +74,7 @@ async function inativarUsuario(id) {
 // Ativando um usuário específico
 async function ativarUsuario(id) {
     try {
-        await db.query(`UPDATE usuarios SET usr_status_de_atividade = 1 WHERE usr_id = ?`, id);
+        await db.query(`UPDATE usuarios SET usr_status_de_atividade = 1 WHERE usr_id = ?`, [id]);
     } catch (err) {
         console.error(`Erro no ativarUsuario - modelUsuarios: ${err}`);
         throw err;
