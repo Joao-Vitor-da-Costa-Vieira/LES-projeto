@@ -1,3 +1,5 @@
+import { getCadastroAdm } from "/scripts/service/usuario/usuarioService.js";
+
 import {
     inativarUsuarioService,
     buscarUsuariosInativosService,
@@ -111,7 +113,7 @@ document.querySelectorAll('.botao_menu2').forEach(button => {
         e.preventDefault();
         e.stopPropagation();
 
-        const status = await inativarUsuarioService(usr_id);
+        const status = await getCadastroAdm(usr_id);
 
         if (status === 204) {
             location.reload();
