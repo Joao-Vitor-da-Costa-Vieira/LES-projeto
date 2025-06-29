@@ -405,6 +405,15 @@ th {
     cursor: pointer;
 }
 
+.adicionar-estoque{
+    background-color: #0003c8;
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
 .botoes_resultado .atualizar {
     background-color: #0003c8;
 }
@@ -419,6 +428,15 @@ th {
 }
 
 /* Classes utilitárias */
+.container-livro-estoque {
+    position: relative;
+    width: 100%;
+}
+
+.livro-estoque-adicionado {
+    margin-bottom: 20px;
+}
+
 .usuario-id,
 .usuario-inat-id {
     display: none;

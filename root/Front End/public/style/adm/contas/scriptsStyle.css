@@ -93,3 +93,8 @@ tr:hover {
     display: flex;
     gap: 8px;
 }
+
+/* Estilos para elementos ocultos */
+.hidden {
+    display: none;
+}

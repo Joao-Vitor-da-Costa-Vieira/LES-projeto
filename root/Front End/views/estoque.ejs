@@ -55,7 +55,54 @@
             </div>
 
             <div class="botoes">
-                <button class="pesquisa-botao">Procurar</button>
+                <button type="button" id="pesquisa-botao">Procurar</button>
+            </div>
+
+            <br>
+
+            <div class="container-livro-estoque">
+                <div class="livro-estoque-adicionado">
+                    
+                </div>
+
+                <div class="table_div hidden">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Código</th>
+                            <th>ISBN</th>
+                            <th>Autor</th>
+                            <th>Editora</th>
+                            <th>Qtd. Estoque</th>
+                            <th>Preço</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if (livros && livros.length > 0) { %>
+                            <% livros.forEach(livro => { %>
+                                <tr>
+                                    <td><%= livro.lvr_titulo %></td>
+                                    <td><%= livro.lvr_codigo_de_barras %></td>
+                                    <td><%= livro.lvr_isbn %></td>
+                                    <td><%= livro.atr_nome || 'N/A' %></td>
+                                    <td><%= livro.edi_nome || 'N/A' %></td>
+                                    <td><%= livro.lvr_qtd_estoque %></td>
+                                    <td>R$<%= Number(livro.lvr_custo) %></td>
+                                </tr>
+                            <% }); %>
+                        <% } else { %>
+                            <tr>
+                                <td colspan="6">Nenhum livro encontrado</td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+                
+                <div class="botoes">
+                    <button class="adicionar-estoque" type="button" id="atualizar">Dar Entrada</button>
+                </div>
             </div>
         </div>
     </div>
