@@ -55,14 +55,37 @@
             </div>
 
             <div class="botoes">
-                <button type="button" id="pesquisa-botao">Procurar</button>
+                <button type="submit" id="pesquisa-botao">Procurar</button>
             </div>
 
             <br>
 
             <div class="container-livro-estoque">
-                <div class="livro-estoque-adicionado">
-                    
+                <div class="livro-estoque-adicionado hidden">
+                    <form id="Entrada">
+                        <div class="linha_centralizada">
+                            <div class="numero">
+                                <label class="label_pequena" for="qtd.">Qtd.</label>
+                                <input class="numero_input" type="number" id="qtd_estoque" name="qtd_estoque">
+                            </div>
+
+                            <div class="numero">
+                                <label class="label_pequena" for="custo">Custo</label>
+                                <input class="numero_input" type="number" step="0.01" id="custo" name="custo">
+                            </div>
+                        </div>
+
+                        <div class="linha_centralizada">
+                            <div class="nome">
+                                <label class="label" for="fornecedor">Fornecedor</label>
+                                <input class="nome_input" type="text" id="fornecedor" name="fornecedor">
+                            </div>
+                        </div>
+                                        
+                        <div class="botoes">
+                            <button class="adicionar-estoque" type="button" id="confirmar">Dar Entrada</button>
+                        </div>
+                    </form>
                 </div>
 
                 <div class="table_div hidden">
@@ -89,20 +112,18 @@
                                     <td><%= livro.edi_nome || 'N/A' %></td>
                                     <td><%= livro.lvr_qtd_estoque %></td>
                                     <td>R$<%= Number(livro.lvr_custo) %></td>
+                                    <td style="display: none;" id="livro-data" data-livro-id="<%= livro.lvr_id %>"></td>
                                 </tr>
                             <% }); %>
                         <% } else { %>
                             <tr>
-                                <td colspan="6">Nenhum livro encontrado</td>
+                                <td colspan="7">Nenhum livro encontrado</td>
                             </tr>
                         <% } %>
                     </tbody>
                 </table>
             </div>
-                
-                <div class="botoes">
-                    <button class="adicionar-estoque" type="button" id="atualizar">Dar Entrada</button>
-                </div>
+
             </div>
         </div>
     </div>
