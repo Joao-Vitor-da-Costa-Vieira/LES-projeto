@@ -2,6 +2,9 @@ import { filtroLivroService } from "/scripts/service/livroService.js";
 
 const pesquisaBotao = document.querySelector("#pesquisa-botao");
 const tabelaBody = document.querySelector("tbody");
+const elementosOcultos = document.querySelectorAll('.hidden');
+
+let hiddenVerificador = 0;
 
 // Função para coletar os filtros do formulário
 function coletarFiltros() {
@@ -14,6 +17,15 @@ function coletarFiltros() {
 
 // Função para atualizar a tabela com os resultados
 function atualizarTabela(livros) {
+
+    if(hiddenVerificador === 0){
+        elementosOcultos.forEach(function(elemento) {
+            elemento.classList.remove('hidden');
+        });
+
+        hiddenVerificador = 1;
+    }
+
     tabelaBody.innerHTML = '';
 
     if (livros.length === 0) {
@@ -23,13 +35,13 @@ function atualizarTabela(livros) {
 
     const row = document.createElement('tr');
     row.innerHTML = `
-        <td>${livros.lvr_titulo}</td>
-        <td>R$ ${livros.lvr_codigo_de_barras}</td>
-        <td>R$ ${livros.lvr_isbn}</td>
-        <td>${livros.atr_nome || 'N/A'}</td>
-        <td>${livros.edi_nome || 'N/A'}</td>
-        <td>${livros.lvr_qtd_estoque}</td>
-        <td>R$ ${livros.lvr_custo}</td>
+        <td>${livros[0].lvr_titulo}</td>
+        <td>R$ ${livros[0].lvr_codigo_de_barras}</td>
+        <td>R$ ${livros[0].lvr_isbn}</td>
+        <td>${livros[0].atr_nome || 'N/A'}</td>
+        <td>${livros[0].edi_nome || 'N/A'}</td>
+        <td>${livros[0].lvr_qtd_estoque}</td>
+        <td>R$ ${livros[0].lvr_custo}</td>
     `;
     tabelaBody.appendChild(row);
 }
