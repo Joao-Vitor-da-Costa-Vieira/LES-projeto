@@ -1,3 +1,5 @@
+const { buscarEstoqueLivro, atualizarEstoqueLivro } = require("../models/livroModel");
+
 module.exports.getEstoque = async (req, res) => {
 
     try {
@@ -30,6 +32,14 @@ module.exports.postEstoque = async (req, res) => {
         ) {
             throw new Error("Quantidade e custo devem ser acima de zero!");
         }
+
+        const estoqueAtual = await buscarEstoqueLivro(req.body.livros_lvr_id);
+
+        let novoEstoque;
+
+        novoEstoque = estoqueAtual + req.body.est_quantidade;
+
+        await atualizarEstoqueLivro(req.body.livros_lvr_id ,novoEstoque);
 
         await entradaEstoque(req.body.entrada);
 
