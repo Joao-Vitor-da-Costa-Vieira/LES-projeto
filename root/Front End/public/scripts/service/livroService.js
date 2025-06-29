@@ -50,3 +50,42 @@ export async function getLivroPagina(livroId, usuarioId) {
     }
     
 }
+
+export async function estoqueService(entrada) {
+    try {
+        if (
+            !entrada.est_quantidade || 
+            !entrada.est_custo || 
+            !entrada.est_fornecedor || 
+            !entrada.livros_lvr_id
+        ) {
+            throw new Error("Todos os campos são obrigatórios!");
+        }
+
+        if (
+            isNaN(entrada.est_quantidade) || 
+            isNaN(entrada.est_custo) ||
+            entrada.est_quantidade <= 0 ||
+            entrada.est_custo <= 0
+        ) {
+            throw new Error("Quantidade e custo devem ser acima de zero!");
+        }
+
+        const res = await fetch('URL_DO_SEU_ENDPOINT', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(entrada),
+        });
+
+        if (!res.ok) {
+            throw new Error(`Erro na requisição: ${res.statusText}`);
+        }
+
+        return res.status;
+    } catch (error) {
+        console.error('Erro no estoqueService:', error);
+        throw error;
+    }
+}
