@@ -1,7 +1,6 @@
 import { 
     buscarUsuarioIdService,
-    atualizarSenhaUsuarioService,
-    getUserId
+    atualizarSenhaUsuarioService
 } from "/scripts/service/usuario/usuarioService.js";
 
 document.querySelector('form').addEventListener('submit', async function (event) {
@@ -13,9 +12,8 @@ document.querySelector('form').addEventListener('submit', async function (event)
     const senhaAtual = document.querySelector('.senha_input').value;
 
     // Pegando o ID do usuário
-    const usr_id = await getUserId();
-
-    console.log(usr_id);
+    const userDataElement = document.getElementById('user-data');
+    const usr_id = userDataElement.getAttribute('data-user-id');
 
     const usuario = await buscarUsuarioIdService(usr_id);
 

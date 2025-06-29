@@ -1,6 +1,5 @@
 import { getHome } from "../../service/telaInicialService";
 import { atualizarCartaoService } from "/scripts/service/usuario/cartaoService.js";
-import { getUserId } from "/scripts/service/usuario/usuarioService.js";
 
 // Enviando os dados para o backend
 document.querySelector('form').addEventListener('submit', async function(event){
@@ -10,7 +9,7 @@ document.querySelector('form').addEventListener('submit', async function(event){
     let dados = Object.fromEntries(formDados.entries());
 
     // Pegando o id do cliente e do cartão
-    const usr_id = await getUserId();
+    const usr_id = dados.id;
 
     const cartaoElement = document.querySelector('.cartoes-id');
     const crt_id = cartaoElement ? cartaoElement.dataset.cartaoId : null;

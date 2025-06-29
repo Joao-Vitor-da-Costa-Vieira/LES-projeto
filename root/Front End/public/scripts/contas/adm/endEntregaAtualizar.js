@@ -1,5 +1,4 @@
 import { atualizarEnderecoEntregaService } from "/scripts/service/usuario/enderecoEntregaService.js";
-import { getUserId } from "/scripts/service/usuario/usuarioService.js";
 
 // Enviando os dados para o backend
 document.querySelector('form').addEventListener('submit', async function(event) {
@@ -9,7 +8,7 @@ document.querySelector('form').addEventListener('submit', async function(event) 
     let dados = Object.fromEntries(formDados.entries());
 
     // Pegando o id do usuário
-    const usr_id = await getUserId();
+    const usr_id = dados.id;
     const end_id = window.location.pathname.split('/').splice(-1)[0];
 
     const endereco = {

@@ -1,7 +1,7 @@
 import { getAtualizarEndCobranca, getAdicionarEndCobranca } from "/scripts/service/usuario/enderecoCobrancaService.js";
-import { getUserId } from "/scripts/service/usuario/usuarioService.js";
 
-const usr_id = await getUserId();
+const userDataElement = document.getElementById('user-data');
+const usr_id = userDataElement.getAttribute('data-user-id');
 
 document.querySelectorAll('.atualizar').forEach(button => {
     

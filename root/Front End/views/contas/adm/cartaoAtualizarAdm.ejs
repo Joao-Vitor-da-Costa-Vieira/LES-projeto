@@ -44,6 +44,8 @@
                     </div>
                     
                     <form class="container-forms-cartoes">
+                        
+                        <input id="id" name="id" value="<%= usuario.usr_id %>" style="display: none;"></input>
                         <div class="cartoes-id" data-cartao-id="<%= Array.isArray(cartoes) ? cartoes[0]?.crt_id : cartoes?.crt_id %>"></div>
                         <!--Primeira Linha-->
                         <div class="linha_centralizada">
@@ -87,18 +89,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    
-    <div class="chat">
-    <div class="header">
-        <h3>Assistente Virtual</h3>
-        <button class="close-chat">X</button>
-    </div>
-    <div class="screen"></div>
-    <div class="input">
-        <input type="text" placeholder="Digite sua mensagem...">
-        <button id="ai-button">Enviar</button>
-    </div>
     </div>
     
     <script type="module" src="/scripts/contas/adm/cartaoAtualizar.js"></script>

@@ -42,16 +42,9 @@
                     <h1 class="titulo"> Endereço de Cobranca</h1>
                 </div>
 
-                <br>
+                <div id="user-data" data-user-id="<%= Array.isArray(usuario) ? usuario[0]?.usr_id : usuario?.usr_id %>" style="display:none;"></div>
 
-                <div class="genero">
-                        <label class="label_genero" for="cbr">Endereços</label>
-                        <select class="selecao" name="cobranca" id="cbr">
-                            <% enderecos.forEach(endereco => { %>
-                                <option value="<%=endereco.end_id%>"><%=endereco.end_endereco%></option>
-                            <% }); %>
-                        </select>
-                </div>
+                <br>
 
                 <div class="table_div">
                     <table>
@@ -93,18 +86,6 @@
                     <button class="adicionar" type="button">Adiconar</button>
             </div>
         </div>
-    </div>
-    
-    <div class="chat">
-    <div class="header">
-        <h3>Assistente Virtual</h3>
-        <button class="close-chat">X</button>
-    </div>
-    <div class="screen"></div>
-    <div class="input">
-        <input type="text" placeholder="Digite sua mensagem...">
-        <button id="ai-button">Enviar</button>
-    </div>
     </div>
     
     <script type="module" src="/scripts/contas/adm/endCobranca.js"></script>

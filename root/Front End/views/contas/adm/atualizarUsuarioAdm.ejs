@@ -49,10 +49,12 @@ esheet" href="/style/usuario/contas/cadastroStyle.css">
                             <h1 class="titulo">Informações Pessoais</h1>
                         </div>
 
+                        <input id="id" name="id" value="<%= usuario.usr_id %>" style="display: none;"></input>
+
                         <!-- Nome -->
                         <div class="nome">
                             <label class="label" for="nome">Nome Completo</label>
-                            <input class="nome_input" type="text" id="nome" name="nome" value="<%=usuario.usr_nome%>" required>
+                            <input class="nome_input" type="text" id="nome" name="nome" value="<%= usuario.usr_nome%>" required>
                         </div>
 
                         <!-- Email -->
@@ -132,19 +134,7 @@ esheet" href="/style/usuario/contas/cadastroStyle.css">
             </form>
         </div>
     </div>
-
-    <div class="chat">
-    <div class="header">
-        <h3>Assistente Virtual</h3>
-        <button class="close-chat">X</button>
-    </div>
-    <div class="screen"></div>
-    <div class="input">
-        <input type="text" placeholder="Digite sua mensagem...">
-        <button id="ai-button">Enviar</button>
-    </div>
-    </div>
-
+    
     <script type="module" src="/scripts/contas/adm/atualizarUsuario.js"></script>
     <script type="module" src="/scripts/base/adm/navbarAdm.js"></script>
     <script type="module" src="/scripts/base/adm/sidebarAdm.js"></script>

@@ -1,5 +1,4 @@
 import { cadastroAtualizarService } from "/scripts/service/usuario/cadastroService.js";
-import { getUserId } from "/scripts/service/usuario/usuarioService.js";
 
 // PASSANDO OS DADOS PARA ATUALIZAÇÃO
 document.querySelector('form').addEventListener('submit', async function (event) {
@@ -8,9 +7,6 @@ document.querySelector('form').addEventListener('submit', async function (event)
     // Pegando dados do formulário
     const formDados = new FormData(event.target);
     let dados = Object.fromEntries(formDados.entries());
-
-    // Pegando o ID do usuário
-    const usr_id = await getUserId();
 
     // Valida se as senhas são iguais
     if (dados.senha !== dados.conf_senha) {
@@ -26,6 +22,8 @@ document.querySelector('form').addEventListener('submit', async function (event)
     }
 
     // Preparando os dados para passar para o back
+    const usr_id = dados.id;
+    
     const usuario = {
         usr_nome: dados.nome, 
         usr_email: dados.E-mail, 
