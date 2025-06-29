@@ -111,6 +111,17 @@ CREATE TABLE escreveu (
 ALTER TABLE escreveu ADD CONSTRAINT relation_15_pk PRIMARY KEY ( autor_atr_id,
                                                                  livros_lvr_id );
 
+CREATE TABLE estoque (
+    est_id                  INTEGER NOT NULL AUTO_INCREMENT,
+    est_quantidade          INTEGER NOT NULL,
+    est_custo               DECIMAL(6, 2) NOT NULL,
+    est_fornecedor          VARCHAR(100) NOT NULL,
+    est_data                DATE NOT NULL,
+    livros_lvr_id           INTEGER NOT NULL,
+);
+
+ALTER TABLE estoque ADD CONSTRAINT estoque_pk PRIMARY KEY ( est_id );
+
 CREATE TABLE forma_de_pagamento (
     fpg_id             INTEGER NOT NULL AUTO_INCREMENT,
     fpg_tipo           VARCHAR(20) NOT NULL,
@@ -233,6 +244,10 @@ ALTER TABLE enderecos_cobranca
 ALTER TABLE enderecos_entrega
     ADD CONSTRAINT fk_ende_usr FOREIGN KEY ( usuarios_usr_id )
         REFERENCES usuarios ( usr_id );
+
+ALTER TABLE estoque
+    ADD CONSTRAINT fk_est_lvr FOREIGN KEY ( livros_lvr_id )
+        REFERENCES livros ( lvr_id );
 
 ALTER TABLE itens_de_venda
     ADD CONSTRAINT fk_itv_lvr FOREIGN KEY ( livros_lvr_id )
