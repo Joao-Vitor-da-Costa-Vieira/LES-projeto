@@ -71,7 +71,7 @@ export async function estoqueService(entrada) {
             throw new Error("Quantidade e custo devem ser acima de zero!");
         }
 
-        const res = await fetch('URL_DO_SEU_ENDPOINT', {
+        const res = await fetch('/estoque/entrada', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
