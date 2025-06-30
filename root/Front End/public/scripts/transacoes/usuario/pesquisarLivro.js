@@ -116,6 +116,11 @@ tabelaBody.addEventListener('click', async function(event) {
         const botao = event.target;
         event.stopPropagation();
 
+        if(!usr_id){
+            alert("Faça login para acessar essa função!");
+            return;  
+        }
+
         let submenuAtual = botao.querySelector('.atualizar_submenu');
 
         if (submenuAtual) {

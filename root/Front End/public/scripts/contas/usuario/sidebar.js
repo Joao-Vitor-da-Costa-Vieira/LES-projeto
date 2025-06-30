@@ -33,7 +33,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         botao.addEventListener('click', (event) => {
             event.stopPropagation();
             try {
-                getSenha(usuarioId);
+                if(usuarioId){
+                    getSenha(usuarioId);
+                } else {
+                    alert("Faça login para acessar essa função!");
+                }
+                
             } catch (error) {
                 console.error('Erro ao carregar página:', error);
             }
@@ -44,7 +49,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         botao.addEventListener('click', (event) => {
             event.stopPropagation();
             try {
-                getAtualizarCadastro(usuarioId);    
+                if(usuarioId){
+                    getAtualizarCadastro(usuarioId); 
+                } else {
+                    alert("Faça login para acessar essa função!");
+                }
+                   
             } catch (error) {
                 console.error('Erro ao carregar página:', error);
             }            
@@ -55,7 +65,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         botao.addEventListener('click', (event) => {
             event.stopPropagation();
             try {
-                getCartoes(usuarioId);    
+                if(usuarioId){
+                    getCartoes(usuarioId);
+                } else {
+                    alert("Faça login para acessar essa função!");
+                }
+                    
             } catch (error) {
                 console.error('Erro ao carregar página:', error);
             }            
@@ -66,7 +81,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         botao.addEventListener('click', (event) => {
             event.stopPropagation();
             try {
-                getEndEntrega(usuarioId);    
+                if(usuarioId){
+                    getEndEntrega(usuarioId);
+                } else {
+                    alert("Faça login para acessar essa função!");
+                }
+                   
             } catch (error) {
                 console.error('Erro ao carregar página:', error);
             }           
@@ -77,7 +97,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         botao.addEventListener('click', (event) => {
             event.stopPropagation();
             try {
-                getEndCobranca(usuarioId);    
+                if(usuarioId){
+                    getEndCobranca(usuarioId);    
+                } else {
+                    alert("Faça login para acessar essa função!");
+                }
+                
             } catch (error) {
                 console.error('Erro ao carregar página:', error);
             }

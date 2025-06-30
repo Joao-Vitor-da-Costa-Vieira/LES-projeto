@@ -7,6 +7,11 @@ document.querySelectorAll('.adicionar-produto').forEach(botao => {
 
         const usr_id = await getUserId();
 
+        if(!usr_id){
+            alert("Faça login para acessar essa função!");
+            return;  
+        }
+
         let submenuAtual = this.querySelector('.atualizar_submenu');
 
         if (submenuAtual) {

@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.querySelectorAll('.home-link').forEach(botao => {
         botao.addEventListener('click', (event) => {
             event.stopPropagation();
-            console.log("Botão clicado!");
+
             getHome(usuarioId);
         });
     });
@@ -120,8 +120,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.querySelectorAll('#botao-carrinho').forEach(botao => {
         botao.addEventListener('click', (event) => {
             event.stopPropagation();
-            console.log("Botão clicado!");
-            getCarrinho(usuarioId);
+            
+            if(usuarioId){
+                getCarrinho(usuarioId);  
+            } else {
+                alert("Faça login para acessar essa função!");  
+            }
+            
         });
     });
 
@@ -129,7 +134,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (btn.textContent.trim() === 'Histórico') {
             btn.addEventListener('click', (event) => {
                 event.stopPropagation();
-                buscarHistorico(usuarioId);
+
+                if(usuarioId){
+                    buscarHistorico(usuarioId);
+                } else {
+                    alert("Faça login para acessar essa função!");  
+                }
+            
             });
         }
     });
