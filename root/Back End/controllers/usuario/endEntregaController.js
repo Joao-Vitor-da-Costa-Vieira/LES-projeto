@@ -6,6 +6,7 @@ const {
 } = require("../../models/usuario/endEntregaModel");
 
 const { buscarNotificacoes } = require("../../models/usuario/notificacaoModel");
+const { buscarUsuarioId } = require("../../models/usuario/usuarioModel");
 
 // Views
 module.exports.getEnderecoEntrega = async (req, res) => {
@@ -51,11 +52,13 @@ module.exports.getEnderecoEntregaAdm = async (req, res) => {
     const { usr_id } = req.query;
 
     const decodedUsrId = decodeURIComponent(usr_id);
+
+    const usuario = await buscarUsuarioId(decodedUsrId);
     const enderecos = await buscarEnderecosEntregaUsuarioId(decodedUsrId);
 
     res.render('contas/adm/endEntregaAdm', { 
         enderecos: enderecos,
-        usr_id: decodedUsrId
+        usuario: usuario
      });
 };
 
@@ -63,9 +66,10 @@ module.exports.getEnderecoEntregaAdicionarAdm = async (req, res) => {
     const { usr_id } = req.query;
 
     const decodedUsrId = decodeURIComponent(usr_id);
+    const usuario = await buscarUsuarioId(decodedUsrId);
 
     res.render('contas/adm/endEntregaAdicionarAdm', {
-        usr_id: decodedUsrId
+        usuario: usuario
      });
 };
 
@@ -73,13 +77,14 @@ module.exports.getEnderecoEntregaAtualizarAdm = async (req, res) => {
     const {end_id, usr_id} = req.query;
 
     const decodedEndId = decodeURIComponent(end_id);
-    const decodedUsrId = decodeURIComponent(usr_id);   
-
+    const decodedUsrId = decodeURIComponent(usr_id);  
+    
+    const usuario = await buscarUsuarioId(decodedUsrId);
     const enderecos = await buscarEnderecoEntregaId(decodedEndId);
 
     res.render('contas/adm/endEntregaAtualizarAdm', { 
         enderecos: enderecos,
-        usr_id: decodedUsrId
+        usuario: usuario
     });
 };
 

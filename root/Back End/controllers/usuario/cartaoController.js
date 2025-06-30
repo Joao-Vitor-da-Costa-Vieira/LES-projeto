@@ -7,6 +7,8 @@ const {
 
 const { buscarNotificacoes } = require("../../models/usuario/notificacaoModel");
 
+const { buscarUsuarioId } = require("../../models/usuario/usuarioModel");
+
 // Views
 module.exports.getCartao = async (req, res) => {
     const { usr_id } = req.query;
@@ -49,11 +51,14 @@ module.exports.getCartaoAtualizar = async (req, res) => {
 module.exports.getCartaoAdm = async (req, res) => {
     const { usr_id } = req.query;
 
-    const cartoes = await buscarCartoesUsuarioId(usr_id);
+    const decodedUsrId = decodeURIComponent(usr_id);
+
+    const cartoes = await buscarCartoesUsuarioId(decodedUsrId);
+    const usuario = await buscarUsuarioId(decodedUsrId);
 
     res.render('contas/adm/cartaoAdm', { 
         cartoes: cartoes,
-        usr_id: decodedUsrId });
+        usuario: usuario });
 };
 
 module.exports.getCartaoAdicionarAdm = async (req, res) => {
@@ -61,8 +66,11 @@ module.exports.getCartaoAdicionarAdm = async (req, res) => {
 
     const decodedUsrId = decodeURIComponent(usr_id);
 
+    const usuario = await buscarUsuarioId(decodedUsrId);
+
+
     res.render('contas/adm/cartaoAdicionarAdm', { 
-        usr_id: decodedUsrId
+        usuario: usuario
      });
 };
 
@@ -73,11 +81,12 @@ module.exports.getCartaoAtualizarAdm = async (req, res) => {
     const decodedCrtId = decodeURIComponent(crt_id);
     const decodedUsrId = decodeURIComponent(usr_id);
 
+    const usuario = await buscarUsuarioId(decodedUsrId);
     const cartoes = await buscarCartaoId(decodedCrtId);
 
     res.render('contas/adm/cartaoAtualizarAdm', { 
         cartoes: cartoes,
-        usr_id: decodedUsrId });
+        usuario: usuario });
 };
 
 // Inserção de dados
