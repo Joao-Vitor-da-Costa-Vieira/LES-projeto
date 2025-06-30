@@ -13,7 +13,7 @@ async function cadastrarEnderecoEntrega(dados, usr_id) {
     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
 
     const valores = [
-        usr_id,
+        dados.end_usr_id,
         dados.end_endereco,
         dados.end_numero,
         dados.end_bairro,
