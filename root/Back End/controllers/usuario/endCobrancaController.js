@@ -86,6 +86,21 @@ module.exports.getEnderecoCobrancaAtualizarAdm = async (req, res) => {
 // Inserção de dados
 module.exports.postEnderecoCobrancaAdicionar = async (req, res) => {
     try {
+
+        //Validação dos dados
+        const camposObrigatorios = [
+            'end_bairro', 'end_cep', 'end_cidade', 
+            'end_estado', 'end_endereco', 'end_numero'
+        ];
+        
+        for (const campo of camposObrigatorios) {
+            if (!req.body[campo] || req.body[campo].trim() === '') {
+                return res.status(400).json({ 
+                    error: `Campo obrigatório faltando: ${campo}` 
+                });
+            }
+        }
+
         await cadastrarEnderecoCobranca(req.body);
         res.sendStatus(200);
     } catch (err) {
@@ -97,6 +112,21 @@ module.exports.postEnderecoCobrancaAdicionar = async (req, res) => {
 // Atualizando os dados dos endereços de cobrança
 module.exports.putEnderecoCobrancaAtualizar = async (req, res) => {
     try {
+
+        //Validação dos dados
+        const camposObrigatorios = [
+            'end_bairro', 'end_cep', 'end_cidade', 
+            'end_estado', 'end_endereco', 'end_numero'
+        ];
+        
+        for (const campo of camposObrigatorios) {
+            if (!req.body[campo] || req.body[campo].trim() === '') {
+                return res.status(400).json({ 
+                    error: `Campo obrigatório faltando: ${campo}` 
+                });
+            }
+        }
+
         const endereco = await atualizarEnderecoCobranca(req.body, req.params.end_id);
         res.json(endereco);
     } catch (err) {
