@@ -11,8 +11,9 @@ async function cadastrarUsuario(dados) {
         usr_telefone_1,
         usr_telefone_2,  
         usr_genero, 
-        usr_senha 
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+        usr_senha,
+        usr_status_de_atividade 
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1)`;
 
     const valores = [
         dados.usr_nome,
