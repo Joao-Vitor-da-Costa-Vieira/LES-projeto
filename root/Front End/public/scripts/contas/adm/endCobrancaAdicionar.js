@@ -12,7 +12,7 @@ document.querySelector('form').addEventListener('submit', async function(event) 
     const usr_id = dados.id;
 
     const endereco = {
-        end_usr_id: usr_id,
+        usuarios_usr_id: usr_id,
         end_bairro: dados.bairro,
         end_cep: dados.cep,
         end_cidade: dados.cidade,

@@ -11,8 +11,12 @@ document.querySelector('form').addEventListener('submit', async function(event) 
     // Pegando o id do usuário
     const usr_id = await getUserId();
 
+    const enderecoElement = document.querySelector('.endereco-id');
+    const end_id = enderecoElement ? enderecoElement.dataset.enderecoId : null;
+
+
     const endereco = {
-        end_usr_id: usr_id,
+        usuarios_usr_id: usr_id,
         end_bairro: dados.bairro,
         end_cep: dados.cep,
         end_cidade: dados.cidade,

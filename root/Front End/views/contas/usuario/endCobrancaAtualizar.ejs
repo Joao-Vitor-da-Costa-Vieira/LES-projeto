@@ -60,6 +60,8 @@
                 </div>
 
                 <form class="container-forms-endereco">
+
+                    <div class="endereco-id" data-endereco-id="<%= Array.isArray(enderecos) ? enderecos[0]?.end_id : enderecos?.end_id %>"></div>
                     
                     <div class="endereco_cobranca">
                         <!--Primeira Linha-->
@@ -78,33 +80,33 @@
                                 <label class="label_genero">Estado</label>
                                 <select class="selecao" id="estado" name="estado" required>
                                     <option value="">Selecione</option>
-                                    <option value="AC">AC</option>
-                                    <option value="AL">AL</option>
-                                    <option value="AP">AP</option>
-                                    <option value="AM">AM</option>
-                                    <option value="BA">BA</option>
-                                    <option value="CE">CE</option>
-                                    <option value="DF">DF</option>
-                                    <option value="ES">ES</option>
-                                    <option value="GO">GO</option>
-                                    <option value="MA">MA</option>
-                                    <option value="MT">MT</option>
-                                    <option value="MS">MS</option>
-                                    <option value="MG">MG</option>
-                                    <option value="PA">PA</option>
-                                    <option value="PB">PB</option>
-                                    <option value="PR">PR</option>
-                                    <option value="PE">PE</option>
-                                    <option value="PI">PI</option>
-                                    <option value="RJ">RJ</option>
-                                    <option value="RN">RN</option>
-                                    <option value="RS">RS</option>
-                                    <option value="RO">RO</option>
-                                    <option value="RR">RR</option>
-                                    <option value="SC">SC</option>
-                                    <option value="SP">SP</option>
-                                    <option value="SE">SE</option>
-                                    <option value="TO">TO</option>
+                                    <option value="AC" <%= enderecos[0]?.end_estado === 'AC' ? 'selected' : '' %>>AC</option>
+                                    <option value="AL" <%= enderecos[0]?.end_estado === 'AL' ? 'selected' : '' %>>AL</option>
+                                    <option value="AP" <%= enderecos[0]?.end_estado === 'AP' ? 'selected' : '' %>>AP</option>
+                                    <option value="AM" <%= enderecos[0]?.end_estado === 'AM' ? 'selected' : '' %>>AM</option>
+                                    <option value="BA" <%= enderecos[0]?.end_estado === 'BA' ? 'selected' : '' %>>BA</option>
+                                    <option value="CE" <%= enderecos[0]?.end_estado === 'CE' ? 'selected' : '' %>>CE</option>
+                                    <option value="DF" <%= enderecos[0]?.end_estado === 'DF' ? 'selected' : '' %>>DF</option>
+                                    <option value="ES" <%= enderecos[0]?.end_estado === 'ES' ? 'selected' : '' %>>ES</option>
+                                    <option value="GO" <%= enderecos[0]?.end_estado === 'GO' ? 'selected' : '' %>>GO</option>
+                                    <option value="MA" <%= enderecos[0]?.end_estado === 'MA' ? 'selected' : '' %>>MA</option>
+                                    <option value="MT" <%= enderecos[0]?.end_estado === 'MT' ? 'selected' : '' %>>MT</option>
+                                    <option value="MS" <%= enderecos[0]?.end_estado === 'MS' ? 'selected' : '' %>>MS</option>
+                                    <option value="MG" <%= enderecos[0]?.end_estado === 'MG' ? 'selected' : '' %>>MG</option>
+                                    <option value="PA" <%= enderecos[0]?.end_estado === 'PA' ? 'selected' : '' %>>PA</option>
+                                    <option value="PB" <%= enderecos[0]?.end_estado === 'PB' ? 'selected' : '' %>>PB</option>
+                                    <option value="PR" <%= enderecos[0]?.end_estado === 'PR' ? 'selected' : '' %>>PR</option>
+                                    <option value="PE" <%= enderecos[0]?.end_estado === 'PE' ? 'selected' : '' %>>PE</option>
+                                    <option value="PI" <%= enderecos[0]?.end_estado === 'PI' ? 'selected' : '' %>>PI</option>
+                                    <option value="RJ" <%= enderecos[0]?.end_estado === 'RJ' ? 'selected' : '' %>>RJ</option>
+                                    <option value="RN" <%= enderecos[0]?.end_estado === 'RN' ? 'selected' : '' %>>RN</option>
+                                    <option value="RS" <%= enderecos[0]?.end_estado === 'RS' ? 'selected' : '' %>>RS</option>
+                                    <option value="RO" <%= enderecos[0]?.end_estado === 'RO' ? 'selected' : '' %>>RO</option>
+                                    <option value="RR" <%= enderecos[0]?.end_estado === 'RR' ? 'selected' : '' %>>RR</option>
+                                    <option value="SC" <%= enderecos[0]?.end_estado === 'SC' ? 'selected' : '' %>>SC</option>
+                                    <option value="SP" <%= enderecos[0]?.end_estado === 'SP' ? 'selected' : '' %>>SP</option>
+                                    <option value="SE" <%= enderecos[0]?.end_estado === 'SE' ? 'selected' : '' %>>SE</option>
+                                    <option value="TO" <%= enderecos[0]?.end_estado === 'TO' ? 'selected' : '' %>>TO</option>
                                 </select>
                             </div>
                         </div>
@@ -154,7 +156,7 @@
     </div>
     </div>
     
-    <script type="module" src="/scripts/contas/usuario/enderecoCobrancaAtualizar.js"></script>
+    <script type="module" src="/scripts/contas/usuario/endCobrancaAtualizar.js"></script>
     <script type="module" src="/scripts/base/usuario/navbar.js"></script>
     <script type="module" src="/scripts/base/usuario/aiChatBot.js"></script>
     <script type="module" src="/scripts/contas/usuario/sidebar.js"></script>
