@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     localStorage.removeItem('currentUserId');
     localStorage.removeItem('currentUserName');
-    localStorage.removeItem('currentAdminId');
-    localStorage.removeItem('currentAdminName');
+    localStorage.removeItem('currentAdmId');
+    localStorage.removeItem('currentAdmName');
     
     document.querySelectorAll('.botao-usuario').forEach(botao => {
         botao.addEventListener('click', (event) => {

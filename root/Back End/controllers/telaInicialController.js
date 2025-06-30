@@ -28,6 +28,10 @@ module.exports.getHome = async (req, res) => {
 module.exports.getHomeAdm = async (req, res) => {
     try {
 
+        const { adm_id } = req.query;
+
+        const adm = buscarAdmId(adm_id);
+
         // Buscar transações prioritárias
         const transacoes = await buscarTransacoesPrioridade();
         
@@ -43,6 +47,7 @@ module.exports.getHomeAdm = async (req, res) => {
         );
 
         res.render('homeAdm', {
+            adm: adm,
             transacoes: transacoesComUsuarios
         });
 

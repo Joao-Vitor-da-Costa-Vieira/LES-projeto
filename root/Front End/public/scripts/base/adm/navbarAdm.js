@@ -1,9 +1,14 @@
 import {
     getClientes,
-    getInativos,
-    getAdmId,
-    admNameDisplay  } from "/scripts/service/usuario/usuarioService.js";
+    getInativos
+} from "/scripts/service/usuario/usuarioService.js";
+
 import { getHomeAdm } from "/scripts/service/telaInicialService.js";
+
+import { 
+    getAdmId,
+    admNameDisplay
+ } from "/scripts/service/usuario/admService.js";
 
 document.addEventListener('DOMContentLoaded', async () => {
     admNameDisplay();
