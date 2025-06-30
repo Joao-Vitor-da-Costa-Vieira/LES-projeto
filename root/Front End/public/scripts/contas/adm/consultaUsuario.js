@@ -1,4 +1,4 @@
-import { getCadastroAdm } from "/scripts/service/usuario/usuarioService.js";
+import { getCadastroAdm, filtroUsuarioService } from "/scripts/service/usuario/usuarioService.js";
 
 import {
     inativarUsuarioService,
@@ -7,6 +7,7 @@ import {
 } from "/scripts/service/usuario/usuarioService.js";
 
 const pesquisaBotao = document.querySelector("#pesquisa-botao");
+const tabelaBody = document.querySelector("tbody");
 
 // Toggle dos filtros avançados
 document.addEventListener('DOMContentLoaded', function() {
@@ -30,8 +31,8 @@ document.querySelectorAll('.atualizar').forEach(botao => {
 
         // Obtendo o id
         let usuarioMostrado = this.closest('tr');
-        let idElement = usuarioMostrado.querySelector('.usuario-id');
-        let id = idElement.textContent; 
+        let idElement = usuarioMostrado.querySelector('#usuario-data');
+        let id = idElement ? idElement.dataset.usuarioId : null;
 
         // Retirando o menu ao clicar de novo
         let submenuAtual = this.querySelector('.atualizar_submenu');
@@ -182,7 +183,7 @@ if (usuariosAtivos.length === 0) {
 function atualizarTabela(usuarios) {
     tabelaBody.innerHTML = '';
 
-    if (livros.length === 0) {
+    if (usuarios.length === 0) {
         tabelaBody.innerHTML = '<tr><td colspan="6">Nenhum usuario encontrado</td></tr>';
         return;
     }
@@ -190,13 +191,14 @@ function atualizarTabela(usuarios) {
     usuarios.forEach(usuario => {
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td> </td>
+                <td> </td>
                 <td>${usuario.usr_nome}</td>
                 <td>${usuario.usr_email}</td>
                 <td>${usuario.usr_cpf}</td>
+                <td>${usuario.usr_genero}</td>
                 <td id="usuario-data" data-usuario-id="${usuario.usr_id}">
                     <div class="botoes_resultado">
-                        <button class="reativar">Reativar</button>
+                        <button class="atualizar">Atualizar</button>
                         <button class="inativar">Inativar</button>
                     </div>
                 </td>
@@ -225,7 +227,7 @@ pesquisaBotao.addEventListener('click', async (e) => {
         const livros = await filtroUsuarioService(filtros);
         atualizarTabela(livros);
     } catch (error) {
-        console.error('Erro ao pesquisar livros:', error);
+        console.error('Erro ao pesquisar usuarios:', error);
         tabelaBody.innerHTML = '<tr><td colspan="6">Erro ao carregar os usuarios</td></tr>';
     }
 });

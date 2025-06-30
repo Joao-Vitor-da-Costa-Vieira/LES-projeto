@@ -16,7 +16,7 @@ router.get('/senha-adm', UsuarioController.getSenhaAdm);
 router.get('/api/usuarios/id/:usr_id', UsuarioController.getApiUsuarioId);
 router.get('/api/usuarios/ativos', UsuarioController.getApiUsuariosAtivos);
 router.get('/api/usuarios/inativos', UsuarioController.getApiUsuariosInativos);
-router.get('/api/usuarios-filtro', UsuarioController.getApiUsuarioFiltro);
+router.get('/api/usuario-filtro', UsuarioController.getApiUsuarioFiltro);
 
 
 router.post('/cadastro', UsuarioController.postCadastro);

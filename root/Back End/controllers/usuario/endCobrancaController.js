@@ -53,7 +53,7 @@ module.exports.getEnderecoCobrancaAdm = async (req, res) => {
     const decodedUsrId = decodeURIComponent(usr_id)
     const enderecos = await buscarEnderecosCobrancaUsuarioId(decodedUsrId);
 
-    res.render('contas/adm/endCobranca', { 
+    res.render('contas/adm/endCobrancaAdm', { 
         enderecos: enderecos,
         usr_id: decodedUsrId
     });
@@ -64,7 +64,7 @@ module.exports.getEnderecoCobrancaAdicionarAdm = async (req, res) => {
 
     const decodedUsrId = decodeURIComponent(usr_id);
 
-    res.render('contas/adm/endCobrancaAdicionar', { 
+    res.render('contas/adm/endCobrancaAdicionarAdm', { 
         usr_id: decodedUsrId
      });
 };
@@ -77,7 +77,7 @@ module.exports.getEnderecoCobrancaAtualizarAdm = async (req, res) => {
 
     const enderecos = await buscarEnderecoCobrancaId(decodedEndId);
 
-    res.render('contas/adm/endCobrancaAtualizar', { 
+    res.render('contas/adm/endCobrancaAtualizarAdm', { 
         enderecos: enderecos,
         usr_id: decodedUsrId });
 };

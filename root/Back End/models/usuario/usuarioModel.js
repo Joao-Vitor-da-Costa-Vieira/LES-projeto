@@ -147,7 +147,7 @@ async function consultaFiltroUsuario(filtros){
 
         if (filtros.email) {
             conditions.push(`usr_email LIKE ?`);
-            params.push(parseFloat(filtros.email));
+            params.push(`%${filtros.email}%`);
         }
 
         if (filtros.cpf) {
@@ -166,10 +166,13 @@ async function consultaFiltroUsuario(filtros){
         }
 
         if (filtros.telefone) {
-            conditions.push(`usr_telefone_1 <= ?`);
-            params.push(filtros.telefone);
-            conditions.push(`usr_telefone_2 <= ?`);
-            params.push(filtros.telefone);
+            const telNumero = filtros.telefone.replace(/\D/g, '');
+            conditions.push(`(
+                usr_telefone_1 = ? OR 
+                usr_telefone_2 = ?
+            )`);
+            params.push(parseInt(telNumero, 10));
+            params.push(parseInt(telNumero, 10));
         }
 
         // Combinar condições

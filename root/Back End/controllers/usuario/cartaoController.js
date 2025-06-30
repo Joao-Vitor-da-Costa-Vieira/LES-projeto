@@ -51,7 +51,7 @@ module.exports.getCartaoAdm = async (req, res) => {
 
     const cartoes = await buscarCartoesUsuarioId(usr_id);
 
-    res.render('contas/adm/cartao', { 
+    res.render('contas/adm/cartaoAdm', { 
         cartoes: cartoes,
         usr_id: decodedUsrId });
 };
@@ -61,7 +61,7 @@ module.exports.getCartaoAdicionarAdm = async (req, res) => {
 
     const decodedUsrId = decodeURIComponent(usr_id);
 
-    res.render('contas/adm/cartaoAdicionar', { 
+    res.render('contas/adm/cartaoAdicionarAdm', { 
         usr_id: decodedUsrId
      });
 };
@@ -75,7 +75,7 @@ module.exports.getCartaoAtualizarAdm = async (req, res) => {
 
     const cartoes = await buscarCartaoId(decodedCrtId);
 
-    res.render('contas/adm/cartaoAtualizar', { 
+    res.render('contas/adm/cartaoAtualizarAdm', { 
         cartoes: cartoes,
         usr_id: decodedUsrId });
 };

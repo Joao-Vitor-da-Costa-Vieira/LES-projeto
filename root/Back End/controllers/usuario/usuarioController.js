@@ -74,7 +74,7 @@ module.exports.getSenha = async (req, res) => {
 
 module.exports.getCadastroAdm = async (req, res) => {
 
-    res.render('contas/adm/cadastrarUsuario');
+    res.render('contas/adm/cadastrarUsuarioAdm');
 };
 
 module.exports.getCadastroAtualizarAdm = async (req, res) => {
@@ -85,7 +85,7 @@ module.exports.getCadastroAtualizarAdm = async (req, res) => {
     const enderecosEntrega = await buscarEnderecosEntregaUsuarioId(usr_id);
     const cartoes = await buscarCartoesUsuarioId(usr_id);
 
-    res.render('contas/adm/atualizarUsuario', {
+    res.render('contas/adm/atualizarUsuarioAdm', {
         usuario: usuario,
         enderecosCobranca: enderecosCobranca,
         enderecosEntrega: enderecosEntrega,
@@ -98,7 +98,7 @@ module.exports.getSenhaAdm = async (req, res) => {
 
     const usuario = await buscarUsuarioId(usr_id);
 
-    res.render('contas/adm/senha', {
+    res.render('contas/adm/senhaAdm', {
         usuario: usuario
     });
 };
