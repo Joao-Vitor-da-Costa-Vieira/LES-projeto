@@ -197,6 +197,13 @@ async function buscarCustoLivro(livroId) {
     return livro.lvr_custo;
 }
 
+async function atualizarCustoLivro(livroId, novoCusto) {
+    await db.query(
+        'UPDATE livros SET lvr_custo = ? WHERE lvr_id = ?',
+        [novoCusto, livroId]
+    );
+}
+
 async function atualizarEstoqueLivro(livroId, novaQuantidade) {
     await db.query(
         'UPDATE livros SET lvr_qtd_estoque = ? WHERE lvr_id = ?',
@@ -278,5 +285,7 @@ module.exports = {
     atualizarEstoqueLivro,
     buscarEstoqueLivro,
     buscarTodosLivros,
-    buscarLivrosVendidos 
+    buscarLivrosVendidos,
+    buscarCustoLivro,
+    atualizarCustoLivro 
 };

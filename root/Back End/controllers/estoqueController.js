@@ -1,4 +1,4 @@
-const { buscarEstoqueLivro, atualizarEstoqueLivro } = require("../models/livroModel");
+const { buscarEstoqueLivro, atualizarEstoqueLivro, buscarCustoLivro, atualizarCustoLivro } = require("../models/livroModel");
 
 module.exports.getEstoque = async (req, res) => {
 
@@ -33,7 +33,12 @@ module.exports.postEstoque = async (req, res) => {
             throw new Error("Quantidade e custo devem ser acima de zero!");
         }
 
+        const custoAtual = await buscarCustoLivro(req.body.livros_lvr_id);
         const estoqueAtual = await buscarEstoqueLivro(req.body.livros_lvr_id);
+
+        if(custoAtual < req.body.est_custo){
+            await atualizarCustoLivro(req.body.livros_lvr_id, req.body.est_custo);
+        }
 
         let novoEstoque;
 
