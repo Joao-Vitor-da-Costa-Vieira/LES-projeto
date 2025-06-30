@@ -48,18 +48,29 @@ async function criarTroca(usuarioId, dadosTroca, itensOriginais) {
 
         // Inserir itens da troca
         for (const item of dadosTroca.itens) {
+            const itemOriginal = itensOriginais.find(i => 
+                Number(i.livros_lvr_id) === Number(item.lvr_id)
+            );
+
+            if (!itemOriginal) {
+                throw new Error(`Livro ID ${item.lvr_id} não encontrado na transação original`);
+            }
+
             await connection.query(
                 `INSERT INTO itens_de_venda SET
                     itv_qtd_item = ?,
+                    itv_valor = ?,
                     transacoes_tra_id = ?,
                     livros_lvr_id = ?`,
                 [
                     item.quantidade,
+                    itemOriginal.itv_valor,
                     novaTransacao.insertId,
                     item.lvr_id
                 ]
             );
         }
+
 
         await connection.commit();
         return novaTransacao.insertId;

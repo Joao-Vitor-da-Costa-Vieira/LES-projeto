@@ -77,7 +77,7 @@
                             <% itensVenda.forEach(item => { %>
                                 <tr data-lvr-id="<%= item.livro.livros_lvr_id %>">
                                     <td><%= item.livro.lvr_titulo %></td>
-                                    <td>R$ <%= item.livro.lvr_custo %></td>
+                                    <td>R$ <%= item.livro.valor_venda %></td>
                                     <td class="qtd-max"><%= item.quantidade_maxima %></td>
                                     <td class="qtd-atual"><%= item.quantidade_selecionada %></td>
                                     <td>

@@ -50,7 +50,8 @@ module.exports.getDevolucao = async (req, res) => {
         const itensParaDevolucao = itensOriginais.map(item => ({
             livro: {
                 ...item,
-                lvr_desconto: item.lvr_desconto || 0
+                lvr_desconto: item.lvr_desconto || 0,
+                valor_venda: item.itv_valor
             },
             quantidade_maxima: item.itv_qtd_item,
             quantidade_selecionada: 0

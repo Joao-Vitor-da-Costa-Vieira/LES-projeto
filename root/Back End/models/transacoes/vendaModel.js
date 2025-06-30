@@ -56,10 +56,11 @@ async function processarPagamentoCompleto({
             await connection.query(
                 `INSERT INTO itens_de_venda (
                     itv_qtd_item,
+                    itv_valor,
                     transacoes_tra_id,
                     livros_lvr_id
-                ) VALUES (?, ?, ?)`,
-                [item.car_qtd_item, tra_id, item.livros_lvr_id]
+                ) VALUES (?, ?, ?, ?)`,
+                [item.car_qtd_item, item.livro.valor, tra_id, item.livros_lvr_id]
             );
 
             await connection.query(

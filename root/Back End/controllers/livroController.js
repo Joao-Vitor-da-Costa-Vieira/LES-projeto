@@ -2,12 +2,10 @@ const {
     buscarLivrosTitulo,
     consultaFiltroLivro,
     buscarLivroId,
-    buscarTodosLivros
+    buscarTodosLivros,
+    buscarGrpPreco
 } = require("../models/livroModel");
 
-const { 
-    buscarUsuarioId 
-} = require("../models/usuario/usuarioModel");
 
 const {buscarNotificacoes
 } = require("../models/usuario/notificacaoModel");
@@ -25,6 +23,13 @@ module.exports.pesquisarLivrosTitulo = async (req, res) => {
         }
         
         const livros = await buscarLivrosTitulo(titulo);
+
+        for(const livro of livros){
+            
+            const grupo = await buscarGrpPreco(livro.grupo_de_precificacao_grp_id);
+
+            livro.valor = (((grupo.grp_margem_lucro * 0.01) + 1) * livro.lvr_custo) * (1 + livro.lvr_desconto);
+        }
         
         let notificacoes = [];
         if (usr_id) {
@@ -65,6 +70,10 @@ module.exports.livroPagina = async (req, res) => {
         }
 
         livro.emEstoque = livro.lvr_qtd_estoque > 0;
+
+        const grupo = await buscarGrpPreco(livro.grupo_de_precificacao_grp_id);
+
+        livro.valor = (((grupo.grp_margem_lucro * 0.01) + 1) * livro.lvr_custo) * (1 + livro.lvr_desconto);
         
         const notificacoes = usr_id ? await buscarNotificacoes(usr_id) : [];
         
@@ -94,6 +103,13 @@ module.exports.getApiFiltrarLivros = async (req, res) => {
 
         // Executar a query
         const livros = await consultaFiltroLivro(filtros);
+
+        for(const livro of livros){
+            
+            const grupo = await buscarGrpPreco(livro.grupo_de_precificacao_grp_id);
+
+            livro.valor = (((grupo.grp_margem_lucro * 0.01) + 1) * livro.lvr_custo) * (1 + livro.lvr_desconto);
+        }
 
         // Verificar os resultados no console
         console.log('Resultados da query:', livros);

@@ -34,7 +34,8 @@ const {
 } = require("../../models/usuario/usuarioModel");
 
 const {
-    buscarLivroId
+    buscarLivroId,
+    buscarGrpPreco
 } = require("../../models/livroModel");
 
 const {buscarItensCupom,
@@ -63,11 +64,17 @@ module.exports.getPagamento = async (req, res) => {
             buscarItensCupom(usr_id)
         ]);
 
+
         console.log('Cartoes recebidos Pagamento:', cartoes);  
 
         const livrosComDetalhes = await Promise.all(
             carrinhos.map(async (carrinho) => {
                 const livro = await buscarLivroId(carrinho.livros_lvr_id);
+
+                const grupo = await buscarGrpPreco(livro.grupo_de_precificacao_grp_id);
+
+                livro.valor = (((grupo.grp_margem_lucro * 0.01) + 1) * livro.lvr_custo) * (1 + livro.lvr_desconto);
+
                 return {
                     ...carrinho,
                     livro: livro
@@ -76,7 +83,7 @@ module.exports.getPagamento = async (req, res) => {
         );
 
         const subtotalTotal = livrosComDetalhes.reduce((total, item) => {
-            return total + (item.livro.lvr_custo * item.car_qtd_item);
+            return total + (item.livro.valor * item.car_qtd_item);
         }, 0);
         
         const notificacoes = usr_id ? await buscarNotificacoes(usr_id) : [];
@@ -275,6 +282,10 @@ module.exports.postPagamento = async (req, res) => {
         const itensDetalhados = [];
         for (const item of itensCarrinho) {
             const livro = await buscarLivroId(item.livros_lvr_id);
+
+            const grupo = await buscarGrpPreco(livro.grupo_de_precificacao_grp_id);
+
+            livro.valor = (((grupo.grp_margem_lucro * 0.01) + 1) * livro.lvr_custo) * (1 + livro.lvr_desconto);
             
             if (item.car_qtd_item > livro.lvr_qtd_estoque) {
                 return res.status(400).json({ 
@@ -313,7 +324,7 @@ module.exports.postPagamento = async (req, res) => {
             frete,
             total: totalCalculado,
             pagamentos,
-            itensCarrinho
+            itensCarrinho: itensDetalhados
         });
 
         res.status(200).json({ tra_id });

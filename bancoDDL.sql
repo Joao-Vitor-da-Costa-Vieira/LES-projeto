@@ -144,6 +144,7 @@ ALTER TABLE grupo_de_precificacao ADD CONSTRAINT grupo_de_precificacao_pk PRIMAR
 CREATE TABLE itens_de_venda (
     itv_id            INTEGER NOT NULL AUTO_INCREMENT,
     itv_qtd_item      INTEGER NOT NULL,
+    itv_valor         DECIMAL(6, 2) NOT NULL,
     transacoes_tra_id INTEGER NOT NULL,
     livros_lvr_id     INTEGER
 );

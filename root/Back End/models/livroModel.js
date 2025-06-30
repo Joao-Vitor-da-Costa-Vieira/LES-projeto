@@ -174,11 +174,27 @@ async function buscarLivroId(lvr_id) {
              GROUP BY l.lvr_id`, 
             [lvr_id]
         );
+
         return livro[0];
     } catch (err) {
         console.error('Erro ao buscar livro por ID:', err);
         throw err;
     }
+}
+
+async function buscarGrpPreco(grp_id) {
+    try {
+        const [grupo] = await ddb.query(
+            `SELECT * FROM grupo_de_precificacao WHERE grp_id = ?`,
+            [grp_id]
+        );
+        
+        return grupo[0];
+    } catch (error) {
+        console.error('Erro ao buscar grupo de precificação por ID:', err);
+        throw err;
+    }
+    
 }
 
 async function buscarEstoqueLivro(livroId) {
@@ -287,5 +303,6 @@ module.exports = {
     buscarTodosLivros,
     buscarLivrosVendidos,
     buscarCustoLivro,
-    atualizarCustoLivro 
+    atualizarCustoLivro,
+    buscarGrpPreco 
 };

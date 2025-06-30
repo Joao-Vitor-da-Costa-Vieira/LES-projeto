@@ -82,7 +82,7 @@
                             <% itensCarrinho.forEach(item => { %>
                                 <tr>
                                     <td><%= item.livro.lvr_titulo %></td>
-                                    <td>R$ <%= item.livro.lvr_custo %></td>
+                                    <td>R$ <%= item.livro.valor %></td>
                                     <td><%= item.livro.lvr_desconto || '0' %>%</td>
                                     <td><%= item.car_qtd_item %></td>
                                     <td>R$ <%= (item.livro.lvr_custo * item.car_qtd_item).toFixed(2) %></td>

@@ -54,7 +54,7 @@ function atualizarTabela(livros) {
             <td>${livro.atr_nome || 'N/A'}</td>
             <td>${livro.edi_nome || 'N/A'}</td>
             <td>${livro.lvr_ano}</td>
-            <td>R$ ${livro.lvr_custo}</td>
+            <td>R$ ${livro.valor}</td>
             <td id ="livro-data" data-livro-id="${livro.lvr_id}">
                 <div class="botoes_resultado">
                     <a class="atualizar" href="/livros/${livro.lvr_id}">Detalhes</a>
