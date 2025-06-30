@@ -67,25 +67,25 @@
                         <div class="linha_centralizada">
                             <div class="num_cartao">
                                 <label for="num_cartao">Número</label>
-                                <input class="num_cartao_input" type="number" id="num_cartao" name="num_cartao" value="<%=cartoes[0].numero%>" required>
+                                <input class="num_cartao_input" type="number" id="num_cartao" name="num_cartao" value="<%=cartoes[0].crt_numero%>" required>
                             </div>
 
                             <div class="cod_sec">
                                 <label for="cod_sec">Código de Segurança</label>
-                                <input class="cod_sec_input" type="password" id="cod_sec" name="cod_sec" value="<%=cartoes[0].cod_sec%>" required>
+                                <input class="cod_sec_input" type="password" id="cod_sec" name="cod_sec" value="<%=cartoes[0].crt_codigo_seguranca%>" required>
                             </div>
 
                             <div class="select">
                                 <label class="label_genero">Bandeira</label>
                                 <select class="selecao" id="bandeira" name="bandeira" required>
                                     <option value="">Selecione</option>
-                                    <option value="Visa">Visa</option>
-                                    <option value="Mastercard">Mastercard</option>
-                                    <option value="Hipercard">Hipercard</option>
-                                    <option value="American Express">American Express</option>
-                                    <option value="Elo">Elo</option>
-                                    <option value="Diners Club">Diners Club</option>
-                                    <option value="Discover">Discover</option>
+                                    <option value="Visa" <%= cartoes[0]?.crt_bandeira === 'Visa' ? 'selected' : '' %>>Visa</option>
+                                    <option value="Mastercard" <%= cartoes[0]?.crt_bandeira === 'Mastercard' ? 'selected' : '' %>>Mastercard</option>
+                                    <option value="Hipercard" <%= cartoes[0]?.crt_bandeira === 'Hipercard' ? 'selected' : '' %>>Hipercard</option>
+                                    <option value="American Express" <%= cartoes[0]?.crt_bandeira === 'American Express' ? 'selected' : '' %>>American Express</option>
+                                    <option value="Elo" <%= cartoes[0]?.crt_bandeira === 'Elo' ? 'selected' : '' %>>Elo</option>
+                                    <option value="Diners Club" <%= cartoes[0]?.crt_bandeira === 'Diners Club' ? 'selected' : '' %>>Diners Club</option>
+                                    <option value="Discover" <%= cartoes[0]?.crt_bandeira === 'Discover' ? 'selected' : '' %>>Discover</option>
                                 </select>
                             </div>
                         </div>
@@ -94,7 +94,7 @@
                         <div class="linha_centralizada">
                             <div class="nome">
                                 <label class="label" for="nome_c">Nome do Titular</label>
-                                <input class="nome_input" type="text" id="nome_c" name="nome_c" value="<%=cartoes[0].nome_c%>" required>
+                                <input class="nome_input" type="text" id="nome_c" name="nome_c" value="<%=cartoes[0].crt_nome%>" required>
                             </div>
                         </div>
                         
