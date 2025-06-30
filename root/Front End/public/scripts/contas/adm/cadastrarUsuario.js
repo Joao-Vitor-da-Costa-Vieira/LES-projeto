@@ -58,9 +58,11 @@ document.getElementById('formCadastro').addEventListener('submit', async functio
         crt_codigo_seguranca: dados.cod_sec
     };
 
-    
+    const conf = {
+        senha: dados.conf_senha
+    }
 
-    const cadastroDados = {usuario, endereco_e, endereco_c, cartao}; 
+    const cadastroDados = {usuario, endereco_e, endereco_c, cartao, conf}; 
     
     const status = await cadastroService(cadastroDados);
     

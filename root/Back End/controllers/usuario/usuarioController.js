@@ -134,6 +134,11 @@ module.exports.getUsuariosAtivos = async (req, res) => {
 module.exports.patchSenha = async (req, res) => {
     try {
         await alterarSenhaUsuario(req.body, req.params.usr_id);
+
+        if (req.body.senha && req.body.senha.trim() === '') {
+            throw new Error('Senha não pode ser vazia');
+        }
+
         res.sendStatus(204);
     } catch (err) {
         console.error(`Erro no patchSenha - controllerUsuario: ${err}`);
@@ -146,6 +151,23 @@ module.exports.putCadastroAtualizar = async (req, res) => {
 
         const {usuario} = req.body;
         const {usr_id} = req.params;
+
+        //Validação dos dados
+        const camposObrigatorios = [
+            'usr_nome', 'usr_email', 'usr_cpf',
+            'usr_data_de_nascimento', 'usr_telefone1'
+        ];
+
+        for (const campo of camposObrigatorios) {
+            if (!usuario[campo] || usuario[campo].trim() === '') {
+                throw new Error(`Campo obrigatório faltando: ${campo}`);
+            }
+        }
+
+        // Validação específica para senha se for fornecida
+        if (usuario.usr_senha && usuario.usr_senha.trim() === '') {
+            throw new Error('Senha não pode ser vazia');
+        }
 
         const res = await atualizarUsuario(usuario,usr_id);
 
@@ -179,6 +201,69 @@ module.exports.patchAtivarUsuario = async (req, res) => {
 // Inserindo dados no banco
 module.exports.postCadastro = async (req, res) => {
     try {
+
+       const camposObrigatorios = {
+            usuario: [
+                'usr_nome', 
+                'usr_email', 
+                'usr_cpf',
+                'usr_data_de_nascimento',
+                'usr_telefone1',
+                'usr_senha'
+            ],
+            endereco_e: [
+                'end_endereco',
+                'end_numero',
+                'end_bairro',
+                'end_cidade',
+                'end_estado',
+                'end_cep'
+            ],
+            endereco_c: [
+                'end_endereco',
+                'end_numero',
+                'end_bairro',
+                'end_cidade',
+                'end_estado',
+                'end_cep'
+            ],
+            cartao: [
+                'crt_nome',
+                'crt_numero',
+                'crt_bandeira',
+                'crt_codigo_seguranca'
+            ]
+        };
+
+        // Função de validação reutilizável
+        const validarCampos = (objeto, campos) => {
+            const faltantes = campos.filter(campo => 
+                !objeto?.[campo] || objeto[campo].toString().trim() === ''
+            );
+            
+            if (faltantes.length > 0) {
+                throw new Error(
+                    `Campos obrigatórios faltando em ${objeto.__section || 'objeto'}: ` +
+                    faltantes.join(', ')
+                );
+            }
+        };
+
+        // Validar cada seção
+        for (const [secao, campos] of Object.entries(camposObrigatorios)) {
+            if (!req.body[secao]) {
+                throw new Error(`Seção ${secao} não encontrada nos dados`);
+            }
+            
+            // Marca a seção para mensagens de erro
+            req.body[secao].__section = secao;
+            validarCampos(req.body[secao], campos);
+        }
+
+        if(req.body.conf.senha !== req.body.usuario.usr_senha){
+            throw new Error(`Senha e confirmação diferentes`);
+        }
+        
         const usr_id = await cadastrarUsuario(req.body.usuario);
 
         req.body.cartao.crt_usr_id = usr_id;
