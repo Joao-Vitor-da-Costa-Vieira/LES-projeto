@@ -21,7 +21,7 @@ router.get('/api/usuarios-filtro', UsuarioController.getApiUsuarioFiltro);
 
 router.post('/cadastro', UsuarioController.postCadastro);
 
-router.put('/:usr_id', UsuarioController.putCadastroAtualizar);
+router.put('/cadastro/:usr_id', UsuarioController.putCadastroAtualizar);
 router.patch('/senha/:usr_id', UsuarioController.patchSenha);
 router.patch('/usuarios/inativar/:usr_id', UsuarioController.patchInativarUsuario);
 router.patch('/usuarios/ativar/:usr_id', UsuarioController.patchAtivarUsuario);

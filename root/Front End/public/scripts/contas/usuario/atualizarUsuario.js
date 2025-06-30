@@ -1,6 +1,11 @@
 import { cadastroAtualizarService } from "/scripts/service/usuario/cadastroService.js";
 import { getUserId } from "/scripts/service/usuario/usuarioService.js";
 
+function validarSenha(senha) {
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+    return regex.test(senha);
+}
+
 // PASSANDO OS DADOS PARA ATUALIZAÇÃO
 document.querySelector('form').addEventListener('submit', async function (event) {
     event.preventDefault();
@@ -28,11 +33,11 @@ document.querySelector('form').addEventListener('submit', async function (event)
     // Preparando os dados para passar para o back
     const usuario = {
         usr_nome: dados.nome, 
-        usr_email: dados.E-mail, 
+        usr_email: dados.email, 
         usr_cpf: dados.cpf,
-        usr_data_de_nascimento: dados.data_nascimento, 
-        usr_telefone: dados.telefone1,
-        usr_telefone: dados.telefone2,
+        usr_data_de_nascimento: dados.data, 
+        usr_telefone_1: dados.telefone1,
+        usr_telefone_2: dados.telefone2,
         usr_genero: dados.genero,
         usr_senha: dados.senha
     };

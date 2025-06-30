@@ -49,36 +49,36 @@ esheet" href="/style/usuario/contas/cadastroStyle.css">
                             <h1 class="titulo">Informações Pessoais</h1>
                         </div>
 
-                        <input id="id" name="id" value="<%= usuario.usr_id %>" style="display: none;"></input>
+                        <input id="id" name="id" value="<%= usuario[0].usr_id %>" style="display: none;"></input>
 
                         <!-- Nome -->
                         <div class="nome">
                             <label class="label" for="nome">Nome Completo</label>
-                            <input class="nome_input" type="text" id="nome" name="nome" value="<%= usuario.usr_nome%>" required>
+                            <input class="nome_input" type="text" id="nome" name="nome" value="<%= usuario[0].usr_nome%>" required>
                         </div>
 
                         <!-- Email -->
                         <div class="email">
                             <label class="label" for="email">E-mail</label>
-                            <input class="email_input" type="email" id="email" name="email" value="<%=usuario.usr_email%>" required>
+                            <input class="email_input" type="email" id="email" name="email" value="<%=usuario[0].usr_email%>" required>
                         </div>
 
                         <!-- Telefone 1 -->
                         <div class="telefone">
                             <label class="label_pequena" for="telefone1">Telefone 1</label>
-                            <input class="telefone_input" type="tel" id="telefone1" name="telefone1" value="<%=usuario.usr_telefone1%>" required>
+                            <input class="telefone_input" type="tel" id="telefone1" name="telefone1" value="<%=usuario[0].usr_telefone1%>" required>
                         </div>
 
                         <!-- Telefone 2 -->
                         <div class="telefone">
                             <label class="label_pequena" for="telefone2">Telefone 2</label>
-                            <input class="telefone_input" type="tel" id="telefone2" name="telefone2" value="<%=usuario.usr_telefone2%>">
+                            <input class="telefone_input" type="tel" id="telefone2" name="telefone2" value="<%=usuario[0].usr_telefone2%>">
                         </div>
 
                         <!-- CPF -->
                         <div class="cpf">
                             <label class="label" for="cpf">CPF</label>
-                            <input class="cpf_input" type="text" id="cpf" name="cpf" value="<%=usuario.usr_cpf%>" required>
+                            <input class="cpf_input" type="text" id="cpf" name="cpf" value="<%=usuario[0].usr_cpf%>" required>
                         </div>
 
                         <!-- Gênero -->
@@ -111,7 +111,7 @@ esheet" href="/style/usuario/contas/cadastroStyle.css">
                         <div class="senha">
                             <label class="label" for="senha">Senha</label>
                             <div class="erro_div">
-                                <input class="senha_input" type="password" id="senha" name="senha" value="<%=usuario.usr_senha%>" required>
+                                <input class="senha_input" type="password" id="senha" name="senha" value="<%=usuario[0].usr_senha%>" required>
                                 <span id="erroSenha" class="erro" style="color: red; display: none;">*</span>
                             </div>
                         </div>
@@ -120,7 +120,7 @@ esheet" href="/style/usuario/contas/cadastroStyle.css">
                         <div class="senha">
                             <label class="label" for="conf_senha">Confirme a Senha</label>
                             <div class="erro_div">
-                                <input class="senha_input" type="password" id="conf_senha" name="conf_senha" value="<%=usuario.usr_senha%>" required>
+                                <input class="senha_input" type="password" id="conf_senha" name="conf_senha" value="<%=usuario[0].usr_senha%>" required>
                                 <span id="erroConfSenha" class="erro" style="color: red; display: none;">*</span>
                             </div>
                         </div>

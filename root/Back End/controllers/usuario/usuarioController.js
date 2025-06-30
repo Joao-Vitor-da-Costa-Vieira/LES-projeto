@@ -149,13 +149,13 @@ module.exports.patchSenha = async (req, res) => {
 module.exports.putCadastroAtualizar = async (req, res) => {
     try {
 
-        const {usuario} = req.body;
+        const usuario = req.body;
         const {usr_id} = req.params;
 
         //Validação dos dados
         const camposObrigatorios = [
             'usr_nome', 'usr_email', 'usr_cpf',
-            'usr_data_de_nascimento', 'usr_telefone1'
+            'usr_data_de_nascimento', 'usr_telefone_1'
         ];
 
         for (const campo of camposObrigatorios) {
@@ -169,7 +169,7 @@ module.exports.putCadastroAtualizar = async (req, res) => {
             throw new Error('Senha não pode ser vazia');
         }
 
-        const res = await atualizarUsuario(usuario,usr_id);
+        await atualizarUsuario(usuario, usr_id);
 
         res.sendStatus(200);
     } catch (err) {
