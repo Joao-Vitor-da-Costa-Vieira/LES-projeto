@@ -1,6 +1,6 @@
 const db = require('../../config/db');
 
-async function cadastrarEnderecoCobranca(dados) {
+async function cadastrarEnderecoCobranca(dados,) {
 
     const sql = `INSERT INTO enderecos_cobranca (
         usuarios_usr_id, 
@@ -14,7 +14,7 @@ async function cadastrarEnderecoCobranca(dados) {
     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
 
     const valores = [
-        dados.end_usr_id,
+        dados.usuarios_usr_id,
         dados.end_endereco,
         dados.end_numero,
         dados.end_bairro,
