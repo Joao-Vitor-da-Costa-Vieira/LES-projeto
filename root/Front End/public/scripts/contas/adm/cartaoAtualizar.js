@@ -1,4 +1,4 @@
-import { getHome } from "../../service/telaInicialService";
+import { getHome } from "/scripts/service/telaInicialService.js";
 import { atualizarCartaoService } from "/scripts/service/usuario/cartaoService.js";
 
 // Enviando os dados para o backend
