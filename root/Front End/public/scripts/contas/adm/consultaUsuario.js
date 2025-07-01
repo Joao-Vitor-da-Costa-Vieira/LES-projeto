@@ -114,7 +114,7 @@ document.querySelectorAll('.botao_menu2').forEach(button => {
         e.preventDefault();
         e.stopPropagation();
 
-        const status = await getCadastroAdm(usr_id);
+        const status = await getCadastroAdm();
 
         if (status === 204) {
             location.reload();

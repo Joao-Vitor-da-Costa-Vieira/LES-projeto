@@ -267,8 +267,8 @@ module.exports.postCadastro = async (req, res) => {
         const usr_id = await cadastrarUsuario(req.body.usuario);
 
         req.body.cartao.crt_usr_id = usr_id;
-        req.body.endereco_c.end_usr_id = usr_id;
-        req.body.endereco_e.end_usr_id = usr_id;
+        req.body.endereco_c.usuarios_usr_id = usr_id;
+        req.body.endereco_e.usuarios_usr_id = usr_id;
 
         await cadastrarCartao(req.body.cartao);
         await cadastrarEnderecoCobranca(req.body.endereco_c);
