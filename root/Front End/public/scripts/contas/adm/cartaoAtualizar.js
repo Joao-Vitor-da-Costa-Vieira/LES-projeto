@@ -9,7 +9,7 @@ document.querySelector('form').addEventListener('submit', async function(event){
     let dados = Object.fromEntries(formDados.entries());
 
     // Pegando o id do cliente e do cartão
-    const usr_id = dados.id;
+     const usr_id = document.getElementById('id').value;
 
     const cartaoElement = document.querySelector('.cartoes-id');
     const crt_id = cartaoElement ? cartaoElement.dataset.cartaoId : null;

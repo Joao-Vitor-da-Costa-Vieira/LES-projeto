@@ -62,3 +62,22 @@ export async function getAdicionarEndEntrega(usr_id) {
         throw err;
     }
 }
+
+
+export async function getAtualizarEndEntregaAdm(id,usr_id) {
+    try {
+        window.location.href = `/endereco-entrega-adm/atualizar?usr_id=${encodeURIComponent(usr_id)}&end_id=${encodeURIComponent(id)}`;
+    } catch (error) {
+        console.error(`Erro no atualizarEndEntrega - serviceEndEntrega: ${err}`);
+        throw err;
+    }
+}
+
+export async function getAdicionarEndEntregaAdm(usr_id) {
+    try {
+        window.location.href = `/endereco-entrega-adm/adicionar?usr_id=${encodeURIComponent(usr_id)}`;
+    } catch (error) {
+        console.error(`Erro no adicionarEndEntrega - serviceEndEntrega: ${err}`);
+        throw err;
+    }
+}

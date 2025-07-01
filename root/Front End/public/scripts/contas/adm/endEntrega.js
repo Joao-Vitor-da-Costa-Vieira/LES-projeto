@@ -1,4 +1,4 @@
-import { getAtualizarEndEntrega, getAdicionarEndEntrega } from "/scripts/service/usuario/enderecoEntregaService.js";
+import { getAtualizarEndEntregaAdm, getAdicionarEndEntregaAdm } from "/scripts/service/usuario/enderecoEntregaService.js";
 
 const userDataElement = document.getElementById('user-data');
 const usr_id = userDataElement.getAttribute('data-user-id');
@@ -9,7 +9,7 @@ document.querySelectorAll('.atualizar').forEach(button => {
         const enderecoMostrado = this.closest('.endereco-mostrado');
         const id = enderecoMostrado.querySelector('.endereco-id').textContent;
 
-        getAtualizarEndEntrega(id, usr_id);
+        getAtualizarEndEntregaAdm(id, usr_id);
     });
 });
 
@@ -17,6 +17,6 @@ document.querySelectorAll('.adicionar').forEach(button => {
     
     button.addEventListener('click', function(){
 
-        getAdicionarEndEntrega(usr_id);
+        getAdicionarEndEntregaAdm(usr_id);
     });
 });

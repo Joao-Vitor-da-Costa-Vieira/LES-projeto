@@ -45,7 +45,7 @@
                     
                     <form class="container-forms-cartoes">
                         
-                        <input id="id" name="id" value="<%= usuario.usr_id %>" style="display: none;"></input>
+                        <input id="id" name="id" value="<%= usuario[0].usr_id %>" style="display: none;">
                         <div class="cartoes-id" data-cartao-id="<%= Array.isArray(cartoes) ? cartoes[0]?.crt_id : cartoes?.crt_id %>"></div>
                         <!--Primeira Linha-->
                         <div class="linha_centralizada">

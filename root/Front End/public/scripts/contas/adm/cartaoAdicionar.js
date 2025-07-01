@@ -8,7 +8,7 @@ document.querySelector('form').addEventListener('submit', async function(event){
     const formDados = new FormData(event.target);
     let dados = Object.fromEntries(formDados.entries());
 
-    const usr_id = dados.id;
+     const usr_id = document.getElementById('id').value;
 
     const cartao = {
         crt_usr_id: usr_id,

@@ -47,3 +47,21 @@ export async function getAdicionarCartao(usr_id) {
         throw err;
     }
 }
+
+export async function getAtualizarCartaoAdm(id,usr_id) {
+    try {
+        window.location.href = `/cartao-adm/atualizar?usr_id=${encodeURIComponent(usr_id)}&crt_id=${encodeURIComponent(id)}`;
+    } catch (error) {
+        console.error(`Erro no atualizarCartao - serviceCartao: ${err}`);
+        throw err;
+    }
+}
+
+export async function getAdicionarCartaoAdm(usr_id) {
+    try {
+        window.location.href = `/cartao-adm/adicionar?usr_id=${encodeURIComponent(usr_id)}`;
+    } catch (error) {
+        console.error(`Erro no adicionarCartao - serviceCartao: ${err}`);
+        throw err;
+    }
+}

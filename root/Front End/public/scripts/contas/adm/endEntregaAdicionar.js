@@ -9,7 +9,7 @@ document.querySelector('form').addEventListener('submit', async function(event) 
     let dados = Object.fromEntries(formDados.entries());
 
     // Pegando o id do usuário
-    const usr_id = dados.id;
+     const usr_id = document.getElementById('id').value;
 
     const endereco = {
         usuarios_usr_id: usr_id,

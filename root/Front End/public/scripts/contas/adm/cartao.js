@@ -1,4 +1,4 @@
-import { getAtualizarCartao, getAdicionarCartao } from "/scripts/service/usuario/cartaoService.js";
+import { getAtualizarCartaoAdm, getAdicionarCartaoAdm } from "/scripts/service/usuario/cartaoService.js";
 
 const userDataElement = document.getElementById('user-data');
 const usr_id = userDataElement.getAttribute('data-user-id');
@@ -9,7 +9,7 @@ document.querySelectorAll('.atualizar').forEach(button => {
         const enderecoMostrado = this.closest('.cartoes-mostrado');
         const id = enderecoMostrado.querySelector('.cartoes-id').textContent;
 
-        getAtualizarCartao(id,usr_id);
+        getAtualizarCartaoAdm(id,usr_id);
     });
 });
 
@@ -17,6 +17,6 @@ document.querySelectorAll('.adicionar').forEach(button => {
     
     button.addEventListener('click', function(){
 
-        getAdicionarCartao(usr_id);
+        getAdicionarCartaoAdm(usr_id);
     });
 });
