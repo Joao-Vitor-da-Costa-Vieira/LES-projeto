@@ -70,8 +70,8 @@ function atualizarTabela(livros) {
     const row = document.createElement('tr');
     row.innerHTML = `
         <td>${livros[0].lvr_titulo}</td>
-        <td>R$ ${livros[0].lvr_codigo_de_barras}</td>
-        <td>R$ ${livros[0].lvr_isbn}</td>
+        <td>${livros[0].lvr_codigo_de_barras}</td>
+        <td>${livros[0].lvr_isbn}</td>
         <td>${livros[0].atr_nome || 'N/A'}</td>
         <td>${livros[0].edi_nome || 'N/A'}</td>
         <td>${livros[0].lvr_qtd_estoque}</td>

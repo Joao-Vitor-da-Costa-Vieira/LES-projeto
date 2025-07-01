@@ -42,26 +42,36 @@
 
             <br>
 
-            <div class="linha-input-pesquisa">
-                <label class="label_pequena">ISBN</label>
-                <input type="number" class="filtro-pesquisa-numero-isbn" placeholder="Pesquisar...">
+            <div class="linha_centralizada">
+                <div class="linha-input-pesquisa">
+                    <label class="label_pequena">ISBN</label>
+                    <input type="number" class="filtro-pesquisa-numero-isbn" placeholder="Pesquisar...">
+                </div>
+
+                <br>
+
+                <div class="linha-input-pesquisa">
+                    <label class="label_pequena">Cód. Barras</label>
+                    <input type="number" class="filtro-pesquisa-numero-codigo" placeholder="Pesquisar...">
+                </div>
+
+                <div class="botoes">
+                    <button type="submit" id="pesquisa-botao">Procurar</button>
+                </div>
+
+                <br>
             </div>
-
-            <br>
-
-            <div class="linha-input-pesquisa">
-                <label class="label_pequena">Cód. Barras</label>
-                <input type="number" class="filtro-pesquisa-numero-codigo" placeholder="Pesquisar...">
-            </div>
-
-            <div class="botoes">
-                <button type="submit" id="pesquisa-botao">Procurar</button>
-            </div>
-
-            <br>
+            
 
             <div class="container-livro-estoque">
                 <div class="livro-estoque-adicionado hidden">
+
+                    <div class="bloco_titulo">
+                        <h1 class="titulo">Info de Entrada</h1>
+                    </div>
+
+                    <br>
+
                     <form id="Entrada">
                         <div class="linha_centralizada">
                             <div class="numero">
@@ -81,9 +91,11 @@
                                 <input class="nome_input" type="text" id="fornecedor" name="fornecedor">
                             </div>
                         </div>
-                                        
-                        <div class="botoes">
-                            <button class="adicionar-estoque" type="button" id="confirmar">Dar Entrada</button>
+                                 
+                        <div class="linha_centralizada">
+                            <div class="botoes">
+                                <button class="adicionar-estoque" type="submit" id="Confirmar">Dar Entrada</button>
+                            </div>
                         </div>
                     </form>
                 </div>

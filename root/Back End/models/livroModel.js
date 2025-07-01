@@ -184,14 +184,14 @@ async function buscarLivroId(lvr_id) {
 
 async function buscarGrpPreco(grp_id) {
     try {
-        const [grupo] = await ddb.query(
+        const [grupo] = await db.query(
             `SELECT * FROM grupo_de_precificacao WHERE grp_id = ?`,
             [grp_id]
         );
         
         return grupo[0];
     } catch (error) {
-        console.error('Erro ao buscar grupo de precificação por ID:', err);
+        console.error('Erro ao buscar grupo de precificação por ID:', error);
         throw err;
     }
     
