@@ -73,7 +73,7 @@ module.exports.getPagamento = async (req, res) => {
 
                 const grupo = await buscarGrpPreco(livro.grupo_de_precificacao_grp_id);
 
-                livro.valor = (((grupo.grp_margem_lucro * 0.01) + 1) * livro.lvr_custo) * (1 + livro.lvr_desconto);
+                livro.valor = (((grupo.grp_margem_lucro * 0.01) + 1) * livro.lvr_custo) * (1 + (livro.lvr_desconto * 0.01));
 
                 return {
                     ...carrinho,
@@ -285,7 +285,7 @@ module.exports.postPagamento = async (req, res) => {
 
             const grupo = await buscarGrpPreco(livro.grupo_de_precificacao_grp_id);
 
-            livro.valor = (((grupo.grp_margem_lucro * 0.01) + 1) * livro.lvr_custo) * (1 + livro.lvr_desconto);
+            livro.valor = (((grupo.grp_margem_lucro * 0.01) + 1) * livro.lvr_custo) * (1 + (livro.lvr_desconto * 0.01));
             
             if (item.car_qtd_item > livro.lvr_qtd_estoque) {
                 return res.status(400).json({ 
