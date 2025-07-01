@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                     end_numero: this.numero.value,
                     end_complemento: this.complemento.value,
                     end_cep: this.cep.value,
-                    end_usr_id: parseInt(usr_id)
+                    usuarios_usr_id: parseInt(usr_id)
                 };
     
                 try {
