@@ -26,7 +26,6 @@ document.querySelector('form').addEventListener('submit', async function(event){
     
     if(result.status === 200){
         alert('Cartão foi atualizado com sucesso!');
-        getHome(usr_id);
         return;
     }
 

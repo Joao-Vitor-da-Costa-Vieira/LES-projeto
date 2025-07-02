@@ -86,7 +86,7 @@
                         <div class="linha_centralizada">
                             <div class="telefone">
                                 <label class="label_pequena" for="telefone1">Telefone 1</label>
-                                <input class="telefone_input" type="tel" id="telefone1" name="telefone1" value="<%=usuario[0].usr_telefone_1%>" required>
+                                <input class="telefone_input" type="number" id="telefone1" name="telefone1" value="<%=usuario[0].usr_telefone_1%>" required>
                             </div>
                         </div>
                         
@@ -95,7 +95,7 @@
                         <div class="linha_centralizada">
                             <div class="telefone">
                                 <label class="label_pequena" for="telefone2">Telefone 2</label>
-                                <input class="telefone_input" type="tel" id="telefone2" name="telefone2" value="<%=usuario[0].usr_telefone_2 ? usuario[0].usr_telefone_2 : [] %>">
+                                <input class="telefone_input" type="number" id="telefone2" name="telefone2" value="<%=usuario[0].usr_telefone_2 ? usuario[0].usr_telefone_2 : [] %>">
                             </div>  
                         </div>
                         
@@ -115,9 +115,9 @@
                             <label class="label_genero">Gênero</label>
                             <select class="selecao" id="genero" name="genero" required>
                                 <option value="">Selecione</option>
-                                <option value="M">Masculino</option>
-                                <option value="F">Feminino</option>
-                                <option value="NB">Não Binário</option>
+                                <option value="M" <%= usuario[0].usr_genero === 'M' ? 'selected' : '' %>>Masculino</option>
+                                <option value="F" <%= usuario[0].usr_genero === 'F' ? 'selected' : '' %>>Feminino</option>
+                                <option value="NB" <%= usuario[0].usr_genero === 'NB' ? 'selected' : '' %>>Não Binário</option>
                             </select>
                         </div>
 

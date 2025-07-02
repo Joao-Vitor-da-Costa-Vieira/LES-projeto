@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="styl    <link rel="stylesheet" href="/style/adm/recursosBasicos.css">
-esheet" href="/style/usuario/contas/cadastroStyle.css">
+    <link rel="stylesheet" href="/style/adm/recursosBasicos.css">
+    <link rel="stylesheet" href="/style/usuario/contas/cadastroStyle.css">
     <link rel="stylesheet" href="/style/usuario/contas/scriptsStyle.css">
     <link rel="icon" href="/imagens/livro-16.ico">
 </head>
@@ -45,41 +45,53 @@ esheet" href="/style/usuario/contas/cadastroStyle.css">
                 <div class="container-forms">
                     <!-- Informações Pessoais -->
                     <div class="usuario">
-                        <div class="bloco_titulo">
-                            <h1 class="titulo">Informações Pessoais</h1>
-                        </div>
 
                         <input id="id" name="id" value="<%= usuario[0].usr_id %>" style="display: none;"></input>
 
                         <!-- Nome -->
-                        <div class="nome">
-                            <label class="label" for="nome">Nome Completo</label>
-                            <input class="nome_input" type="text" id="nome" name="nome" value="<%= usuario[0].usr_nome%>" required>
+                        <div class="linha_centralizada">
+                            <div class="nome">
+                                <label class="label" for="nome">Nome Completo</label>
+                                <input class="nome_input" type="text" id="nome" name="nome" value="<%=usuario[0].usr_nome%>" required>
+                            </div>
                         </div>
+                        
 
                         <!-- Email -->
-                        <div class="email">
-                            <label class="label" for="email">E-mail</label>
-                            <input class="email_input" type="email" id="email" name="email" value="<%=usuario[0].usr_email%>" required>
+                        <div class="linha_centralizada">
+                            <div class="email">
+                                <label class="label" for="email">E-mail</label>
+                                <input class="email_input" type="email" id="email" name="email" value="<%=usuario[0].usr_email%>" required>
+                            </div>  
                         </div>
+                        
 
                         <!-- Telefone 1 -->
-                        <div class="telefone">
-                            <label class="label_pequena" for="telefone1">Telefone 1</label>
-                            <input class="telefone_input" type="tel" id="telefone1" name="telefone1" value="<%=usuario[0].usr_telefone1%>" required>
+                        <div class="linha_centralizada">
+                            <div class="telefone">
+                                <label class="label_pequena" for="telefone1">Telefone 1</label>
+                                <input class="telefone_input" type="number" id="telefone1" name="telefone1" value="<%=usuario[0].usr_telefone_1%>" required>
+                            </div>
                         </div>
+                        
 
                         <!-- Telefone 2 -->
-                        <div class="telefone">
-                            <label class="label_pequena" for="telefone2">Telefone 2</label>
-                            <input class="telefone_input" type="tel" id="telefone2" name="telefone2" value="<%=usuario[0].usr_telefone2%>">
+                        <div class="linha_centralizada">
+                            <div class="telefone">
+                                <label class="label_pequena" for="telefone2">Telefone 2</label>
+                                <input class="telefone_input" type="number" id="telefone2" name="telefone2" value="<%=usuario[0].usr_telefone_2 ? usuario[0].usr_telefone_2 : [] %>">
+                            </div>  
                         </div>
+                        
 
                         <!-- CPF -->
-                        <div class="cpf">
-                            <label class="label" for="cpf">CPF</label>
-                            <input class="cpf_input" type="text" id="cpf" name="cpf" value="<%=usuario[0].usr_cpf%>" required>
+                        <div class="linha_centralizada">
+                            <div class="cpf">
+                                <label class="label" for="cpf">CPF</label>
+                                <input class="cpf_input" type="text" id="cpf" name="cpf" value="<%=usuario[0].usr_cpf%>" required>
+                            </div>
                         </div>
+                        
 
                         <!-- Gênero -->
                         <!--Input de Gênero-->
@@ -87,41 +99,49 @@ esheet" href="/style/usuario/contas/cadastroStyle.css">
                             <label class="label_genero">Gênero</label>
                             <select class="selecao" id="genero" name="genero" required>
                                 <option value="">Selecione</option>
-                                <option value="M">Masculino</option>
-                                <option value="F">Feminino</option>
-                                <option value="NB">Não Binário</option>
+                                <option value="M" <%= usuario[0].usr_genero === 'M' ? 'selected' : '' %>>Masculino</option>
+                                <option value="F" <%= usuario[0].usr_genero === 'F' ? 'selected' : '' %>>Feminino</option>
+                                <option value="NB" <%= usuario[0].usr_genero === 'NB' ? 'selected' : '' %>>Não Binário</option>
                             </select>
                         </div>
 
                         <!-- Data de Nascimento -->
-                        <div class="data_div">
-                            <label class="label_pequena" for="data">Data de Nascimento</label>
-                            <% let dataFormatada = '';
-                            if (usuario[0].usr_data_de_nascimento) {
-                                let date = new Date(usuario[0].usr_data_de_nascimento);
-                                if (!isNaN(date.getTime())) {
-                                    dataFormatada = date.toISOString().split('T')[0];
+                        <div class="linha_centralizada">
+                            <div class="data_div">
+                                <label class="label_pequena" for="data">Data de Nascimento</label>
+                                <% let dataFormatada = '';
+                                if (usuario[0].usr_data_de_nascimento) {
+                                    let date = new Date(usuario[0].usr_data_de_nascimento);
+                                    if (!isNaN(date.getTime())) {
+                                        dataFormatada = date.toISOString().split('T')[0];
+                                    }
                                 }
-                            }
-                            %>
-                            <input type="date" id="data" name="data" value="<%=dataFormatada%>" required>
-                        </div>
-
-                        <!-- Senha -->
-                        <div class="senha">
-                            <label class="label" for="senha">Senha</label>
-                            <div class="erro_div">
-                                <input class="senha_input" type="password" id="senha" name="senha" value="<%=usuario[0].usr_senha%>" required>
-                                <span id="erroSenha" class="erro" style="color: red; display: none;">*</span>
+                                %>
+                                <input type="date" id="data" name="data" value="<%=dataFormatada%>" required>
                             </div>
                         </div>
+                        
+
+                        <!-- Senha -->
+                        <div class="linha_centralizada">
+                        <div class="senha">
+                            <label class="label" for="senha">Senha</label>
+                                <div class="erro_div">
+                                    <input class="senha_input" type="password" id="senha" name="senha" value="<%=usuario[0].usr_senha%>" required>
+                                    <span id="erroSenha" class="erro" style="color: red; display: none;">*</span>
+                                </div>
+                            </div>
+                        </div>
+                        
 
                         <!-- Confirmação de Senha -->
-                        <div class="senha">
-                            <label class="label" for="conf_senha">Confirme a Senha</label>
-                            <div class="erro_div">
-                                <input class="senha_input" type="password" id="conf_senha" name="conf_senha" value="<%=usuario[0].usr_senha%>" required>
-                                <span id="erroConfSenha" class="erro" style="color: red; display: none;">*</span>
+                        <div class="linha_centralizada">
+                            <div class="senha">
+                                <label class="label" for="conf_senha">Confirme a Senha</label>
+                                <div class="erro_div">
+                                    <input class="senha_input" type="password" id="conf_senha" name="conf_senha" value="<%=usuario[0].usr_senha%>" required>
+                                    <span id="erroConfSenha" class="erro" style="color: red; display: none;">*</span>
+                                </div>
                             </div>
                         </div>
                     </div>
