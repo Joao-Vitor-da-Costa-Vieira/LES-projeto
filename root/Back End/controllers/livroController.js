@@ -28,7 +28,7 @@ module.exports.pesquisarLivrosTitulo = async (req, res) => {
             
             const grupo = await buscarGrpPreco(livro.grupo_de_precificacao_grp_id);
 
-            livro.valor = (((grupo.grp_margem_lucro * 0.01) + 1) * livro.lvr_custo) * (1 + (livro.lvr_desconto * 0.01));
+            livro.valor = (((grupo.grp_margem_lucro * 0.01) + 1) * livro.lvr_custo) * (1 - (livro.lvr_desconto * 0.01));
         }
         
         let notificacoes = [];
@@ -73,7 +73,7 @@ module.exports.livroPagina = async (req, res) => {
 
         const grupo = await buscarGrpPreco(livro.grupo_de_precificacao_grp_id);
 
-        livro.valor = (((grupo.grp_margem_lucro * 0.01) + 1) * livro.lvr_custo) * (1 + (livro.lvr_desconto * 0.01));
+        livro.valor = (((grupo.grp_margem_lucro * 0.01) + 1) * livro.lvr_custo) * (1 - (livro.lvr_desconto * 0.01));
         
         const notificacoes = usr_id ? await buscarNotificacoes(usr_id) : [];
         
@@ -108,7 +108,7 @@ module.exports.getApiFiltrarLivros = async (req, res) => {
             
             const grupo = await buscarGrpPreco(livro.grupo_de_precificacao_grp_id);
 
-            livro.valor = (((grupo.grp_margem_lucro * 0.01) + 1) * livro.lvr_custo) * (1 + (livro.lvr_desconto * 0.01));
+            livro.valor = (((grupo.grp_margem_lucro * 0.01) + 1) * livro.lvr_custo) * (1 - (livro.lvr_desconto * 0.01));
         }
 
         // Verificar os resultados no console
