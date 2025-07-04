@@ -24,6 +24,8 @@ describe('Fluxo Administrativo Completo', () => {
       }
     });
 
+    cy.wait(1500);
+
     // 2. Navegação para Cadastro de Usuário
     cy.url().should('include', '/home-adm');
     cy.get('#Clientes').click();
@@ -32,19 +34,27 @@ describe('Fluxo Administrativo Completo', () => {
     cy.url().should('include', '/cadastro-adm');
     cy.contains('Cadastrar Usuário').should('be.visible');
 
+    cy.wait(1500);
+
     // 3. Preenchimento do Formulário de Cadastro
     cy.get('#nome').type(nomeUsuario);
     cy.get('#email').type('fulano.teste@example.com');
     cy.get('#cpf').type('12345678901');
+
+    cy.wait(1500);
     
     const senhaValida = 'Senha@123';
     cy.get('#senha').type(senhaValida);
     cy.get('#conf_senha').type(senhaValida);
+
+    cy.wait(1500);
     
     cy.get('#data_nascimento').type('1990-01-01');
     cy.get('#telefone1').type('11987654321');
     cy.get('#telefone2').type('1133334444');
     cy.get('#genero').select('M');
+
+    cy.wait(1500);
 
     // Preenchimento de Endereços
     cy.get('#cidade_e').type('São Paulo');
@@ -55,6 +65,8 @@ describe('Fluxo Administrativo Completo', () => {
     cy.get('#complemento_e').type('Apto 101');
     cy.get('#cep_e').type('01001000');
 
+    cy.wait(1500);
+
     cy.get('#cidade_c').type('São Paulo');
     cy.get('#bairro_c').type('Centro');
     cy.get('#estado_c').select('SP');
@@ -63,27 +75,36 @@ describe('Fluxo Administrativo Completo', () => {
     cy.get('#complemento_c').type('Apto 101');
     cy.get('#cep_c').type('01001000');
 
+    cy.wait(1500);
+
     // Preenchimento de Cartão
     cy.get('#num_cartao').type('4111111111111111');
     cy.get('#cod_sec').type('123');
     cy.get('#bandeira').select('Visa');
-    cy.get('#nome_c').type('FULANO DA SILVA TESTE');
+    cy.get('#nome_c').type('FULANO TESTE');
+
+    cy.wait(1500);
 
     // 4. Submissão do Cadastro
     cy.intercept('POST', '/cadastro').as('submitCadastro');
     cy.get('#submit').click();
     cy.wait('@submitCadastro').its('response.statusCode').should('eq', 200);
 
+    cy.wait(1500);
 
     // 5. Navegação para Lista de Usuários
     cy.get('#Clientes').click();
     cy.url().should('include', '/usuarios');
     cy.contains('Gerenciar Usuários').should('be.visible');
 
+    cy.wait(1500);
+
     // 6. Pesquisa do Usuário Cadastrado
     cy.get('.nome_input').type(nomeUsuario);
     cy.get('#pesquisa-botao').click();
     cy.contains('tr', nomeUsuario).should('exist');
+
+    cy.wait(1500);
 
     // 7. Atualização do Cadastro
     cy.contains('tr', nomeUsuario).within(() => {
@@ -97,6 +118,8 @@ describe('Fluxo Administrativo Completo', () => {
     cy.contains('Atualizando Usuario').should('be.visible');
 
     cy.get('#nome').clear().type(novoNomeUsuario);
+
+    cy.wait(1500);
     
     cy.intercept('PUT', '/cadastro/*').as('atualizacaoSubmit'); 
     cy.contains('button', 'Confirmar').click();
@@ -110,10 +133,14 @@ describe('Fluxo Administrativo Completo', () => {
     cy.get('#pesquisa-botao').click();
     cy.contains('tr', novoNomeUsuario).should('exist');
 
+    cy.wait(1500);
+
     // 9. Atualização de Senha
     cy.contains('tr', novoNomeUsuario).within(() => {
       cy.get('.atualizar').click();
     });
+
+    cy.wait(1500);
 
     cy.get('.atualizar_submenu').should('be.visible');
     cy.contains('.submenu-botao', 'Senha').click();
@@ -121,9 +148,13 @@ describe('Fluxo Administrativo Completo', () => {
     cy.url().should('include', '/senha-adm');
     cy.contains('Recuperar Senha').should('be.visible');
 
+    cy.wait(1500);
+
     cy.get('#senha').type(senhaValida);
     cy.get('#senhanova').type(novaSenha);
     cy.get('#conf_senha').type(novaSenha);
+
+    cy.wait(1500);
 
     cy.intercept('PATCH', '/senha/*').as('alteracaoSenha');
     cy.contains('button', 'Confirmar').click();
@@ -131,30 +162,44 @@ describe('Fluxo Administrativo Completo', () => {
 
     // 10. Atualização de Cartão
     cy.get('#Clientes').click();
+    
+    cy.wait(1500);
 
     cy.get('.nome_input').type(nomeUsuario);
     cy.get('#pesquisa-botao').click();
     cy.contains('tr', nomeUsuario).should('exist');
 
+    cy.wait(1500);
+
     cy.contains('tr', novoNomeUsuario).within(() => {
       cy.get('.atualizar').click();
     });
+
+    cy.wait(1500);
     
     cy.get('.atualizar_submenu').should('be.visible');
     cy.contains('.submenu-botao', 'Cartões').click();
+
+    cy.wait(1500);
     
     cy.url().should('include', '/cartao-adm');
     cy.contains('Cartões').should('be.visible');
+
+    cy.wait(1500);
     
     cy.get('.cartoes-mostrado .atualizar').first().click();
     
     cy.url().should('include', '/cartao-adm/atualizar');
     cy.contains('Atualização de Cartão').should('be.visible');
+
+    cy.wait(1500);
     
     cy.get('#num_cartao').clear().type('5555555555554444');
     cy.intercept('PUT', '/cartao/*/atualizar/*').as('atualizaCartao');
     cy.contains('button', 'Alterar').click();
     cy.wait('@atualizaCartao').its('response.statusCode').should('eq', 200);
+
+    cy.wait(1500);
 
     // 11. Atualização de Endereço de Cobrança
     cy.get('#Clientes').click();
@@ -163,25 +208,35 @@ describe('Fluxo Administrativo Completo', () => {
     cy.get('#pesquisa-botao').click();
     cy.contains('tr', nomeUsuario).should('exist');
 
+    cy.wait(1500);
+
     cy.contains('tr', novoNomeUsuario).within(() => {
       cy.get('.atualizar').click();
     });
 
     cy.get('.atualizar_submenu').should('be.visible');
     cy.contains('.submenu-botao', 'Endereços de cobrança').click();
+    
+    cy.wait(1500);
 
     cy.url().should('include', '/endereco-cobranca-adm');
     cy.contains('Endereço de Cobranca').should('be.visible');
+
+    cy.wait(1500);
 
     cy.get('.endereco-mostrado .atualizar').first().click();
 
     cy.url().should('include', '/endereco-cobranca-adm/atualizar');
     cy.contains('Atualização de End. Cobranca').should('be.visible');
 
+    cy.wait(1500);
+
     cy.get('#numero').clear().type('456');
     cy.intercept('PUT', '/endereco-cobranca/*/atualizar/*').as('atualizaEndCobranca');
     cy.contains('button', 'Atualizar').click();
     cy.wait('@atualizaEndCobranca').its('response.statusCode').should('eq', 200);
+
+    cy.wait(1500);
 
     // 12. Atualização de Endereço de Entrega
     cy.get('#Clientes').click();
@@ -189,6 +244,8 @@ describe('Fluxo Administrativo Completo', () => {
     cy.get('.nome_input').type(nomeUsuario);
     cy.get('#pesquisa-botao').click();
     cy.contains('tr', nomeUsuario).should('exist');
+
+    cy.wait(1500);
 
     cy.contains('tr', novoNomeUsuario).within(() => {
       cy.get('.atualizar').click();
@@ -200,19 +257,27 @@ describe('Fluxo Administrativo Completo', () => {
     cy.url().should('include', '/endereco-entrega-adm');
     cy.contains('Endereço de Entrega').should('be.visible');
 
+    cy.wait(1500);
+
     cy.get('.endereco-mostrado .atualizar').first().click();
 
     cy.url().should('include', '/endereco-entrega-adm/atualizar');
     cy.contains('Atualização de End. Entrega').should('be.visible');
+
+    cy.wait(1500);
 
     cy.get('#numero').clear().type('789');
     cy.intercept('PUT', '/endereco-entrega/*/atualizar/*').as('atualizaEndEntrega');
     cy.contains('button', 'Atualizar').click();
     cy.wait('@atualizaEndEntrega').its('response.statusCode').should('eq', 200);
 
+    cy.wait(1500);
+
     // 13. Finalização
     cy.get('#Clientes').click();
     cy.url().should('include', '/usuarios');
     cy.contains('Gerenciar Usuários').should('be.visible');
+
+    cy.wait(1500);
   });
 });
