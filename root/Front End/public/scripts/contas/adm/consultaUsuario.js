@@ -153,7 +153,7 @@ document.querySelectorAll('.inativar').forEach(button => {
     });
 });
 
-export function criarBotaoInativados() {
+ export function criarBotaoInativados() {
     if (!document.getElementById('btn-inativados')) {
         let botao = document.createElement('a');
         botao.id = 'btn-inativados';
@@ -164,7 +164,7 @@ export function criarBotaoInativados() {
             bottom: 20px;
             right: 20px;
             background-color: #0003c8;
-            width: 250px;
+            width: 200px;
             height: 50px;
             align-items: center;
             color: #ffffff;
