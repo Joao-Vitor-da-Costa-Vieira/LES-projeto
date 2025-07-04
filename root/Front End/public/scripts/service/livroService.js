@@ -41,7 +41,7 @@ export async function buscarLivrosVendidoService() {
     }
 }
 
-export async function getLivroPagina(livroId, usuarioId) {
+export async function getLivroPagina(usuarioId, livroId) {
     try {
         window.location.href = `/livros?lvr_id=${livroId}&usr_id=${usuarioId}`;
     } catch (error) {
