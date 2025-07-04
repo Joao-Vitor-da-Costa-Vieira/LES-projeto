@@ -1,6 +1,5 @@
 const db = require('../config/db');
 
-// Buscando os livros do banco de dados pelo titulo
 async function buscarLivrosTitulo(titulo) {
     try {
         const [livros] = await db.query(
@@ -30,7 +29,6 @@ async function buscarLivrosTitulo(titulo) {
 async function consultaFiltroLivro(filtros){
     try {
 
-        // Query modificada para MySQL
         let queryBase = `
             SELECT 
                 l.*,
@@ -49,7 +47,6 @@ async function consultaFiltroLivro(filtros){
         const conditions = [];
         const params = [];
 
-        // [Restante das condições permanece igual...]
         if (filtros.titulo) {
             conditions.push(`l.lvr_titulo LIKE ?`);
             params.push(`%${filtros.titulo}%`);
@@ -115,7 +112,6 @@ async function consultaFiltroLivro(filtros){
             queryBase += ` WHERE ` + conditions.join(' AND ');
         }
 
-        // Agrupar apenas por ID do livro
         queryBase += ` GROUP BY l.lvr_id`;
         
         const [livros] = await db.query(queryBase, params);
@@ -228,7 +224,7 @@ async function atualizarEstoqueLivro(livroId, novaQuantidade) {
 }
 
 async function buscarLivrosVendidos(dados) {
-    // Garante que cat_ids seja um array (mesmo se vier como número, string única ou undefined)
+
     const cat_ids = Array.isArray(dados.cat_ids) 
         ? dados.cat_ids 
         : (dados.cat_ids ? [dados.cat_ids] : []);
@@ -254,14 +250,14 @@ async function buscarLivrosVendidos(dados) {
     const condicoes = ["t.tra_status IN ('APROVADO', 'EM TRANSPORTE', 'ENTREGUE')"];
     const valores = [];
 
-    // Filtro por categorias (só aplica se houver IDs)
+    // Filtro de categorias
     if (cat_ids.length > 0) {
         const placeholders = cat_ids.map(() => '?').join(',');
         condicoes.push(`cat.cat_id IN (${placeholders})`);
         valores.push(...cat_ids);
     }
 
-    // Filtro por data (ajuste para datas únicas)
+    // Filtro de datas
     if (inicio && fim) {
         condicoes.push(`t.tra_data BETWEEN ? AND ?`);
         valores.push(`${inicio} 00:00:00`, `${fim} 23:59:59`);

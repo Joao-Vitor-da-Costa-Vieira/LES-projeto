@@ -1,10 +1,6 @@
 const db = require('../../config/db');
 
-// Inserindo um novo cartão no banco de dados
 async function cadastrarCartao(dados) {
-    // Consulta SQL
-
-    console.log(dados);
     
     const sql = `INSERT INTO cartoes (
         usuarios_usr_id, 
@@ -14,7 +10,6 @@ async function cadastrarCartao(dados) {
         crt_codigo_seguranca 
     ) VALUES (?, ?, ?, ?, ?)`;
 
-    // Valores a serem inseridos no banco
     const valores = [
         dados.crt_usr_id,
         dados.crt_nome,

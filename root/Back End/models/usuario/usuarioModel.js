@@ -1,6 +1,5 @@
 const db = require('../../config/db');
 
-// Função que insere um novo usuário no banco
 async function cadastrarUsuario(dados) {
 
     const sql = `INSERT INTO usuarios (
@@ -35,7 +34,6 @@ async function cadastrarUsuario(dados) {
     }
 }
 
-// Atualizando os dados dos usuários no banco
 async function atualizarUsuario(dados, usr_id) {
     const campos = Object.keys(dados).map(key => `${key} = ?`).join(', ');
     let valores = Object.values(dados);
@@ -52,7 +50,6 @@ async function atualizarUsuario(dados, usr_id) {
     }
 }
 
-// Alterar senha de um usuário
 async function alterarSenhaUsuario(senha, id) {
     try {
         await db.query(`UPDATE usuarios SET usr_senha = ? WHERE usr_id = ?`, [senha.usr_senha, id]);
@@ -62,7 +59,6 @@ async function alterarSenhaUsuario(senha, id) {
     }
 }
 
-// Inativando um usuário específico
 async function inativarUsuario(id) {
     try {
         await db.query(`UPDATE usuarios SET usr_status_de_atividade = 0 WHERE usr_id = ?`, [id]);
@@ -72,7 +68,6 @@ async function inativarUsuario(id) {
     }
 }
 
-// Ativando um usuário específico
 async function ativarUsuario(id) {
     try {
         await db.query(`UPDATE usuarios SET usr_status_de_atividade = 1 WHERE usr_id = ?`, [id]);
@@ -82,7 +77,6 @@ async function ativarUsuario(id) {
     }
 }
 
-// Buscando usuários ativos
 async function buscarUsuariosAtivos() {
     try {
         const [usuarios] = await db.query('SELECT * FROM usuarios WHERE usr_status_de_atividade = 1');
@@ -93,7 +87,6 @@ async function buscarUsuariosAtivos() {
     }
 }
 
-// Buscando usuários inativos
 async function buscarUsuariosInativos() {
     try {
         const [usuarios] = await db.query('SELECT * FROM usuarios WHERE usr_status_de_atividade = 0');
@@ -104,7 +97,6 @@ async function buscarUsuariosInativos() {
     }
 }
 
-// Buscando todos os usuários do banco de dados
 async function buscarTodosUsuarios() {
     try {
         const [usuarios] = await db.query('SELECT * FROM usuarios');
@@ -115,7 +107,6 @@ async function buscarTodosUsuarios() {
     }
 }
 
-// Buscando usuários por id
 async function buscarUsuarioId(id) {
     try {
         const [usuario] = await db.query(`SELECT * FROM usuarios WHERE usr_id = ?`, [id]);
@@ -139,7 +130,6 @@ async function consultaFiltroUsuario(filtros){
         const conditions = [];
         const params = [];
 
-        // [Restante das condições permanece igual...]
         if (filtros.nome) {
             conditions.push(`usr_nome LIKE ?`);
             params.push(`%${filtros.nome}%`);
@@ -180,7 +170,6 @@ async function consultaFiltroUsuario(filtros){
             queryBase += ` WHERE ` + conditions.join(' AND ');
         }
 
-        // Agrupar apenas por ID do usuario
         queryBase += ` GROUP BY usr_id`;
         
         const [usuarios] = await db.query(queryBase, params);
@@ -191,7 +180,6 @@ async function consultaFiltroUsuario(filtros){
     }
 }
 
-// Exportando as funções de busca
 module.exports = {
     buscarTodosUsuarios,
     buscarUsuarioId,
