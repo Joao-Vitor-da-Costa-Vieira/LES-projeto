@@ -178,6 +178,16 @@ th {
     border: #1317ff;
 }
 
+input[type=submit] {
+    background-color: green;
+    width: 80px;
+    height: 30px;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    border: green;
+}
+
 /* Classes utilitárias */
 .endereco-id {
     display: none;

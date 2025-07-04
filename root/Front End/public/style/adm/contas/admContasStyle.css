@@ -360,6 +360,17 @@
     border-radius: 5px;
 }
 
+.botao-mais-filtro {
+    padding: 5px 10px;
+    background-color: #0004ff;
+    color: white;
+    border: none;
+    border-radius: 0;
+    justify-self: center;
+    cursor: pointer;
+}
+
+
 /* Estilos de tabela */
 .table_div {
     display: flex;

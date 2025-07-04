@@ -124,6 +124,10 @@ th {
     min-width: 120px;
 }
 
+.label-categoria-analise{
+    color: #ffffff;
+}
+
 .selecao_media {
     padding: 8px;
     border: 1px solid #ddd;
@@ -155,6 +159,7 @@ th {
     grid-template-columns: 1fr;
     justify-items: center;
     align-items: center;
+    background-color: #0003c8;
     width: 300px;
     padding: 20px;
     box-shadow: 0px 0px 20px rgba(0,0,0,0.1);
@@ -166,6 +171,7 @@ th {
 .box .title-categorias {
     margin: 0 0 10px 0;
     text-align: center;
+    color: #ffffff;
 }
 
 .btns {

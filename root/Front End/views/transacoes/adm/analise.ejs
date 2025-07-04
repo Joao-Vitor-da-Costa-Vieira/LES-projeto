@@ -51,39 +51,44 @@
 
             </br>
 
-            <div class="box data hidden">
-                <h2 class="title-periodo">Período</h2>
-                <label for="data-range">Selecione um Período</label>
-                <input id="data-range" type="text" placeholder="Clique aqui..." class="form-control">
-                <div class="btns">
-                    <div class="btn-flt-data">
-                        <a href="" class="btn-filtro btn-filtrar">Filtrar</a>
-                    </div>
-                    <div class="btn-clean-periodo">
-                        <a href="" class="btn-filtro btn-limpar">Limpar</a>
+            <div class="linha_centralizada">
+                <div class="box data hidden">
+                    <h2 class="title-periodo">Período</h2>
+                    <label for="data-range" class="label-categoria-analise">Selecione um Período</label>
+                    <input id="data-range" type="text" placeholder="Clique aqui..." class="form-control">
+                    <div class="btns">
+                        <div class="btn-flt-data">
+                            <a href="" class="btn-filtro btn-filtrar">Filtrar</a>
+                        </div>
+                        <div class="btn-clean-periodo">
+                            <a href="" class="btn-filtro btn-limpar">Limpar</a>
+                        </div>
                     </div>
                 </div>
             </div>
+            
         
             </br class="hidden">
 
-            <div class="box categorias hidden">
-                <h2 class="title-categorias">Categorias</h2>
-                <label for="categorias-filtro">Selecione as Categorias</label>
-                <select name="categorias-filtro" id="categorias-filtro" multiple>
+            <div class="linha_centralizada">
+                <div class="box categorias hidden">
+                    <h2 class="title-categorias">Categorias</h2>
+                    <label for="categorias-filtro" class="label-categoria-analise">Selecione as Categorias</label>
+                    <select name="categorias-filtro" id="categorias-filtro" multiple>
 
-                    <% categorias.forEach(cat => { %>
-                        <option value="<%=cat.cat_id%>"><%=cat.cat_nome%></option>
-                    <% }); %>
+                        <% categorias.forEach(cat => { %>
+                            <option value="<%=cat.cat_id%>"><%=cat.cat_nome%></option>
+                        <% }); %>
 
-                </select>
+                    </select>
 
-                <div class="btns">
-                    <div class="btn-flt-cat">
-                        <a href="" class="btn-filtro btn-filtrar">Filtrar</a>
-                    </div>
-                    <div class="btn-clean-cat">
-                        <a href="" class="btn-filtro btn-limpar">Limpar</a>
+                    <div class="btns">
+                        <div class="btn-flt-cat">
+                            <a href="" class="btn-filtro btn-filtrar">Filtrar</a>
+                        </div>
+                        <div class="btn-clean-cat">
+                            <a href="" class="btn-filtro btn-limpar">Limpar</a>
+                        </div>
                     </div>
                 </div>
             </div>
