@@ -85,7 +85,7 @@
                                     <td>R$ <%= item.livro.valor %></td>
                                     <td><%= item.livro.lvr_desconto || '0' %>%</td>
                                     <td><%= item.car_qtd_item %></td>
-                                    <td>R$ <%= (item.livro.lvr_custo * item.car_qtd_item).toFixed(2) %></td>
+                                    <td>R$ <%= (item.livro.valor * item.car_qtd_item).toFixed(2) %></td>
                                 </tr>
                             <% }); %>
                         <% } else { %>
@@ -176,7 +176,7 @@
             const selectedOption = this.options[this.selectedIndex];
             if (selectedOption.value) {
                 const endId = parseInt(selectedOption.value);
-                const frete = endId + 10;
+                const frete = endId/10 + 10;
                 
                 document.getElementById('frete-valor').textContent = 'R$ ' + frete;
                 

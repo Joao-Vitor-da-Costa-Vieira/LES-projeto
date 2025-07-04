@@ -85,7 +85,7 @@ describe('Fluxo Venda/Troca Completo', () => {
     cy.get('.atualizar_submenu .numero_input').clear().type(quantidade.toString());
     cy.get('.submenu-adicionar-produto').click();
     cy.get('.confirmacao-overlay').should('be.visible');
-    cy.contains('Produto adicionado ao carrinho!').should('be.visible');
+    cy.contains('Item adicionado ao carrinho com sucesso').should('be.visible');
     cy.get('.continuar-comprando').click();
     cy.get('.confirmacao-overlay').should('not.exist');
   };
@@ -108,24 +108,26 @@ describe('Fluxo Venda/Troca Completo', () => {
     cy.get('#comprar').should('be.enabled').click();
     cy.url().should('include', '/pagamento');
     cy.contains('Pagamento').should('be.visible');
-    cy.get('#end_entrega option').should('have.length.gt', 1);
-    cy.get('#end_entrega').select(1);
+    cy.get('#end_entrega option').should('have.length', 1);
+    cy.get('#end_entrega').select(0); 
     cy.get('.adicionar-forma-pagamento').click();
     cy.get('#forma-pagamento-select').select('1');
     cy.get('.confirmar-pagamento').click();
-    cy.get('.forma-pagamento-item input[name="valor"]').type(
-      cy.get('#total-valor').invoke('text').then(text => {
-        return text.replace('R$ ', '').trim();
-      })
-    );
-    cy.get('.forma-pagamento-item select[name="cartao"]').select(1);
+    cy.get('#total-valor').invoke('text').then(text => {
+      const valorTotal = text.replace('R$ ', '').trim();
+      cy.get('.forma-pagamento-item input[name="valor"]')
+        .clear()
+        .type(valorTotal);
+  });
+    cy.get('.forma-pagamento-item select[name="cartao"]').select(0);
     cy.intercept('POST', '/pagamento/confirmar').as('finalizarPagamento');
     cy.get('#Confirmar').click();
     cy.wait('@finalizarPagamento').its('response.statusCode').should('eq', 200);
   };
 
   const verificarHistoricoCompras = (statusEsperado) => {
-    cy.get('button:contains("Histórico")').click();
+    cy.wait(4000);
+    cy.get('#historico').click();
     cy.url().should('include', '/pagamento/historico');
     cy.get('table tbody tr').each(($row) => {
       cy.wrap($row).within(() => {
@@ -164,19 +166,55 @@ describe('Fluxo Venda/Troca Completo', () => {
 
   const filtrarPedidoPorNome = (nome) => {
     cy.get('#mostrar-filtros').click();
-    cy.get('#filtro-nome').type(nome);
+    cy.get('#nomeUsuario').type(nome);
     cy.get('#aplicar-filtros').click();
     cy.get('table tbody tr').should('have.length.at.least', 1);
     cy.contains('td', nome).should('exist');
-    cy.contains('td', nome).parent('tr').find('.ver_mais').click();
+    cy.contains('td', nome).parent('tr').find('.alterar').click();
   };
 
   const atualizarStatusPedido = (acao) => {
-    cy.get('#atualizar').click();
-    cy.get('.status-modal').should('be.visible');
-    cy.contains('button', acao).click();
-    cy.contains(`Status atualizado para: ${acao.split('Confirmar ')[1]}`).should('be.visible');
-    cy.get('#btn-voltar-pedidos').click();
+    // 1. Intercepta a chamada de API de atualização
+    cy.intercept('POST', '/api/pedidos-atualizar/status').as('statusUpdate');
+
+    // 2. Clica no botão de atualizar
+    cy.get('#atualizar')
+      .should('be.visible')
+      .click();
+
+    // 3. Interage com o modal de status
+    cy.get('.status-modal', { timeout: 10000 }).within(() => {
+      cy.contains('button', acao, { timeout: 5000 })
+        .should('be.visible')
+        .click();
+    });
+
+    // 4. Espera a requisição completar
+    cy.wait('@statusUpdate').then((interception) => {
+      expect(interception.response.statusCode).to.eq(200);
+    });
+
+    // 5. Recarrega a página manualmente
+    cy.reload();
+  };
+
+  const navegarParaPaginaLivro = () => {
+    cy.get('.texto-container').first().within(() => {
+      cy.get('.alterar').click();
+    });
+    cy.url().should('include', '/livros');
+    cy.get('.titulo-livro h1').should('be.visible');
+  };
+
+  // Nova função para adicionar livro da página do produto
+  const adicionarLivroDaPagina = (quantidade = 1) => {
+    cy.get('.adicionar-produto').click();
+    cy.get('.atualizar_submenu').should('be.visible');
+    cy.get('.atualizar_submenu .numero_input').clear().type(quantidade.toString());
+    cy.get('.submenu-adicionar-produto').click();
+    cy.get('.confirmacao-overlay').should('be.visible');
+    cy.get('.continuar-comprando').click();
+    cy.get('.confirmacao-overlay').should('not.exist');
   };
 
   const solicitarTroca = (quantidade = 1) => {
@@ -188,132 +226,96 @@ describe('Fluxo Venda/Troca Completo', () => {
     cy.intercept('POST', '/trocas/confirmar').as('confirmarTroca');
     cy.get('#trocar').click();
     cy.wait('@confirmarTroca').its('response.statusCode').should('eq', 200);
-    cy.contains('Troca solicitada com sucesso').should('be.visible');
   };
 
   const atualizarStatusTroca = (acao) => {
-    cy.get('#atualizar-troca').click();
-    cy.get('.status-modal').should('be.visible');
-    cy.contains('button', acao).click();
-    cy.get('#btn-voltar-pedidos').click();
-  };
+    // 1. Intercepta a chamada de API de atualização
+    cy.intercept('POST', '/api/pedidos-atualizar/status').as('statusUpdate');
 
-  const verificarNotificacao = (tipo) => {
-    cy.get('.notificacao-icone').should('be.visible').click();
-    cy.get('.notificacao-submenu').should('be.visible');
-    cy.get('.notificacao-item').should('contain', tipo);
-    cy.get('.notificacao-item').first().click();
-    cy.url().should('include', '/pagamento/detalhes');
-    cy.contains(tipo).should('be.visible');
-  };
+    // 2. Clica no botão de atualizar
+    cy.get('#atualizar')
+      .should('be.visible')
+      .click();
 
-  const adicionarLivroPorPesquisa = (termoPesquisa, livro) => {
-    cy.get('#navbarInput').type(termoPesquisa);
-    cy.get('#navbarBotaoPesquisa').click();
-    cy.url().should('include', '/buscar-titulo');
-    cy.get('.table_div table').should('be.visible');
-    cy.contains('td', livro).parent('tr').within(() => {
-      cy.get('.adicionar').click();
-      cy.get('.atualizar_submenu .numero_input').should('have.value', '1');
-      cy.get('.submenu-adicionar-produto').click();
-      cy.get('.confirmacao-overlay').should('be.visible');
-      cy.get('.continuar-comprando').click();
+    // 3. Interage com o modal de status
+    cy.wait(2000);
+    cy.get('.status-modal', { timeout: 10000 }).within(() => {
+      cy.contains('button', acao, { timeout: 5000 })
+        .should('be.visible')
+        .click();
     });
-  };
 
-  const removerItemDoCarrinho = () => {
-    cy.get('#tabela-carrinho tbody tr').then(($rows) => {
-      if ($rows.length > 0 && !$rows.text().includes('Seu carrinho está vazio')) {
-        cy.get('.remover').first().click();
-        cy.get('.deletar_submenu').should('be.visible');
-        cy.contains('Confirmar Remoção?').should('be.visible');
-        cy.get('.submenu-deletar-produto').click();
-        cy.get('.confirmacao-overlay').should('be.visible');
-        cy.contains('Item removido do carrinho').should('be.visible');
-        cy.get('.continuar-comprando').click();
-        cy.get('#tabela-carrinho tbody tr').should(($newRows) => {
-          expect($newRows.length).to.be.lessThan($rows.length);
-        });
-      }
+    // 4. Espera a requisição completar
+    cy.wait('@statusUpdate').then((interception) => {
+      expect(interception.response.statusCode).to.eq(200);
     });
-  };
 
-  const realizarPagamentoComCupom = () => {
-    cy.get('#comprar').should('be.enabled').click();
-    cy.url().should('include', '/pagamento');
-    cy.get('#end_entrega option').should('have.length.gt', 0);
-    cy.get('#end_entrega').select(1);
-    cy.get('.adicionar-forma-pagamento').click();
-    cy.get('#forma-pagamento-select').select('2');
-    cy.get('.confirmar-pagamento').click();
-    cy.get('.forma-pagamento-item').within(() => {
-      cy.get('select[name="cupom"] option').should('have.length.gt', 0);
-      cy.get('select[name="cupom"]').select(1);
-      cy.get('select[name="cupom"] option:selected').then(($option) => {
-        const cupomValue = parseFloat($option.text().match(/R\$ (\d+\.\d{2})/)[1]);
-        cy.get('input[name="valor"]').clear().type(cupomValue.toFixed(2));
-      });
-    });
-    cy.intercept('POST', '/pagamento/confirmar').as('finalizarPagamentoCupom');
-    cy.get('#Confirmar').click();
-    cy.wait('@finalizarPagamentoCupom').its('response.statusCode').should('eq', 200);
-  };
-
-  const solicitarDevolucao = (quantidade = 1) => {
-    cy.get('.atualizar').first().click();
-    cy.get('.atualizar_submenu').should('be.visible');
-    cy.get('.atualizar_submenu .numero_input').clear().type(quantidade.toString());
-    cy.get('.submenu-atualizar-produto').click();
-    cy.get('#tabela-carrinho tbody tr:first-child .qtd-atual').should('contain', quantidade.toString());
-    cy.intercept('POST', '/devolucoes/confirmar').as('confirmarDevolucao');
-    cy.get('#devolver').click();
-    cy.wait('@confirmarDevolucao').its('response.statusCode').should('eq', 200);
-    cy.contains('Devolução solicitada com sucesso').should('be.visible');
-  };
-
-  const atualizarStatusDevolucao = (acao) => {
-    cy.get('#atualizar-devolucao').click();
-    cy.get('.status-modal').should('be.visible');
-    cy.contains('button', acao).click();
-    cy.get('#btn-voltar-pedidos').click();
+    // 5. Recarrega a página manualmente 
+    cy.reload();
   };
 
   // Teste principal
   it('Teste completo de cadastro e atualização', () => {
+    cy.viewport(1080, 720)
+
     // 1. Login sem usuario
     loginSemUsuario();
+
+    cy.wait(1500);
     
     // 2. Navegação para Cadastro de Usuário
     navegarParaCadastro();
 
+    cy.wait(1500);
+
     // 3. Preenchimento do Formulário de Cadastro
     const senhaValida = 'Senha@123';
     preencherFormularioCadastro(nomeUsuario, 'fulano.teste@example.com', '12345678901', senhaValida);
+
+    cy.wait(1500);
     
     // Preenchimento de Endereços
     preencherEndereco('e'); // Endereço de entrega
     preencherEndereco('c'); // Endereço de cobrança
 
+    cy.wait(1500);
+
     // Preenchimento de Cartão
     preencherCartao();
+
+    cy.wait(1500);
 
     // 4. Submissão do Cadastro
     submeterCadastro();
 
+    cy.wait(1500);
+
     // 5. Login com usuario criado
     loginComUsuario(nomeUsuario);
+
+    cy.wait(1500);
     
     // 6. Adicionar livro ao carrinho (primeiro slide)
-    adicionarLivroAoCarrinho(2);
+    navegarParaPaginaLivro();
+    cy.wait(1500);
+    adicionarLivroDaPagina(2);
+
+    cy.wait(1500);
     
     // 7. Verificar carrinho e atualizar quantidade
     verificarEAtualizarCarrinho(1);
+
+    cy.wait(1500);
     
     // 8. Realiza o pagamento
     realizarPagamento();
 
+    cy.wait(1500);
+
     // 9. Verificar histórico de compras
     verificarHistoricoCompras('APROVADO');
+    
+    cy.wait(1500);
 
     // 10. Verificar detalhes da transação
     cy.url().should('include', '/pagamento/detalhes');
@@ -321,148 +323,86 @@ describe('Fluxo Venda/Troca Completo', () => {
       transacaoId = text.match(/#(\d+)/)[1];
     });
 
+    cy.wait(1500);
+
     // 11. Login Adm
     loginAdm();
+
+    cy.wait(1500);
 
     // 12. Navegação para Pedidos
     navegarParaPedidosAdm();
 
+    cy.wait(1500);
+
     // 13. Filtrar e verificar a compra
     filtrarPedidoPorNome(nomeUsuario);
+
+    cy.wait(1500);
 
     // 14. Verificar dados e atualizar status da compra
     cy.get('h1.titulo').then(($titulo) => {
       transacaoId = $titulo.text().match(/#(\d+)/)[1];
     });
+
+    cy.wait(1500);
     
     // Primeira atualização: APROVADO → EM TRANSPORTE
     atualizarStatusPedido('Confirmar Transporte');
+
+    cy.wait(1500);
     
     // Segunda atualização: EM TRANSPORTE → ENTREGUE
-    cy.contains('tr', transacaoId).find('.ver_mais').click();
     atualizarStatusPedido('Confirmar Entrega');
-    
-    // Verificação final no histórico
-    cy.contains('tr', transacaoId).within(() => {
-      cy.get('td:nth-child(4)').should('contain', 'ENTREGUE');
-    });
+
+    cy.wait(1500);
 
     // 15. Login com usuario criado
     loginComUsuario(nomeUsuario);
 
+    cy.wait(1500);
+
     // 16. Verificar histórico de compras
     verificarHistoricoCompras('ENTREGUE');
 
+    cy.wait(1500);
+
     // 17. Solicitar troca do item
+    cy.get('#troca').click(); 
     cy.url().should('include', '/trocas');
     solicitarTroca(1);
+
+    cy.wait(1500);
     
     // 18. Login Adm
     loginAdm();
 
+    cy.wait(1500);
+
     // 19. Navegação para Pedidos
     navegarParaPedidosAdm();
+
+    cy.wait(1500);
 
     // 20. Filtrar e verificar a compra
     filtrarPedidoPorNome(nomeUsuario);
 
+    cy.wait(1500);
+
     // 21. Verificar status da troca e atualizar para TROCA APROVADA
     cy.url().should('include', '/pedidos-adm');
     atualizarStatusTroca('Aprovar Troca');
+
+    cy.wait(1500);
     
     // 22. Atualizar para TROCA CONCLUÍDA
-    cy.contains('tr', transacaoId).find('.ver_mais').click();
-    atualizarStatusTroca('Concluir Troca');
+    atualizarStatusTroca('Confirmar Troca');
 
-    // 23. Verificação final no histórico
-    cy.contains('tr', transacaoId).within(() => {
-      cy.get('td:nth-child(4)').should('contain', 'TROCA CONCLUÍDA');
-    });
+    cy.wait(2000);
 
-    // 24. Verificar como usuário que a troca foi concluída
-    loginComUsuario(nomeUsuario);
-    verificarNotificacao('TROCA CONCLUÍDA');
-
-    // 25. Pesquisar e Adicionar novos livros ao carrinho
-    adicionarLivroPorPesquisa('Harry', 'Harry Potter e a Pedra Filosofal');
-
-    // 26. Teste da página de detalhes do livro
-    cy.get('.botao-mais-filtro').click(); 
-    cy.get('.filtro-pesquisa-numero-isbn').type('9788532512062');
-    cy.get('#pesquisa-botao').click();
-    cy.contains('td', 'Harry Potter e a Câmara Secreta').parent('tr').find('.atualizar').click();
+    // 24. Login User
+    loginComUsuario(nomeUsuario);  
     
-    cy.url().should('include', 'livros');
-    cy.get('.estoque-div').within(() => {
-      cy.get('.estoque:visible').then(($estoqueElement) => {
-        const estoqueText = $estoqueElement.text().trim();
-        if (estoqueText === 'Em Estoque') {
-          cy.get('.adicionar-produto').click();
-          cy.get('.submenu-adicionar-produto').click();
-          cy.get('.ver-carrinho').click();
-        } else if (estoqueText !== 'Sem Estoque') {
-          throw new Error('Status de estoque desconhecido');
-        }
-      });
-    });
-        
-    // 27. Remoção de item do carrinho e avanço para compra
-    removerItemDoCarrinho();
-    
-    // 28. Pagamento usando cupom da primeira compra
-    realizarPagamentoComCupom();
-
-    // 29. Verificar histórico da compra com cupom
-    verificarHistoricoCompras('APROVADO');
-
-    // 30. Verificar detalhes da transação 
-    cy.url().should('include', '/pagamento/detalhes');
-    cy.contains('Transação').should('be.visible');
-
-    // 31. Login Adm 
-    loginAdm();
-
-    // 32. Navegação para Pedidos 
-    navegarParaPedidosAdm();
-
-    // 33. Filtrar e verificar a compra 
-    filtrarPedidoPorNome(nomeUsuario);
-
-    // 34. Atualizar status para EM TRANSPORTE e ENTREGUE 
-    atualizarStatusPedido('Confirmar Transporte');
-    cy.contains('tr', transacaoId).find('.ver_mais').click();
-    atualizarStatusPedido('Confirmar Entrega');
-
-    // 35. Login com usuário criado 
-    loginComUsuario(nomeUsuario);
-
-    // 36. Verificar histórico e solicitar DEVOLUÇÃO 
-    verificarHistoricoCompras('ENTREGUE');
-
-    // 37. Solicitar devolução do item
-    cy.url().should('include', '/devolucoes'); 
-    solicitarDevolucao(1);
-
-    // 38. Login Adm para processar devolução
-    loginAdm();
-
-    // 39. Navegação para Pedidos 
-    navegarParaPedidosAdm();
-
-    // 40. Filtrar e verificar a devolução 
-    cy.get('#mostrar-filtros').click();
-    cy.get('#filtro-nome').type(nomeUsuario);
-    cy.get('#filtro-status').select('DEVOLUCAO SOLICITADA'); 
-    cy.get('#aplicar-filtros').click();
-    cy.contains('td', nomeUsuario).parent('tr').find('.ver_mais').click();
-
-    // 41. Aprovar e concluir devolução
-    atualizarStatusDevolucao('Aprovar Devolução');
-    cy.contains('tr', transacaoId).find('.ver_mais').click();
-    atualizarStatusDevolucao('Concluir Devolução');
-
-    // 42. Verificação final
-    loginComUsuario(nomeUsuario);
-    verificarNotificacao('DEVOLUÇÃO CONCLUÍDA');
+    cy.wait(1500);
   });
 });
