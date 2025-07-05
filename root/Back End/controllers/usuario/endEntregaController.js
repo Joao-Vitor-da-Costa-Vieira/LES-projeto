@@ -114,7 +114,6 @@ module.exports.postEnderecoEntregaAdicionar = async (req, res) => {
     }
 };
 
-// Atualizando os dados dos endereços de entrega
 module.exports.putEnderecoEntregaAtualizar = async (req, res) => {
     try {
 

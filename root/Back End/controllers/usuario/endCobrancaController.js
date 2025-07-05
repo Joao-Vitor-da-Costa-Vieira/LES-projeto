@@ -116,7 +116,6 @@ module.exports.postEnderecoCobrancaAdicionar = async (req, res) => {
     }
 };
 
-// Atualizando os dados dos endereços de cobrança
 module.exports.putEnderecoCobrancaAtualizar = async (req, res) => {
     try {
 

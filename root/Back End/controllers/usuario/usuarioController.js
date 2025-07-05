@@ -264,6 +264,20 @@ module.exports.postCadastro = async (req, res) => {
             throw new Error(`Senha e confirmação diferentes`);
         }
         
+        const senha = req.body.usuario.usr_senha;
+        const senhaValida = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/.test(senha);
+        
+        if (!senhaValida) {
+            throw new Error(
+                'A senha deve conter pelo menos:\n' +
+                '- 8 caracteres\n' +
+                '- 1 letra maiúscula\n' +
+                '- 1 letra minúscula\n' +
+                '- 1 número\n' +
+                '- 1 caractere especial'
+            );
+        }
+        
         const usr_id = await cadastrarUsuario(req.body.usuario);
 
         req.body.cartao.crt_usr_id = usr_id;
@@ -301,7 +315,6 @@ module.exports.getApiUsuarioFiltro = async (req, res) => {
         // Obter todos os parâmetros de query da requisição
         const filtros = JSON.parse(decodeURIComponent(req.query.filtros));
 
-        // Executar a query
         const usuarios = await consultaFiltroUsuario(filtros);
         
         res.json(usuarios);
